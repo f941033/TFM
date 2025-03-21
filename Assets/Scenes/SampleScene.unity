@@ -5328,6 +5328,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 950477925}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 1743503420}
+  - {fileID: 1050009667}
+  - {fileID: 1237776911}
 --- !u!61 &411383682
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5420,6 +5425,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 660027751}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 1352838733}
+  - {fileID: 1747701056}
+  - {fileID: 1134902203}
 --- !u!61 &437076986
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8551,6 +8561,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 573047134}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 1743503420}
+  - {fileID: 1070399074}
+  - {fileID: 1050009667}
 --- !u!61 &704813448
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8643,6 +8658,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1894064794}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 1134902203}
+  - {fileID: 1352838733}
 --- !u!61 &747832104
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12270,6 +12289,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 633081787}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 704813445}
+  - {fileID: 411383679}
 --- !u!61 &1050009670
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12362,6 +12385,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1104334457}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 1743503420}
+  - {fileID: 1747701056}
+  - {fileID: 704813445}
+  - {fileID: 1761887845}
+  - {fileID: 1777768565}
 --- !u!61 &1070399077
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15022,6 +15052,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 755839606}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 747832101}
+  - {fileID: 437076983}
 --- !u!61 &1134902206
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15114,6 +15148,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1079370134}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 1352838733}
+  - {fileID: 411383679}
 --- !u!61 &1237776914
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16497,6 +16535,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 781990228}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 1743503420}
+  - {fileID: 1237776911}
+  - {fileID: 747832101}
+  - {fileID: 437076983}
 --- !u!61 &1352838735
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16790,6 +16834,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1743503423}
   - {fileID: 1352838736}
   - {fileID: 1747701059}
   - {fileID: 1070399075}
@@ -16803,6 +16848,105 @@ Transform:
   - {fileID: 437076984}
   - {fileID: 1777768566}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1743503420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1743503423}
+  - component: {fileID: 1743503422}
+  - component: {fileID: 1743503421}
+  m_Layer: 0
+  m_Name: Collider 0
+  m_TagString: salaCentral
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1743503421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743503420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f70d2385769df40a87244dcf6b456e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 781990228}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 1352838733}
+  - {fileID: 1747701056}
+  - {fileID: 1070399074}
+  - {fileID: 704813445}
+  - {fileID: 411383679}
+--- !u!61 &1743503422
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743503420}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 7.506498, y: 3.4439502}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 6.7512712, y: 7.6060534}
+  m_EdgeRadius: 0
+--- !u!4 &1743503423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743503420}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.08, y: -12.59, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1550297786}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1747701056
 GameObject:
@@ -16835,6 +16979,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1342241390}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 1743503420}
+  - {fileID: 1070399074}
+  - {fileID: 437076983}
+  - {fileID: 1777768565}
 --- !u!61 &1747701058
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16942,6 +17092,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1863194467}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 1070399074}
+  - {fileID: 704813445}
 --- !u!61 &1761887848
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17034,6 +17188,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1127114198}
+  estaLibre: 0
+  salasContiguas:
+  - {fileID: 1747701056}
+  - {fileID: 1070399074}
 --- !u!61 &1777768568
 BoxCollider2D:
   m_ObjectHideFlags: 0
