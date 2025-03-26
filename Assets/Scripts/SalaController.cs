@@ -7,6 +7,9 @@ public class SalaController : MonoBehaviour
     Color originalColor;
     public bool estaLibre = false;
     public GameObject[] salasContiguas;
+    public Transform[] wayPoints;
+    public Transform[] removeWayPoints;
+    public SpawnEnemies spawnEnemiesController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +33,7 @@ public class SalaController : MonoBehaviour
         {
             tilemap.gameObject.SetActive(false);
             estaLibre = true;
+            spawnEnemiesController.AddWayPoints(wayPoints,removeWayPoints);
         }
             
     }
