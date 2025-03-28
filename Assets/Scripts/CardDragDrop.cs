@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
@@ -10,6 +12,9 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private Transform layerDrag;
     private int cardIndex;
     private Vector2 originalAnchoredPosition;
+
+    private bool cartaColocada = false;
+    [SerializeField] private GraphicRaycaster raycasterUI;
 
     [Header("Zona válida")]
     public Tilemap dropTilemap;
@@ -25,8 +30,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Input.mousePosition: " + Input.mousePosition);
-        Debug.Log("RectTransform.position antes: " + rectTransform.position);
         originalAnchoredPosition = rectTransform.anchoredPosition;
         originalTransform = transform.parent;
         cardIndex = transform.GetSiblingIndex();
@@ -37,14 +40,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnDrag(PointerEventData eventData)
     {
-        /*Vector2 localPoint;
-
-        RectTransform parentRect = transform.parent as RectTransform;
-
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, eventData.position, null, out localPoint))
-        {
-            rectTransform.anchoredPosition = localPoint;
-        }*/
         rectTransform.position = Input.mousePosition;
     }
 
@@ -56,10 +51,21 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         if (dropTilemap.HasTile(cellPos))
         {
-            Debug.Log("Carta soltada sobre un tile válido en: " + cellPos);
-            Destroy(gameObject);
+            if(IsOverLayout()){
+                Debug.Log("La has soltado sobre el layout y no sobre el mapa");
+                return;
+            }
+            Collider2D col = Physics2D.OverlapPoint(new Vector2(worldPos.x, worldPos.y));
+            if(col != null){
+                SalaController sala = col.GetComponent<SalaController>();
+                if(sala != null && sala.estaLibre){ 
+                    Debug.Log("Carta soltada sobre un tile válido en: " + cellPos);
+                    Destroy(gameObject);
+                    cartaColocada = true;
+                }
+            }
         }
-        else
+        if(!cartaColocada)
         {
             transform.SetParent(originalTransform, true);
             transform.SetSiblingIndex(cardIndex);
@@ -67,6 +73,29 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         }
 
         canvasGroup.blocksRaycasts = true;
+    }
+
+    private bool IsOverLayout()
+    {
+        if (raycasterUI == null)
+        {
+            Debug.LogError("El GraphicRaycaster no está asignado a raycasterUI.");
+            return false;
+        }
+        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        pointerData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        raycasterUI.Raycast(pointerData, results);
+
+        foreach (var result in results)
+        {
+            Debug.Log("Encontrado componente: " + result.gameObject.name);
+            if (result.gameObject.name == "PanelCartas")
+                return true;
+        }
+
+        return false;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
