@@ -51,10 +51,10 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         if (dropTilemap.HasTile(cellPos))
         {
-            if(IsOverLayout()){
+            /*if(IsOverLayout()){
                 Debug.Log("La has soltado sobre el layout y no sobre el mapa");
                 return;
-            }
+            }*/
             Collider2D col = Physics2D.OverlapPoint(new Vector2(worldPos.x, worldPos.y));
             if(col != null){
                 SalaController sala = col.GetComponent<SalaController>();
@@ -75,7 +75,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         canvasGroup.blocksRaycasts = true;
     }
 
-    private bool IsOverLayout()
+    /*private bool IsOverLayout()
     {
         if (raycasterUI == null)
         {
@@ -96,7 +96,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         }
 
         return false;
-    }
+    }*/
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
