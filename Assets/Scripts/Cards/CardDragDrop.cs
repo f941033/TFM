@@ -12,6 +12,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private Transform layerDrag;
     private int cardIndex;
     private Vector2 originalAnchoredPosition;
+    public CardData cardData;
+    public PlayerController player;
 
     private bool cartaColocada = false;
     [SerializeField] private GraphicRaycaster raycasterUI;
@@ -60,6 +62,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 SalaController sala = col.GetComponent<SalaController>();
                 if(sala != null && sala.estaLibre){ 
                     Debug.Log("Carta soltada sobre un tile válido en: " + cellPos);
+                    cardData.Play(player);
                     Destroy(gameObject);
                     cartaColocada = true;
                 }

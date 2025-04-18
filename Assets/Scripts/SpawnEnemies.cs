@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class SpawnEnemies : MonoBehaviour
 {
     public GameObject enemy;
     public Transform[] spawnWaypoints;
-    public ArrayList spawnListPoints = new ArrayList();
+    private List<Transform> spawnListPoints = new List<Transform>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,10 +28,13 @@ public class SpawnEnemies : MonoBehaviour
         {
             yield return new WaitForSeconds(3f);
 
-            foreach (Transform point in spawnListPoints)
-            {
-                Instantiate(enemy, point.position, Quaternion.identity);
-            }
+            if (spawnListPoints.Count == 0)
+                continue;
+
+            int randomWP = Random.Range(0, spawnListPoints.Count);
+            Transform chosenPoint = spawnListPoints[randomWP];
+
+            Instantiate(enemy, chosenPoint.position, Quaternion.identity);
         }
 
         
@@ -39,17 +43,14 @@ public class SpawnEnemies : MonoBehaviour
     {
         RemoveWayPoints(removePoints);
         foreach (Transform point in posiciones)
-        {
-            spawnListPoints.Add(point);
-        }
+            if (!spawnListPoints.Contains(point))
+                spawnListPoints.Add(point);
     }
 
     void RemoveWayPoints(Transform[] removePoints)
     {
         if (!removePoints.IsUnityNull())
         foreach (Transform point in removePoints)
-        {
             spawnListPoints.Remove(point);
-        }
     }
 }
