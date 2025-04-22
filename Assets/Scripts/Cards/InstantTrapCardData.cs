@@ -13,6 +13,7 @@ public class InstantTrapCardData : TrapCardData
 
     public override void OnTrigger(PlayerController player, EnemyController enemy)
     {
+        Debug.Log("He entrado en el trigger de instantTrap");
         enemy.receiveDamage(damage);
         Debug.Log("He activado la trampa");
         this.used = true;

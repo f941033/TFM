@@ -36,4 +36,17 @@ public class EnemyController : MonoBehaviour
     private void Die(){
         Destroy(gameObject);
     }
+
+    void OnDrawGizmosSelected()
+    {
+        var col = GetComponent<CircleCollider2D>();
+        if (col == null) return;
+
+        // El centro del círculo respecto al world
+        Vector3 center = transform.position + (Vector3)col.offset;
+        float   radius = col.radius;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(center, radius);
+    }
 }

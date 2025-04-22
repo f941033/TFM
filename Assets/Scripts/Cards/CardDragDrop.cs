@@ -72,7 +72,9 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                             goto End_Drop;
                         }
                     }
-                    cardData.Play(player, cellPos);
+
+                    Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
+                    cardData.Play(player, worldCenter);
                     Deck.CardPlayed(gameObject, cardData);
                     //Destroy(gameObject);
                     cartaColocada = true;
