@@ -11,7 +11,7 @@ public class BuffCardData : CardData
 
     private void OnEnable() { cardType = CardType.Buff; }
 
-    public override void Play(PlayerController player)
+    public override void Play(PlayerController player, Vector3 worldPosition)
     {
         player.ApplyTemporaryBuff(buffType, modifier, duration);
     }

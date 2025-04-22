@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1fc63ab785f1fb44a66583e8ae0b945, type: 3}
-  m_Name: RiseAttack
+  m_Name: RiseSpeedAttack
   m_EditorClassIdentifier: 
-  cardName: PegaLeches10000
+  cardName: MasRapido
   cost: 0
-  description: "T\xFA ataque aumenta un 50% durante 10 segundos"
+  description: Durante 15 segundos, la velocidad de ataque aumenta un 20%
   cardType: 0
-  buffType: 1
-  modifier: 1.5
-  duration: 10
+  buffType: 2
+  modifier: 1.2
+  duration: 15

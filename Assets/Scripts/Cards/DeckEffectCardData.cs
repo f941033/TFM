@@ -3,14 +3,26 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Cards/DeckEffectCard")]
 public class DeckEffectCardData : CardData
 {
-    /*[Header("Deck Effect")]
-    public int drawCount;
+    public enum Effect { DrawFromDiscard, HandSizeBuff, Draw }
+    public Effect effectType;
+    public byte count;
+    public float duration;
 
-    private void OnEnable() { cardType = CardType.DeckEffect; }
-*/
-    public override void Play(PlayerController player)
+    private void OnEnable() => cardType = CardType.DeckEffect;
+
+    public override void Play(PlayerController player, Vector3 worldPos)
     {
-        //player.DrawCards(drawCount);
+        var cardManager = FindFirstObjectByType<CardManager>();
+        switch (effectType)
+        {
+            case Effect.DrawFromDiscard:
+                Debug.Log("Entro en el case de la cardeffect");
+                cardManager.DrawFromDiscard(count);
+                break;
+            case Effect.HandSizeBuff:
+                //cardManager.IncereaseHandSizeTemporary(count, duration);
+                break;
+        }
     }
     
 }

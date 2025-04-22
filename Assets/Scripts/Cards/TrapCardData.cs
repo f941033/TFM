@@ -1,17 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Cards/TrapCard")]
-public class TrapCardData : CardData
+public abstract class TrapCardData : CardData
 {
-    [Header("Trap")]
+    public bool used = false;
     public GameObject trapPrefab;
-    public Vector3 spawnOffset;
-
+    public int damage;
     private void OnEnable() { cardType = CardType.Trap; }
 
-    public override void Play(PlayerController player)
-    {
-        Vector3 pos = player.transform.position + spawnOffset;
-        Instantiate(trapPrefab, pos, Quaternion.identity);
-    }
+    public abstract void OnTrigger(PlayerController player, EnemyController enemy);
 }

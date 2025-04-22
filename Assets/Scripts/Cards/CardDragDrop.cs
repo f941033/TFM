@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
+using DeckboundDungeon.Cards;
 
 public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -13,6 +14,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private int cardIndex;
     private Vector2 originalAnchoredPosition;
     public CardData cardData;
+    internal CardManager Deck;
     public PlayerController player;
 
     private bool cartaColocada = false;
@@ -47,7 +49,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("Estoy soltando la carta y acabando el drag");
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPos = dropTilemap.WorldToCell(worldPos);
 
@@ -61,13 +62,24 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             if(col != null){
                 SalaController sala = col.GetComponent<SalaController>();
                 if(sala != null && sala.estaLibre){ 
-                    Debug.Log("Carta soltada sobre un tile válido en: " + cellPos);
-                    cardData.Play(player);
-                    Destroy(gameObject);
+                    if(cardData.cardType == CardType.Trap){
+                        dropTilemap.SetTileFlags(cellPos, TileFlags.None);
+                        dropTilemap.SetColor(cellPos, Color.green);
+                    }
+                    if(cardData.cardType == CardType.DeckEffect){
+                        if(Deck.discardPile.Count == 0){
+                            Debug.Log("No hay cartas en la pila de descartes");
+                            goto End_Drop;
+                        }
+                    }
+                    cardData.Play(player, cellPos);
+                    Deck.CardPlayed(gameObject, cardData);
+                    //Destroy(gameObject);
                     cartaColocada = true;
                 }
             }
         }
+        End_Drop:
         if(!cartaColocada)
         {
             transform.SetParent(originalTransform, true);

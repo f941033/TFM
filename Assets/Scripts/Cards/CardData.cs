@@ -10,5 +10,5 @@ public abstract class CardData : ScriptableObject
     [TextArea] public string description;
     public CardType cardType;
 
-    public abstract void Play(PlayerController player);
+    public abstract void Play(PlayerController player, Vector3 worldPosition);
 }

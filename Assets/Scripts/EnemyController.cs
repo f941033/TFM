@@ -5,9 +5,8 @@ public class EnemyController : MonoBehaviour
 {
     NavMeshAgent agent;
     Transform target;
-
-    private float health = 50f;
-    private float currentHealth;
+    [SerializeField] private float health = 50f;
+    [SerializeField] private float currentHealth;
     private float damage = 10f;
 
     void Awake(){
@@ -20,7 +19,6 @@ public class EnemyController : MonoBehaviour
             Die();
         }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -30,7 +28,6 @@ public class EnemyController : MonoBehaviour
         agent.updateUpAxis = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         agent.SetDestination(target.position);
