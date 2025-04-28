@@ -8,6 +8,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float health = 50f;
     [SerializeField] private float currentHealth;
     private float damage = 10f;
+    private float attackCooldown = 0f;
+    public float attackRate = 1f;
+    public float attackRange = 1.5f;
 
     void Awake(){
         currentHealth = health;
@@ -31,6 +34,23 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         agent.SetDestination(target.position);
+
+        float distancia = Vector2.Distance(transform.position, target.position);
+        if (distancia <= attackRange && attackCooldown <= 0f)
+        {
+            Attack();
+            attackCooldown = 1f / attackRate;
+        }
+    }
+
+    private void Attack()
+    {
+        PlayerController pc = target.GetComponent<PlayerController>();
+        if (pc != null)
+        {
+            pc.receiveDamage(damage);
+            Debug.Log("Estoy atacando");
+        }
     }
 
     private void Die(){

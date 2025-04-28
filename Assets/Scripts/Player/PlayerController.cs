@@ -2,6 +2,7 @@ using UnityEngine;
 using DeckboundDungeon.Cards.Buff;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private CircleCollider2D rangeTrigger;
 
     [Header("Base stats")]
-    private float baseHealth = 100f;
+    [SerializeField] private float baseHealth = 100f;
     private float baseDamage = 20f;
     private float baseAttackSpeed = 1f;
     private float baseRange = 1f;
@@ -23,6 +24,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float currentAttackSpeed;
     [SerializeField] private float currentRange;
     [SerializeField] private float currentSoulsRate;
+    [SerializeField] private int amountGold;
+
+    public event Action<float> OnHealthChanged;
 
     void Awake()
     {
@@ -35,6 +39,8 @@ public class PlayerController : MonoBehaviour
         rangeTrigger = GetComponent<CircleCollider2D>();
         rangeTrigger.isTrigger = true;
         rangeTrigger.radius = baseRange;
+
+        OnHealthChanged?.Invoke(currentHealth);
     }
 
     public void ApplyTemporaryBuff(BuffType buff, float modifier, float duration){
@@ -144,4 +150,18 @@ public class PlayerController : MonoBehaviour
     public float CurrentAttackSpeed => currentAttackSpeed;
     public float CurrentRange    => currentRange;
     public float CurrentSoulsRate => currentSoulsRate;
+
+    public void receiveDamage(float damage){
+        currentHealth -= damage;
+
+        currentHealth = Mathf.Clamp(currentHealth, 0f, baseHealth);
+
+        OnHealthChanged?.Invoke(currentHealth);
+        if(currentHealth <=0 ){
+            Die();
+        }
+    }
+    private void Die(){
+        Destroy(gameObject);
+    }
 }
