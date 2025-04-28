@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BolaGigante
   m_EditorClassIdentifier: 
   cardName: Bola Gigante
-  cost: 0
+  cost: 3
   description: Cae una bola del cielo sobre los enemigos
   cardType: 1
   used: 0

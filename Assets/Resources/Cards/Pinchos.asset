@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pinchos
   m_EditorClassIdentifier: 
   cardName: Pinchos
-  cost: 0
+  cost: 4
   description: Pinchos que pinchan y atraviesan como Dracula a sus enemigos
   cardType: 1
   used: 1

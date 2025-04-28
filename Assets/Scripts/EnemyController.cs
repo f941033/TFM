@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     private float damage = 10f;
     private float attackCooldown = 0f;
     public float attackRate = 1f;
-    public float attackRange = 1.5f;
+    public float attackRange = 1f;
 
     void Awake(){
         currentHealth = health;
@@ -34,6 +34,9 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         agent.SetDestination(target.position);
+
+        if (attackCooldown > 0f)
+            attackCooldown -= Time.deltaTime;
 
         float distancia = Vector2.Distance(transform.position, target.position);
         if (distancia <= attackRange && attackCooldown <= 0f)

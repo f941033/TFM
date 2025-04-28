@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RiseSpeedAttack
   m_EditorClassIdentifier: 
   cardName: MasRapido
-  cost: 0
+  cost: 2
   description: Durante 15 segundos, la velocidad de ataque aumenta un 20%
   cardType: 0
   buffType: 2

@@ -49,6 +49,12 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!player.TrySpendSouls(cardData.cost))
+        {
+            Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
+            // sonido de que la carta no se puede jugar o quizá que ni se pueda arrastrar, eso se verá
+            goto End_Drop;
+        }
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPos = dropTilemap.WorldToCell(worldPos);
 

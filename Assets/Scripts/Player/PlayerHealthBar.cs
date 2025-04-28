@@ -3,11 +3,8 @@ using UnityEngine.UI;
 
 public class PlayerHealthBar : MonoBehaviour
 {
-    [Header("Referencias UI")]
     [SerializeField] private Slider healthSlider;
-
-    [Header("Referencias Player")]
-    [SerializeField] private PlayerController player; // arrastra tu PlayerController aquí
+    [SerializeField] private PlayerController player;
 
     void Start()
     {

@@ -3,6 +3,8 @@ using DeckboundDungeon.Cards.Buff;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,15 +19,19 @@ public class PlayerController : MonoBehaviour
     private float baseAttackSpeed = 1f;
     private float baseRange = 1f;
     private float baseSoulsRate = 1f;
+    [SerializeField] private float maxSouls = 15f;
 
     [Header("Current stats")]
     [SerializeField] private float currentHealth;
     [SerializeField] private float currentDamage;
     [SerializeField] private float currentAttackSpeed;
     [SerializeField] private float currentRange;
+    [SerializeField] private float currentSouls;
     [SerializeField] private float currentSoulsRate;
     [SerializeField] private int amountGold;
 
+    //[Header("Events")]
+    public event Action<float> OnSoulsChanged;
     public event Action<float> OnHealthChanged;
 
     void Awake()
@@ -34,6 +40,7 @@ public class PlayerController : MonoBehaviour
         currentDamage = baseDamage;
         currentAttackSpeed = baseAttackSpeed;
         currentRange = baseRange;
+        currentSouls = 6f;
         currentSoulsRate = baseSoulsRate;
 
         rangeTrigger = GetComponent<CircleCollider2D>();
@@ -41,6 +48,7 @@ public class PlayerController : MonoBehaviour
         rangeTrigger.radius = baseRange;
 
         OnHealthChanged?.Invoke(currentHealth);
+        OnSoulsChanged?.Invoke(currentSouls);
     }
 
     public void ApplyTemporaryBuff(BuffType buff, float modifier, float duration){
@@ -98,6 +106,13 @@ public class PlayerController : MonoBehaviour
             TryAttack();
             attackCooldown = 1f / currentAttackSpeed;
         }
+
+        if (currentSouls < maxSouls)
+        {
+            currentSouls += currentSoulsRate * Time.deltaTime/2;
+            currentSouls = Mathf.Clamp(currentSouls, 0f, maxSouls);
+            OnSoulsChanged?.Invoke(currentSouls);
+        }
     }
 
     private void TryAttack()
@@ -129,6 +144,30 @@ public class PlayerController : MonoBehaviour
             targetsInRange.Remove(enemy);
     }
 
+    public void receiveDamage(float damage){
+        currentHealth -= damage;
+
+        currentHealth = Mathf.Clamp(currentHealth, 0f, baseHealth);
+
+        OnHealthChanged?.Invoke(currentHealth);
+        if(currentHealth <=0 ){
+            Die();
+        }
+    }
+    public bool TrySpendSouls(float amount)
+{
+    if (currentSouls >= amount)
+    {
+        currentSouls -= amount;
+        OnSoulsChanged?.Invoke(currentSouls);
+        return true;
+    }
+    return false;
+}
+    private void Die(){
+        SceneManager.LoadScene("GameOver");
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
@@ -150,18 +189,6 @@ public class PlayerController : MonoBehaviour
     public float CurrentAttackSpeed => currentAttackSpeed;
     public float CurrentRange    => currentRange;
     public float CurrentSoulsRate => currentSoulsRate;
-
-    public void receiveDamage(float damage){
-        currentHealth -= damage;
-
-        currentHealth = Mathf.Clamp(currentHealth, 0f, baseHealth);
-
-        OnHealthChanged?.Invoke(currentHealth);
-        if(currentHealth <=0 ){
-            Die();
-        }
-    }
-    private void Die(){
-        Destroy(gameObject);
-    }
+    public float CurrentSouls => currentSouls;
+    public float MaxSouls => maxSouls;
 }

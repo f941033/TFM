@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GetLastDiscard
   m_EditorClassIdentifier: 
   cardName: Reciclado
-  cost: 0
+  cost: 2
   description: Roba la ultima carta usada de tu pila de descartes
   cardType: 2
   effectType: 0
