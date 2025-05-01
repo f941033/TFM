@@ -10,6 +10,7 @@ public class SalaController : MonoBehaviour
     public Transform[] wayPoints;
     public Transform[] removeWayPoints;
     public SpawnEnemies spawnEnemiesController;
+    bool cartaAbrirSala = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,7 +30,7 @@ public class SalaController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (esSalaContigua())
+        if (esSalaContigua() && cartaAbrirSala)
         {
             tilemap.gameObject.SetActive(false);
             estaLibre = true;
@@ -40,7 +41,7 @@ public class SalaController : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (esSalaContigua())
+        if (esSalaContigua() && cartaAbrirSala)
         {
             tilemap.color = Color.yellow;
             
@@ -63,5 +64,9 @@ public class SalaController : MonoBehaviour
             }
         }
         return false;
+    }
+    public void TengoCartaAbrirSala()
+    {
+        cartaAbrirSala = true;
     }
 }

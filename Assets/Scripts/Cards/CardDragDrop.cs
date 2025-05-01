@@ -23,6 +23,16 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     [Header("Zona válida")]
     public Tilemap dropTilemap;
 
+
+    //Tilemap Higlighted
+    public Tilemap highlightMap;
+    public TileBase highlightTile;
+
+    private Vector3Int previousCell;
+    private bool hasPrevious = false;
+    private bool hasNext = false;
+    private bool isDragging = false;
+
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -30,7 +40,40 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         layerDrag = GameObject.Find("LayerDrag")?.transform;
         if (layerDrag == null)
             Debug.LogError("No se encontró el DragLayer en la escena.");
+    }
+
+    void Start()
+    {
+        highlightTile = Resources.Load<TileBase>("Tiles/HighlightTile");
+        highlightMap = GameObject.Find("Tilemap Highlighted").GetComponent<Tilemap>();
+    }
+
+    void Update()
+    {
+        // Solo resalta si estás arrastrando una carta
+        if (isDragging)
+        {
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int cellPos = highlightMap.WorldToCell(mouseWorldPos);
+
+            // Solo actualiza si se ha cambiado de celda
+            if (!hasPrevious || cellPos != previousCell)
+            {
+                if (hasPrevious)
+                    highlightMap.SetTile(previousCell, null);
+
+                highlightMap.SetTile(cellPos, highlightTile);
+                previousCell = cellPos;
+                hasPrevious = true;
+            }
         }
+        else if (hasPrevious)
+        {
+            // Si dejas de arrastrar, limpia el highlight
+            highlightMap.SetTile(previousCell, null);
+            hasPrevious = false;
+        }
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -40,15 +83,21 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         transform.SetParent(layerDrag, true);
         transform.SetAsLastSibling();
         canvasGroup.blocksRaycasts = false;
+
+        canvasGroup.alpha = 0.3f;
+        isDragging = true;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.position = Input.mousePosition;
+        rectTransform.position = Input.mousePosition;        
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        canvasGroup.alpha = 1f;
+        isDragging = false;
+
         if (!player.TrySpendSouls(cardData.cost))
         {
             Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
@@ -120,15 +169,5 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         return false;
     }*/
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 }

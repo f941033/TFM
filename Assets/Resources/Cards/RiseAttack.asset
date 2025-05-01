@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: PegaLeches10000
   cost: 1
-  description: "T\xFA ataque aumenta un 50% durante 10 segundos"
+  description: Tu ataque aumenta un 50% durante 10 segundos
   cardType: 0
   buffType: 1
   modifier: 1.5

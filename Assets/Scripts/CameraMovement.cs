@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
      float moveSpeed = 15f;
-     float borderThickness = 10f;
+     float borderThickness = 2f;
      Vector2 mapSize = new Vector2(55f, 55f); // Tamaño del mapa
      float cameraZOffset = -30f; // Mantener la cámara en esta profundidad
 
