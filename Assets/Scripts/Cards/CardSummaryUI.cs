@@ -45,7 +45,7 @@ public class CardSummaryUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        // Añadir un texto por cada carta seleccionada
+        // Aï¿½adir un texto por cada carta seleccionada
         foreach (var card in selectedCards)
         {
             GameObject go = Instantiate(cardNamePrefab, transform);
@@ -67,5 +67,6 @@ public class CardSummaryUI : MonoBehaviour
     public void BotonListo()
     {
         canvasDeck.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

@@ -11,9 +11,11 @@ public class EnemyController : MonoBehaviour
     private float attackCooldown = 0f;
     public float attackRate = 1f;
     public float attackRange = 1f;
+    public int gold;
 
     void Awake(){
         currentHealth = health;
+        gold = 10;
     }
 
     public void receiveDamage(float damage){
@@ -48,15 +50,18 @@ public class EnemyController : MonoBehaviour
 
     private void Attack()
     {
-        PlayerController pc = target.GetComponent<PlayerController>();
-        if (pc != null)
+        PlayerController player = target.GetComponent<PlayerController>();
+        if (player != null)
         {
-            pc.receiveDamage(damage);
-            Debug.Log("Estoy atacando");
+            player.receiveDamage(damage);
         }
     }
 
     private void Die(){
+        PlayerController player = target.GetComponent<PlayerController>();
+        Debug.Log(gold);
+        player?.AddGold(gold);
+        Debug.Log("he pasado ya al oro");
         Destroy(gameObject);
     }
 

@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     //[Header("Events")]
     public event Action<float> OnSoulsChanged;
     public event Action<float> OnHealthChanged;
+    public event Action<int> OnGoldChanged;
 
     void Awake()
     {
@@ -144,7 +145,8 @@ public class PlayerController : MonoBehaviour
             targetsInRange.Remove(enemy);
     }
 
-    public void receiveDamage(float damage){
+    public void receiveDamage(float damage)
+    {
         currentHealth -= damage;
 
         currentHealth = Mathf.Clamp(currentHealth, 0f, baseHealth);
@@ -155,16 +157,32 @@ public class PlayerController : MonoBehaviour
         }
     }
     public bool TrySpendSouls(float amount)
-{
-    if (currentSouls >= amount)
     {
-        currentSouls -= amount;
-        OnSoulsChanged?.Invoke(currentSouls);
-        return true;
+        if (currentSouls >= amount)
+        {
+            currentSouls -= amount;
+            OnSoulsChanged?.Invoke(currentSouls);
+            return true;
+        }
+        return false;
     }
-    return false;
-}
-    private void Die(){
+    public void AddGold(int gold)
+    {
+        Debug.Log(gold);
+        amountGold+= gold;
+        Debug.Log(amountGold);
+        OnGoldChanged?.Invoke(gold);
+    }
+    public void SpendGold(int gold)
+    {
+        if(amountGold > gold)
+        {
+            amountGold-=gold;
+            OnGoldChanged?.Invoke(gold);
+        }
+    }
+    private void Die()
+    {
         SceneManager.LoadScene("GameOver");
     }
 
