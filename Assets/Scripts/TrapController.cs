@@ -4,6 +4,9 @@ public class TrapController : MonoBehaviour
 {
     [HideInInspector] public TrapCardData cardData;
     [HideInInspector] public PlayerController player;
+
+    [HideInInspector] public vector3Int cellPos;
+    [HideInInspector] public Color initialColor;
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("He entrado en el trigger de TrapController");
@@ -31,29 +34,29 @@ public class TrapController : MonoBehaviour
         Debug.Log($"[TrapController] BoxCollider2D: {(bc != null ? "OK" : "MISSING")}", this);
     }
     void OnDrawGizmos()
-{
-    // Marcador siempre visible en Scene View
-    Gizmos.color = Color.magenta;
-    Gizmos.DrawSphere(transform.position, 0.1f);
-
-    // Ahora intentamos dibujar cualquier Collider2D
-    var cols = GetComponents<Collider2D>();
-    foreach (var col in cols)
     {
-        if (col is BoxCollider2D box)
+        // Marcador siempre visible en Scene View
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawSphere(transform.position, 0.1f);
+
+        // Ahora intentamos dibujar cualquier Collider2D
+        var cols = GetComponents<Collider2D>();
+        foreach (var col in cols)
         {
-            Vector3 c = transform.position + (Vector3)box.offset;
-            Vector3 s = new Vector3(box.size.x, box.size.y, 0);
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(c, s);
+            if (col is BoxCollider2D box)
+            {
+                Vector3 c = transform.position + (Vector3)box.offset;
+                Vector3 s = new Vector3(box.size.x, box.size.y, 0);
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireCube(c, s);
+            }
+            else if (col is CircleCollider2D circ)
+            {
+                Vector3 c = transform.position + (Vector3)circ.offset;
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(c, circ.radius);
+            }
+            // si hay otros Collider2D, añádelos aquí…
         }
-        else if (col is CircleCollider2D circ)
-        {
-            Vector3 c = transform.position + (Vector3)circ.offset;
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(c, circ.radius);
-        }
-        // si hay otros Collider2D, añádelos aquí…
     }
-}
 }

@@ -22,6 +22,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     [Header("Zona válida")]
     public Tilemap dropTilemap;
+    private vector3Int cell;
+    private Color cellColor;
 
 
     //Tilemap Higlighted
@@ -66,12 +68,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 previousCell = cellPos;
                 hasPrevious = true;
             }
-        }
-        else if (hasPrevious)
-        {
-            // Si dejas de arrastrar, limpia el highlight
-            highlightMap.SetTile(previousCell, null);
-            hasPrevious = false;
         }
     }
 
@@ -130,6 +126,11 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
                     Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
                     cardData.Play(player, worldCenter);
+                    if (hasPrevious)
+                    {
+                        highlightMap.SetTile(previousCell, null);
+                        hasPrevious = false;
+                    }
                     Deck.CardPlayed(gameObject, cardData);
                     //Destroy(gameObject);
                     cartaColocada = true;
