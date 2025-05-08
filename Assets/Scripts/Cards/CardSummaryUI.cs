@@ -9,9 +9,10 @@ public class CardSummaryUI : MonoBehaviour
     public TextMeshProUGUI contador;
     public Button botonListo;
     public GameObject canvasDeck;
+    public CardManager cardManager;
 
     private List<CardData> selectedCards = new List<CardData>();
-    private int maxCardDeck = 6;
+    private int maxCardDeck = 10;
 
     private void Start()
     {
@@ -68,5 +69,6 @@ public class CardSummaryUI : MonoBehaviour
     {
         canvasDeck.SetActive(false);
         Time.timeScale = 1f;
+        cardManager.InicializarPartida(selectedCards);
     }
 }

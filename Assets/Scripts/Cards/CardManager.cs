@@ -21,7 +21,7 @@ public class CardManager : MonoBehaviour
     public byte currentHandSize;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    /*void Start()
     {
         player = FindFirstObjectByType<PlayerController>();
 
@@ -34,7 +34,22 @@ public class CardManager : MonoBehaviour
 
         Shuffle(drawPile);
         DrawFullHand();
+    }*/
+
+    public void InicializarPartida(List<CardData> selectedCards)
+    {
+        player = FindFirstObjectByType<PlayerController>();
+
+        startingDeck = new List<CardData>(selectedCards);
+        drawPile = new List<CardData>(startingDeck);
+        discardPile.Clear();
+
+        currentHandSize = handSize;
+
+        Shuffle(drawPile);
+        DrawFullHand();
     }
+
     // Update is called once per frame
     void Update()
     {
