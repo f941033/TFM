@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     private float attackCooldown = 0f;
     public float attackRate = 1f;
     public float attackRange = 1f;
+    private bool  playerInRange = false;
     public int gold;
 
     void Awake(){
@@ -33,9 +34,20 @@ public class EnemyController : MonoBehaviour
         agent.updateUpAxis = false;
     }
 
+        void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            playerInRange   = true;
+            attackCooldown  = 1f / attackRate; // forzamos espera antes del primer golpe
+        }
+    }
+
     void Update()
     {
         agent.SetDestination(target.position);
+
+        if(!playerInRange) return;
 
         if (attackCooldown > 0f)
             attackCooldown -= Time.deltaTime;
@@ -59,9 +71,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die(){
         PlayerController player = target.GetComponent<PlayerController>();
-        Debug.Log(gold);
         player?.AddGold(gold);
-        Debug.Log("he pasado ya al oro");
         Destroy(gameObject);
     }
 

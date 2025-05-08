@@ -1,15 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
+using UnityEngine.Tilemaps;
 using DeckboundDungeon.Cards;
+
 public class TrapController : MonoBehaviour
 {
     [HideInInspector] public TrapCardData cardData;
     [HideInInspector] public PlayerController player;
 
-    [HideInInspector] public vector3Int cellPos;
+    [HideInInspector] public Vector3Int cellPos;
     [HideInInspector] public Color initialColor;
+    private Tilemap tilemap;
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("He entrado en el trigger de TrapController");
         if (!other.CompareTag("Enemy")) return;
 
         var enemy = other.GetComponent<EnemyController>();
@@ -17,21 +21,20 @@ public class TrapController : MonoBehaviour
 
         // Le decimos a la carta que aplique su lógica de trigger
         cardData.OnTrigger(player, enemy);
-        Debug.Log("Ha encontrado un enemigo");
 
         if (cardData.used)
+        {
+            tilemap.SetTileFlags(cellPos, TileFlags.LockColor);
+            tilemap.SetColor(cellPos, initialColor);
             Destroy(gameObject);
-
+        }
     }
 
-    void Awake()
+    void Start()
     {
-        // Debug inicial para ver si el script se ejecuta
-        Debug.Log($"[TrapController] Awake en «{gameObject.name}»", this);
-
-        // Comprueba si tienes un BoxCollider2D
-        var bc = GetComponent<BoxCollider2D>();
-        Debug.Log($"[TrapController] BoxCollider2D: {(bc != null ? "OK" : "MISSING")}", this);
+        tilemap = FindFirstObjectByType<CardManager>().zonaValidaTilemap;
+        if (tilemap == null)
+            Debug.LogError("[TrapController] no encontré zonaValidaTilemap", this);
     }
     void OnDrawGizmos()
     {

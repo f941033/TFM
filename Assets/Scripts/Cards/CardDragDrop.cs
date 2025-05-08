@@ -22,9 +22,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     [Header("Zona válida")]
     public Tilemap dropTilemap;
-    private vector3Int cell;
-    private Color cellColor;
-
 
     //Tilemap Higlighted
     public Tilemap highlightMap;
@@ -32,7 +29,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     private Vector3Int previousCell;
     private bool hasPrevious = false;
-    private bool hasNext = false;
     private bool isDragging = false;
 
     void Awake()
@@ -42,6 +38,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         layerDrag = GameObject.Find("LayerDrag")?.transform;
         if (layerDrag == null)
             Debug.LogError("No se encontró el DragLayer en la escena.");
+            player = FindFirstObjectByType<PlayerController>();
     }
 
     void Start()
@@ -73,6 +70,17 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!player.TrySpendSouls(cardData.cost))
+        {
+            Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
+            // sonido de que la carta no se puede jugar
+            eventData.pointerDrag       = null;
+            eventData.pointerPress      = null;
+            canvasGroup.blocksRaycasts  = true;
+            isDragging                  = false;
+            canvasGroup.alpha           = 1f;
+            return;
+        }
         originalAnchoredPosition = rectTransform.anchoredPosition;
         originalTransform = transform.parent;
         cardIndex = transform.GetSiblingIndex();
@@ -86,36 +94,33 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isDragging) return;
         rectTransform.position = Input.mousePosition;        
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        canvasGroup.alpha = 1f;
-        isDragging = false;
+        if (!isDragging) return;
 
-        if (!player.TrySpendSouls(cardData.cost))
-        {
-            Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
-            // sonido de que la carta no se puede jugar o quizá que ni se pueda arrastrar, eso se verá
-            goto End_Drop;
-        }
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPos = dropTilemap.WorldToCell(worldPos);
 
         if (dropTilemap.HasTile(cellPos))
         {
-            /*if(IsOverLayout()){
-                Debug.Log("La has soltado sobre el layout y no sobre el mapa");
-                return;
-            }*/
             Collider2D col = Physics2D.OverlapPoint(new Vector2(worldPos.x, worldPos.y));
             if(col != null){
                 SalaController sala = col.GetComponent<SalaController>();
                 if(sala != null && sala.estaLibre){ 
                     if(cardData.cardType == CardType.Trap){
+                        Color initialColor = dropTilemap.GetColor(cellPos);
                         dropTilemap.SetTileFlags(cellPos, TileFlags.None);
                         dropTilemap.SetColor(cellPos, Color.green);
+                        var trapGO = Instantiate(((TrapCardData)cardData).trapPrefab, dropTilemap.GetCellCenterWorld(cellPos), Quaternion.identity);
+                        var trapController = trapGO.GetComponent<TrapController>();
+                        trapController.cardData = (TrapCardData)cardData;
+                        trapController.player = player;
+                        trapController.cellPos = cellPos;
+                        trapController.initialColor = initialColor;
                     }
                     if(cardData.cardType == CardType.DeckEffect){
                         if(Deck.discardPile.Count == 0){
@@ -136,6 +141,9 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                     cartaColocada = true;
                 }
             }
+            canvasGroup.alpha = 1f;
+            canvasGroup.blocksRaycasts = true;
+            isDragging = false;
         }
         End_Drop:
         if(!cartaColocada)

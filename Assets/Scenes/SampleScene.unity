@@ -14031,7 +14031,7 @@ GameObject:
   - component: {fileID: 844376034}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37521,7 +37521,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
   m_Origin: {x: -27, y: -20, z: 0}
   m_Size: {x: 53, y: 42, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
