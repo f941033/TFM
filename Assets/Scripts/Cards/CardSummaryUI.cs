@@ -11,7 +11,7 @@ public class CardSummaryUI : MonoBehaviour
     public GameObject canvasDeck;
     public CardManager cardManager;
 
-    private List<CardData> selectedCards = new List<CardData>();
+    public List<CardData> selectedCards = new List<CardData>();
     private int maxCardDeck = 10;
 
     private void Start()

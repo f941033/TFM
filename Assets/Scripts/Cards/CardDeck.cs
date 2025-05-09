@@ -23,8 +23,16 @@ public class CardDeck : MonoBehaviour, IPointerClickHandler
 
     private void ToggleSelection()
     {
-        isSelected = !isSelected;
-        selectionBorder.SetActive(isSelected);
+
+            
+        if (isSelected || (!isSelected && (summaryPanel.selectedCards.Count < 10)))
+        {
+            isSelected = !isSelected;
+            selectionBorder.SetActive(isSelected);
+        }
+
+
+
     }
 
     private void UpdateSummaryPanel()
