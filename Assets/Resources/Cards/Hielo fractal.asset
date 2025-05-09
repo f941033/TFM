@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hielo fractal
   m_EditorClassIdentifier: 
   cardName: Hielo fractal
-  cost: 8
+  cost: 0
   description: "Ralentiza 70% + 5% da\xF1o/sec por congelaci\xF3n"
   cardType: 1
   used: 0

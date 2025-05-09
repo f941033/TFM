@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Trampa de red
   m_EditorClassIdentifier: 
   cardName: Trampa de red
-  cost: 7
+  cost: 0
   description: "Atrapa enemigos 8 seg. + 5% da\xF1o/sec por estrangulamiento."
   cardType: 1
   used: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Aplastamiento
   m_EditorClassIdentifier: 
   cardName: Aplastamiento
-  cost: 8
+  cost: 2
   description: "Campo el\xE9ctrico que ralentiza y da\xF1a a los h\xE9roes. Aumenta
     su poder con trampas de agua."
   cardType: 1

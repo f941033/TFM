@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sierra giratoria
   m_EditorClassIdentifier: 
   cardName: Sierra giratoria
-  cost: 12
+  cost: 1
   description: "Da\xF1o continuo 15% vida/sec a enemigos en l\xEDnea recta."
   cardType: 1
   used: 0

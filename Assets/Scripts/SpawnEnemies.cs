@@ -26,7 +26,7 @@ public class SpawnEnemies : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(5f);
 
             if (spawnListPoints.Count == 0)
                 continue;

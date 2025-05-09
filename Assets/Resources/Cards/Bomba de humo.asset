@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bomba de humo
   m_EditorClassIdentifier: 
   cardName: Bomba de humo
-  cost: 6
+  cost: 2
   description: "Ciega enemigos (50% menos precisi\xF3n) por 8 seg."
   cardType: 1
   used: 0

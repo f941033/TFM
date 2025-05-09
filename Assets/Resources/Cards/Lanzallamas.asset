@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lanzallamas
   m_EditorClassIdentifier: 
   cardName: Lanzallamas
-  cost: 10
+  cost: 1
   description: "Lanza llamas a grupos durante 5 segundos\n25% da\xF1o/sec a grupos.
     Duraci\xF3n: 5 seg."
   cardType: 1

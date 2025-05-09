@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mina Terremoto
   m_EditorClassIdentifier: 
   cardName: Mina Terremoto
-  cost: 12
+  cost: 1
   description: "Da\xF1o 40% + derrumba techo (da\xF1o \xE1rea adicional 20%)."
   cardType: 1
   used: 0
