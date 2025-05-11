@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using DeckboundDungeon.Cards;
+using System.Collections;
 
 public class TrapController : MonoBehaviour
 {
@@ -12,29 +13,63 @@ public class TrapController : MonoBehaviour
     [HideInInspector] public Vector3Int cellPos;
     [HideInInspector] public Color initialColor;
     private Tilemap tilemap;
+    void Awake()
+    {
+        tilemap = FindFirstObjectByType<CardManager>()?.zonaValidaTilemap;
+        if (tilemap == null)
+            Debug.LogError("[TrapController] no encontré zonaValidaTilemap", this);
+
+        if (cardData == null)
+            Debug.LogWarning("[TrapController] no se ha asignado cardData", this);
+        if (player == null)
+            Debug.LogWarning("[TrapController] no se ha asignado player", this);
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (!(cardData is InstantTrapCardData)) return;
         if (!other.CompareTag("Enemy")) return;
 
         var enemy = other.GetComponent<EnemyController>();
         if (enemy == null) return;
 
-        // Le decimos a la carta que aplique su lógica de trigger
         cardData.OnTrigger(player, enemy);
 
         if (cardData.used)
-        {
-            tilemap.SetTileFlags(cellPos, TileFlags.LockColor);
-            tilemap.SetColor(cellPos, initialColor);
-            Destroy(gameObject);
-        }
+            ClearAndDestroy();
     }
 
     void Start()
     {
-        tilemap = FindFirstObjectByType<CardManager>().zonaValidaTilemap;
-        if (tilemap == null)
-            Debug.LogError("[TrapController] no encontré zonaValidaTilemap", this);
+        if (cardData is ContinuousTrapCardData cloudData)
+        {
+            StartCoroutine(CloudDamage(cloudData));
+        }
+    }
+
+    private IEnumerator CloudDamage(ContinuousTrapCardData cloud)
+    {
+        float elapsed = 0f;
+        while(elapsed < cloud.duration)
+        {
+            var hits = Physics2D.OverlapCircleAll(transform.position, cloud.radius);
+            foreach(var hit in hits)
+            {
+                if(hit.CompareTag("Enemy")){
+                    Debug.Log("He detectado un enemigo, le hago daño");
+                    hit.GetComponent<EnemyController>().receiveDamage(cloud.damage * Time.deltaTime);
+                }
+            }
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        ClearAndDestroy();
+    }
+
+    private void ClearAndDestroy(){
+        tilemap.SetTileFlags(cellPos, TileFlags.LockColor);
+        tilemap.SetColor(cellPos, initialColor);
+        Destroy(gameObject);
     }
     void OnDrawGizmos()
     {
