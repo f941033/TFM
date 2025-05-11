@@ -13,7 +13,9 @@ public class CardManager : MonoBehaviour
     public Tilemap zonaValidaTilemap;
     private PlayerController player;
     public TextMeshProUGUI textNumberOfCardsDeck;
+    public TextMeshProUGUI textNumberOfCardsDiscardPile;
     public GameObject drawPileImage;
+    public GameObject discardPileImage;
 
     [Header("Variables del mazo")]
     public List<CardData> startingDeck;
@@ -28,6 +30,16 @@ public class CardManager : MonoBehaviour
     {
         player = FindFirstObjectByType<PlayerController>();
         currentHandSize = handSize;
+    }
+
+    public void ActivateDiscardPileImage()
+    {
+        discardPileImage.SetActive(true);
+    }
+
+    public void UpdateTextNumberOfCardsDiscard()
+    {
+        textNumberOfCardsDiscardPile.text = discardPile.Count.ToString();
     }
 
     /*
@@ -53,8 +65,10 @@ public class CardManager : MonoBehaviour
         startingDeck = new List<CardData>(selectedCards);
         drawPile = new List<CardData>(startingDeck);
         discardPile.Clear();
+        discardPileImage.SetActive(false);
         Debug.Log(startingDeck.Count);
         textNumberOfCardsDeck.text = drawPile.Count.ToString();
+        
         Shuffle(drawPile);
         DrawFullHand();
         Time.timeScale = 1f;
@@ -70,9 +84,11 @@ public class CardManager : MonoBehaviour
         if (drawPile.Count == 0) {
             drawPile.AddRange(discardPile);
             discardPile.Clear();
+            discardPileImage.SetActive(false);
             Shuffle(drawPile);
             drawPileImage.SetActive(true);
         }
+
         var cardToDraw = drawPile[0];
         drawPile.RemoveAt(0);
 
@@ -84,7 +100,6 @@ public class CardManager : MonoBehaviour
         {
             textNumberOfCardsDeck.text = drawPile.Count.ToString();
         }
-        
 
         var cardData = Instantiate(prefabCard, panelCard);
         CardUI cardUI = cardData.GetComponentInChildren<CardUI>();

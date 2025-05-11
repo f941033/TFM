@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using DeckboundDungeon.Cards;
+using TMPro;
 
 public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -16,6 +17,9 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public CardData cardData;
     internal CardManager Deck;
     public PlayerController player;
+
+    //private TextMeshProUGUI textNumberOfCardsDiscard;
+    //private GameObject discardPileImage;
 
     private bool cartaColocada = false;
     [SerializeField] private GraphicRaycaster raycasterUI;
@@ -45,6 +49,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     {
         highlightTile = Resources.Load<TileBase>("Tiles/HighlightTile");
         highlightMap = GameObject.Find("Tilemap Highlighted").GetComponent<Tilemap>();
+        //discardPileImage = Deck.GetDiscardPileImage();
+        //textNumberOfCardsDiscard = discardPileImage.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     void Update()
@@ -146,12 +152,19 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             canvasGroup.blocksRaycasts = true;
             isDragging = false;
         }
+
         End_Drop:
         if(!cartaColocada)
         {
             transform.SetParent(originalTransform, true);
             transform.SetSiblingIndex(cardIndex);
             rectTransform.anchoredPosition = originalAnchoredPosition;
+        }
+        else
+        {
+            if (Deck.discardPile.Count == 1) Deck.ActivateDiscardPileImage();
+
+            Deck.UpdateTextNumberOfCardsDiscard();
         }
 
         canvasGroup.blocksRaycasts = true;
