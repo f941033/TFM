@@ -136,6 +136,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                         highlightMap.SetTile(previousCell, null);
                         hasPrevious = false;
                     }
+                    player.SpendSouls(cardData.cost);
                     Deck.CardPlayed(gameObject, cardData);
                     //Destroy(gameObject);
                     cartaColocada = true;

@@ -148,6 +148,7 @@ public class PlayerController : MonoBehaviour
     public void receiveDamage(float damage)
     {
         currentHealth -= damage;
+        GetComponent<Damageable>().TakeDamage(damage);
 
         currentHealth = Mathf.Clamp(currentHealth, 0f, baseHealth);
 
@@ -159,12 +160,14 @@ public class PlayerController : MonoBehaviour
     public bool TrySpendSouls(float amount)
     {
         if (currentSouls >= amount)
-        {
-            currentSouls -= amount;
-            OnSoulsChanged?.Invoke(currentSouls);
             return true;
-        }
         return false;
+    }
+
+    public void SpendSouls(float amount)
+    {
+        currentSouls -= amount;
+        OnSoulsChanged?.Invoke(currentSouls);
     }
     public void AddGold(int gold)
     {

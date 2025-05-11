@@ -6,7 +6,7 @@ public abstract class CardData : ScriptableObject
 {
     [Header("Datos comunes")]
     public string cardName;
-    public byte cost;
+    public float cost;
     [TextArea] public string description;
     public CardType cardType;
 
