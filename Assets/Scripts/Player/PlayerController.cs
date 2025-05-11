@@ -171,9 +171,7 @@ public class PlayerController : MonoBehaviour
     }
     public void AddGold(int gold)
     {
-        Debug.Log(gold);
         amountGold+= gold;
-        Debug.Log(amountGold);
         OnGoldChanged?.Invoke(gold);
     }
     public void SpendGold(int gold)
