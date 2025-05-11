@@ -36,13 +36,14 @@ public class CardManager : MonoBehaviour
         DrawFullHand();
     }*/
 
-    public void InicializarPartida(List<CardData> selectedCards)
+    public void StartRun(List<CardData> selectedCards)
     {
         player = FindFirstObjectByType<PlayerController>();
 
         startingDeck = new List<CardData>(selectedCards);
         drawPile = new List<CardData>(startingDeck);
         discardPile.Clear();
+        Debug.Log(startingDeck.Count);
 
         currentHandSize = handSize;
 

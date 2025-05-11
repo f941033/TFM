@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
 
     public void receiveDamage(float damage){
         currentHealth -= damage;
+        GetComponent<Damageable>().TakeDamage(damage);
         if(currentHealth <=0 ){
             Die();
         }
@@ -82,7 +83,7 @@ public class EnemyController : MonoBehaviour
 
         // El centro del círculo respecto al world
         Vector3 center = transform.position + (Vector3)col.offset;
-        float   radius = col.radius;
+        float radius = col.radius;
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(center, radius);

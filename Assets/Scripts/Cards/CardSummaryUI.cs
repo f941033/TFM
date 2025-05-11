@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class CardSummaryUI : MonoBehaviour
 {
+    public GameSettings settings;
     public GameObject cardNamePrefab; // Prefab UI con componente Text
     public TextMeshProUGUI contador;
     public Button botonListo;
     public GameObject canvasDeck;
     public CardManager cardManager;
+    public Transform listContainer;
 
     public List<CardData> selectedCards = new List<CardData>();
-    private int maxCardDeck = 10;
+    private int maxCardDeck => settings.initialDeckSize;
 
     private void Start()
     {
@@ -67,8 +69,13 @@ public class CardSummaryUI : MonoBehaviour
 
     public void BotonListo()
     {
+        cardManager.StartRun(selectedCards);
+
+        foreach (Transform child in listContainer) 
+            Destroy(child.gameObject);
+        selectedCards.Clear();
+
         canvasDeck.SetActive(false);
         Time.timeScale = 1f;
-        cardManager.InicializarPartida(selectedCards);
     }
 }
