@@ -7,8 +7,8 @@ public class CardSummaryUI : MonoBehaviour
 {
     public GameSettings settings;
     public GameObject cardNamePrefab; // Prefab UI con componente Text
-    public TextMeshProUGUI contador;
-    public Button botonListo;
+    public TextMeshProUGUI counterText;
+    public Button readyButton;
     public GameObject canvasDeck;
     public CardManager cardManager;
     public Transform listContainer;
@@ -19,7 +19,7 @@ public class CardSummaryUI : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 0f;
-        contador.text = selectedCards.Count + "/" + maxCardDeck;
+        counterText.text = selectedCards.Count + "/" + maxCardDeck;
     }
 
     public void SelectCard(CardData card)
@@ -56,18 +56,18 @@ public class CardSummaryUI : MonoBehaviour
             text.text = card.cardName;
         }
 
-        contador.text = selectedCards.Count + "/" + maxCardDeck;
+        counterText.text = selectedCards.Count + "/" + maxCardDeck;
         if (selectedCards.Count == maxCardDeck)
         {
-            botonListo.interactable = true;
+            readyButton.interactable = true;
         }
         else
         {
-            botonListo.interactable = false;
+            readyButton.interactable = false;
         }
     }
 
-    public void BotonListo()
+    public void ReadyButton()
     {
         cardManager.StartRun(selectedCards);
 
@@ -76,6 +76,6 @@ public class CardSummaryUI : MonoBehaviour
         selectedCards.Clear();
 
         canvasDeck.SetActive(false);
-        Time.timeScale = 1f;
+        
     }
 }

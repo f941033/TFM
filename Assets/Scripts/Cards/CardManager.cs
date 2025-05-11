@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using DeckboundDungeon.Cards.Buff;
+using TMPro;
 
 public class CardManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class CardManager : MonoBehaviour
     public Transform panelCard;
     public Tilemap zonaValidaTilemap;
     private PlayerController player;
+    public TextMeshProUGUI textNumberOfCardsDeck;
+    public GameObject drawPileImage;
 
     [Header("Variables del mazo")]
     public List<CardData> startingDeck;
@@ -21,34 +24,40 @@ public class CardManager : MonoBehaviour
     public byte currentHandSize;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    /*void Start()
+    void Start()
     {
         player = FindFirstObjectByType<PlayerController>();
-
-        CardData[] allCards = Resources.LoadAll<CardData>("Cards");
-        startingDeck = new List<CardData>(allCards);
-        drawPile = new List<CardData>(startingDeck);
-        discardPile.Clear();
-
         currentHandSize = handSize;
+    }
 
-        Shuffle(drawPile);
+    /*
+    public void PreparationPhase(List<CardData> selectedCards)
+    {
+        startingDeck = new List<CardData>(selectedCards);
+
+        //Crear el mazo de cartas de tipo trampa
+        foreach (CardData card in startingDeck) 
+        { 
+            if(card.cardType == CardType.Trap)
+            {
+                drawPile.Add(card);
+            }
+        }
+       
         DrawFullHand();
-    }*/
+    }
+    */
 
     public void StartRun(List<CardData> selectedCards)
     {
-        player = FindFirstObjectByType<PlayerController>();
-
         startingDeck = new List<CardData>(selectedCards);
         drawPile = new List<CardData>(startingDeck);
         discardPile.Clear();
         Debug.Log(startingDeck.Count);
-
-        currentHandSize = handSize;
-
+        textNumberOfCardsDeck.text = drawPile.Count.ToString();
         Shuffle(drawPile);
         DrawFullHand();
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -57,14 +66,25 @@ public class CardManager : MonoBehaviour
         
     }
 
-    public void DrawCard(){
-        if(drawPile.Count == 0){
+    public void DrawCard() {
+        if (drawPile.Count == 0) {
             drawPile.AddRange(discardPile);
             discardPile.Clear();
             Shuffle(drawPile);
+            drawPileImage.SetActive(true);
         }
         var cardToDraw = drawPile[0];
         drawPile.RemoveAt(0);
+
+        if (drawPile.Count == 0)
+        {
+            drawPileImage.SetActive(false);
+        }
+        else
+        {
+            textNumberOfCardsDeck.text = drawPile.Count.ToString();
+        }
+        
 
         var cardData = Instantiate(prefabCard, panelCard);
         CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
