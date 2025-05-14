@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class PlayerController : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private List<EnemyController> targetsInRange = new List<EnemyController>();
     private CircleCollider2D rangeTrigger;
+    public TextMeshProUGUI textGold;
 
     [Header("Base stats")]
     [SerializeField] private float baseHealth = 100f;
@@ -172,6 +174,8 @@ public class PlayerController : MonoBehaviour
     public void AddGold(int gold)
     {
         amountGold+= gold;
+        textGold.text = amountGold.ToString();
+
         OnGoldChanged?.Invoke(gold);
     }
     public void SpendGold(int gold)
@@ -179,6 +183,7 @@ public class PlayerController : MonoBehaviour
         if(amountGold > gold)
         {
             amountGold-=gold;
+            textGold.text = amountGold.ToString();
             OnGoldChanged?.Invoke(gold);
         }
     }

@@ -109,6 +109,7 @@ MonoBehaviour:
   attackRate: 1
   attackRange: 1
   gold: 10
+  effectGoldPrefab: {fileID: 7312088903935544102, guid: 262d3cbdda9907f44ac832ba54f20a2f, type: 3}
 --- !u!195 &29840297323312385
 NavMeshAgent:
   m_ObjectHideFlags: 0

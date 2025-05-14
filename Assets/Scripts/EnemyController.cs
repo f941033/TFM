@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     private bool  playerInRange = false;
     public int gold;
 
+    public GameObject effectGoldPrefab;
+
     void Awake(){
         currentHealth = health;
         gold = 10;
@@ -73,6 +75,7 @@ public class EnemyController : MonoBehaviour
     private void Die(){
         PlayerController player = target.GetComponent<PlayerController>();
         player?.AddGold(gold);
+        Instantiate(effectGoldPrefab, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
     }
