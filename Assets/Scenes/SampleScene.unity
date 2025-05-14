@@ -7369,6 +7369,7 @@ GameObject:
   - component: {fileID: 515426502}
   - component: {fileID: 515426504}
   - component: {fileID: 515426503}
+  - component: {fileID: 515426505}
   m_Layer: 5
   m_Name: Image DrawPile
   m_TagString: Untagged
@@ -7435,6 +7436,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515426501}
   m_CullTransparentMesh: 1
+--- !u!114 &515426505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515426501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09528190b80431043bffb914691d7ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuController: {fileID: 560255915}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -11092,7 +11106,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &686094483
 MonoBehaviour:
   m_ObjectHideFlags: 0

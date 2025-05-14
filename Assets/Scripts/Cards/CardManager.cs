@@ -106,7 +106,6 @@ public class CardManager : MonoBehaviour
         
         Shuffle(drawPile);
         DrawFullHand();
-        //Time.timeScale = 1f;
         GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>().SendMessage("GenerarEnemigos");
     }
 
@@ -115,7 +114,7 @@ public class CardManager : MonoBehaviour
     {        
         foreach (Transform card in panelCard)
         { 
-            Destroy(card);
+            Destroy(card.gameObject);
         }
     }
 

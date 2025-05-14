@@ -110,4 +110,10 @@ public class PauseMenuController : MonoBehaviour
             cd.selectionBorder.SetActive(false);
         }
     }
+
+    public void ShowCardsDeck()
+    {
+        deckPanel.SetActive(true);
+        PopulateDeckGrid();
+    }
 }

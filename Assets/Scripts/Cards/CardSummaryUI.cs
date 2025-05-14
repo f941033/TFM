@@ -18,7 +18,6 @@ public class CardSummaryUI : MonoBehaviour
 
     private void Start()
     {
-        //Time.timeScale = 0f;
         counterText.text = selectedCards.Count + "/" + maxCardDeck;
     }
 
