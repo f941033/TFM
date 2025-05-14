@@ -47,7 +47,7 @@ public class CardManager : MonoBehaviour
     }
 
     //----------------------------------------------------------
-    //                   FASE DE PREPARACIÓN
+    //                   FASE DE PREPARACIï¿½N
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
@@ -88,7 +88,7 @@ public class CardManager : MonoBehaviour
 
 
     //----------------------------------------------------------
-    //                   INICIO FASE DE ACCIÓN
+    //                   INICIO FASE DE ACCIï¿½N
     //----------------------------------------------------------
     public void StartRun()
     {
@@ -100,7 +100,7 @@ public class CardManager : MonoBehaviour
         drawPileImage.SetActive(true);
 
 
-        //Crear el mazo de cartas de tipo ACCIÓN
+        //Crear el mazo de cartas de tipo ACCIï¿½N
         foreach (CardData card in startingDeck)
         {
             if (card.cardType != CardType.Trap)
@@ -127,6 +127,7 @@ public class CardManager : MonoBehaviour
         { 
             Destroy(card.gameObject);
         }
+        cardsInHand.Clear();
     }
 
 
