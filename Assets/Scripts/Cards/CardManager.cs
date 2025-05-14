@@ -46,25 +46,13 @@ public class CardManager : MonoBehaviour
         textNumberOfCardsDiscardPile.text = discardPile.Count.ToString();
     }
 
+    //----------------------------------------------------------
+    //                   FASE DE PREPARACIÓN
+    //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
         startingDeck = new List<CardData>(selectedCards);
-
-        StartCoroutine("CountDown");
-
-
         
-        drawPile = new List<CardData>(startingDeck);
-        discardPile.Clear();
-        discardPileImage.SetActive(false);
-        Debug.Log(startingDeck.Count);
-        textNumberOfCardsDeck.text = drawPile.Count.ToString();
-
-        Shuffle(drawPile);
-        DrawFullHand();
-
-
-        /*
         //Crear el mazo de cartas de tipo trampa
         foreach (CardData card in startingDeck) 
         { 
@@ -72,10 +60,18 @@ public class CardManager : MonoBehaviour
             {
                 drawPile.Add(card);
             }
-        }*/
+        }
+
+        StartCoroutine("CountDown");
 
 
+        discardPile.Clear();
+        discardPileImage.SetActive(false);
+        Debug.Log(startingDeck.Count);
+        textNumberOfCardsDeck.text = drawPile.Count.ToString();
 
+        Shuffle(drawPile);
+        DrawFullHand();
     }
  
     IEnumerator CountDown()
@@ -89,11 +85,20 @@ public class CardManager : MonoBehaviour
         }
         StartRun();        
     }
+
+
+    //----------------------------------------------------------
+    //                   INICIO FASE DE ACCIÓN
+    //----------------------------------------------------------
     public void StartRun()
     {
         //startingDeck = new List<CardData>(selectedCards);
+        ClearPanelCard();
         textCountDown.gameObject.SetActive(false);
+
+        //cambiar startingdeck por otro sin las cartas usadas en preparación
         drawPile = new List<CardData>(startingDeck);
+
         discardPile.Clear();
         discardPileImage.SetActive(false);
         Debug.Log(startingDeck.Count);
@@ -104,6 +109,17 @@ public class CardManager : MonoBehaviour
         //Time.timeScale = 1f;
         GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>().SendMessage("GenerarEnemigos");
     }
+
+
+    void ClearPanelCard()
+    {        
+        foreach (Transform card in panelCard)
+        { 
+            Destroy(card);
+        }
+    }
+
+
 
     // Update is called once per frame
     void Update()
