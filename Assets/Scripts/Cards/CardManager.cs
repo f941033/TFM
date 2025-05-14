@@ -16,7 +16,7 @@ public class CardManager : MonoBehaviour
     public TextMeshProUGUI textNumberOfCardsDeck;
     public TextMeshProUGUI textNumberOfCardsDiscardPile;
     public TextMeshProUGUI textCountDown;
-    private int countDown = 20;
+    private int countDown = 30;
     public GameObject drawPileImage;
     public GameObject discardPileImage;
     public AudioManager audioManager;
@@ -51,6 +51,9 @@ public class CardManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
+        Debug.Log("he llamado a comenzar movimiento de camara");
+        GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
+
         startingDeck = new List<CardData>(selectedCards);
         
         //Crear el mazo de cartas de tipo TRAMPA
@@ -116,8 +119,10 @@ public class CardManager : MonoBehaviour
         
         Shuffle(drawPile);
         DrawFullHand();
+        
         GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>().SendMessage("GenerarEnemigos");
-        //GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
+        
+        
     }
 
 

@@ -19,6 +19,7 @@ public class CardSummaryUI : MonoBehaviour
     private void Start()
     {
         counterText.text = selectedCards.Count + "/" + maxCardDeck;
+        GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StopCameraMovement");
     }
 
     public void SelectCard(CardData card)

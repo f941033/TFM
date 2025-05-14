@@ -54,6 +54,7 @@ public class CardDeck : MonoBehaviour, IPointerClickHandler
         textName.text = cardData.cardName;
         textDesc.text = cardData.description;
         textCost.text = cardData.cost.ToString();
+        //GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StopCameraMovement");
     }
 
     // Update is called once per frame

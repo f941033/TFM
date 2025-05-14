@@ -25,44 +25,25 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 cameraPos = transform.position;
-
-        // Movimiento Horizontal
-        if (mousePos.x >= Screen.width - borderThickness)
-        {
-            cameraPos.x += moveSpeed * Time.deltaTime;
-        }
-        else if (mousePos.x <= borderThickness)
-        {
-            cameraPos.x -= moveSpeed * Time.deltaTime;
-        }
-
-        // Movimiento Vertical
-        if (mousePos.y >= Screen.height - borderThickness)
-        {
-            cameraPos.y += moveSpeed * Time.deltaTime;
-        }
-        else if (mousePos.y <= borderThickness)
-        {
-            cameraPos.y -= moveSpeed * Time.deltaTime;
-        }
-
-        // Limitar la posición de la cámara al tamaño del mapa
-        // Aquí es CLAVE restar la mitad del tamaño de la cámara para centrarla
-        cameraPos.x = Mathf.Clamp(cameraPos.x, 0f + cameraWidth / 2, mapSize.x - cameraWidth / 2);
-        cameraPos.y = Mathf.Clamp(cameraPos.y, 0f + cameraHeight / 2, mapSize.y - cameraHeight / 2);
-
-        transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraZOffset);
+        
     }
 
 
-    /*
+ 
     public void StartCameraMovement()
     {
+        Debug.Log("arrancando movimiento de cámara");
         StartCoroutine("MoveCamera");
     }
-    public IEnumerator MoveCamera()
+
+    public void StopCameraMovement()
+    {
+        Debug.Log("parando movimiento de cámara");
+        StopCoroutine("MoveCamera");
+    }
+
+
+    IEnumerator MoveCamera()
     {
         while (true)
         {
@@ -95,6 +76,7 @@ public class CameraMovement : MonoBehaviour
             cameraPos.y = Mathf.Clamp(cameraPos.y, 0f + cameraHeight / 2, mapSize.y - cameraHeight / 2);
 
             transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraZOffset);
+            yield return null;
         }
-    }*/
+    }
 }
