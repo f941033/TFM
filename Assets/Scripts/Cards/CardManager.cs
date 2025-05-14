@@ -94,9 +94,10 @@ public class CardManager : MonoBehaviour
     {
         //startingDeck = new List<CardData>(selectedCards);
         ClearPanelCard();
+        drawPileImage.SetActive(true);
         textCountDown.gameObject.SetActive(false);
 
-        //cambiar startingdeck por otro sin las cartas usadas en preparación
+        //cambiar startingDeck por otro sin las cartas usadas en preparación
         drawPile = new List<CardData>(startingDeck);
 
         discardPile.Clear();
@@ -107,6 +108,7 @@ public class CardManager : MonoBehaviour
         Shuffle(drawPile);
         DrawFullHand();
         GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>().SendMessage("GenerarEnemigos");
+        //GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
     }
 
 
