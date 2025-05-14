@@ -12,6 +12,7 @@ public class TrapController : MonoBehaviour
 
     [HideInInspector] public Vector3Int cellPos;
     [HideInInspector] public Color initialColor;
+    private TileBase originalTile;
     private Tilemap tilemap;
     void Awake()
     {
@@ -40,6 +41,7 @@ public class TrapController : MonoBehaviour
 
     void Start()
     {
+        originalTile = Resources.Load<TileBase>("Tiles/FloorTile");
         if (cardData is ContinuousTrapCardData cloudData)
         {
             StartCoroutine(CloudDamage(cloudData));
@@ -68,8 +70,9 @@ public class TrapController : MonoBehaviour
 
     private void ClearAndDestroy(){
         tilemap.SetTileFlags(cellPos, TileFlags.LockColor);
-        tilemap.SetColor(cellPos, initialColor);
-        Destroy(gameObject);
+        //tilemap.SetColor(cellPos, initialColor);
+        tilemap.SetTile(cellPos, originalTile);
+        Destroy(gameObject); 
     }
     void OnDrawGizmos()
     {

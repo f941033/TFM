@@ -73,6 +73,7 @@ public class EnemyController : MonoBehaviour
     private void Die(){
         PlayerController player = target.GetComponent<PlayerController>();
         player?.AddGold(gold);
+
         Destroy(gameObject);
     }
 
