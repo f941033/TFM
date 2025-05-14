@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using DeckboundDungeon.Cards.Buff;
 using TMPro;
+using System.Collections;
 
 public class CardManager : MonoBehaviour
 {
@@ -14,8 +15,11 @@ public class CardManager : MonoBehaviour
     private PlayerController player;
     public TextMeshProUGUI textNumberOfCardsDeck;
     public TextMeshProUGUI textNumberOfCardsDiscardPile;
+    public TextMeshProUGUI textCountDown;
+    private int countDown = 20;
     public GameObject drawPileImage;
     public GameObject discardPileImage;
+    public AudioManager audioManager;
 
     [Header("Variables del mazo")]
     public List<CardData> startingDeck;
@@ -42,11 +46,25 @@ public class CardManager : MonoBehaviour
         textNumberOfCardsDiscardPile.text = discardPile.Count.ToString();
     }
 
-    /*
     public void PreparationPhase(List<CardData> selectedCards)
     {
         startingDeck = new List<CardData>(selectedCards);
 
+        StartCoroutine("CountDown");
+
+
+        
+        drawPile = new List<CardData>(startingDeck);
+        discardPile.Clear();
+        discardPileImage.SetActive(false);
+        Debug.Log(startingDeck.Count);
+        textNumberOfCardsDeck.text = drawPile.Count.ToString();
+
+        Shuffle(drawPile);
+        DrawFullHand();
+
+
+        /*
         //Crear el mazo de cartas de tipo trampa
         foreach (CardData card in startingDeck) 
         { 
@@ -54,15 +72,27 @@ public class CardManager : MonoBehaviour
             {
                 drawPile.Add(card);
             }
-        }
-       
-        DrawFullHand();
-    }
-    */
+        }*/
 
-    public void StartRun(List<CardData> selectedCards)
+
+
+    }
+ 
+    IEnumerator CountDown()
     {
-        startingDeck = new List<CardData>(selectedCards);
+        while (countDown > 0)
+        {
+            yield return new WaitForSeconds(1);
+            countDown--;
+            textCountDown.text = countDown.ToString();
+            if (countDown <= 3) audioManager.SoundBeep();
+        }
+        StartRun();        
+    }
+    public void StartRun()
+    {
+        //startingDeck = new List<CardData>(selectedCards);
+        textCountDown.gameObject.SetActive(false);
         drawPile = new List<CardData>(startingDeck);
         discardPile.Clear();
         discardPileImage.SetActive(false);
@@ -71,7 +101,8 @@ public class CardManager : MonoBehaviour
         
         Shuffle(drawPile);
         DrawFullHand();
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
+        GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>().SendMessage("GenerarEnemigos");
     }
 
     // Update is called once per frame

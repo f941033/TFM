@@ -9,11 +9,12 @@ public class ContinuousTrapController : MonoBehaviour
     Vector3Int cell;
     Color originalColor;
     float duration, radius, damage;
+    private TileBase originalTile;
     PlayerController player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        originalTile = Resources.Load<TileBase>("Tiles/FloorTile");
     }
 
     public void Initialize(PlayerController player, ContinuousTrapCardData cardData)
@@ -53,6 +54,7 @@ public class ContinuousTrapController : MonoBehaviour
         }
         zone.SetTileFlags(cell, TileFlags.LockColor);
         zone.SetColor(cell, originalColor);
+        zone.SetTile(cell, originalTile);
         Destroy(gameObject);
     }
     void OnDrawGizmosSelected()

@@ -18,7 +18,7 @@ public class CardSummaryUI : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         counterText.text = selectedCards.Count + "/" + maxCardDeck;
     }
 
@@ -69,7 +69,8 @@ public class CardSummaryUI : MonoBehaviour
 
     public void ReadyButton()
     {
-        cardManager.StartRun(selectedCards);
+        //cardManager.StartRun(selectedCards);
+        cardManager.PreparationPhase(selectedCards);
 
         foreach (Transform child in listContainer) 
             Destroy(child.gameObject);

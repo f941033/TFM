@@ -13,7 +13,7 @@ public class SpawnEnemies : MonoBehaviour
     void Start()
     {
         AddWayPoints(spawnWaypoints,null);
-        StartCoroutine("GenerarEnemigos");
+        //StartCoroutine("GenerarEnemigos");
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class SpawnEnemies : MonoBehaviour
         
     }
 
-    IEnumerator GenerarEnemigos()
+    public IEnumerator GenerarEnemigos()
     {
         while (true)
         {
