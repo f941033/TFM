@@ -53,7 +53,7 @@ public class CardManager : MonoBehaviour
     {
         startingDeck = new List<CardData>(selectedCards);
         
-        //Crear el mazo de cartas de tipo trampa
+        //Crear el mazo de cartas de tipo TRAMPA
         foreach (CardData card in startingDeck) 
         { 
             if(card.cardType == CardType.Trap)
@@ -93,12 +93,21 @@ public class CardManager : MonoBehaviour
     public void StartRun()
     {
         //startingDeck = new List<CardData>(selectedCards);
-        ClearPanelCard();
-        drawPileImage.SetActive(true);
         textCountDown.gameObject.SetActive(false);
+        ClearPanelCard();
+        drawPile = new List<CardData>();
 
-        //cambiar startingDeck por otro sin las cartas usadas en preparación
-        drawPile = new List<CardData>(startingDeck);
+        drawPileImage.SetActive(true);
+
+
+        //Crear el mazo de cartas de tipo ACCIÓN
+        foreach (CardData card in startingDeck)
+        {
+            if (card.cardType != CardType.Trap)
+            {
+                drawPile.Add(card);
+            }
+        }
 
         discardPile.Clear();
         discardPileImage.SetActive(false);
