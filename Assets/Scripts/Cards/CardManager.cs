@@ -15,11 +15,14 @@ public class CardManager : MonoBehaviour
     private PlayerController player;
     public TextMeshProUGUI textNumberOfCardsDeck;
     public TextMeshProUGUI textNumberOfCardsDiscardPile;
-    public TextMeshProUGUI textCountDown;
+    public GameObject countDownObject;
+    public GameObject panelGo;
     private int countDown = 30;
     public GameObject drawPileImage;
     public GameObject discardPileImage;
     public AudioManager audioManager;
+
+    private TextMeshProUGUI textCountDown;
 
     [Header("Variables del mazo")]
     public List<CardData> startingDeck;
@@ -34,6 +37,7 @@ public class CardManager : MonoBehaviour
     {
         player = FindFirstObjectByType<PlayerController>();
         currentHandSize = handSize;
+        textCountDown = countDownObject.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void ActivateDiscardPileImage()
@@ -51,7 +55,6 @@ public class CardManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
-        Debug.Log("he llamado a comenzar movimiento de camara");
         GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
 
         Debug.Log("vida base del player: " + FindFirstObjectByType<PlayerController>().baseHealth.ToString());
@@ -97,7 +100,11 @@ public class CardManager : MonoBehaviour
     public void StartRun()
     {
         //startingDeck = new List<CardData>(selectedCards);
-        textCountDown.gameObject.SetActive(false);
+        //textCountDown.gameObject.SetActive(false);
+        countDownObject.SetActive(false);
+
+        StartCoroutine("PanelGo");
+
         ClearPanelCard();
         drawPile = new List<CardData>();
 
@@ -217,5 +224,17 @@ public class CardManager : MonoBehaviour
             DrawCard();
             count--;
         }
+    }
+
+    public void SkipCountDown()
+    {
+        StartRun();
+    }
+
+    IEnumerator PanelGo()
+    {
+        panelGo.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        panelGo.SetActive(false);
     }
 }
