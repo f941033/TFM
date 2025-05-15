@@ -118,15 +118,15 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 SalaController sala = col.GetComponent<SalaController>();
                 if(sala != null && sala.estaLibre){ 
                     if(cardData.cardType == CardType.Trap){
-                        Color initialColor = dropTilemap.GetColor(cellPos);
-                        dropTilemap.SetTileFlags(cellPos, TileFlags.None);
-                        dropTilemap.SetColor(cellPos, Color.green);
-                        var trapGO = Instantiate(((TrapCardData)cardData).trapPrefab, dropTilemap.GetCellCenterWorld(cellPos), Quaternion.identity);
-                        var trapController = trapGO.GetComponent<TrapController>();
-                        trapController.cardData = (TrapCardData)cardData;
-                        trapController.player = player;
-                        trapController.cellPos = cellPos;
-                        trapController.initialColor = initialColor;
+                        //Color initialColor = dropTilemap.GetColor(cellPos);
+                        //dropTilemap.SetTileFlags(cellPos, TileFlags.None);
+                        //dropTilemap.SetColor(cellPos, Color.green);
+                        //var trapGO = Instantiate(((TrapCardData)cardData).trapPrefab, dropTilemap.GetCellCenterWorld(cellPos), Quaternion.identity);
+                        //var trapController = trapGO.GetComponent<TrapController>();
+                        //trapController.cardData = (TrapCardData)cardData;
+                        //trapController.player = player;
+                        //trapController.cellPos = cellPos;
+                        //trapController.initialColor = initialColor;
                     }
                     if(cardData.cardType == CardType.DeckEffect){
                         if(Deck.discardPile.Count == 0){
@@ -142,7 +142,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                         highlightMap.SetTile(previousCell, null);
                         hasPrevious = false;
                     }
-                    player.SpendSouls(cardData.cost);
                     Deck.CardPlayed(gameObject, cardData);
                     //Destroy(gameObject);
                     cartaColocada = true;
@@ -164,6 +163,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         {
             if (Deck.discardPile.Count == 1) Deck.ActivateDiscardPileImage();
 
+            player.SpendSouls(cardData.cost);
             Deck.UpdateTextNumberOfCardsDiscard();
         }
 

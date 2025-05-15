@@ -20,16 +20,13 @@ public class TrapController : MonoBehaviour
         if (tilemap == null)
             Debug.LogError("[TrapController] no encontré zonaValidaTilemap", this);
 
-        if (cardData == null)
-            Debug.LogWarning("[TrapController] no se ha asignado cardData", this);
-        if (player == null)
-            Debug.LogWarning("[TrapController] no se ha asignado player", this);
     }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!(cardData is InstantTrapCardData)) return;
         if (!other.CompareTag("Enemy")) return;
 
+        Debug.Log("Algo ha entrado en el collider");
         var enemy = other.GetComponent<EnemyController>();
         if (enemy == null) return;
 
@@ -46,6 +43,12 @@ public class TrapController : MonoBehaviour
         {
             StartCoroutine(CloudDamage(cloudData));
         }
+        else
+        {
+            BoxCollider2D boxCol = GetComponent<BoxCollider2D>();
+            boxCol.isTrigger = true;
+            boxCol.size = new Vector2(cardData.trapSizeInTiles.x, cardData.trapSizeInTiles.y);
+        }
     }
 
     private IEnumerator CloudDamage(ContinuousTrapCardData cloud)
@@ -56,10 +59,8 @@ public class TrapController : MonoBehaviour
             var hits = Physics2D.OverlapCircleAll(transform.position, cloud.radius);
             foreach(var hit in hits)
             {
-                if(hit.CompareTag("Enemy")){
-                    Debug.Log("He detectado un enemigo, le hago daño");
+                if(hit.CompareTag("Enemy"))
                     hit.GetComponent<EnemyController>().receiveDamage(cloud.damage * Time.deltaTime);
-                }
             }
 
             elapsed += Time.deltaTime;

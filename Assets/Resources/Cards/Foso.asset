@@ -18,5 +18,6 @@ MonoBehaviour:
   cardType: 1
   healthModifier: -5
   used: 1
-  trapPrefab: {fileID: 1444403662060021971, guid: 1eeb3bcf215a5fd4fb91df13cefffb77, type: 3}
+  trapPrefab: {fileID: 6277402101696320810, guid: 7db39a53d2057c142b5b622c64d7810a, type: 3}
   damage: 50
+  trapSizeInTiles: {x: 1, y: 1}
