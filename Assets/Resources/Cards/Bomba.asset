@@ -16,6 +16,7 @@ MonoBehaviour:
   cost: 2
   description: "Explosi\xF3n sorpresa, muerte no tanto."
   cardType: 1
+  healthModifier: -5
   used: 0
   trapPrefab: {fileID: 1444403662060021971, guid: 1eeb3bcf215a5fd4fb91df13cefffb77, type: 3}
   damage: 50

@@ -16,6 +16,7 @@ MonoBehaviour:
   cost: 1
   description: "Da\xF1o continuo 15% vida/sec a enemigos en l\xEDnea recta."
   cardType: 1
+  healthModifier: 15
   used: 0
   trapPrefab: {fileID: 1444403662060021971, guid: 1eeb3bcf215a5fd4fb91df13cefffb77, type: 3}
   damage: 15

@@ -17,6 +17,7 @@ MonoBehaviour:
   description: "15% da\xF1o al contacto + paraliza 3 seg.. Aumenta su poder con trampas
     de agua."
   cardType: 1
+  healthModifier: 10
   used: 0
   trapPrefab: {fileID: 1444403662060021971, guid: 1eeb3bcf215a5fd4fb91df13cefffb77, type: 3}
   damage: 20

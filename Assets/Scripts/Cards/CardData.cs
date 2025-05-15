@@ -9,6 +9,7 @@ public abstract class CardData : ScriptableObject
     public float cost;
     [TextArea] public string description;
     public CardType cardType;
+    public float healthModifier;
 
     public abstract void Play(PlayerController player, Vector3 worldPosition);
 }

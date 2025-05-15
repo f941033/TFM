@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 85896109}
   - component: {fileID: 85896108}
   m_Layer: 5
-  m_Name: "T\xEDtulo"
+  m_Name: BaseHealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -403,11 +403,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 133849680}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &85896108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Elecci\xF3n de cartas"
+  m_text: 'Salud base: 100'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -455,14 +455,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 57
-  m_fontSizeBase: 57
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -14465,7 +14465,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textGold: {fileID: 743861996}
-  baseHealth: 100
   maxSouls: 15
   currentHealth: 0
   currentDamage: 0
@@ -26679,10 +26678,12 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: 495d767fe5dc8a94bb2d22b528c0e643, type: 2}
   cardNamePrefab: {fileID: 6224160029015025571, guid: 2af469c1b74662c43a151b02d72b84ce, type: 3}
   counterText: {fileID: 1776117610}
+  baseHealthText: {fileID: 85896108}
   readyButton: {fileID: 1292049666}
   canvasDeck: {fileID: 388060328}
   cardManager: {fileID: 1880551133}
   listContainer: {fileID: 622414958}
+  playerController: {fileID: 844376031}
   selectedCards: []
 --- !u!114 &1959062256
 MonoBehaviour:

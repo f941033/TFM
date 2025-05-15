@@ -8,18 +8,23 @@ public class CardSummaryUI : MonoBehaviour
     public GameSettings settings;
     public GameObject cardNamePrefab; // Prefab UI con componente Text
     public TextMeshProUGUI counterText;
+    public TextMeshProUGUI baseHealthText;
     public Button readyButton;
     public GameObject canvasDeck;
     public CardManager cardManager;
     public Transform listContainer;
+    public PlayerController playerController;
 
     public List<CardData> selectedCards = new List<CardData>();
     private int maxCardDeck => settings.initialDeckSize;
+    private float baseHealth;
 
     private void Start()
     {
         counterText.text = selectedCards.Count + "/" + maxCardDeck;
         GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StopCameraMovement");
+        baseHealth = playerController.BaseHealth;
+        baseHealthText.text = "Salud base: " + baseHealth;
     }
 
     public void SelectCard(CardData card)
@@ -27,6 +32,7 @@ public class CardSummaryUI : MonoBehaviour
         if (!selectedCards.Contains(card))
         {
             selectedCards.Add(card);
+            baseHealth += card.healthModifier;
             UpdateSummaryPanel();
         }
     }
@@ -36,12 +42,15 @@ public class CardSummaryUI : MonoBehaviour
         if (selectedCards.Contains(card))
         {
             selectedCards.Remove(card);
+            baseHealth -= card.healthModifier;
             UpdateSummaryPanel();
         }
     }
 
     private void UpdateSummaryPanel()
     {
+        baseHealthText.text = "Salud base: " + baseHealth;
+
         // Limpiar el panel
         foreach (Transform child in transform)
         {
@@ -69,6 +78,7 @@ public class CardSummaryUI : MonoBehaviour
 
     public void ReadyButton()
     {
+        playerController.BaseHealth = baseHealth;
         //cardManager.StartRun(selectedCards);
         cardManager.PreparationPhase(selectedCards);
 

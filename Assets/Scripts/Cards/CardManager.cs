@@ -54,6 +54,7 @@ public class CardManager : MonoBehaviour
         Debug.Log("he llamado a comenzar movimiento de camara");
         GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
 
+        Debug.Log("vida base del player: " + FindFirstObjectByType<PlayerController>().baseHealth.ToString());
         startingDeck = new List<CardData>(selectedCards);
         
         //Crear el mazo de cartas de tipo TRAMPA

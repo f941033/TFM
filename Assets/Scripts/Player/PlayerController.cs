@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI textGold;
 
     [Header("Base stats")]
-    [SerializeField] private float baseHealth = 100f;
+    [SerializeField] public float baseHealth { get; set; } = 100f;
     private float baseDamage = 20f;
     private float baseAttackSpeed = 1f;
     private float baseRange = 1f;
