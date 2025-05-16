@@ -28,12 +28,13 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void EnemieKaputt()
+    public void EnemyKaputt()
     {
         enemiesDied++;
         Debug.Log("enemigo " + enemiesDied + " muerto");
         if (enemiesDied == enemiesToKill)
         {
+            enemiesDied = 0;
             Invoke("EndWave",1f);
         }
     }

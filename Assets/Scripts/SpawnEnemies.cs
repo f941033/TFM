@@ -16,7 +16,7 @@ public class SpawnEnemies : MonoBehaviour
         AddWayPoints(spawnWaypoints,null);
         //StartCoroutine("GenerarEnemigos");
         
-        enemiesCounter = 0;
+        
     }
 
     // Update is called once per frame
@@ -28,8 +28,9 @@ public class SpawnEnemies : MonoBehaviour
     public IEnumerator GenerarEnemigos()
     {
         enemiesToSpawn = FindFirstObjectByType<GameManager>().enemiesToKill;
-
-        while (enemiesCounter < enemiesToSpawn)
+        enemiesCounter = 0;
+        //while (enemiesCounter < enemiesToSpawn)
+        for (int i = 1;i<=enemiesToSpawn;i++)
         {
             yield return new WaitForSeconds(3f);
 
