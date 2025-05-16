@@ -118,9 +118,9 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 SalaController sala = col.GetComponent<SalaController>();
                 if(sala != null && sala.estaLibre){ 
                     if(cardData.cardType == CardType.Trap){
-                        //Color initialColor = dropTilemap.GetColor(cellPos);
-                        //dropTilemap.SetTileFlags(cellPos, TileFlags.None);
-                        //dropTilemap.SetColor(cellPos, Color.green);
+                        Color initialColor = dropTilemap.GetColor(cellPos);
+                        dropTilemap.SetTileFlags(cellPos, TileFlags.None);
+                        dropTilemap.SetColor(cellPos, Color.green);
                         //var trapGO = Instantiate(((TrapCardData)cardData).trapPrefab, dropTilemap.GetCellCenterWorld(cellPos), Quaternion.identity);
                         //var trapController = trapGO.GetComponent<TrapController>();
                         //trapController.cardData = (TrapCardData)cardData;

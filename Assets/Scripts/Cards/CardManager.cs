@@ -55,6 +55,7 @@ public class CardManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
+        countDown = 30;
         GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
 
         Debug.Log("vida base del player: " + FindFirstObjectByType<PlayerController>().baseHealth.ToString());
@@ -124,12 +125,13 @@ public class CardManager : MonoBehaviour
         discardPileImage.SetActive(false);
         Debug.Log(startingDeck.Count);
         textNumberOfCardsDeck.text = drawPile.Count.ToString();
-        
+
         Shuffle(drawPile);
         DrawFullHand();
-        
-        GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>().SendMessage("GenerarEnemigos");
-        
+
+        //GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>().SendMessage("GenerarEnemigos");
+        var spawner = GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>();
+        spawner.StartCoroutine(spawner.GenerarEnemigos());
         
     }
 

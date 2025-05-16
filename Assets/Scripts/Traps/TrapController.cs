@@ -39,16 +39,13 @@ public class TrapController : MonoBehaviour
     void Start()
     {
         originalTile = Resources.Load<TileBase>("Tiles/FloorTile");
-        if (cardData is ContinuousTrapCardData cloudData)
-        {
-            StartCoroutine(CloudDamage(cloudData));
-        }
-        else
-        {
-            BoxCollider2D boxCol = GetComponent<BoxCollider2D>();
-            boxCol.isTrigger = true;
-            boxCol.size = new Vector2(cardData.trapSizeInTiles.x, cardData.trapSizeInTiles.y);
-        }
+        //if (cardData is ContinuousTrapCardData cloudData)
+        //{
+            //Debug.Log("Entro en que es de tipo Continuo");
+            //StartCoroutine(CloudDamage(cloudData));
+            //return;
+        //}
+        //Debug.Log("Y ahora estoy fuera del if");
     }
 
     private IEnumerator CloudDamage(ContinuousTrapCardData cloud)

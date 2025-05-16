@@ -53,7 +53,11 @@ public class GameManager : MonoBehaviour
         numberWave++;
         textNumberWave.text = "Ronda: " + numberWave;
 
-        cardSummaryUI.ReadyButton();
+        Time.timeScale = 0f;
+
+        cardSummaryUI.ResetRun();
+        //Lo comentado intentando que las oleadas pasen bien
+        //cardSummaryUI.ReadyButton();
         /*
          * LO QUE HACE READYBUTTON
         playerController.BaseHealth = baseHealth;

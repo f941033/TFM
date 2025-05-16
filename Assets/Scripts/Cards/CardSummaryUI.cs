@@ -79,15 +79,29 @@ public class CardSummaryUI : MonoBehaviour
 
     public void ReadyButton()
     {
-        playerController.BaseHealth = baseHealth;
-        //gameManager.SetSelectedCards(selectedCards);
+        Time.timeScale = 1f;
+        canvasDeck.SetActive(false);
         cardManager.PreparationPhase(selectedCards);
+        //playerController.BaseHealth = baseHealth;
+        //gameManager.SetSelectedCards(selectedCards);
+        //cardManager.PreparationPhase(selectedCards);
 
-        foreach (Transform child in listContainer) 
+        //foreach (Transform child in listContainer)
+            //Destroy(child.gameObject);
+        //selectedCards.Clear();
+
+        //canvasDeck.SetActive(false);
+
+    }
+
+    public void ResetRun()
+    {
+        foreach (Transform child in listContainer)
             Destroy(child.gameObject);
         selectedCards.Clear();
-
-        canvasDeck.SetActive(false);
-        
+        counterText.text = $"0/{settings.initialDeckSize}";
+        baseHealth = playerController.BaseHealth;
+        baseHealthText.text = "Salud base: " + baseHealth;
+        readyButton.interactable = false;
     }
 }
