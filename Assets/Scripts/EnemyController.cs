@@ -76,7 +76,7 @@ public class EnemyController : MonoBehaviour
         PlayerController player = target.GetComponent<PlayerController>();
         player?.AddGold(gold);
         Instantiate(effectGoldPrefab, transform.position, Quaternion.identity);
-
+        FindFirstObjectByType<GameManager>().EnemieKaputt();
         Destroy(gameObject);
     }
 

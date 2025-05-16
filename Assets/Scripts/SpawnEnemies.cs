@@ -8,12 +8,15 @@ public class SpawnEnemies : MonoBehaviour
     public GameObject enemy;
     public Transform[] spawnWaypoints;
     private List<Transform> spawnListPoints = new List<Transform>();
+    private int enemiesToSpawn, enemiesCounter;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         AddWayPoints(spawnWaypoints,null);
         //StartCoroutine("GenerarEnemigos");
+        
+        enemiesCounter = 0;
     }
 
     // Update is called once per frame
@@ -24,9 +27,11 @@ public class SpawnEnemies : MonoBehaviour
 
     public IEnumerator GenerarEnemigos()
     {
-        while (true)
+        enemiesToSpawn = FindFirstObjectByType<GameManager>().enemiesToKill;
+
+        while (enemiesCounter < enemiesToSpawn)
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(3f);
 
             if (spawnListPoints.Count == 0)
                 continue;
@@ -35,6 +40,8 @@ public class SpawnEnemies : MonoBehaviour
             Transform chosenPoint = spawnListPoints[randomWP];
 
             Instantiate(enemy, chosenPoint.position, Quaternion.identity);
+            enemiesCounter++;
+            Debug.Log("enemiesToSpawn: " + enemiesToSpawn + ", enemiesCounter: " + enemiesCounter);
         }
 
         
