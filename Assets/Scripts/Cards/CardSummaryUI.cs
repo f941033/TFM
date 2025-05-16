@@ -18,7 +18,7 @@ public class CardSummaryUI : MonoBehaviour
 
     public List<CardData> selectedCards = new List<CardData>();
     private int maxCardDeck => settings.initialDeckSize;
-    private float baseHealth;
+    public float baseHealth;
 
     private void Start()
     {

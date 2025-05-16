@@ -103,7 +103,7 @@ public class CardManager : MonoBehaviour
         //startingDeck = new List<CardData>(selectedCards);
         //textCountDown.gameObject.SetActive(false);
         countDownObject.SetActive(false);
-
+        countDown = 30;
         StartCoroutine("PanelGo");
 
         ClearPanelCard();
