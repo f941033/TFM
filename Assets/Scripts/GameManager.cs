@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject panelEndWave;
     public CardManager cardManager;
     public CardSummaryUI cardSummaryUI;
+    public PlayerController playerController;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -53,7 +54,8 @@ public class GameManager : MonoBehaviour
         numberWave++;
         textNumberWave.text = "Ronda: " + numberWave;
 
-        cardSummaryUI.ReadyButton();
+        playerController.BaseHealth = cardSummaryUI.baseHealth;
+        cardManager.PreparationPhase(selectedCards);
         /*
          * LO QUE HACE READYBUTTON
         playerController.BaseHealth = baseHealth;
