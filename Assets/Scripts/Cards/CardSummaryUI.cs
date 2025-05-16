@@ -83,7 +83,7 @@ public class CardSummaryUI : MonoBehaviour
         canvasDeck.SetActive(false);
         cardManager.PreparationPhase(selectedCards);
         //playerController.BaseHealth = baseHealth;
-        //gameManager.SetSelectedCards(selectedCards);
+        gameManager.SetSelectedCards(selectedCards);
         //cardManager.PreparationPhase(selectedCards);
 
         //foreach (Transform child in listContainer)

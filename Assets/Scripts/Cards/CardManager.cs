@@ -55,6 +55,9 @@ public class CardManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
+        drawPileImage.SetActive(true);
+        countDownObject.SetActive(true);
+        ClearPanelCard();
         //countDown = 30;
         GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
 

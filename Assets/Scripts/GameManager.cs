@@ -53,10 +53,11 @@ public class GameManager : MonoBehaviour
         panelEndWave.SetActive(false);
         numberWave++;
         textNumberWave.text = "Ronda: " + numberWave;
-        
-        Time.timeScale = 0f;
+        cardManager.PreparationPhase(selectedCards);
 
-        cardSummaryUI.ResetRun();
+        //Time.timeScale = 0f;
+
+        //cardSummaryUI.ResetRun();
         //Lo comentado intentando que las oleadas pasen bien
         //cardSummaryUI.ReadyButton();
 
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
          * */
     }
 
-    //NO SE USA
+
     public void SetSelectedCards(List<CardData> selectedCards)
     {
         this.selectedCards = selectedCards;
