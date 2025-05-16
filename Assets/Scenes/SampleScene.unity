@@ -7988,6 +7988,7 @@ MonoBehaviour:
   textNumberWave: {fileID: 1640885441}
   panelEndWave: {fileID: 587340171}
   cardManager: {fileID: 1880551133}
+  cardSummaryUI: {fileID: 1959062255}
 --- !u!4 &462794454
 Transform:
   m_ObjectHideFlags: 0
@@ -28551,6 +28552,7 @@ MonoBehaviour:
   cardManager: {fileID: 1880551133}
   listContainer: {fileID: 622414958}
   playerController: {fileID: 844376031}
+  gameManager: {fileID: 462794453}
   selectedCards: []
 --- !u!114 &1959062256
 MonoBehaviour:

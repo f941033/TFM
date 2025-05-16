@@ -14,6 +14,7 @@ public class CardSummaryUI : MonoBehaviour
     public CardManager cardManager;
     public Transform listContainer;
     public PlayerController playerController;
+    public GameManager gameManager;
 
     public List<CardData> selectedCards = new List<CardData>();
     private int maxCardDeck => settings.initialDeckSize;
@@ -79,7 +80,7 @@ public class CardSummaryUI : MonoBehaviour
     public void ReadyButton()
     {
         playerController.BaseHealth = baseHealth;
-        //cardManager.StartRun(selectedCards);
+        //gameManager.SetSelectedCards(selectedCards);
         cardManager.PreparationPhase(selectedCards);
 
         foreach (Transform child in listContainer) 

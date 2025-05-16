@@ -7,10 +7,12 @@ public class GameManager : MonoBehaviour
     private int enemiesDied = 0;
     public int enemiesToKill;
     private int numberWave = 1;
+    private List<CardData> selectedCards = new List<CardData>();
 
     public TextMeshProUGUI textNumberWave;
     public GameObject panelEndWave;
     public CardManager cardManager;
+    public CardSummaryUI cardSummaryUI;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,9 +32,9 @@ public class GameManager : MonoBehaviour
     {
         enemiesDied++;
         Debug.Log("enemigo " + enemiesDied + " muerto");
-        if (enemiesDied >= enemiesToKill)
+        if (enemiesDied == enemiesToKill)
         {
-            EndWave();
+            Invoke("EndWave",1f);
         }
     }
 
@@ -49,7 +51,24 @@ public class GameManager : MonoBehaviour
         panelEndWave.SetActive(false);
         numberWave++;
         textNumberWave.text = "Ronda: " + numberWave;
-        List<CardData> selectedCards = FindAnyObjectByType<CardSummaryUI>().selectedCards;
+
+        cardSummaryUI.ReadyButton();
+        /*
+         * LO QUE HACE READYBUTTON
+        playerController.BaseHealth = baseHealth;
         cardManager.PreparationPhase(selectedCards);
+
+        foreach (Transform child in listContainer) 
+            Destroy(child.gameObject);
+        selectedCards.Clear();
+
+        canvasDeck.SetActive(false);
+         * */
+    }
+
+    //NO SE USA
+    public void SetSelectedCards(List<CardData> selectedCards)
+    {
+        this.selectedCards = selectedCards;
     }
 }
