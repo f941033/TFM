@@ -17,7 +17,7 @@ public class CardManager : MonoBehaviour
     public TextMeshProUGUI textNumberOfCardsDiscardPile;
     public GameObject countDownObject;
     public GameObject panelGo;
-    private int countDown = 30;
+    //private int countDown = 30;
     public GameObject drawPileImage;
     public GameObject discardPileImage;
     public AudioManager audioManager;
@@ -37,7 +37,7 @@ public class CardManager : MonoBehaviour
     {
         player = FindFirstObjectByType<PlayerController>();
         currentHandSize = handSize;
-        textCountDown = countDownObject.GetComponentInChildren<TextMeshProUGUI>();
+        //textCountDown = countDownObject.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void ActivateDiscardPileImage()
@@ -55,7 +55,7 @@ public class CardManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
-        countDown = 30;
+        //countDown = 30;
         GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
 
         Debug.Log("vida base del player: " + FindFirstObjectByType<PlayerController>().baseHealth.ToString());
@@ -70,7 +70,7 @@ public class CardManager : MonoBehaviour
             }
         }
 
-        StartCoroutine("CountDown");
+        //StartCoroutine("CountDown");
 
 
         discardPile.Clear();
@@ -82,6 +82,7 @@ public class CardManager : MonoBehaviour
         DrawFullHand();
     }
  
+    /*
     IEnumerator CountDown()
     {
         while (countDown > 0)
@@ -93,7 +94,7 @@ public class CardManager : MonoBehaviour
         }
         StartRun();        
     }
-
+    */
 
     //----------------------------------------------------------
     //                   INICIO FASE DE ACCI�N
@@ -103,7 +104,7 @@ public class CardManager : MonoBehaviour
         //startingDeck = new List<CardData>(selectedCards);
         //textCountDown.gameObject.SetActive(false);
         countDownObject.SetActive(false);
-        countDown = 30;
+        //countDown = 30;
         StartCoroutine("PanelGo");
 
         ClearPanelCard();
