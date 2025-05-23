@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         rangeTrigger = GetComponent<CircleCollider2D>();
         rangeTrigger.isTrigger = true;
         rangeTrigger.radius = baseRange;
+        currentSouls = maxSouls;
 
         OnHealthChanged?.Invoke(currentHealth);
         OnSoulsChanged?.Invoke(currentSouls);
@@ -110,12 +111,12 @@ public class PlayerController : MonoBehaviour
             attackCooldown = 1f / currentAttackSpeed;
         }
 
-        if (currentSouls < maxSouls)
-        {
-            currentSouls += currentSoulsRate * Time.deltaTime/2;
-            currentSouls = Mathf.Clamp(currentSouls, 0f, maxSouls);
-            OnSoulsChanged?.Invoke(currentSouls);
-        }
+        //if (currentSouls < maxSouls)
+        //{
+        //    currentSouls += currentSoulsRate * Time.deltaTime/2;
+        //    currentSouls = Mathf.Clamp(currentSouls, 0f, maxSouls);
+        //    OnSoulsChanged?.Invoke(currentSouls);
+        //}
     }
 
     private void TryAttack()
@@ -190,6 +191,12 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         SceneManager.LoadScene("GameOver");
+    }
+
+    public void RefillSouls()
+    {
+        currentSouls = maxSouls;
+        OnSoulsChanged?.Invoke(currentSouls);
     }
 
     void OnDrawGizmosSelected()

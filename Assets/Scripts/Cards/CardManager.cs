@@ -58,7 +58,8 @@ public class CardManager : MonoBehaviour
         drawPileImage.SetActive(true);
         countDownObject.SetActive(true);
         ClearPanelCard();
-        //countDown = 30;
+        //FindFirstObjectByType<PlayerSoulsBar>().gameObject.SetActive(true);
+        player.RefillSouls();
         GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
 
         Debug.Log("vida base del player: " + FindFirstObjectByType<PlayerController>().baseHealth.ToString());
@@ -115,6 +116,7 @@ public class CardManager : MonoBehaviour
 
         drawPileImage.SetActive(true);
 
+        //FindFirstObjectByType<PlayerSoulsBar>().gameObject.SetActive(false);
 
         //Crear el mazo de cartas de tipo ACCI�N
         foreach (CardData card in startingDeck)
