@@ -1,3 +1,4 @@
+
 using System.Collections;
 using UnityEngine;
 
@@ -12,8 +13,16 @@ public class CameraMovement : MonoBehaviour
     private float cameraHeight;
     private float cameraWidth;
 
+    private float zoomSpeed = 5f;
+    private float minZoom = 2f;
+    private float maxZoom = 12f;
+
+    private Vector3 dragOriginMaze;
+    private bool isDraggingMaze = false;
+
     void Start()
     {
+
         mainCamera = Camera.main;
         // Calcular el tamaño de la cámara en el mundo (importante hacerlo en Start)
         cameraHeight = 2f * mainCamera.orthographicSize;
@@ -25,7 +34,42 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        
+        /* --------------------------------------------
+         *              ZOOM CON RUEDA
+         * --------------------------------------------*/             
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0f)
+        {
+            mainCamera.orthographicSize -= scroll * zoomSpeed;
+            mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, minZoom, maxZoom);
+        }
+
+
+
+        /*--------------------------------------------
+         *         ARRASTRE DEL NIVEL CON RUEDA
+         *--------------------------------------------*/
+
+        // Detectar inicio del arrastre con la rueda del ratón (botón 2)
+        if (Input.GetMouseButtonDown(2))
+        {
+            dragOriginMaze = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            isDraggingMaze = true;
+        }
+
+        // Mientras se mantenga presionado el botón central
+        if (isDraggingMaze && Input.GetMouseButton(2))
+        {
+            Vector3 currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 difference = dragOriginMaze - currentPos;
+            transform.position += difference;
+        }
+
+        // Al soltar la rueda del ratón
+        if (Input.GetMouseButtonUp(2))
+        {
+            isDraggingMaze = false;
+        }
     }
 
 
@@ -33,7 +77,7 @@ public class CameraMovement : MonoBehaviour
     public void StartCameraMovement()
     {
         Debug.Log("arrancando movimiento de cámara");
-        StartCoroutine("MoveCamera");
+        //StartCoroutine("MoveCamera");
     }
 
     public void StopCameraMovement()
@@ -79,4 +123,7 @@ public class CameraMovement : MonoBehaviour
             yield return null;
         }
     }
+
+
+    
 }
