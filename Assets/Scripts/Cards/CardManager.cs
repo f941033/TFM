@@ -29,7 +29,7 @@ public class CardManager : MonoBehaviour
     public List<CardData> drawPile = new List<CardData>();
     public List<CardData> discardPile = new List<CardData>();
     private List<GameObject> cardsInHand   = new List<GameObject>();
-    public byte handSize = 3;
+    public byte handSize = 5;
     public byte currentHandSize;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -80,12 +80,15 @@ public class CardManager : MonoBehaviour
         discardPile.Clear();
         discardPileImage.SetActive(false);
         Debug.Log(startingDeck.Count);
-        textNumberOfCardsDeck.text = drawPile.Count.ToString();
+        textNumberOfCardsDeck.text = startingDeck.Count.ToString();
 
-        Shuffle(drawPile);
+        Shuffle(startingDeck);
         DrawFullHand();
     }
- 
+
+    
+
+
     /*
     IEnumerator CountDown()
     {
@@ -160,6 +163,7 @@ public class CardManager : MonoBehaviour
     }
 
     public void DrawCard() {
+        /*
         if (drawPile.Count == 0) {
             drawPile.AddRange(discardPile);
             discardPile.Clear();
@@ -167,10 +171,12 @@ public class CardManager : MonoBehaviour
             Shuffle(drawPile);
             drawPileImage.SetActive(true);
         }
+        */
 
         var cardToDraw = drawPile[0];
         drawPile.RemoveAt(0);
 
+        /*
         if (drawPile.Count == 0)
         {
             drawPileImage.SetActive(false);
@@ -178,7 +184,9 @@ public class CardManager : MonoBehaviour
         else
         {
             textNumberOfCardsDeck.text = drawPile.Count.ToString();
-        }
+        }*/
+
+        textNumberOfCardsDeck.text = drawPile.Count.ToString();
 
         var cardData = Instantiate(prefabCard, panelCard);
         CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
@@ -194,9 +202,11 @@ public class CardManager : MonoBehaviour
     }
 
     public void DrawFullHand(){
+        
         while(cardsInHand.Count < currentHandSize && (drawPile.Count > 0 || discardPile.Count > 0)){
             DrawCard();
         }
+
     }
 
     public void CardPlayed(GameObject card, CardData cardData){
@@ -206,10 +216,12 @@ public class CardManager : MonoBehaviour
         cardsInHand.Remove(card);
         discardPile.Add(cardData);
         Destroy(card);
+        /*
         if (cardData.cardType != CardType.DeckEffect)
         {
             DrawFullHand();
         }
+        */
     }
 
     public void Shuffle<T>(List<T> list){

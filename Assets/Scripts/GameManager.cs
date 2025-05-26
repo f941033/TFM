@@ -15,13 +15,17 @@ public class GameManager : MonoBehaviour
     public CardSummaryUI cardSummaryUI;
     public PlayerController playerController;
 
+    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         textNumberWave.text = "Ronda: " + numberWave.ToString();
-        enemiesToKill = 5;
+        enemiesToKill = 5;        
     }
+
+    
 
     // Update is called once per frame
     void Update()

@@ -10,7 +10,7 @@ public class CardSelectionController : MonoBehaviour
     [Tooltip("Prefab que contiene el script CardDeck y sus referencias (borde, textos…)")]
     public GameObject cardDeckPrefab; 
     public CardSummaryUI summaryPanel;
-
+    /*
     void Start()
     {
         // Carga todos los CardData de Resources/Cards
@@ -25,5 +25,5 @@ public class CardSelectionController : MonoBehaviour
             cd.summaryPanel = summaryPanel;
             // (El Start del CardDeck se encargará de rellenar nombres, coste, etc.)
         }
-    }
+    }*/
 }
