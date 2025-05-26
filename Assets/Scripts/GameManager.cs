@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
     public CardSummaryUI cardSummaryUI;
     public PlayerController playerController;
 
-    
+    public GameObject prefabCard;
+    public Transform panelCard;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,9 +48,21 @@ public class GameManager : MonoBehaviour
     void EndWave()
     {
         panelEndWave.SetActive(true);
-
+        GenerateRewardCard();
     }
 
+    void GenerateRewardCard()
+    {
+        var allCards = Resources.LoadAll<CardData>("Cards");        
+
+        for (int i = 1; i <= 3; i++)
+        {
+            var cardData = Instantiate(prefabCard, panelCard);
+            CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
+            int index = Random.Range(0, allCards.Length);
+            cardUI.setCardUI(allCards[index]);
+        }
+    }
 
     public void PlayAnotherRun()
     {
