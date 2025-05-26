@@ -67,6 +67,8 @@ public class GameManager : MonoBehaviour
     public void PlayAnotherRun()
     {
         Debug.Log("vamos a por otra ronda");
+
+        ClearPanelCard();
         panelEndWave.SetActive(false);
         numberWave++;
         textNumberWave.text = "Ronda: " + numberWave;
@@ -95,5 +97,13 @@ public class GameManager : MonoBehaviour
     public void SetSelectedCards(List<CardData> selectedCards)
     {
         this.selectedCards = selectedCards;
+    }
+
+    void ClearPanelCard()
+    {
+        foreach (Transform card in panelCard)
+        {
+            Destroy(card.gameObject);
+        }
     }
 }

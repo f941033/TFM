@@ -82,6 +82,7 @@ public class CardManager : MonoBehaviour
         Debug.Log(startingDeck.Count);
         textNumberOfCardsDeck.text = startingDeck.Count.ToString();
 
+        Shuffle(drawPile);
         Shuffle(startingDeck);
         DrawFullHand();
     }
