@@ -8,12 +8,14 @@ public class GameManager : MonoBehaviour
     public int enemiesToKill;
     private int numberWave = 1;
     private List<CardData> selectedCards = new List<CardData>();
+    private CardData[] allCards;
 
     public TextMeshProUGUI textNumberWave;
     public GameObject panelEndWave;
     public CardManager cardManager;
     public CardSummaryUI cardSummaryUI;
     public PlayerController playerController;
+    public CardSelectionManager selectionManager;
 
     public GameObject prefabCard;
     public Transform panelCard;
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     void GenerateRewardCard()
     {
-        var allCards = Resources.LoadAll<CardData>("Cards");        
+        allCards = Resources.LoadAll<CardData>("Cards");        
 
         for (int i = 1; i <= 3; i++)
         {
@@ -67,11 +69,41 @@ public class GameManager : MonoBehaviour
     public void PlayAnotherRun()
     {
         Debug.Log("vamos a por otra ronda");
-
+        
         ClearPanelCard();
         panelEndWave.SetActive(false);
         numberWave++;
         textNumberWave.text = "Ronda: " + numberWave;
+
+
+        /*------------------------------------------------
+         *           AÑADIR CARTA NUEVA AL DECK
+         *           
+        esto no funciona por la obtención del cardDat
+        CardData selected = selectionManager.GetSelectedCardData();
+        {
+            selectedCards.Add(selected);
+            Debug.Log("carta añadida: " + selected.cardName);
+        }
+        else
+        {
+            Debug.Log("carta nueva sin datos");
+        }
+        */
+
+
+        //esto es una chapuza pero funciona:
+
+        string selectedName = selectionManager.GetSelectedCardName();
+        allCards = Resources.LoadAll<CardData>("Cards");
+
+        foreach (var item in allCards)
+        {
+            if(item.cardName == selectedName)
+                selectedCards.Add(item);
+        }
+
+
         cardManager.PreparationPhase(selectedCards);
 
         //Time.timeScale = 0f;
@@ -106,4 +138,5 @@ public class GameManager : MonoBehaviour
             Destroy(card.gameObject);
         }
     }
+
 }

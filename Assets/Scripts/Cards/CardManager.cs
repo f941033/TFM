@@ -51,7 +51,7 @@ public class CardManager : MonoBehaviour
     }
 
     //----------------------------------------------------------
-    //                   FASE DE PREPARACI�N
+    //                   FASE DE PREPARACION
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
@@ -105,7 +105,7 @@ public class CardManager : MonoBehaviour
     */
 
     //----------------------------------------------------------
-    //                   INICIO FASE DE ACCI�N
+    //                   INICIO FASE DE ACCION
     //----------------------------------------------------------
     public void StartRun()
     {

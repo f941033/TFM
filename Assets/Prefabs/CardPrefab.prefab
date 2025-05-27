@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6613778939926741901}
   - component: {fileID: 1155634466732858110}
   - component: {fileID: 1006428690191700898}
+  - component: {fileID: 3138034295888315653}
   m_Layer: 5
   m_Name: CardPrefab
   m_TagString: Untagged
@@ -177,10 +178,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768f56fd69afdc84caec304809ca511e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverScale: 1.2
-  hoverYOffset: 30
-  animationDuration: 0.2
-  layoutElement: {fileID: 7752803208183232184}
+  hoverColor: {r: 1, g: 0.9, b: 0.6, a: 1}
+  cardImage: {fileID: 0}
+--- !u!114 &3138034295888315653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228139822927816391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6f2377657ba6b4196f777d795168a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardImage: {fileID: 6147466527104360549}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  deselectedColor: {r: 1, g: 1, b: 1, a: 1}
+  isSelected: 0
+  textName: {fileID: 8496887275114331779}
 --- !u!1 &2507691201520312205
 GameObject:
   m_ObjectHideFlags: 0

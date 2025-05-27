@@ -8,7 +8,6 @@ public class Tutorial : MonoBehaviour
     public GameManager gameManager;
 
     List<CardData> startingDeck = new List<CardData>();
-    int startingNumberOfCardsInDeck = 10;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
