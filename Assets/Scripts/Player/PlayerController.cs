@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float currentRange;
     [SerializeField] private float currentSouls;
     [SerializeField] private float currentSoulsRate;
-    [SerializeField] private int amountGold;
+    [SerializeField] private int amountGold = 150;
+    
 
     //[Header("Events")]
     public event Action<float> OnSoulsChanged;
@@ -53,6 +54,8 @@ public class PlayerController : MonoBehaviour
 
         OnHealthChanged?.Invoke(currentHealth);
         OnSoulsChanged?.Invoke(currentSouls);
+
+        textGold.text = amountGold.ToString();
     }
 
     public void ApplyTemporaryBuff(BuffType buff, float modifier, float duration){
@@ -181,7 +184,7 @@ public class PlayerController : MonoBehaviour
     }
     public void SpendGold(int gold)
     {
-        if(amountGold > gold)
+        if(amountGold >= gold)
         {
             amountGold-=gold;
             textGold.text = amountGold.ToString();
@@ -222,4 +225,6 @@ public class PlayerController : MonoBehaviour
     public float CurrentSoulsRate => currentSoulsRate;
     public float CurrentSouls => currentSouls;
     public float MaxSouls => maxSouls;
+    public float AmountGold => amountGold;
+
 }
