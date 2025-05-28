@@ -20,6 +20,7 @@ public class CardManager : MonoBehaviour
     //private int countDown = 30;
     public GameObject drawPileImage;
     public GameObject discardPileImage;
+    public GameObject soulsBar;
     public AudioManager audioManager;
 
     private TextMeshProUGUI textCountDown;
@@ -58,7 +59,7 @@ public class CardManager : MonoBehaviour
         drawPileImage.SetActive(true);
         countDownObject.SetActive(true);
         ClearPanelCard();
-        //FindFirstObjectByType<PlayerSoulsBar>().gameObject.SetActive(true);
+        soulsBar.SetActive(true);
         player.RefillSouls();
         GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
 
@@ -120,7 +121,7 @@ public class CardManager : MonoBehaviour
 
         drawPileImage.SetActive(true);
 
-        //FindFirstObjectByType<PlayerSoulsBar>().gameObject.SetActive(false);
+        soulsBar.SetActive(false);
 
         //Crear el mazo de cartas de tipo ACCI�N
         foreach (CardData card in startingDeck)

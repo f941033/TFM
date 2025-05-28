@@ -53,7 +53,10 @@ public class CardDeck : MonoBehaviour, IPointerClickHandler
         selectionBorder.SetActive(false);
         textName.text = cardData.cardName;
         textDesc.text = cardData.description;
-        textCost.text = cardData.cost.ToString();
+        if (cardData is TrapCardData trap)
+            textCost.text = trap.cost.ToString();
+        else
+            textCost.gameObject.SetActive(false);
         //GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StopCameraMovement");
     }
 

@@ -6,7 +6,6 @@ public abstract class CardData : ScriptableObject
 {
     [Header("Datos comunes")]
     public string cardName;
-    public float cost;
     [TextArea] public string description;
     public CardType cardType;
     public float healthModifier;

@@ -4,6 +4,7 @@ public abstract class TrapCardData : CardData
 {
     public bool used = false;
     public GameObject trapPrefab;
+    public float cost;
     public int damage;
     private void OnEnable() { cardType = CardType.Trap; }
     public Vector2Int trapSizeInTiles = Vector2Int.one;

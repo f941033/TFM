@@ -27554,6 +27554,7 @@ MonoBehaviour:
   panelGo: {fileID: 1141026837}
   drawPileImage: {fileID: 515426501}
   discardPileImage: {fileID: 1667874408}
+  soulsBar: {fileID: 885787625}
   audioManager: {fileID: 1545725397}
   startingDeck: []
   drawPile: []

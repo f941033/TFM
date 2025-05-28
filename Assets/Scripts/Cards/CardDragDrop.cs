@@ -76,16 +76,19 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!player.TrySpendSouls(cardData.cost))
+        if (cardData is TrapCardData trap)
         {
+            if (!player.TrySpendSouls(trap.cost))
+            {
             Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
             // sonido de que la carta no se puede jugar
-            eventData.pointerDrag       = null;
-            eventData.pointerPress      = null;
-            canvasGroup.blocksRaycasts  = true;
-            isDragging                  = false;
-            canvasGroup.alpha           = 1f;
+            eventData.pointerDrag = null;
+            eventData.pointerPress = null;
+            canvasGroup.blocksRaycasts = true;
+            isDragging = false;
+            canvasGroup.alpha = 1f;
             return;
+            }
         }
         originalAnchoredPosition = rectTransform.anchoredPosition;
         originalTransform = transform.parent;
@@ -163,7 +166,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         {
             if (Deck.discardPile.Count == 1) Deck.ActivateDiscardPileImage();
 
-            player.SpendSouls(cardData.cost);
+            if(cardData is TrapCardData trap)
+                player.SpendSouls(trap.cost);
             Deck.UpdateTextNumberOfCardsDiscard();
         }
 

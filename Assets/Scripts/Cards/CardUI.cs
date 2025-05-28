@@ -13,13 +13,18 @@ public class CardUI : MonoBehaviour
         data = cardData;
         textName.text = data.cardName;
         textDescription.text = data.description;
-        textCost.text = cardData.cost.ToString();
-        if(data.cardType == CardType.Trap){
+        if (cardData is TrapCardData trap)
+            textCost.text = trap.cost.ToString();
+        else
+            textCost.gameObject.SetActive(false);
+        if (data.cardType == CardType.Trap)
+        {
             var trapData = cardData as TrapCardData;
-            if(trapData!=null)
+            if (trapData != null)
                 textDamage.text = trapData.damage.ToString();
         }
-        else{
+        else
+        {
             textDamage.gameObject.SetActive(false);
         }
     }
