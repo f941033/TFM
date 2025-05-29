@@ -13,12 +13,17 @@ public class EnemyController : MonoBehaviour
     public float attackRange = 1f;
     private bool  playerInRange = false;
     public int gold;
+    private Animator animator;
+    private AudioSource audioSource;
+
+    [Header("Audio")]
+    public AudioClip attackSound;
 
     public GameObject effectGoldPrefab;
 
     void Awake(){
         currentHealth = health;
-        gold = 10;
+        gold = 10;        
     }
 
     public void receiveDamage(float damage){
@@ -35,6 +40,18 @@ public class EnemyController : MonoBehaviour
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
+        if (target.position.x < transform.position.x)
+        {
+            transform.localScale = new Vector3(-1,1,1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
         void OnTriggerEnter2D(Collider2D col)
@@ -68,6 +85,8 @@ public class EnemyController : MonoBehaviour
         PlayerController player = target.GetComponent<PlayerController>();
         if (player != null)
         {
+            audioSource.PlayOneShot(attackSound);
+            animator.SetTrigger("attack");
             player.receiveDamage(damage);
         }
     }

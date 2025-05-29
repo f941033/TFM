@@ -38,6 +38,13 @@ public class PlayerController : MonoBehaviour
     public event Action<float> OnHealthChanged;
     public event Action<int> OnGoldChanged;
 
+    private Animator anim;
+    private AudioSource audioSource;
+
+    [Header("Audio")]
+    public AudioClip attackSound;
+
+
     void Awake()
     {
         currentHealth = baseHealth;
@@ -56,6 +63,9 @@ public class PlayerController : MonoBehaviour
         OnSoulsChanged?.Invoke(currentSouls);
 
         textGold.text = amountGold.ToString();
+
+        anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void ApplyTemporaryBuff(BuffType buff, float modifier, float duration){
@@ -132,7 +142,10 @@ public class PlayerController : MonoBehaviour
         EnemyController target = targetsInRange[0];
 
         target.receiveDamage(currentDamage);
+
         //Aquí van animaciones, sonido y otros menesteres
+        anim.SetTrigger("attack");
+        audioSource.PlayOneShot(attackSound);
     }
 
     void OnTriggerEnter2D(Collider2D col)
