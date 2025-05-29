@@ -4,12 +4,14 @@ using UnityEngine;
 public class TorretaController : MonoBehaviour
 {
     [Header("Configuración")]
+    public float rotationSpeed = 5f;
     public float fireRate = 1f;
-    public float detectionRadius = 1f;
+    public float detectionRadius = 10f;
     public GameObject projectilePrefab;
-    public float speed = 5f;
+    public Transform firePoint; // Objeto hijo del cañón donde salen los proyectiles
 
     private List<Transform> enemiesInRange = new List<Transform>();
+    private Transform currentTarget;
     private float fireCountdown = 0f;
 
     private AudioSource audioSource;
@@ -18,11 +20,47 @@ public class TorretaController : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
     }
-
     void Update()
     {
-        if (enemiesInRange.Count > 0)
+        FindNearestTarget();
+        AimAndShoot();
+    }
+
+    void FindNearestTarget()
+    {
+        float shortestDistance = Mathf.Infinity;
+        Transform nearestEnemy = null;
+
+        foreach (Transform enemy in enemiesInRange)
         {
+            if (enemy == null) continue;
+
+            // Usamos posición del padre (base) para cálculo de distancias
+            float distance = Vector3.Distance(transform.parent.position, enemy.position);
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                nearestEnemy = enemy;
+            }
+        }
+
+        currentTarget = nearestEnemy;
+    }
+
+    void AimAndShoot()
+    {
+        if (currentTarget != null)
+        {
+            // Rotación del cañón (hijo) respecto a la base (padre)
+            Vector3 direction = (currentTarget.position + Vector3.up * 0.5f) - transform.parent.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
+
             if (fireCountdown <= 0f)
             {
                 Shoot();
@@ -34,24 +72,20 @@ public class TorretaController : MonoBehaviour
 
     void Shoot()
     {
-        if (projectilePrefab != null && enemiesInRange.Count > 0)
+        if (projectilePrefab != null && firePoint != null)
         {
             audioSource.Play();
-            // Instanciar proyectil en el pivote de la torreta, sin rotación
             GameObject projectile = Instantiate(
                 projectilePrefab,
-                transform.position,
-                Quaternion.identity
+                firePoint.position,
+                firePoint.rotation
             );
-
-            // Dirección hacia el primer enemigo en rango
-            Transform target = enemiesInRange[0];
-            Vector2 direction = (target.position - transform.position).normalized;
 
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                rb.linearVelocity = direction * speed; 
+                // Dirección basada en la rotación del cañón
+                rb.linearVelocity = firePoint.up * 10f;
             }
         }
     }
@@ -72,9 +106,4 @@ public class TorretaController : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
-    }
 }

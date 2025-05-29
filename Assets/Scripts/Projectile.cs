@@ -4,6 +4,10 @@ public class Projectile : MonoBehaviour
 {
     public int damage = 10;
 
+    private void Start()
+    {
+        Destroy(gameObject,3f);
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
