@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Pinchos
   m_EditorClassIdentifier: 
   cardName: Pinchos
-  cost: 4
-  description: Pinchos que pinchan y atraviesan como Dracula a sus enemigos
+  description: "Muerte instant\xE1nea"
   cardType: 1
   healthModifier: -5
   used: 1
   trapPrefab: {fileID: 416448874857516934, guid: f27b2468c63a2534eba5c63a523a0b30, type: 3}
+  cost: 4
   damage: 50
   trapSizeInTiles: {x: 1, y: 1}

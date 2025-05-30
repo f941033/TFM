@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: "\xC1cido corrosivo"
   m_EditorClassIdentifier: 
   cardName: "\xC1cido corrosivo"
-  cost: 0
-  description: "Reduce armadura enemiga 50% + 10% da\xF1o/sec."
+  description: "Da\xF1o 10% "
   cardType: 1
   healthModifier: 20
   used: 0
   trapPrefab: {fileID: 1444403662060021971, guid: 1eeb3bcf215a5fd4fb91df13cefffb77, type: 3}
+  cost: 0
   damage: 5
+  trapSizeInTiles: {x: 1, y: 1}

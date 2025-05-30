@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Lanzallamas
   m_EditorClassIdentifier: 
   cardName: Lanzallamas
-  cost: 1
-  description: "Lanza llamas a grupos durante 5 segundos\n25% da\xF1o/sec a grupos.
-    Duraci\xF3n: 5 seg."
+  description: "Da\xF1o 25% a grupos.  5 segundos"
   cardType: 1
   healthModifier: 10
   used: 0
   trapPrefab: {fileID: 1444403662060021971, guid: 1eeb3bcf215a5fd4fb91df13cefffb77, type: 3}
+  cost: 1
   damage: 20
+  trapSizeInTiles: {x: 1, y: 1}

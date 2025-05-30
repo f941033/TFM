@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DeckboundDungeon.Cards;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -99,15 +100,21 @@ public class PauseMenuController : MonoBehaviour
         foreach (Transform child in deckGridContainer)
             Destroy(child.gameObject);
 
+        List<CardData> deckToShow = new List<CardData>();
+
         // asumimos que cardManager.startingDeck o bien otro listado es tu mazo actual
         foreach (var card in cardManager.startingDeck)
         {
-            var go = Instantiate(cardDeckPrefab, deckGridContainer);
-            var cd = go.GetComponent<CardDeck>();
-            cd.cardData = card;
-            cd.isSelectable = false;
-            // si tu CardDeck en modo selección activa border, lo desactivamos aquí:
-            cd.selectionBorder.SetActive(false);
+            if (!deckToShow.Contains(card)) {
+                deckToShow.Add(card);
+                var go = Instantiate(cardDeckPrefab, deckGridContainer);
+                var cd = go.GetComponent<CardDeck>();
+                cd.cardData = card;
+                cd.isSelectable = false;
+                // si tu CardDeck en modo selección activa border, lo desactivamos aquí:
+                cd.selectionBorder.SetActive(false);
+            };
+
         }
     }
 

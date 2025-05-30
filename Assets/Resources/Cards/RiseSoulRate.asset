@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RiseSoulRate
   m_EditorClassIdentifier: 
   cardName: Muerteeeee
-  cost: 3
-  description: "Aumenta un 30% la velocidad de recuperaci\xF3n de almas"
+  description: "+30% recuperaci\xF3n de almas"
   cardType: 0
+  healthModifier: 0
   buffType: 4
   modifier: 1.3
   duration: 20

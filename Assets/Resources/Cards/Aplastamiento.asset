@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Aplastamiento
   m_EditorClassIdentifier: 
   cardName: Aplastamiento
-  cost: 2
-  description: "Campo el\xE9ctrico que ralentiza y da\xF1a a los h\xE9roes. Aumenta
-    su poder con trampas de agua."
+  description: "Campo el\xE9ctrico que ralentiza y da\xF1a a los h\xE9roes."
   cardType: 1
   healthModifier: -5
   used: 0
   trapPrefab: {fileID: 1444403662060021971, guid: 1eeb3bcf215a5fd4fb91df13cefffb77, type: 3}
+  cost: 2
   damage: 50
+  trapSizeInTiles: {x: 1, y: 1}

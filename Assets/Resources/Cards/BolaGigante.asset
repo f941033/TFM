@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: BolaGigante
   m_EditorClassIdentifier: 
   cardName: Bola Gigante
-  cost: 3
-  description: Cae una bola del cielo sobre los enemigos
+  description: Cae una bola sobre los enemigos
   cardType: 1
   healthModifier: 0
   used: 0
   trapPrefab: {fileID: 1444403662060021971, guid: 1eeb3bcf215a5fd4fb91df13cefffb77, type: 3}
+  cost: 3
   damage: 40
+  trapSizeInTiles: {x: 1, y: 1}

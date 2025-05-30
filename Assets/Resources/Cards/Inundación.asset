@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: "Inundaci\xF3n"
   m_EditorClassIdentifier: 
   cardName: Inundar sala
-  cost: 1
-  description: "Inunda la sala, ralentiza h\xE9roes y potencia trampas el\xE9ctricas."
+  description: "Da\xF1o 20%"
   cardType: 1
   healthModifier: 10
   used: 0
   trapPrefab: {fileID: 1444403662060021971, guid: 1eeb3bcf215a5fd4fb91df13cefffb77, type: 3}
+  cost: 1
   damage: 20
+  trapSizeInTiles: {x: 1, y: 1}

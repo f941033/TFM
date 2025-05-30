@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: "Electrocuci\xF3n"
   m_EditorClassIdentifier: 
   cardName: "Electrocuci\xF3n"
-  cost: 1
-  description: "15% da\xF1o al contacto + paraliza 3 seg.. Aumenta su poder con trampas
-    de agua."
+  description: "Da\xF1o 15%"
   cardType: 1
   healthModifier: 10
   used: 0
   trapPrefab: {fileID: 1444403662060021971, guid: 1eeb3bcf215a5fd4fb91df13cefffb77, type: 3}
+  cost: 1
   damage: 20
+  trapSizeInTiles: {x: 1, y: 1}

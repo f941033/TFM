@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: New Continuous Trap Card Data
   m_EditorClassIdentifier: 
   cardName: "Gas neurot\xF3xico"
-  cost: 2
-  description: "Reduce ataque enemigo 30% + 8% da\xF1o/sec."
+  description: "Da\xF1o 8%"
   cardType: 1
   healthModifier: 15
   used: 0
   trapPrefab: {fileID: 1444403662060021971, guid: 1eeb3bcf215a5fd4fb91df13cefffb77, type: 3}
+  cost: 2
   damage: 8
+  trapSizeInTiles: {x: 1, y: 1}
   duration: 4
   radius: 2

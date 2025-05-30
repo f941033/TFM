@@ -34,19 +34,24 @@ public class Tutorial : MonoBehaviour
 
         foreach (var card in allCards)
         {
-            if(card.cardName == "Foso" || card.cardName == "Pinchos" || card.cardName == "Bomba" || card.cardName == "Sierra giratoria" )
+            if(card.cardName == "Foso" || card.cardName == "Pinchos" || card.cardName == "Sierra giratoria" )
             {
                 startingDeck.Add(card);
 
-                if (card.cardName == "Pinchos" )
+                if (card.cardName == "Pinchos" || card.cardName == "Sierra giratoria")
                 {
                     startingDeck.Add(card);
                 }
             }
 
-            if (card.cardName == "MasRapido" || card.cardName == "Muerteeeee" || card.cardName == "PegaLeches10000" || card.cardName == "Reciclado" || card.cardName == "Doble robo")
+            if (card.cardName == "MasRapido" || card.cardName == "Muerteeeee" || card.cardName == "PegaLeches10000" )
             {
                 startingDeck.Add(card);
+
+                if (card.cardName == "MasRapido" || card.cardName == "Muerteeeee")
+                {
+                    startingDeck.Add(card);
+                }
             }
 
 
