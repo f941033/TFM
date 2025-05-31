@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    NavMeshAgent agent;
     Transform target;
     [SerializeField] private float health = 50f;
     [SerializeField] private float currentHealth;
@@ -35,11 +34,7 @@ public class EnemyController : MonoBehaviour
     }
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         target = GameObject.Find("Player").transform;
-
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
 
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
@@ -65,7 +60,6 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        agent.SetDestination(target.position);
 
         if(!playerInRange) return;
 

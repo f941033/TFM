@@ -1100,8 +1100,8 @@ GameObject:
   - component: {fileID: 243067823}
   - component: {fileID: 243067825}
   - component: {fileID: 243067824}
-  - component: {fileID: 243067826}
-  m_Layer: 0
+  - component: {fileID: 243067828}
+  m_Layer: 7
   m_Name: Paredes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6351,22 +6351,44 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &243067826
-MonoBehaviour:
+--- !u!19719996 &243067828
+TilemapCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 243067822}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 1
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1 &304215803
 GameObject:
   m_ObjectHideFlags: 0
@@ -6883,86 +6905,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349679177}
   m_CullTransparentMesh: 1
---- !u!1 &369336984
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 369336987}
-  - component: {fileID: 369336986}
-  - component: {fileID: 369336985}
-  m_Layer: 0
-  m_Name: Navmesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &369336985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 369336984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70bd44a44cd62c64fbfc1eea95b24880, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideByGrid: 0
-  m_UseMeshPrefab: {fileID: 0}
-  m_CompressBounds: 0
-  m_OverrideVector: {x: 1, y: 1, z: 1}
---- !u!114 &369336986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 369336984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e04976799df50f54ba128eff723155a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.33333334
-  m_BuildHeightMesh: 0
-  m_MinRegionArea: 0
-  m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: 45dfa6e921efc47448933124701ea11f, type: 2}
---- !u!4 &369336987
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 369336984}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &370657143
 GameObject:
   m_ObjectHideFlags: 0
@@ -8327,7 +8269,6 @@ GameObject:
   - component: {fileID: 573047136}
   - component: {fileID: 573047134}
   - component: {fileID: 573047135}
-  - component: {fileID: 573047137}
   m_Layer: 0
   m_Name: sala 4
   m_TagString: Untagged
@@ -9306,22 +9247,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2072691941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &573047137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573047133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &586835901
 GameObject:
   m_ObjectHideFlags: 0
@@ -9968,7 +9893,6 @@ GameObject:
   - component: {fileID: 633081789}
   - component: {fileID: 633081787}
   - component: {fileID: 633081788}
-  - component: {fileID: 633081790}
   m_Layer: 0
   m_Name: sala 6
   m_TagString: Untagged
@@ -10867,22 +10791,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2072691941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &633081790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633081786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &645516912
 GameObject:
   m_ObjectHideFlags: 0
@@ -10956,7 +10864,6 @@ GameObject:
   - component: {fileID: 660027749}
   - component: {fileID: 660027751}
   - component: {fileID: 660027750}
-  - component: {fileID: 660027752}
   m_Layer: 0
   m_Name: sala 12
   m_TagString: Untagged
@@ -11815,22 +11722,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &660027752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 660027748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &685984300
 GameObject:
   m_ObjectHideFlags: 0
@@ -12870,7 +12761,6 @@ GameObject:
   - component: {fileID: 755839604}
   - component: {fileID: 755839606}
   - component: {fileID: 755839605}
-  - component: {fileID: 755839607}
   m_Layer: 0
   m_Name: sala 11
   m_TagString: Untagged
@@ -13749,22 +13639,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &755839607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 755839603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &758644573
 GameObject:
   m_ObjectHideFlags: 0
@@ -13953,7 +13827,6 @@ GameObject:
   - component: {fileID: 781990223}
   - component: {fileID: 781990228}
   - component: {fileID: 781990227}
-  - component: {fileID: 781990229}
   m_Layer: 0
   m_Name: sala 1
   m_TagString: Untagged
@@ -15222,22 +15095,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &781990229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781990222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &810180121
 GameObject:
   m_ObjectHideFlags: 0
@@ -16239,7 +16096,6 @@ GameObject:
   - component: {fileID: 950477923}
   - component: {fileID: 950477925}
   - component: {fileID: 950477924}
-  - component: {fileID: 950477926}
   m_Layer: 0
   m_Name: sala 5
   m_TagString: Untagged
@@ -17458,22 +17314,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &950477926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 950477922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &959790952
 GameObject:
   m_ObjectHideFlags: 0
@@ -18004,7 +17844,6 @@ GameObject:
   - component: {fileID: 1079370132}
   - component: {fileID: 1079370134}
   - component: {fileID: 1079370133}
-  - component: {fileID: 1079370135}
   m_Layer: 0
   m_Name: sala 9
   m_TagString: Untagged
@@ -18703,22 +18542,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1079370135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1079370131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &1085909686
 GameObject:
   m_ObjectHideFlags: 0
@@ -18823,7 +18646,6 @@ GameObject:
   - component: {fileID: 1104334459}
   - component: {fileID: 1104334457}
   - component: {fileID: 1104334458}
-  - component: {fileID: 1104334460}
   m_Layer: 0
   m_Name: sala 3
   m_TagString: Untagged
@@ -19692,22 +19514,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2072691941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1104334460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1104334456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &1127114197
 GameObject:
   m_ObjectHideFlags: 0
@@ -19719,7 +19525,6 @@ GameObject:
   - component: {fileID: 1127114200}
   - component: {fileID: 1127114198}
   - component: {fileID: 1127114199}
-  - component: {fileID: 1127114201}
   m_Layer: 0
   m_Name: sala 13
   m_TagString: Untagged
@@ -20638,22 +20443,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2072691941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1127114201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127114197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &1134902203
 GameObject:
   m_ObjectHideFlags: 0
@@ -22196,7 +21985,6 @@ GameObject:
   - component: {fileID: 1342241388}
   - component: {fileID: 1342241390}
   - component: {fileID: 1342241389}
-  - component: {fileID: 1342241391}
   m_Layer: 0
   m_Name: sala 2
   m_TagString: Untagged
@@ -23475,22 +23263,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1342241391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342241387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &1346398581
 GameObject:
   m_ObjectHideFlags: 0
@@ -26101,7 +25873,6 @@ GameObject:
   - component: {fileID: 1863194469}
   - component: {fileID: 1863194467}
   - component: {fileID: 1863194468}
-  - component: {fileID: 1863194470}
   m_Layer: 0
   m_Name: sala 7
   m_TagString: Untagged
@@ -27350,22 +27121,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2072691941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1863194470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863194466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &1880551132
 GameObject:
   m_ObjectHideFlags: 0
@@ -27468,7 +27223,6 @@ GameObject:
   - component: {fileID: 1894064792}
   - component: {fileID: 1894064794}
   - component: {fileID: 1894064793}
-  - component: {fileID: 1894064795}
   m_Layer: 0
   m_Name: sala 10
   m_TagString: Untagged
@@ -28247,22 +28001,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1894064795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894064791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &1919700681
 GameObject:
   m_ObjectHideFlags: 0
@@ -29125,7 +28863,6 @@ GameObject:
   - component: {fileID: 2063852901}
   - component: {fileID: 2063852903}
   - component: {fileID: 2063852902}
-  - component: {fileID: 2063852904}
   m_Layer: 6
   m_Name: Tilemap Laberinto
   m_TagString: Untagged
@@ -39700,22 +39437,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &2063852904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063852900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &2072691940
 GameObject:
   m_ObjectHideFlags: 0
@@ -39725,7 +39446,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2072691941}
-  - component: {fileID: 2072691942}
   m_Layer: 0
   m_Name: Salas
   m_TagString: Untagged
@@ -39760,22 +39480,6 @@ Transform:
   - {fileID: 1127114200}
   m_Father: {fileID: 223613205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2072691942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2072691940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &2111620423
 GameObject:
   m_ObjectHideFlags: 0
@@ -40639,4 +40343,3 @@ SceneRoots:
   - {fileID: 1814210730}
   - {fileID: 6092519247445101949}
   - {fileID: 421110705}
-  - {fileID: 369336987}
