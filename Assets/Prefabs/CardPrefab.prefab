@@ -110,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardData: {fileID: 0}
   player: {fileID: 0}
+  torretaPrefab: {fileID: 7377369047218687532, guid: 7867a5b053835a3459000edc0ede0dc2, type: 3}
   raycasterUI: {fileID: 0}
   dropTilemap: {fileID: 0}
   highlightMap: {fileID: 0}

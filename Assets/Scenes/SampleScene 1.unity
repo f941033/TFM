@@ -7862,7 +7862,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce91ae578a467aa468a743c2fea14650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesToKill: 5
+  initialEnemiesToKill: 3
+  enemiesToKillInCurrentWave: 0
   textNumberWave: {fileID: 1640885441}
   panelEndWave: {fileID: 587340171}
   cardManager: {fileID: 1880551133}

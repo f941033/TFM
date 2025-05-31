@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private int enemiesDied = 0;
-    public int enemiesToKill;
+    public int initialEnemiesToKill = 3;
+    public int enemiesToKillInCurrentWave;
     private int numberWave = 1;
     private List<CardData> selectedCards = new List<CardData>();
     private CardData[] allCards;
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         textNumberWave.text = "Ronda: " + numberWave.ToString();
-        enemiesToKill = 5;        
+        enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
     }
 
     
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         enemiesDied++;
         Debug.Log("enemigo " + enemiesDied + " muerto");
-        if (enemiesDied == enemiesToKill)
+        if (enemiesDied == enemiesToKillInCurrentWave)
         {
             enemiesDied = 0;
             Invoke("EndWave",1f);
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
         panelEndWave.SetActive(false);
         numberWave++;
         textNumberWave.text = "Ronda: " + numberWave;
+        enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
 
 
         /*------------------------------------------------

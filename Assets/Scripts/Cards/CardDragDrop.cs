@@ -42,7 +42,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         layerDrag = GameObject.Find("LayerDrag")?.transform;
         if (layerDrag == null)
             Debug.LogError("No se encontró el DragLayer en la escena.");
-            player = FindFirstObjectByType<PlayerController>();
+        player = FindFirstObjectByType<PlayerController>();
     }
 
     void Start()
@@ -104,7 +104,12 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public void OnDrag(PointerEventData eventData)
     {
         if (!isDragging) return;
-        rectTransform.position = Input.mousePosition;        
+        rectTransform.position = Input.mousePosition;
+
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(eventData.position);
+        mouseWorldPos.z = 0;
+
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -130,6 +135,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                         //trapController.player = player;
                         //trapController.cellPos = cellPos;
                         //trapController.initialColor = initialColor;
+
                     }
                     if(cardData.cardType == CardType.DeckEffect){
                         if(Deck.discardPile.Count == 0){

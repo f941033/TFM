@@ -27,7 +27,7 @@ public class SpawnEnemies : MonoBehaviour
 
     public IEnumerator GenerarEnemigos()
     {
-        enemiesToSpawn = FindFirstObjectByType<GameManager>().enemiesToKill;
+        enemiesToSpawn = FindFirstObjectByType<GameManager>().enemiesToKillInCurrentWave;
         enemiesCounter = 0;
         //while (enemiesCounter < enemiesToSpawn)
         for (int i = 1;i<=enemiesToSpawn;i++)
