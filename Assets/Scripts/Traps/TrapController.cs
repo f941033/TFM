@@ -68,7 +68,7 @@ public class TrapController : MonoBehaviour
 
     private void ClearAndDestroy(){
         tilemap.SetTileFlags(cellPos, TileFlags.LockColor);
-        //tilemap.SetColor(cellPos, initialColor);
+        tilemap.SetColor(cellPos, Color.white);
         tilemap.SetTile(cellPos, originalTile);
         Destroy(gameObject); 
     }

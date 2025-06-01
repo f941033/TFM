@@ -21,3 +21,6 @@ MonoBehaviour:
   cost: 1
   damage: 20
   trapSizeInTiles: {x: 1, y: 1}
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 128

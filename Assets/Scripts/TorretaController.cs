@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,9 +8,13 @@ public class TorretaController : MonoBehaviour
     [Header("Configuración")]
     public float rotationSpeed = 5f;
     public float fireRate = 1f;
-    public float detectionRadius = 10f;
+    public float detectionRadius = 3f;
     public GameObject projectilePrefab;
     public Transform firePoint; // Objeto hijo del cañón donde salen los proyectiles
+
+    [Header("Detección")]
+    public float checkInterval = 0.3f; // Intervalo de chequeo para optimización
+
 
     private List<Transform> enemiesInRange = new List<Transform>();
     private Transform currentTarget;
@@ -20,7 +25,58 @@ public class TorretaController : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        StartCoroutine(EnemyDetectionRoutine());
     }
+
+    IEnumerator EnemyDetectionRoutine()
+    {
+        while (true)
+        {
+            UpdateEnemiesInRange();
+            yield return new WaitForSeconds(checkInterval);
+        }
+    }
+
+    void UpdateEnemiesInRange()
+    {
+        // 1. Obtener todos los enemigos en la escena
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        // 2. Crear lista temporal de enemigos en rango
+        HashSet<Transform> currentEnemiesInRange = new HashSet<Transform>();
+
+        // 3. Chequear distancia para cada enemigo
+        foreach (GameObject enemy in allEnemies)
+        {
+            if (enemy == null) continue;
+
+            float distance = Vector3.Distance(
+                transform.parent.position,
+                enemy.transform.position
+            );
+
+            if (distance <= detectionRadius)
+            {
+                currentEnemiesInRange.Add(enemy.transform);
+            }
+        }
+
+        // 4. Actualizar lista principal
+        enemiesInRange.RemoveAll(enemy =>
+            enemy == null ||
+            !currentEnemiesInRange.Contains(enemy)
+        );
+
+        // 5. Añadir nuevos enemigos
+        foreach (Transform enemy in currentEnemiesInRange)
+        {
+            if (!enemiesInRange.Contains(enemy))
+            {
+                enemiesInRange.Add(enemy);
+            }
+        }
+    }
+
     void Update()
     {
         FindNearestTarget();
@@ -90,7 +146,7 @@ public class TorretaController : MonoBehaviour
             }
         }
     }
-
+    /*
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy") && !enemiesInRange.Contains(other.transform))
@@ -107,5 +163,5 @@ public class TorretaController : MonoBehaviour
         }
     }
 
-
+    */
 }

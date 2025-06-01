@@ -105,9 +105,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 5
   fireRate: 1
-  detectionRadius: 2.5
+  detectionRadius: 3
   projectilePrefab: {fileID: 3188030190352859303, guid: 785e2115f350a0247b05846776feacfe, type: 3}
   firePoint: {fileID: 6160494710280513426}
+  checkInterval: 0.3
 --- !u!82 &8768354133262798304
 AudioSource:
   m_ObjectHideFlags: 0
@@ -212,7 +213,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49963177589909985}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -253,7 +254,7 @@ GameObject:
   - component: {fileID: 3009786956473875944}
   - component: {fileID: 4389836680003733558}
   - component: {fileID: 3718399301329372688}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +334,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1400778418362487002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -354,7 +355,7 @@ GameObject:
   - component: {fileID: 5662933646770562773}
   - component: {fileID: 3236589953679226030}
   - component: {fileID: 5803669322039359989}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.7490196, g: 0, b: 0.9960785, a: 0.11372549}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
