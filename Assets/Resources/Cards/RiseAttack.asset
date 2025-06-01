@@ -19,3 +19,4 @@ MonoBehaviour:
   buffType: 1
   modifier: 1.5
   duration: 10
+  cooldown: 15

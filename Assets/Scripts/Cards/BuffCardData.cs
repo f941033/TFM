@@ -8,6 +8,7 @@ public class BuffCardData : CardData
     public BuffType buffType;
     public float modifier;
     public float duration;
+    public float cooldown;
 
     private void OnEnable() { cardType = CardType.Buff; }
 

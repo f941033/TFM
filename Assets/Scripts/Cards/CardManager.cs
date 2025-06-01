@@ -178,28 +178,26 @@ public class CardManager : MonoBehaviour
         var cardToDraw = drawPile[0];
         drawPile.RemoveAt(0);
 
-        /*
-        if (drawPile.Count == 0)
-        {
-            drawPileImage.SetActive(false);
-        }
-        else
-        {
-            textNumberOfCardsDeck.text = drawPile.Count.ToString();
-        }*/
 
         textNumberOfCardsDeck.text = drawPile.Count.ToString();
 
         var cardData = Instantiate(prefabCard, panelCard);
         CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
         cardUI.setCardUI(cardToDraw);
-
-        var drag = cardData.GetComponent<CardDragDrop>();
-        drag.dropTilemap = zonaValidaTilemap;
-        drag.cardData = cardToDraw;
-        drag.player = player;
-        drag.Deck = this;
-
+        if (cardToDraw.cardType == CardType.Trap)
+        {
+            var drag = cardData.GetComponent<CardDragDrop>();
+            drag.dropTilemap = zonaValidaTilemap;
+            drag.cardData = cardToDraw;
+            drag.player = player;
+            drag.Deck = this;
+        }
+        else if (cardToDraw is BuffCardData buffData)
+        {
+            Destroy(cardData.GetComponent<CardDragDrop>());
+            HabilityCardHandler hability = cardData.GetComponentInChildren<HabilityCardHandler>(includeInactive: true);
+            hability.Initialize(buffData, player);
+        }
         cardsInHand.Add(cardData);
     }
 
