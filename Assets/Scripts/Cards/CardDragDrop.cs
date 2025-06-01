@@ -18,6 +18,14 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     internal CardManager Deck;
     public PlayerController player;
 
+    public Tilemap tilemap;
+    public LayerMask obstacleLayers; // Capas de obstáculos (paredes, etc.)
+    public Tilemap obstacleTilemap; // Tilemap de obstáculos (opcional)
+    public float checkRadius = 0.4f; // Radio para verificación de colisión
+    public GameObject borderPrefab;
+    private GameObject currentBorder;        //borde temporal durante el arrastre
+    
+
     //private TextMeshProUGUI textNumberOfCardsDiscard;
     //private GameObject discardPileImage;
 
@@ -51,6 +59,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         highlightMap = GameObject.Find("Tilemap Highlighted").GetComponent<Tilemap>();
         //discardPileImage = Deck.GetDiscardPileImage();
         //textNumberOfCardsDiscard = discardPileImage.GetComponentInChildren<TextMeshProUGUI>();
+        tilemap = GameObject.Find("Tilemap Laberinto").GetComponent<Tilemap>();
+        obstacleTilemap = GameObject.Find("Paredes").GetComponent<Tilemap>();
     }
 
     void Update()
@@ -97,8 +107,10 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         transform.SetAsLastSibling();
         canvasGroup.blocksRaycasts = false;
 
-        canvasGroup.alpha = 0.3f;
+        canvasGroup.alpha = 0.15f;
         isDragging = true;
+
+        currentBorder = Instantiate(borderPrefab);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -109,12 +121,69 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(eventData.position);
         mouseWorldPos.z = 0;
 
+        //------------------ILUMINAR CELDA AL DESPLAZAR-----------------
+        
+        Vector3Int cellPos = tilemap.WorldToCell(mouseWorldPos);
 
+        if (IsPositionValid(cellPos))
+        {
+            Vector3 alignedPos = tilemap.GetCellCenterWorld(cellPos);
+            currentBorder.transform.position = alignedPos;
+            currentBorder.SetActive(true);
+        }
+        else
+        {
+            currentBorder.SetActive(false);
+        }
     }
+
+    bool IsPositionValid(Vector3Int cellPos)
+    {
+        Vector3 worldPos = tilemap.GetCellCenterWorld(cellPos);
+
+        // 1. Verificar tiles y colliders físicos
+        bool isPhysicallyValid =
+            tilemap.HasTile(cellPos) &&
+            !Physics2D.OverlapCircle(worldPos, checkRadius, obstacleLayers);
+
+        // 2. Verificar distancia a torretas (radio de acción)
+        
+        bool isOutsideTurretRange = true;
+        foreach (TorretaController turret in GetAllTurrets())
+        {
+            float turrentDistance = Vector3.Distance(worldPos, turret.transform.position);
+            if (turrentDistance <= turret.detectionRadius)
+            {
+                isOutsideTurretRange = false;
+                break;
+            }
+        }
+        
+
+        // 3. Verificar distancia a Player
+        bool isOutsidePlayerRange = true;
+        float distance = Vector3.Distance(worldPos, player.transform.position);
+        if (distance <= 2.25f)
+        {
+            isOutsidePlayerRange = false;
+        }
+        
+
+        return isPhysicallyValid && isOutsideTurretRange && isOutsidePlayerRange;
+    }
+
+    // Obtener todas las torretas en escena
+    TorretaController[] GetAllTurrets()
+    {
+        return FindObjectsByType<TorretaController>(FindObjectsSortMode.None);
+    }
+
 
     public void OnEndDrag(PointerEventData eventData)
     {
         if (!isDragging) return;
+
+        Destroy(currentBorder);
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPos = dropTilemap.WorldToCell(worldPos);

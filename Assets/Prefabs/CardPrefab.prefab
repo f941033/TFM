@@ -110,7 +110,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardData: {fileID: 0}
   player: {fileID: 0}
-  torretaPrefab: {fileID: 7377369047218687532, guid: 7867a5b053835a3459000edc0ede0dc2, type: 3}
+  tilemap: {fileID: 0}
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  obstacleTilemap: {fileID: 0}
+  checkRadius: 0.4
+  borderPrefab: {fileID: 2514062046054944184, guid: fa24afdd1efcef046b5b5eaaaa64dca5, type: 3}
   raycasterUI: {fileID: 0}
   dropTilemap: {fileID: 0}
   highlightMap: {fileID: 0}

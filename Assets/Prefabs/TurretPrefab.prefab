@@ -213,7 +213,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49963177589909985}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 3009786956473875944}
   - component: {fileID: 4389836680003733558}
   - component: {fileID: 3718399301329372688}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 5662933646770562773}
   - component: {fileID: 3236589953679226030}
   - component: {fileID: 5803669322039359989}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

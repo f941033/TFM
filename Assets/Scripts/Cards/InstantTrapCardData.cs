@@ -10,7 +10,7 @@ public class InstantTrapCardData : TrapCardData
         // Verificar colisiones solo con obstáculos físicos (no triggers)
         Collider2D[] colliders = Physics2D.OverlapCircleAll(
             worldPosition,
-            0.5f,
+            0.45f,
             obstacleLayers
         );
         if(colliders.Length == 0 )
