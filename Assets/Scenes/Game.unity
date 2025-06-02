@@ -5103,7 +5103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &411383680
 Transform:
   m_ObjectHideFlags: 0
@@ -10053,7 +10053,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &704813446
 Transform:
   m_ObjectHideFlags: 0
@@ -15831,7 +15831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1070399075
 Transform:
   m_ObjectHideFlags: 0
@@ -21709,7 +21709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1352838734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23162,8 +23162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f70d2385769df40a87244dcf6b456e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 781990228}
-  estaLibre: 0
+  tilemap: {fileID: 2063852903}
+  estaLibre: 1
   salasContiguas:
   - {fileID: 1352838733}
   - {fileID: 1747701056}
@@ -23252,7 +23252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1747701057
 MonoBehaviour:
   m_ObjectHideFlags: 0
