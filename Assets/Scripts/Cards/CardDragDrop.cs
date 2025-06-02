@@ -147,7 +147,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             !Physics2D.OverlapCircle(worldPos, checkRadius, obstacleLayers);
 
         // 2. Verificar distancia a torretas (radio de acción)
-        
+        /*
         bool isOutsideTurretRange = true;
         foreach (TorretaController turret in GetAllTurrets())
         {
@@ -158,7 +158,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 break;
             }
         }
-        
+        */
 
         // 3. Verificar distancia a Player
         bool isOutsidePlayerRange = true;
@@ -169,7 +169,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         }
         
 
-        return isPhysicallyValid && isOutsideTurretRange && isOutsidePlayerRange;
+        return isPhysicallyValid && isOutsidePlayerRange;
     }
 
     // Obtener todas las torretas en escena
@@ -185,7 +185,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         Destroy(currentBorder);
 
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
         Vector3Int cellPos = dropTilemap.WorldToCell(worldPos);
 
         if (dropTilemap.HasTile(cellPos))
@@ -195,7 +195,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 SalaController sala = col.GetComponent<SalaController>();
                 if(sala != null && sala.estaLibre){ 
                     if(cardData.cardType == CardType.Trap){
-                        Color initialColor = dropTilemap.GetColor(cellPos);
                         dropTilemap.SetTileFlags(cellPos, TileFlags.None);
                         dropTilemap.SetColor(cellPos, Color.green);
                         //var trapGO = Instantiate(((TrapCardData)cardData).trapPrefab, dropTilemap.GetCellCenterWorld(cellPos), Quaternion.identity);
@@ -205,6 +204,9 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                         //trapController.cellPos = cellPos;
                         //trapController.initialColor = initialColor;
 
+                        Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
+                        cardData.Play(player, worldCenter);
+
                     }
                     if(cardData.cardType == CardType.DeckEffect){
                         if(Deck.discardPile.Count == 0){
@@ -212,9 +214,9 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                             goto End_Drop;
                         }
                     }
-
+                    /*
                     Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
-                    cardData.Play(player, worldCenter);
+                    cardData.Play(player, worldCenter);*/
                     if (hasPrevious)
                     {
                         highlightMap.SetTile(previousCell, null);

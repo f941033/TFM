@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2804141960140267264}
   - component: {fileID: 6160349541528422814}
   - component: {fileID: 8768354133262798304}
-  - component: {fileID: 8895408193386798012}
   m_Layer: 0
   m_Name: "Ca\xF1on"
   m_TagString: Untagged
@@ -206,42 +205,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!58 &8895408193386798012
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49963177589909985}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 2.5
 --- !u!1 &1400778418362487002
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +217,7 @@ GameObject:
   - component: {fileID: 3009786956473875944}
   - component: {fileID: 4389836680003733558}
   - component: {fileID: 3718399301329372688}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +318,7 @@ GameObject:
   - component: {fileID: 5662933646770562773}
   - component: {fileID: 3236589953679226030}
   - component: {fileID: 5803669322039359989}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
