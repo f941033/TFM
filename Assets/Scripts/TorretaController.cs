@@ -118,7 +118,7 @@ public class TorretaController : MonoBehaviour
                 rotationSpeed * Time.deltaTime
             );
             float angleDiff = Quaternion.Angle(transform.rotation, targetRotation);
-            if (angleDiff < 3f)
+            if (angleDiff < 8f)
             {
                 if (fireCountdown <= 0f)
                     {
