@@ -57,8 +57,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     {
         highlightTile = Resources.Load<TileBase>("Tiles/HighlightTile");
         highlightMap = GameObject.Find("Tilemap Highlighted").GetComponent<Tilemap>();
-        //discardPileImage = Deck.GetDiscardPileImage();
-        //textNumberOfCardsDiscard = discardPileImage.GetComponentInChildren<TextMeshProUGUI>();
         tilemap = GameObject.Find("Tilemap Laberinto").GetComponent<Tilemap>();
         obstacleTilemap = GameObject.Find("Paredes").GetComponent<Tilemap>();
     }
@@ -90,14 +88,15 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         {
             if (!player.TrySpendSouls(trap.cost))
             {
-            Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
-            // sonido de que la carta no se puede jugar
-            eventData.pointerDrag = null;
-            eventData.pointerPress = null;
-            canvasGroup.blocksRaycasts = true;
-            isDragging = false;
-            canvasGroup.alpha = 1f;
-            return;
+                FindFirstObjectByType<GameManager>().ShowMessage("¡No tienes suficientes almas!", 2);
+                Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
+                // sonido de que la carta no se puede jugar
+                eventData.pointerDrag = null;
+                eventData.pointerPress = null;
+                canvasGroup.blocksRaycasts = true;
+                isDragging = false;
+                canvasGroup.alpha = 1f;
+                return;
             }
         }
         originalAnchoredPosition = rectTransform.anchoredPosition;
@@ -146,21 +145,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             tilemap.HasTile(cellPos) &&
             !Physics2D.OverlapCircle(worldPos, checkRadius, obstacleLayers);
 
-        // 2. Verificar distancia a torretas (radio de acción)
-        /*
-        bool isOutsideTurretRange = true;
-        foreach (TorretaController turret in GetAllTurrets())
-        {
-            float turrentDistance = Vector3.Distance(worldPos, turret.transform.position);
-            if (turrentDistance <= turret.detectionRadius)
-            {
-                isOutsideTurretRange = false;
-                break;
-            }
-        }
-        */
-
-        // 3. Verificar distancia a Player
+        // 2. Verificar distancia a Player
         bool isOutsidePlayerRange = true;
         float distance = Vector3.Distance(worldPos, player.transform.position);
         if (distance <= 2.25f)
@@ -177,7 +162,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     {
         return FindObjectsByType<TorretaController>(FindObjectsSortMode.None);
     }
-
 
     public void OnEndDrag(PointerEventData eventData)
     {
@@ -197,12 +181,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                     if(cardData.cardType == CardType.Trap){
                         dropTilemap.SetTileFlags(cellPos, TileFlags.None);
                         dropTilemap.SetColor(cellPos, Color.green);
-                        //var trapGO = Instantiate(((TrapCardData)cardData).trapPrefab, dropTilemap.GetCellCenterWorld(cellPos), Quaternion.identity);
-                        //var trapController = trapGO.GetComponent<TrapController>();
-                        //trapController.cardData = (TrapCardData)cardData;
-                        //trapController.player = player;
-                        //trapController.cellPos = cellPos;
-                        //trapController.initialColor = initialColor;
 
                         Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
                         cardData.Play(player, worldCenter);
@@ -214,16 +192,12 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                             goto End_Drop;
                         }
                     }
-                    /*
-                    Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
-                    cardData.Play(player, worldCenter);*/
                     if (hasPrevious)
                     {
                         highlightMap.SetTile(previousCell, null);
                         hasPrevious = false;
                     }
                     Deck.CardPlayed(gameObject, cardData);
-                    //Destroy(gameObject);
                     cartaColocada = true;
                 }
             }
@@ -250,28 +224,4 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         canvasGroup.blocksRaycasts = true;
     }
-
-    /*private bool IsOverLayout()
-    {
-        if (raycasterUI == null)
-        {
-            Debug.LogError("El GraphicRaycaster no está asignado a raycasterUI.");
-            return false;
-        }
-        PointerEventData pointerData = new PointerEventData(EventSystem.current);
-        pointerData.position = Input.mousePosition;
-
-        List<RaycastResult> results = new List<RaycastResult>();
-        raycasterUI.Raycast(pointerData, results);
-
-        foreach (var result in results)
-        {
-            Debug.Log("Encontrado componente: " + result.gameObject.name);
-            if (result.gameObject.name == "PanelCartas")
-                return true;
-        }
-
-        return false;
-    }*/
- 
 }

@@ -8,7 +8,6 @@ using System.Collections;
 
 public class CardManager : MonoBehaviour
 {
-    //private List<Card> cardInHand = new List<Card>();
     public GameObject prefabCard;
     public Transform panelCard;
     public Tilemap zonaValidaTilemap;
@@ -17,19 +16,16 @@ public class CardManager : MonoBehaviour
     public TextMeshProUGUI textNumberOfCardsDiscardPile;
     public GameObject countDownObject;
     public GameObject panelGo;
-    //private int countDown = 30;
     public GameObject drawPileImage;
     public GameObject discardPileImage;
     public GameObject soulsBar;
     public AudioManager audioManager;
 
-    private TextMeshProUGUI textCountDown;
-
     [Header("Variables del mazo")]
     public List<CardData> startingDeck;
     public List<CardData> drawPile = new List<CardData>();
     public List<CardData> discardPile = new List<CardData>();
-    private List<GameObject> cardsInHand   = new List<GameObject>();
+    private List<GameObject> cardsInHand = new List<GameObject>();
     public byte handSize = 5;
     public byte currentHandSize;
 
@@ -38,7 +34,6 @@ public class CardManager : MonoBehaviour
     {
         player = FindFirstObjectByType<PlayerController>();
         currentHandSize = handSize;
-        //textCountDown = countDownObject.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void ActivateDiscardPileImage()
@@ -65,18 +60,15 @@ public class CardManager : MonoBehaviour
 
         Debug.Log("vida base del player: " + FindFirstObjectByType<PlayerController>().baseHealth.ToString());
         startingDeck = new List<CardData>(selectedCards);
-        
+
         //Crear el mazo de cartas de tipo TRAMPA
-        foreach (CardData card in startingDeck) 
-        { 
-            if(card.cardType == CardType.Trap)
+        foreach (CardData card in startingDeck)
+        {
+            if (card.cardType == CardType.Trap)
             {
                 drawPile.Add(card);
             }
         }
-
-        //StartCoroutine("CountDown");
-
 
         discardPile.Clear();
         discardPileImage.SetActive(false);
@@ -88,32 +80,12 @@ public class CardManager : MonoBehaviour
         DrawFullHand();
     }
 
-    
-
-
-    /*
-    IEnumerator CountDown()
-    {
-        while (countDown > 0)
-        {
-            yield return new WaitForSeconds(1);
-            countDown--;
-            textCountDown.text = countDown.ToString();
-            if (countDown <= 3) audioManager.SoundBeep();
-        }
-        StartRun();        
-    }
-    */
-
     //----------------------------------------------------------
     //                   INICIO FASE DE ACCION
     //----------------------------------------------------------
     public void StartRun()
     {
-        //startingDeck = new List<CardData>(selectedCards);
-        //textCountDown.gameObject.SetActive(false);
         countDownObject.SetActive(false);
-        //countDown = 30;
         StartCoroutine("PanelGo");
 
         ClearPanelCard();
@@ -140,17 +112,16 @@ public class CardManager : MonoBehaviour
         Shuffle(drawPile);
         DrawFullHand();
 
-        //GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>().SendMessage("GenerarEnemigos");
         var spawner = GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>();
         spawner.StartCoroutine(spawner.GenerarEnemigos());
-        
+
     }
 
 
     void ClearPanelCard()
-    {        
+    {
         foreach (Transform card in panelCard)
-        { 
+        {
             Destroy(card.gameObject);
         }
         cardsInHand.Clear();
@@ -161,20 +132,11 @@ public class CardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void DrawCard() {
-        /*
-        if (drawPile.Count == 0) {
-            drawPile.AddRange(discardPile);
-            discardPile.Clear();
-            discardPileImage.SetActive(false);
-            Shuffle(drawPile);
-            drawPileImage.SetActive(true);
-        }
-        */
-
+    public void DrawCard()
+    {
         var cardToDraw = drawPile[0];
         drawPile.RemoveAt(0);
 
@@ -201,30 +163,30 @@ public class CardManager : MonoBehaviour
         cardsInHand.Add(cardData);
     }
 
-    public void DrawFullHand(){
-        
-        while(cardsInHand.Count < currentHandSize && (drawPile.Count > 0 || discardPile.Count > 0)){
+    public void DrawFullHand()
+    {
+
+        while (cardsInHand.Count < currentHandSize && (drawPile.Count > 0 || discardPile.Count > 0))
+        {
             DrawCard();
         }
 
     }
 
-    public void CardPlayed(GameObject card, CardData cardData){
-        for(int i=0; i<discardPile.Count; i++){
-            
+    public void CardPlayed(GameObject card, CardData cardData)
+    {
+        for (int i = 0; i < discardPile.Count; i++)
+        {
+
         }
         cardsInHand.Remove(card);
         discardPile.Add(cardData);
         Destroy(card);
-        /*
-        if (cardData.cardType != CardType.DeckEffect)
-        {
-            DrawFullHand();
-        }
-        */
+
     }
 
-    public void Shuffle<T>(List<T> list){
+    public void Shuffle<T>(List<T> list)
+    {
         //Algoritmo de Fisher-Yates para que el shuffle sea siempre aleatorio
         for (int i = 0; i < list.Count; i++)
         {
