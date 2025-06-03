@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class EnemyController : MonoBehaviour
     public int gold;
     private Animator animator;
     private AudioSource audioSource;
+    public Image healthBarUI;
+    private SpriteRenderer renderer;
 
     [Header("Audio")]
     public AudioClip attackSound;
@@ -27,6 +30,7 @@ public class EnemyController : MonoBehaviour
 
     public void receiveDamage(float damage){
         currentHealth -= damage;
+        healthBarUI.fillAmount = currentHealth/health;
         GetComponent<Damageable>().TakeDamage(damage);
         if(currentHealth <=0 ){
             Die();
@@ -35,17 +39,20 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player").transform;
+        renderer = GetComponent<SpriteRenderer>();
 
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
 
         if (target.position.x < transform.position.x)
         {
-            transform.localScale = new Vector3(-1,1,1);
+            renderer.flipX = true;
+            //transform.localScale = new Vector3(-1,1,1);
         }
         else
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            renderer.flipX = false;
+            //transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
