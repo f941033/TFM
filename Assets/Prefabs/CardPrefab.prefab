@@ -117,7 +117,8 @@ MonoBehaviour:
     m_Bits: 128
   obstacleTilemap: {fileID: 0}
   checkRadius: 0.4
-  borderPrefab: {fileID: 2514062046054944184, guid: fa24afdd1efcef046b5b5eaaaa64dca5, type: 3}
+  borderPrefab_1: {fileID: 2514062046054944184, guid: fa24afdd1efcef046b5b5eaaaa64dca5, type: 3}
+  borderPrefab_4: {fileID: 2514062046054944184, guid: b3dad1fac86eaf04ca9117f643d6bbc7, type: 3}
   raycasterUI: {fileID: 0}
   dropTilemap: {fileID: 0}
   highlightMap: {fileID: 0}

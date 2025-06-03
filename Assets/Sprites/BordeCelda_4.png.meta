@@ -1,0 +1,845 @@
+fileFormatVersion: 2
+guid: ea63bf108f3eddd49b1352a34cc0053e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7185207819958812180
+    second: BordeCelda_4_0
+  - first:
+      213: 6441247923104744667
+    second: BordeCelda_4_1
+  - first:
+      213: -1582376220219494846
+    second: BordeCelda_4_2
+  - first:
+      213: 1367559930285560723
+    second: BordeCelda_4_3
+  - first:
+      213: 9087781943691340416
+    second: BordeCelda_4_4
+  - first:
+      213: 7970097504726544263
+    second: BordeCelda_4_5
+  - first:
+      213: -4616974889317404928
+    second: BordeCelda_4_6
+  - first:
+      213: 1974623876104916325
+    second: BordeCelda_4_7
+  - first:
+      213: -5046935583608561957
+    second: BordeCelda_4_8
+  - first:
+      213: -8150861392886279030
+    second: BordeCelda_4_9
+  - first:
+      213: 5775793338384854276
+    second: BordeCelda_4_10
+  - first:
+      213: -1246513549429276517
+    second: BordeCelda_4_11
+  - first:
+      213: -7064214105192695090
+    second: BordeCelda_4_12
+  - first:
+      213: 8203242147980838667
+    second: BordeCelda_4_13
+  - first:
+      213: 2994875431909833622
+    second: BordeCelda_4_14
+  - first:
+      213: 161643184317062914
+    second: BordeCelda_4_15
+  - first:
+      213: -627598022547654602
+    second: BordeCelda_4_16
+  - first:
+      213: -4856731666757726540
+    second: BordeCelda_4_17
+  - first:
+      213: -9101925949597429222
+    second: BordeCelda_4_18
+  - first:
+      213: 4424471835605103926
+    second: BordeCelda_4_19
+  - first:
+      213: 4945336276878725728
+    second: BordeCelda_4_20
+  - first:
+      213: 6061898240772716459
+    second: BordeCelda_4_21
+  - first:
+      213: 8129306449021017136
+    second: BordeCelda_4_22
+  - first:
+      213: -8190954829292660753
+    second: BordeCelda_4_23
+  - first:
+      213: -7878155144055308886
+    second: BordeCelda_4_24
+  - first:
+      213: 7454392656773656037
+    second: BordeCelda_4_25
+  - first:
+      213: 5877239694616588939
+    second: BordeCelda_4_26
+  - first:
+      213: -6701194626937190306
+    second: BordeCelda_4_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 8
+  spritePivot: {x: 1, y: 0}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BordeCelda_4_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 55
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41ef002817cf6b360800000000000000
+      internalID: 7185207819958812180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_1
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 61
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd481eedbd8e36950800000000000000
+      internalID: 6441247923104744667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_2
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 61
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24eaac426354a0ae0800000000000000
+      internalID: -1582376220219494846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_3
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 61
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3939abdc28c8af210800000000000000
+      internalID: 1367559930285560723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_4
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 61
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08a6ee557894e1e70800000000000000
+      internalID: 9087781943691340416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_5
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 61
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78fe37204797b9e60800000000000000
+      internalID: 7970097504726544263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_6
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 61
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00f6659ccc53defb0800000000000000
+      internalID: -4616974889317404928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_7
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 55
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56d0d3c04f5476b10800000000000000
+      internalID: 1974623876104916325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 47
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bde9bb693dea5f9b0800000000000000
+      internalID: -5046935583608561957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a84519f8fb252ee80800000000000000
+      internalID: -8150861392886279030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_10
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 47
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40d2f76907db72050800000000000000
+      internalID: 5775793338384854276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_11
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 40
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b908e86f78e73bee0800000000000000
+      internalID: -1246513549429276517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 33
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eca7faaf2bed6fd90800000000000000
+      internalID: -7064214105192695090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 25
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0709ec5545c7d170800000000000000
+      internalID: 8203242147980838667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_14
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 33
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69bb789765fef8920800000000000000
+      internalID: 2994875431909833622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_15
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 25
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20fd495ae954e3200800000000000000
+      internalID: 161643184317062914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 18
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6383f447ce25a47f0800000000000000
+      internalID: -627598022547654602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 11
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bec389f74c699cb0800000000000000
+      internalID: -4856731666757726540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_18
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 18
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a12d55aa2967fa180800000000000000
+      internalID: -9101925949597429222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_19
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 11
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63576ff41b1e66d30800000000000000
+      internalID: 4424471835605103926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 062953e642d51a440800000000000000
+      internalID: 4945336276878725728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_21
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 0
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba7b2d92550302450800000000000000
+      internalID: 6061898240772716459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_22
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03c903cf42911d070800000000000000
+      internalID: 8129306449021017136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_23
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 0
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe79db4faf1e35e80800000000000000
+      internalID: -8190954829292660753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_24
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 0
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aadba2103ab2ba290800000000000000
+      internalID: -7878155144055308886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_25
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ed264350a2537760800000000000000
+      internalID: 7454392656773656037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_26
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 0
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8272710d56209150800000000000000
+      internalID: 5877239694616588939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BordeCelda_4_27
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 0
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5807a2cdf29003a0800000000000000
+      internalID: -6701194626937190306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BordeCelda_4_0: 7185207819958812180
+      BordeCelda_4_1: 6441247923104744667
+      BordeCelda_4_10: 5775793338384854276
+      BordeCelda_4_11: -1246513549429276517
+      BordeCelda_4_12: -7064214105192695090
+      BordeCelda_4_13: 8203242147980838667
+      BordeCelda_4_14: 2994875431909833622
+      BordeCelda_4_15: 161643184317062914
+      BordeCelda_4_16: -627598022547654602
+      BordeCelda_4_17: -4856731666757726540
+      BordeCelda_4_18: -9101925949597429222
+      BordeCelda_4_19: 4424471835605103926
+      BordeCelda_4_2: -1582376220219494846
+      BordeCelda_4_20: 4945336276878725728
+      BordeCelda_4_21: 6061898240772716459
+      BordeCelda_4_22: 8129306449021017136
+      BordeCelda_4_23: -8190954829292660753
+      BordeCelda_4_24: -7878155144055308886
+      BordeCelda_4_25: 7454392656773656037
+      BordeCelda_4_26: 5877239694616588939
+      BordeCelda_4_27: -6701194626937190306
+      BordeCelda_4_3: 1367559930285560723
+      BordeCelda_4_4: 9087781943691340416
+      BordeCelda_4_5: 7970097504726544263
+      BordeCelda_4_6: -4616974889317404928
+      BordeCelda_4_7: 1974623876104916325
+      BordeCelda_4_8: -5046935583608561957
+      BordeCelda_4_9: -8150861392886279030
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
