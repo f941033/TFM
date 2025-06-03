@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject prefabCard;
     public Transform panelCard;
-
+    [SerializeField] private TextMeshProUGUI messageText;
+    private Coroutine HideMessageCO;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,12 +31,12 @@ public class GameManager : MonoBehaviour
         enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
     }
 
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void EnemyKaputt()
@@ -44,7 +46,7 @@ public class GameManager : MonoBehaviour
         if (enemiesDied == enemiesToKillInCurrentWave)
         {
             enemiesDied = 0;
-            Invoke("EndWave",1f);
+            Invoke("EndWave", 1f);
         }
     }
 
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     void GenerateRewardCard()
     {
-        allCards = Resources.LoadAll<CardData>("Cards");        
+        allCards = Resources.LoadAll<CardData>("Cards");
 
         for (int i = 1; i <= 3; i++)
         {
@@ -70,7 +72,7 @@ public class GameManager : MonoBehaviour
     public void PlayAnotherRun()
     {
         Debug.Log("vamos a por otra ronda");
-        
+        messageText.gameObject.SetActive(false);
         ClearPanelCard();
         panelEndWave.SetActive(false);
         numberWave++;
@@ -79,13 +81,13 @@ public class GameManager : MonoBehaviour
 
 
         /*------------------------------------------------
-         *           AÑADIR CARTA NUEVA AL DECK
+         *           Aï¿½ADIR CARTA NUEVA AL DECK
          *           
-        esto no funciona por la obtención del cardDat
+        esto no funciona por la obtenciï¿½n del cardDat
         CardData selected = selectionManager.GetSelectedCardData();
         {
             selectedCards.Add(selected);
-            Debug.Log("carta añadida: " + selected.cardName);
+            Debug.Log("carta aï¿½adida: " + selected.cardName);
         }
         else
         {
@@ -101,30 +103,11 @@ public class GameManager : MonoBehaviour
 
         foreach (var item in allCards)
         {
-            if(item.cardName == selectedName)
+            if (item.cardName == selectedName)
                 selectedCards.Add(item);
         }
 
-
         cardManager.PreparationPhase(selectedCards);
-
-        //Time.timeScale = 0f;
-
-        //cardSummaryUI.ResetRun();
-        //Lo comentado intentando que las oleadas pasen bien
-        //cardSummaryUI.ReadyButton();
-
-        /*
-         * LO QUE HACE READYBUTTON
-        playerController.BaseHealth = baseHealth;
-        cardManager.PreparationPhase(selectedCards);
-
-        foreach (Transform child in listContainer) 
-            Destroy(child.gameObject);
-        selectedCards.Clear();
-
-        canvasDeck.SetActive(false);
-         * */
     }
 
 
@@ -139,6 +122,23 @@ public class GameManager : MonoBehaviour
         {
             Destroy(card.gameObject);
         }
+    }
+    
+        public void ShowMessage(string text, float duration)
+    {
+        if (HideMessageCO != null)
+            StopCoroutine(HideMessageCO);
+        messageText.text = text;
+        messageText.gameObject.SetActive(true);
+        HideMessageCO = StartCoroutine(HideMessage(duration));
+    }
+
+    private IEnumerator HideMessage(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        messageText.gameObject.SetActive(false);
+        messageText.text = "";
+        HideMessageCO = null;
     }
 
 }

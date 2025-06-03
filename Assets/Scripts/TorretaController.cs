@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class TorretaController : MonoBehaviour
 {
-    [Header("Configuración")]
+    [Header("Configuraciï¿½n")]
     public float rotationSpeed = 5f;
     public float fireRate = 1f;
     public float detectionRadius = 3f;
     public GameObject projectilePrefab;
-    public Transform firePoint; // Objeto hijo del cañón donde salen los proyectiles
+    public Transform firePoint; // Objeto hijo del caï¿½ï¿½n donde salen los proyectiles
 
-    [Header("Detección")]
-    public float checkInterval = 0.3f; // Intervalo de chequeo para optimización
+    [Header("Detecciï¿½n")]
+    public float checkInterval = 0.3f; // Intervalo de chequeo para optimizaciï¿½n
 
 
     private List<Transform> enemiesInRange = new List<Transform>();
@@ -67,7 +67,7 @@ public class TorretaController : MonoBehaviour
             !currentEnemiesInRange.Contains(enemy)
         );
 
-        // 5. Añadir nuevos enemigos
+        // 5. Aï¿½adir nuevos enemigos
         foreach (Transform enemy in currentEnemiesInRange)
         {
             if (!enemiesInRange.Contains(enemy))
@@ -92,7 +92,7 @@ public class TorretaController : MonoBehaviour
         {
             if (enemy == null) continue;
 
-            // Usamos posición del padre (base) para cálculo de distancias
+            // Usamos posiciï¿½n del padre (base) para cï¿½lculo de distancias
             float distance = Vector3.Distance(transform.parent.position, enemy.position);
             if (distance < shortestDistance)
             {
@@ -108,7 +108,7 @@ public class TorretaController : MonoBehaviour
     {
         if (currentTarget != null)
         {
-            // Rotación del cañón (hijo) respecto a la base (padre)
+            // Rotaciï¿½n del caï¿½ï¿½n (hijo) respecto a la base (padre)
             Vector3 direction = (currentTarget.position + Vector3.up * 0.5f) - transform.parent.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -117,11 +117,14 @@ public class TorretaController : MonoBehaviour
                 targetRotation,
                 rotationSpeed * Time.deltaTime
             );
-
-            if (fireCountdown <= 0f)
+            float angleDiff = Quaternion.Angle(transform.rotation, targetRotation);
+            if (angleDiff < 3f)
             {
-                Shoot();
-                fireCountdown = 1f / fireRate;
+                if (fireCountdown <= 0f)
+                    {
+                        Shoot();
+                        fireCountdown = 1f / fireRate;
+                    }   
             }
             fireCountdown -= Time.deltaTime;
         }
@@ -141,7 +144,7 @@ public class TorretaController : MonoBehaviour
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                // Dirección basada en la rotación del cañón
+                // Direcciï¿½n basada en la rotaciï¿½n del caï¿½ï¿½n
                 rb.linearVelocity = firePoint.up * 10f;
             }
         }
