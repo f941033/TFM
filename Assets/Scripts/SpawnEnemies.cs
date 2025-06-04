@@ -26,13 +26,17 @@ public class SpawnEnemies : MonoBehaviour
         
     }
 
-    public void GenerarPuntosSpawn()
-    {
-        // Empezamos con un solo punto de spawn
-
-        int randomWP = Random.Range(0, spawnListPoints.Count);
+    public void GenerarPuntosSpawn(int roundNumber)
+    {   
         chosenPoints.Clear();
-        chosenPoints.Add(spawnListPoints[randomWP]);
+
+        int numberOfSpawnPoints = roundNumber >= 20 ? 4 : Mathf.Clamp((roundNumber - 1) / 5 + 1, 1, 4);
+        for (int i = 0; i < numberOfSpawnPoints; i++)
+        {
+
+            chosenPoints.Add(spawnListPoints[Random.Range(1,spawnListPoints.Count)]);
+        }
+        
 
         ActivarLuces();
     }

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private int enemiesDied = 0;
     public int initialEnemiesToKill = 3;
     public int enemiesToKillInCurrentWave;
-    private int numberWave = 1;
+    public int numberWave = 1;
     private List<CardData> selectedCards = new List<CardData>();
     private CardData[] allCards;
 

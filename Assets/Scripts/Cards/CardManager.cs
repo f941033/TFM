@@ -12,6 +12,7 @@ public class CardManager : MonoBehaviour
     public Transform panelCard;
     public Tilemap zonaValidaTilemap;
     private PlayerController player;
+    public GameManager gameManager;
     public TextMeshProUGUI textNumberOfCardsDeck;
     public TextMeshProUGUI textNumberOfCardsDiscardPile;
     public GameObject countDownObject;
@@ -82,7 +83,7 @@ public class CardManager : MonoBehaviour
 
         // ---------------PUNTOS DE SPAWN DE ENEMIGOS-----------------
         spawnEnemies.DesactivarLuces();
-        spawnEnemies.GenerarPuntosSpawn();
+        spawnEnemies.GenerarPuntosSpawn(gameManager.numberWave);
 
     }
 

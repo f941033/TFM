@@ -359,7 +359,7 @@ Transform:
   m_GameObject: {fileID: 69432781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.25, y: 0.05, z: 0}
+  m_LocalPosition: {x: 11.25, y: -0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2373,6 +2373,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 9, y: 0, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 35
+      m_TileSpriteIndex: 35
+      m_TileMatrixIndex: 3
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: -16, y: 1, z: 0}
     second:
       serializedVersion: 2
@@ -3505,7 +3515,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 0db090c697ac9d64ab4ed76075d2f27e, type: 2}
   - m_RefCount: 5
     m_Data: {fileID: 11400000, guid: 12bfab9b049965d489ca64360ea493a6, type: 2}
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: b499468c07d71e4498677124389e093b, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 5c8fad35d9074b549a564189f0cc43da, type: 2}
@@ -3580,7 +3590,7 @@ Tilemap:
     m_Data: {fileID: 1973625944, guid: c7186f7247c8bfa419a841545bbbff00, type: 3}
   - m_RefCount: 5
     m_Data: {fileID: 382161576, guid: c7186f7247c8bfa419a841545bbbff00, type: 3}
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data: {fileID: -861289966, guid: 53ac2faf64153c6478c4d7886d07c2ed, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -3999678026335421665, guid: 53ac2faf64153c6478c4d7886d07c2ed, type: 3}
@@ -3639,7 +3649,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 208
+  - m_RefCount: 209
     m_Data:
       e00: 1
       e01: 0
@@ -3658,7 +3668,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 214
+  - m_RefCount: 215
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -3757,7 +3767,7 @@ CompositeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -3814,9 +3824,9 @@ CompositeCollider2D:
       - X: 90000000
         Y: 30000000
       - X: 90000000
-        Y: 10000000
+        Y: 0
       - X: 100000000
-        Y: 10000000
+        Y: 0
     - - X: -150000000
         Y: 30000000
       - X: -98750000
@@ -4169,33 +4179,6 @@ CompositeCollider2D:
         Y: -50000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 9.99997, y: 1}
-      - {x: 10.00003, y: 3}
-      - {x: 12, y: 2.9999707}
-      - {x: 12.00003, y: 1}
-      - {x: 12.875, y: 1.0000293}
-      - {x: 12.874992, y: 14.750009}
-      - {x: 12.624989, y: 15}
-      - {x: -1, y: 14.999971}
-      - {x: -0.99997073, y: 14}
-      - {x: 1, y: 13.999971}
-      - {x: 0.9999706, y: 9}
-      - {x: 0, y: 8.99997}
-      - {x: 0.000029300001, y: 8}
-      - {x: 2, y: 7.9999704}
-      - {x: 2.0000293, y: 7}
-      - {x: 3, y: 6.9999704}
-      - {x: 3.0000293, y: 6}
-      - {x: 4, y: 5.9999704}
-      - {x: 4.000029, y: 5}
-      - {x: 5, y: 4.9999704}
-      - {x: 5.000029, y: 4}
-      - {x: 6, y: 3.9999704}
-      - {x: 6.000029, y: 2}
-      - {x: 6.875, y: 2.0000293}
-      - {x: 6.8750296, y: 3}
-      - {x: 9, y: 2.9999707}
-      - {x: 9.00003, y: 1}
     - - {x: -15.000029, y: 1}
       - {x: -14.999971, y: 3}
       - {x: -9.875, y: 2.9999707}
@@ -4223,6 +4206,33 @@ CompositeCollider2D:
       - {x: -15.625009, y: 14.999992}
       - {x: -15.875, y: 14.749989}
       - {x: -15.874971, y: 1}
+    - - {x: 9.99997, y: 0}
+      - {x: 10.00003, y: 3}
+      - {x: 12, y: 2.9999707}
+      - {x: 12.00003, y: 1}
+      - {x: 12.875, y: 1.0000293}
+      - {x: 12.874992, y: 14.750009}
+      - {x: 12.624989, y: 15}
+      - {x: -1, y: 14.999971}
+      - {x: -0.99997073, y: 14}
+      - {x: 1, y: 13.999971}
+      - {x: 0.9999706, y: 9}
+      - {x: 0, y: 8.99997}
+      - {x: 0.000029300001, y: 8}
+      - {x: 2, y: 7.9999704}
+      - {x: 2.0000293, y: 7}
+      - {x: 3, y: 6.9999704}
+      - {x: 3.0000293, y: 6}
+      - {x: 4, y: 5.9999704}
+      - {x: 4.000029, y: 5}
+      - {x: 5, y: 4.9999704}
+      - {x: 5.000029, y: 4}
+      - {x: 6, y: 3.9999704}
+      - {x: 6.000029, y: 2}
+      - {x: 6.875, y: 2.0000293}
+      - {x: 6.8750296, y: 3}
+      - {x: 9, y: 2.9999707}
+      - {x: 9.00003, y: 0}
     - - {x: 12, y: 4.0000296}
       - {x: 6.875, y: 4.0000296}
       - {x: 6.874992, y: 4.7500076}
@@ -4371,7 +4381,7 @@ CompositeCollider2D:
       - {x: 1.9999708, y: -4}
       - {x: 0, y: -4.000029}
       - {x: 0.000029300001, y: -5}
-  m_VertexDistance: 0.0005
+  m_VertexDistance: 0.01
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 243067822}
@@ -4383,7 +4393,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 243067822}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -5953,6 +5963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialEnemiesToKill: 3
   enemiesToKillInCurrentWave: 0
+  numberWave: 1
   textNumberWave: {fileID: 1640885441}
   panelEndWave: {fileID: 587340171}
   cardManager: {fileID: 1880551133}
@@ -16993,7 +17004,7 @@ Transform:
   m_GameObject: {fileID: 1094370590}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.29, y: 0.01, z: 0}
+  m_LocalPosition: {x: -15.29, y: -0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25774,6 +25785,7 @@ MonoBehaviour:
   prefabCard: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
   panelCard: {fileID: 774299043}
   zonaValidaTilemap: {fileID: 2063852903}
+  gameManager: {fileID: 462794453}
   textNumberOfCardsDeck: {fileID: 1498456598}
   textNumberOfCardsDiscardPile: {fileID: 1336435715}
   countDownObject: {fileID: 391539994}
