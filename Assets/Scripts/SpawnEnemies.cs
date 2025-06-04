@@ -31,10 +31,23 @@ public class SpawnEnemies : MonoBehaviour
         chosenPoints.Clear();
 
         int numberOfSpawnPoints = roundNumber >= 20 ? 4 : Mathf.Clamp((roundNumber - 1) / 5 + 1, 1, 4);
-        for (int i = 0; i < numberOfSpawnPoints; i++)
-        {
 
-            chosenPoints.Add(spawnListPoints[Random.Range(1,spawnListPoints.Count)]);
+        // Crear una copia temporal de la lista original
+        List<GameObject> tempList = new List<GameObject>(spawnListPoints);
+
+        // Algoritmo Fisher-Yates para mezclar la lista
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            int randomIndex = Random.Range(i, tempList.Count);
+            GameObject temp = tempList[randomIndex];
+            tempList[randomIndex] = tempList[i];
+            tempList[i] = temp;
+        }
+
+        // Tomar los primeros 'numberOfSpawnPoints' elementos
+        for (int i = 0; i < numberOfSpawnPoints && i < tempList.Count; i++)
+        {
+            chosenPoints.Add(tempList[i]);
         }
         
 
