@@ -7,8 +7,8 @@ public class SalaController : MonoBehaviour
     Color originalColor;
     public bool estaLibre = false;
     public GameObject[] salasContiguas;
-    public Transform[] wayPoints;
-    public Transform[] removeWayPoints;
+    public GameObject[] wayPoints;
+    public GameObject[] removeWayPoints;
     public SpawnEnemies spawnEnemiesController;
     bool cartaAbrirSala = false;
 

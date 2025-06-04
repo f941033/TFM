@@ -6,8 +6,9 @@ using UnityEngine;
 public class SpawnEnemies : MonoBehaviour
 {
     public GameObject enemy;
-    public Transform[] spawnWaypoints;
-    private List<Transform> spawnListPoints = new List<Transform>();
+    public GameObject[] spawnWaypoints;
+    private List<GameObject> spawnListPoints = new List<GameObject>();
+    private List<GameObject> chosenPoints = new List<GameObject>();
     private int enemiesToSpawn, enemiesCounter;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,20 +26,49 @@ public class SpawnEnemies : MonoBehaviour
         
     }
 
+    public void GenerarPuntosSpawn()
+    {
+        // Empezamos con un solo punto de spawn
+
+        int randomWP = Random.Range(0, spawnListPoints.Count);
+        chosenPoints.Clear();
+        chosenPoints.Add(spawnListPoints[randomWP]);
+
+        ActivarLuces();
+    }
+    private void ActivarLuces()
+    {
+        foreach (GameObject go in chosenPoints)
+        {
+            go.transform.GetChild(0).gameObject.SetActive(true);
+        }
+
+    }
+
+    public void DesactivarLuces()
+    {
+        foreach (GameObject go in chosenPoints)
+        {
+            go.transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+    }
+
+
     public IEnumerator GenerarEnemigos()
     {
         enemiesToSpawn = FindFirstObjectByType<GameManager>().enemiesToKillInCurrentWave;
         enemiesCounter = 0;
-        //while (enemiesCounter < enemiesToSpawn)
+
         for (int i = 1;i<=enemiesToSpawn;i++)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(Random.Range(1.5f,3f));
 
-            if (spawnListPoints.Count == 0)
+            if (chosenPoints.Count == 0)
                 continue;
 
-            int randomWP = Random.Range(0, spawnListPoints.Count);
-            Transform chosenPoint = spawnListPoints[randomWP];
+            int randomWP = Random.Range(0, chosenPoints.Count);
+            Transform chosenPoint = chosenPoints[randomWP].transform;
 
             Instantiate(enemy, chosenPoint.position, Quaternion.identity);
             enemiesCounter++;
@@ -47,18 +77,21 @@ public class SpawnEnemies : MonoBehaviour
 
         
     }
-    public void AddWayPoints(Transform[] posiciones, Transform[] removePoints)
+
+  
+
+    public void AddWayPoints(GameObject[] posiciones, GameObject[] removePoints)
     {
         RemoveWayPoints(removePoints);
-        foreach (Transform point in posiciones)
+        foreach (GameObject point in posiciones)
             if (!spawnListPoints.Contains(point))
                 spawnListPoints.Add(point);
     }
 
-    void RemoveWayPoints(Transform[] removePoints)
+    void RemoveWayPoints(GameObject[] removePoints)
     {
         if (!removePoints.IsUnityNull())
-        foreach (Transform point in removePoints)
+        foreach (GameObject point in removePoints)
             spawnListPoints.Remove(point);
     }
 }

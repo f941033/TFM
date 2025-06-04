@@ -20,6 +20,7 @@ public class CardManager : MonoBehaviour
     public GameObject discardPileImage;
     public GameObject soulsBar;
     public AudioManager audioManager;
+    public SpawnEnemies spawnEnemies;
 
     [Header("Variables del mazo")]
     public List<CardData> startingDeck;
@@ -78,6 +79,11 @@ public class CardManager : MonoBehaviour
         Shuffle(drawPile);
         Shuffle(startingDeck);
         DrawFullHand();
+
+        // ---------------PUNTOS DE SPAWN DE ENEMIGOS-----------------
+        spawnEnemies.DesactivarLuces();
+        spawnEnemies.GenerarPuntosSpawn();
+
     }
 
     //----------------------------------------------------------
