@@ -66,7 +66,7 @@ public class TrapController : MonoBehaviour
         ClearAndDestroy();
     }
 
-    private void ClearAndDestroy(){
+    public void ClearAndDestroy(){
         Vector3Int cellPos = tilemap.WorldToCell(transform.position);
         tilemap.SetColor(cellPos, Color.white);
         Destroy(gameObject); 

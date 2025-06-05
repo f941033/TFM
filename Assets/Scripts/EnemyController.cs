@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
     private Animator animator;
     private AudioSource audioSource;
     public Image healthBarUI;
-    private SpriteRenderer renderer;
+    private SpriteRenderer spriteRenderer;
 
     [Header("Audio")]
     public AudioClip attackSound;
@@ -39,19 +39,19 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player").transform;
-        renderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
 
         if (target.position.x < transform.position.x)
         {
-            renderer.flipX = true;
+            spriteRenderer.flipX = true;
             //transform.localScale = new Vector3(-1,1,1);
         }
         else
         {
-            renderer.flipX = false;
+            spriteRenderer.flipX = false;
             //transform.localScale = new Vector3(1, 1, 1);
         }
     }

@@ -34,6 +34,12 @@ public class InstantTrapCardData : TrapCardData
         Debug.Log("He entrado en el trigger de instantTrap");
         enemy.receiveDamage(damage);
         Debug.Log("He activado la trampa");
-        this.used = true;
+        //this.used = true;
+
+        //poner un nuevo atributo para saber el número de usos de la trampa
+        if(cardName != "Foso")
+        {
+            used = true;
+        }
     }
 }

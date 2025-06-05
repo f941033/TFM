@@ -6,6 +6,7 @@ TagManager:
   tags:
   - salaCentral
   - Enemy
+  - Foso
   layers:
   - Default
   - TransparentFX

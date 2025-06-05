@@ -24,7 +24,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public float checkRadius = 0.4f; // Radio para verificación de colisión
     public GameObject borderPrefab_1, borderPrefab_4;
     private GameObject currentBorder;        //borde temporal durante el arrastre
-    
+
 
     //private TextMeshProUGUI textNumberOfCardsDiscard;
     //private GameObject discardPileImage;
@@ -110,7 +110,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         isDragging = true;
 
 
-        // poner en el cardData un atributo más para saber su escala y no usar el Name
+        // poner en el cardData un atributo más para saber su escala
+        // poner en el cardData un atributo más para saber su escala
         if (cardData.numberOfTiles == 4)
         {
             currentBorder = Instantiate(borderPrefab_4);
@@ -130,7 +131,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         mouseWorldPos.z = 0;
 
         //------------------ILUMINAR CELDA AL DESPLAZAR-----------------
-        
+
         Vector3Int cellPos = tilemap.WorldToCell(mouseWorldPos);
 
         if (IsPositionValid(cellPos))
@@ -161,7 +162,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         {
             isOutsidePlayerRange = false;
         }
-        
+
 
         return isPhysicallyValid && isOutsidePlayerRange;
     }
@@ -184,10 +185,13 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         if (dropTilemap.HasTile(cellPos))
         {
             Collider2D col = Physics2D.OverlapPoint(new Vector2(worldPos.x, worldPos.y));
-            if(col != null){
+            if (col != null)
+            {
                 SalaController sala = col.GetComponent<SalaController>();
-                if(sala != null && sala.estaLibre){ 
-                    if(cardData.cardType == CardType.Trap){
+                if (sala != null && sala.estaLibre)
+                {
+                    if (cardData.cardType == CardType.Trap)
+                    {
                         dropTilemap.SetTileFlags(cellPos, TileFlags.None);
                         dropTilemap.SetColor(cellPos, Color.green);
 
@@ -195,8 +199,10 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                         cardData.Play(player, worldCenter);
 
                     }
-                    if(cardData.cardType == CardType.DeckEffect){
-                        if(Deck.discardPile.Count == 0){
+                    if (cardData.cardType == CardType.DeckEffect)
+                    {
+                        if (Deck.discardPile.Count == 0)
+                        {
                             Debug.Log("No hay cartas en la pila de descartes");
                             goto End_Drop;
                         }
@@ -215,8 +221,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             isDragging = false;
         }
 
-        End_Drop:
-        if(!cartaColocada)
+    End_Drop:
+        if (!cartaColocada)
         {
             transform.SetParent(originalTransform, true);
             transform.SetSiblingIndex(cardIndex);
@@ -226,7 +232,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         {
             if (Deck.discardPile.Count == 1) Deck.ActivateDiscardPileImage();
 
-            if(cardData is TrapCardData trap)
+            if (cardData is TrapCardData trap)
                 player.SpendSouls(trap.cost);
             Deck.UpdateTextNumberOfCardsDiscard();
         }

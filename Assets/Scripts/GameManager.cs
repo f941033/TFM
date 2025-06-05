@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public CardSummaryUI cardSummaryUI;
     public PlayerController playerController;
     public CardSelectionManager selectionManager;
+    public Tilemap tilemap;
 
     public GameObject prefabCard;
     public Transform panelCard;
@@ -72,6 +74,18 @@ public class GameManager : MonoBehaviour
     public void PlayAnotherRun()
     {
         Debug.Log("vamos a por otra ronda");
+
+        //-----------ELIMINAR FOSOS DE LA RONDA ANTERIOR--------------
+
+        //GameObject[] fosos = GameObject.FindGameObjectsWithTag("Foso");
+        //foreach (var item in fosos)
+        //{
+        //    Vector3Int cellPos = tilemap.WorldToCell(item.transform.position);
+        //    tilemap.SetColor(cellPos, Color.white);
+        //    Destroy(item);
+        //}
+
+
         messageText.gameObject.SetActive(false);
         ClearPanelCard();
         panelEndWave.SetActive(false);
@@ -83,7 +97,7 @@ public class GameManager : MonoBehaviour
         /*------------------------------------------------
          *           A�ADIR CARTA NUEVA AL DECK
          *           
-        esto no funciona por la obtenci�n del cardDat
+        esto no funciona por la obtenci�n del cardData
         CardData selected = selectionManager.GetSelectedCardData();
         {
             selectedCards.Add(selected);
@@ -123,8 +137,8 @@ public class GameManager : MonoBehaviour
             Destroy(card.gameObject);
         }
     }
-    
-        public void ShowMessage(string text, float duration)
+
+    public void ShowMessage(string text, float duration)
     {
         if (HideMessageCO != null)
             StopCoroutine(HideMessageCO);
