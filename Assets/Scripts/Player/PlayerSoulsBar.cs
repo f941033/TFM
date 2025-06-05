@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerSoulsBar : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlayerSoulsBar : MonoBehaviour
     [SerializeField] private PlayerController player;
     [SerializeField] private RectTransform ticksContainer;
     [SerializeField] private GameObject tickPrefab;
+    [SerializeField] private TextMeshProUGUI soulsText;
 
     private float maxSouls;
     void Awake()
@@ -17,6 +19,7 @@ public class PlayerSoulsBar : MonoBehaviour
         soulsSlider.value = player.CurrentSouls;
 
         CreateTicks();
+        soulsText.text = $"{player.CurrentSouls}/{(int)maxSouls}";
     }
 
     void OnEnable()
@@ -32,6 +35,7 @@ public class PlayerSoulsBar : MonoBehaviour
     private void UpdateSoulsBar(float newSouls)
     {
         soulsSlider.value = newSouls;
+         soulsText.text = $"{(int)newSouls}/{(int)maxSouls}";
     }
     private void CreateTicks()
     {
