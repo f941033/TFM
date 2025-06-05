@@ -3,6 +3,8 @@ using UnityEngine.Tilemaps;
 
 public class CardBehaviour : MonoBehaviour
 {
+    public int enemiesToKill =3;
+
     Tilemap tilemap;
     int enemiesKilled = 0;
 
@@ -23,7 +25,7 @@ public class CardBehaviour : MonoBehaviour
         if (collision.tag == "Enemy") 
         {
             enemiesKilled++;
-            if (enemiesKilled == 3)
+            if (enemiesKilled == enemiesToKill)
             {
                 GetComponent<TrapController>().ClearAndDestroy();
             }
