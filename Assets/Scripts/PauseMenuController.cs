@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using DeckboundDungeon.Cards;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -53,23 +54,23 @@ public class PauseMenuController : MonoBehaviour
         // tecla Escape para abrir/cerrar pausa
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused) 
+            if (isPaused)
                 ResumeGame();
-            else           
+            else
                 PauseGame();
         }
     }
 
     public void PauseGame()
     {
-        Time.timeScale    = 0f;
+        Time.timeScale = 0f;
         pauseMenuUI.SetActive(true);
         isPaused = true;
     }
 
     public void ResumeGame()
     {
-        deckPanel .SetActive(false);
+        deckPanel.SetActive(false);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -100,20 +101,15 @@ public class PauseMenuController : MonoBehaviour
         foreach (Transform child in deckGridContainer)
             Destroy(child.gameObject);
 
-        List<CardData> deckToShow = new List<CardData>();
-
         // asumimos que cardManager.startingDeck o bien otro listado es tu mazo actual
-        foreach (var card in cardManager.startingDeck)
+        foreach (var card in cardManager.startingDeck.OrderBy(c => c.cardName))
         {
-            if (!deckToShow.Contains(card)) {
-                deckToShow.Add(card);
-                var go = Instantiate(cardDeckPrefab, deckGridContainer);
-                var cd = go.GetComponent<CardDeck>();
-                cd.cardData = card;
-                cd.isSelectable = false;
-                // si tu CardDeck en modo selección activa border, lo desactivamos aquí:
-                cd.selectionBorder.SetActive(false);
-            };
+            var go = Instantiate(cardDeckPrefab, deckGridContainer);
+            var cd = go.GetComponent<CardDeck>();
+            cd.cardData = card;
+            cd.isSelectable = false;
+            // si tu CardDeck en modo selección activa border, lo desactivamos aquí:
+            cd.selectionBorder.SetActive(false);
 
         }
     }
