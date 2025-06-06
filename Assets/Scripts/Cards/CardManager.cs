@@ -8,6 +8,7 @@ using System.Collections;
 
 public class CardManager : MonoBehaviour
 {
+    public GameObject panelTimeScale;
     public GameObject prefabCard;
     public Transform panelCard;
     public Tilemap zonaValidaTilemap;
@@ -53,6 +54,7 @@ public class CardManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
+        panelTimeScale.SetActive(false);
         drawPileImage.SetActive(true);
         countDownObject.SetActive(true);
         ClearPanelCard();
@@ -93,6 +95,7 @@ public class CardManager : MonoBehaviour
     public void StartRun()
     {
         countDownObject.SetActive(false);
+        panelTimeScale.SetActive(true);
         StartCoroutine("PanelGo");
 
         ClearPanelCard();

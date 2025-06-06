@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     void EndWave()
     {
+        Time.timeScale = 1f;
         panelEndWave.SetActive(true);
         GenerateRewardCard();
     }
