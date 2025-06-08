@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22281041}
   - component: {fileID: 22281042}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: wayPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -391,7 +391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 69432782}
   - component: {fileID: 69432783}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: wayPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -17661,7 +17661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1094370591}
   - component: {fileID: 1094370592}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: wayPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -28522,7 +28522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1974343098}
   - component: {fileID: 1974343099}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: wayPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}

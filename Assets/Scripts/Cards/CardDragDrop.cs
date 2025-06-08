@@ -193,7 +193,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                     if (cardData.cardType == CardType.Trap)
                     {
                         dropTilemap.SetTileFlags(cellPos, TileFlags.None);
-                        dropTilemap.SetColor(cellPos, Color.green);
+                        //dropTilemap.SetColor(cellPos, Color.green);
 
                         Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
                         cardData.Play(player, worldCenter);
