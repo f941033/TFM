@@ -37,7 +37,7 @@ public class InstantTrapCardData : TrapCardData
         //this.used = true;
 
         //poner un nuevo atributo para saber el número de usos de la trampa
-        if(cardName != "Foso")
+        if(cardName != "Foso"  && cardName != "Ácido corrosivo")
         {
             used = true;
         }
