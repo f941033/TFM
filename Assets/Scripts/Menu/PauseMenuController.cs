@@ -26,7 +26,7 @@ public class PauseMenuController : MonoBehaviour
     [Tooltip("Transform padre que tiene el GridLayoutGroup")]
     public Transform deckGridContainer;
     [Tooltip("Prefab de tarjeta (el mismo de selección inicial)")]
-    public GameObject cardDeckPrefab;
+    public GameObject cardPrefab;
 
     private bool isPaused = false;
     private CardManager cardManager;
@@ -104,12 +104,16 @@ public class PauseMenuController : MonoBehaviour
         // asumimos que cardManager.startingDeck o bien otro listado es tu mazo actual
         foreach (var card in cardManager.startingDeck.OrderBy(c => c.cardName))
         {
-            var go = Instantiate(cardDeckPrefab, deckGridContainer);
-            var cd = go.GetComponent<CardDeck>();
-            cd.cardData = card;
-            cd.isSelectable = false;
+            var cardData = Instantiate(cardPrefab, deckGridContainer);
+            CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
+            cardUI.setCardUI(card);
+
+            var drag = cardData.GetComponent<CardDragDrop>();
+            if (drag != null) Destroy(drag);
+            //cd.cardData = card;
+            //cd.isSelectable = false;
             // si tu CardDeck en modo selección activa border, lo desactivamos aquí:
-            cd.selectionBorder.SetActive(false);
+            //cd.selectionBorder.SetActive(false);
 
         }
     }

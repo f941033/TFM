@@ -6632,7 +6632,7 @@ MonoBehaviour:
   backButton: {fileID: 87405107}
   deckPanel: {fileID: 1346398581}
   deckGridContainer: {fileID: 1734575779}
-  cardDeckPrefab: {fileID: 228139822927816391, guid: d9bbb39de94b60047afdbe09eb81b01a, type: 3}
+  cardPrefab: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
 --- !u!4 &560255916
 Transform:
   m_ObjectHideFlags: 0
@@ -26968,7 +26968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridContainer: {fileID: 622414958}
-  cardDeckPrefab: {fileID: 228139822927816391, guid: d9bbb39de94b60047afdbe09eb81b01a, type: 3}
+  cardDeckPrefab: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
   summaryPanel: {fileID: 1959062255}
 --- !u!1 &1894064791
 GameObject:
@@ -28118,7 +28118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 495d767fe5dc8a94bb2d22b528c0e643, type: 2}
-  cardNamePrefab: {fileID: 6224160029015025571, guid: 2af469c1b74662c43a151b02d72b84ce, type: 3}
+  cardNamePrefab: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
   counterText: {fileID: 1776117610}
   baseHealthText: {fileID: 85896108}
   readyButton: {fileID: 1292049666}
