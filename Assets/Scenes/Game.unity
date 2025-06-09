@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22281041}
   - component: {fileID: 22281042}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: wayPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -391,7 +391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 69432782}
   - component: {fileID: 69432783}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: wayPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -10382,10 +10382,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 900413463}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &688702788
 MonoBehaviour:
@@ -10409,7 +10409,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -14153,8 +14153,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.12, y: 0.52}
-  m_Radius: 2
+  m_Offset: {x: 0, y: 0.5}
+  m_Radius: 2.46
 --- !u!1 &861252556
 GameObject:
   m_ObjectHideFlags: 0
@@ -14638,8 +14638,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.07, y: 0.48}
-  m_SizeDelta: {x: 3, y: 3}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 5.1287, y: 5.0671}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &900413464
 MonoBehaviour:
@@ -17661,7 +17661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1094370591}
   - component: {fileID: 1094370592}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: wayPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -28522,7 +28522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1974343098}
   - component: {fileID: 1974343099}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: wayPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
