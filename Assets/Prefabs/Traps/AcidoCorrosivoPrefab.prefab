@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4400319751222912287}
   - component: {fileID: 533710063301047464}
   - component: {fileID: 8862617074969215597}
+  - component: {fileID: 3651776166605178254}
   m_Layer: 0
   m_Name: AcidoCorrosivoPrefab
   m_TagString: PlayerWall
@@ -151,3 +152,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.41036513, y: 0.41632026}
   m_EdgeRadius: 0
+--- !u!95 &3651776166605178254
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7377369047218687532}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eeff430f23df87e4a89c9cbd56ef46bc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
