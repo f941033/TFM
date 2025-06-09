@@ -15,7 +15,7 @@ public class CameraMovement : MonoBehaviour
 
     private float zoomSpeed = 5f;
     private float minZoom = 4f;
-    private float maxZoom = 14f;
+    private float maxZoom = 15f;
 
     private Vector3 dragOriginMaze;
     private bool isDraggingMaze = false;
