@@ -1,0 +1,628 @@
+fileFormatVersion: 2
+guid: 9425ded1a2c7a794f93e74482c7f990a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -187958489351416072
+    second: Spritesheet_Cards1 1_0
+  - first:
+      213: -424489222799608843
+    second: Spritesheet_Cards1 1_1
+  - first:
+      213: 8636921974897587550
+    second: Spritesheet_Cards1 1_2
+  - first:
+      213: -7136975150788794519
+    second: Spritesheet_Cards1 1_3
+  - first:
+      213: 3919558743797617017
+    second: Spritesheet_Cards1 1_4
+  - first:
+      213: -521729145512415587
+    second: Spritesheet_Cards1 1_5
+  - first:
+      213: 522992055174558497
+    second: Spritesheet_Cards1 1_6
+  - first:
+      213: -821528628963053635
+    second: Spritesheet_Cards1 1_7
+  - first:
+      213: -5465647616295926553
+    second: Spritesheet_Cards1 1_8
+  - first:
+      213: -5236128467163415787
+    second: Spritesheet_Cards1 1_9
+  - first:
+      213: -954868658273017560
+    second: Spritesheet_Cards1 1_10
+  - first:
+      213: 8362875893643066145
+    second: Spritesheet_Cards1 1_11
+  - first:
+      213: -3096288714599092917
+    second: Spritesheet_Cards1 1_12
+  - first:
+      213: -9074122860406129322
+    second: Spritesheet_Cards1 1_13
+  - first:
+      213: -5930952971217319538
+    second: Spritesheet_Cards1 1_14
+  - first:
+      213: 4111961406013207937
+    second: Spritesheet_Cards1 1_15
+  - first:
+      213: -5032236567194108284
+    second: Spritesheet_Cards1 1_16
+  - first:
+      213: -1316635731305887650
+    second: Spritesheet_Cards1 1_17
+  - first:
+      213: 3916236256656401711
+    second: Spritesheet_Cards1 1_18
+  - first:
+      213: -6928471812329966136
+    second: Spritesheet_Cards1 1_19
+  - first:
+      213: -7039250338050419803
+    second: Spritesheet_Cards1 1_20
+  - first:
+      213: 179518548531485098
+    second: Spritesheet_Cards1 1_21
+  - first:
+      213: 5376216138212832827
+    second: Spritesheet_Cards1 1_22
+  - first:
+      213: 3234454719390248069
+    second: Spritesheet_Cards1 1_23
+  - first:
+      213: 8710160747267443415
+    second: Spritesheet_Cards1 1_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CardBase_Purple
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 78
+        width: 887
+        height: 1402
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f690b1ffbc346df0800000000000000
+      internalID: -187958489351416072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardBase_Brown
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 78
+        width: 888
+        height: 1402
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f33c080d49eb1af0800000000000000
+      internalID: -424489222799608843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LifePlus_Icon
+      rect:
+        serializedVersion: 2
+        x: 1793
+        y: 1250
+        width: 234
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e55398a96c28cd770800000000000000
+      internalID: 8636921974897587550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Textbox_Purple
+      rect:
+        serializedVersion: 2
+        x: 2038
+        y: 1102
+        width: 747
+        height: 378
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 967a176e9ee54fc90800000000000000
+      internalID: -7136975150788794519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DamageBar_BackgroundPurple
+      rect:
+        serializedVersion: 2
+        x: 2793
+        y: 1437
+        width: 236
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 971555829e1156630800000000000000
+      internalID: 3919558743797617017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DamageBar_BackgorundBrown
+      rect:
+        serializedVersion: 2
+        x: 2793
+        y: 1390
+        width: 236
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9ea3cc3b1272c8f0800000000000000
+      internalID: -521729145512415587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet_Cards1 1_6
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 1348
+        width: 231
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 123f705d08a024700800000000000000
+      internalID: 522992055174558497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LevelText_Purple
+      rect:
+        serializedVersion: 2
+        x: 2794
+        y: 1262
+        width: 180
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbfe7d980185994f0800000000000000
+      internalID: -821528628963053635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LifeMinus_Icon
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 1052
+        width: 200
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e48833837e1624b0800000000000000
+      internalID: -5465647616295926553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LevelText_Brown
+      rect:
+        serializedVersion: 2
+        x: 2795
+        y: 1183
+        width: 180
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51bf96cb6e88557b0800000000000000
+      internalID: -5236128467163415787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Souls_Icon
+      rect:
+        serializedVersion: 2
+        x: 1818
+        y: 815
+        width: 183
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 821ab70b300afb2f0800000000000000
+      internalID: -954868658273017560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TextBox_Brown
+      rect:
+        serializedVersion: 2
+        x: 2038
+        y: 708
+        width: 747
+        height: 378
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12bb54d1157ee0470800000000000000
+      internalID: 8362875893643066145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TargetDamage_IconSmall
+      rect:
+        serializedVersion: 2
+        x: 2817
+        y: 1017
+        width: 148
+        height: 148
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4d2544a1d5c705d0800000000000000
+      internalID: -3096288714599092917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreaDamage_IconSmall
+      rect:
+        serializedVersion: 2
+        x: 2809
+        y: 855
+        width: 166
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48ef9aa0187e92ab0800000000000000
+      internalID: -5032236567194108284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TargetDamage_Icon
+      rect:
+        serializedVersion: 2
+        x: 1783
+        y: 556
+        width: 240
+        height: 241
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e580de837ce5abde0800000000000000
+      internalID: -1316635731305887650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Use_IconSmall
+      rect:
+        serializedVersion: 2
+        x: 2858
+        y: 736
+        width: 68
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f25a2865024495630800000000000000
+      internalID: 3916236256656401711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spikes_Draw
+      rect:
+        serializedVersion: 2
+        x: 2046
+        y: 187
+        width: 743
+        height: 509
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa910d33b27cd7200800000000000000
+      internalID: 179518548531485098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreaDamage_Icon
+      rect:
+        serializedVersion: 2
+        x: 1789
+        y: 306
+        width: 237
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58c675f2e6713ec20800000000000000
+      internalID: 3234454719390248069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Use_Icon
+      rect:
+        serializedVersion: 2
+        x: 1837
+        y: 90
+        width: 119
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7da4d6d1d05b0e870800000000000000
+      internalID: 8710160747267443415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 486f8b246ae9135499182ebcdf415cf5
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      AreaDamage_Icon: 3234454719390248069
+      AreaDamage_IconSmall: -5032236567194108284
+      CardBase_Brown: -424489222799608843
+      CardBase_Purple: -187958489351416072
+      DamageBar_BackgorundBrown: -521729145512415587
+      DamageBar_BackgroundPurple: 3919558743797617017
+      LevelText_Brown: -5236128467163415787
+      LevelText_Purple: -821528628963053635
+      LifeMinus_Icon: -5465647616295926553
+      LifePlus_Icon: 8636921974897587550
+      Souls_Icon: -954868658273017560
+      Spikes_Draw: 179518548531485098
+      TargetDamage_Icon: -1316635731305887650
+      TargetDamage_IconSmall: -3096288714599092917
+      TextBox_Brown: 8362875893643066145
+      Textbox_Purple: -7136975150788794519
+      Use_Icon: 8710160747267443415
+      Use_IconSmall: 3916236256656401711
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
