@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class TorretaController : MonoBehaviour
     public float detectionRadius = 3f;
     public GameObject projectilePrefab;
     public Transform firePoint; // Objeto hijo del ca��n donde salen los proyectiles
+    public TextMeshProUGUI healthText;
 
     [Header("Detecci�n")]
     public float checkInterval = 0.3f; // Intervalo de chequeo para optimizaci�n
@@ -21,6 +23,8 @@ public class TorretaController : MonoBehaviour
     private float fireCountdown = 0f;
 
     private AudioSource audioSource;
+    private int projectilesNumber = 50;
+    private bool canShoot = true;
 
     private void Start()
     {
@@ -30,7 +34,7 @@ public class TorretaController : MonoBehaviour
 
     IEnumerator EnemyDetectionRoutine()
     {
-        while (true)
+        while (canShoot)
         {
             UpdateEnemiesInRange();
             yield return new WaitForSeconds(checkInterval);
@@ -79,8 +83,11 @@ public class TorretaController : MonoBehaviour
 
     void Update()
     {
-        FindNearestTarget();
-        AimAndShoot();
+        if (canShoot)
+        {
+            FindNearestTarget();
+            AimAndShoot();
+        }
     }
 
     void FindNearestTarget()
@@ -108,7 +115,7 @@ public class TorretaController : MonoBehaviour
     {
         if (currentTarget != null)
         {
-            // Rotaci�n del ca��n (hijo) respecto a la base (padre)
+            // Rotacion del cañon (hijo) respecto a la base (padre)
             Vector3 direction = (currentTarget.position + Vector3.up * 0.5f) - transform.parent.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -132,20 +139,26 @@ public class TorretaController : MonoBehaviour
 
     void Shoot()
     {
-        if (projectilePrefab != null && firePoint != null)
+        if (projectilePrefab != null && firePoint != null && canShoot)
         {
             audioSource.Play();
             GameObject projectile = Instantiate(
                 projectilePrefab,
                 firePoint.position,
                 firePoint.rotation
-            );
-
+            );            
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
                 // Direcci�n basada en la rotaci�n del ca��n
                 rb.linearVelocity = firePoint.up * 10f;
+            }
+
+            projectilesNumber--;
+            healthText.text = projectilesNumber.ToString();
+            if (projectilesNumber == 0)
+            {
+                canShoot = false;
             }
         }
     }
