@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.UI;
 public class CardUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textName;
@@ -9,8 +9,15 @@ public class CardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textDamage;
     [SerializeField] private TextMeshProUGUI textUse;
     [HideInInspector] public CardData data;
+    [SerializeField] private Image backgroundImage;
+    [SerializeField] private Sprite trapBackground;
+    [SerializeField] private Sprite buffBackground;
+    [SerializeField] private Image damageImage;
+    [SerializeField] private Image useImage;
+    [SerializeField] private Image costImage;
 
-    public void setCardUI(CardData cardData){
+    public void setCardUI(CardData cardData)
+    {
         data = cardData;
         textName.text = data.cardName;
         textDescription.text = data.description;
@@ -18,11 +25,16 @@ public class CardUI : MonoBehaviour
         {
             textCost.text = trap.cost.ToString();
             textUse.text = trap.uses.ToString();
+            backgroundImage.sprite = trapBackground;
         }
         else
         {
             textCost.gameObject.SetActive(false);
             textUse.gameObject.SetActive(false);
+            backgroundImage.sprite = buffBackground;
+            damageImage.gameObject.SetActive(false);
+            useImage.gameObject.SetActive(false);
+            costImage.gameObject.SetActive(false);
         }
         if (data.cardType == CardType.Trap)
         {

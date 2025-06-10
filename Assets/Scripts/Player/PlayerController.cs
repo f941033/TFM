@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float currentRange;
     [SerializeField] private float currentSouls;
     [SerializeField] private float currentSoulsRate;
-    [SerializeField] private int amountGold = 150;
+    [SerializeField] private int amountGold = 50;
     
 
     //[Header("Events")]

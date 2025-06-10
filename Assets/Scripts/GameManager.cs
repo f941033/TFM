@@ -69,6 +69,9 @@ public class GameManager : MonoBehaviour
             CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
             int index = Random.Range(0, allCards.Length);
             cardUI.setCardUI(allCards[index]);
+            
+            var drag = cardData.GetComponent<CardDragDrop>();
+            if (drag != null) Destroy(drag);
         }
     }
 
