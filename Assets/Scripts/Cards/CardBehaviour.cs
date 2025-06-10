@@ -12,7 +12,7 @@ public class CardBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        if (healthText != null) healthText.text = (enemiesToKill - enemiesKilled).ToString();
     }
 
     // Update is called once per frame
