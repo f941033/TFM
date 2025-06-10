@@ -20,6 +20,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public Tilemap tilemap;
     public LayerMask obstacleLayers; // Capas de obstáculos (paredes, etc.)
+    public LayerMask spawnPointLayers;
     public Tilemap obstacleTilemap; // Tilemap de obstáculos (opcional)
     public float checkRadius = 0.5f; // Radio para verificación de colisión
     public GameObject borderPrefab_1, borderPrefab_4;
@@ -153,7 +154,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         // 1. Verificar tiles y colliders físicos
         bool isPhysicallyValid =
             tilemap.HasTile(cellPos) &&
-            !Physics2D.OverlapCircle(worldPos, checkRadius, obstacleLayers);
+            !Physics2D.OverlapCircle(worldPos, checkRadius, obstacleLayers) &&
+            !Physics2D.OverlapCircle(worldPos, checkRadius, spawnPointLayers);
 
         // 2. Verificar distancia a Player
         bool isOutsidePlayerRange = true;

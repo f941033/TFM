@@ -18,6 +18,7 @@ MonoBehaviour:
   healthModifier: -5
   numberOfTiles: 0
   used: 0
+  uses: 1
   trapPrefab: {fileID: 7377369047218687532, guid: 7b28963f52b32a24cb176128db09215a, type: 3}
   cost: 2
   damage: 50

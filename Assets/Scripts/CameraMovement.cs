@@ -73,6 +73,8 @@ public class CameraMovement : MonoBehaviour
     }
 
 
+
+    //-------------- EL MOVIMIENTO DE CÁMARA YA NO SE USA -----------------
  
     public void StartCameraMovement()
     {

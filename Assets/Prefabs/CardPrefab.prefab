@@ -116,6 +116,9 @@ MonoBehaviour:
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 128
+  spawnPointLayers:
+    serializedVersion: 2
+    m_Bits: 512
   obstacleTilemap: {fileID: 0}
   checkRadius: 0.4
   borderPrefab_1: {fileID: 2514062046054944184, guid: fa24afdd1efcef046b5b5eaaaa64dca5, type: 3}
