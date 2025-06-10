@@ -64,6 +64,12 @@ MonoBehaviour:
   textDamage: {fileID: 7874559390015761224}
   textUse: {fileID: 8142434465573530874}
   data: {fileID: 0}
+  backgroundImage: {fileID: 2075047113887814455}
+  trapBackground: {fileID: -187958489351416072, guid: 9425ded1a2c7a794f93e74482c7f990a, type: 3}
+  buffBackground: {fileID: -424489222799608843, guid: 9425ded1a2c7a794f93e74482c7f990a, type: 3}
+  damageImage: {fileID: 2400003060270256869}
+  useImage: {fileID: 2372759111113623021}
+  costImage: {fileID: 7056149638346329167}
 --- !u!114 &7752803208183232184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,8 +253,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -3.0168457}
-  m_SizeDelta: {x: 0, y: -6.038208}
+  m_AnchoredPosition: {x: 0, y: -6.7832}
+  m_SizeDelta: {x: 0, y: 30.1545}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2611241215422348674
 CanvasRenderer:

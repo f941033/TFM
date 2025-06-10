@@ -25,7 +25,6 @@ public class EnemyController : MonoBehaviour
 
     void Awake(){
         currentHealth = health;
-        gold = 20;        
     }
 
     public void receiveDamage(float damage){

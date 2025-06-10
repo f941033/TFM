@@ -16,10 +16,10 @@ MonoBehaviour:
   description: "Da\xF1o 15%"
   cardType: 1
   healthModifier: 15
-  numberOfTiles: 1
+  numberOfTiles: 0
   used: 0
   uses: 3
   trapPrefab: {fileID: 7377369047218687532, guid: 9a2fa0d2eccd66542994497079b4a580, type: 3}
-  cost: 4
-  damage: 20
+  cost: 2
+  damage: 15
   trapSizeInTiles: {x: 1, y: 1}
