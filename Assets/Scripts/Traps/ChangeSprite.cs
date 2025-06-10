@@ -30,13 +30,9 @@ public class ChangeSprite : MonoBehaviour
             if (index == sprites.Length)
             {
                 GetComponent<TrapController>().ClearAndDestroy();
-                Invoke("Clear", 1f);
             }
         }
     }
 
-    //private void Clear()
-    //{
-    //    GetComponent<TrapController>().ClearAndDestroy();
-    //}
+
 }
