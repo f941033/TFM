@@ -39,7 +39,8 @@ public class Tutorial : MonoBehaviour
 
         foreach (var card in allCards)
         {
-            if (card.cardName == "Foso" || card.cardName == "Ácido corrosivo" || card.cardName == "Torreta" || card.cardName == "Bomba" || card.cardName == "Sierra giratoria")
+            //if (card.cardName == "Foso" || card.cardName == "Ácido corrosivo" || card.cardName == "Electrocución" || card.cardName == "Bomba" || card.cardName == "Sierra giratoria")
+            if (card.cardName == "Muro" || card.cardName == "Muro" || card.cardName == "Muro" || card.cardName == "Muro" || card.cardName == "Sierra giratoria")
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;

@@ -16,11 +16,10 @@ MonoBehaviour:
   description: "Dispara autom\xE1ticamente a los enemigos"
   cardType: 1
   healthModifier: -5
+  numberOfTiles: 1
   used: 0
+  uses: 50
   trapPrefab: {fileID: 7377369047218687532, guid: 7867a5b053835a3459000edc0ede0dc2, type: 3}
   cost: 5
-  damage: 10
+  damage: 20
   trapSizeInTiles: {x: 1, y: 1}
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 128

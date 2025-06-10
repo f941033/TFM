@@ -59,33 +59,63 @@ public class GameManager : MonoBehaviour
         GenerateRewardCard();
     }
 
+
     void GenerateRewardCard()
     {
         allCards = Resources.LoadAll<CardData>("Cards");
+        List<CardData> selectedCards = new List<CardData>();
+        bool isSpecialRound = (numberWave % 5 == 0); 
+        CardData turretCard = null;
 
-        for (int i = 1; i <= 3; i++)
+        // Buscar la carta de torreta
+        foreach (CardData card in allCards)
+        {
+            if (card.cardName.Contains("Torreta")) 
+            {
+                turretCard = card;
+                break;
+            }
+        }
+
+        if (isSpecialRound && turretCard != null)
+        {
+            // Añadir 1 carta de torreta y 2 aleatorias
+            selectedCards.Add(turretCard);
+
+            // Generar 2 cartas aleatorias que no sean la torreta
+            for (int i = 0; i < 2; i++)
+            {
+                CardData randomCard;
+                do
+                {
+                    randomCard = allCards[Random.Range(0, allCards.Length)];
+                } while (randomCard == turretCard);
+
+                selectedCards.Add(randomCard);
+            }
+
+        }
+        else
+        {
+            // Cartas completamente aleatorias
+            for (int i = 0; i < 3; i++)
+            {
+                selectedCards.Add(allCards[Random.Range(0, allCards.Length)]);
+            }
+        }
+
+        // Instanciar las cartas seleccionadas
+        foreach (CardData card in selectedCards)
         {
             var cardData = Instantiate(prefabCard, panelCard);
             CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
-            int index = Random.Range(0, allCards.Length);
-            cardUI.setCardUI(allCards[index]);
+            cardUI.setCardUI(card);
         }
     }
 
     public void PlayAnotherRun()
     {
         Debug.Log("vamos a por otra ronda");
-
-        //-----------ELIMINAR FOSOS DE LA RONDA ANTERIOR--------------
-
-        //GameObject[] fosos = GameObject.FindGameObjectsWithTag("Foso");
-        //foreach (var item in fosos)
-        //{
-        //    Vector3Int cellPos = tilemap.WorldToCell(item.transform.position);
-        //    tilemap.SetColor(cellPos, Color.white);
-        //    Destroy(item);
-        //}
-
 
         messageText.gameObject.SetActive(false);
         ClearPanelCard();
@@ -97,19 +127,7 @@ public class GameManager : MonoBehaviour
 
         /*------------------------------------------------
          *           A�ADIR CARTA NUEVA AL DECK
-         *           
-        esto no funciona por la obtenci�n del cardData
-        CardData selected = selectionManager.GetSelectedCardData();
-        {
-            selectedCards.Add(selected);
-            Debug.Log("carta a�adida: " + selected.cardName);
-        }
-        else
-        {
-            Debug.Log("carta nueva sin datos");
-        }
-        */
-
+         *------------------------------------------------   */
 
         //esto es una chapuza pero funciona:
 
