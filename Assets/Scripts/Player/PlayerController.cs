@@ -89,9 +89,6 @@ public class PlayerController : MonoBehaviour
                 currentRange *= modifier;
                 rangeTrigger.radius = currentRange;
                 break;
-            case BuffType.SoulRate:
-                currentSoulsRate *= modifier;
-                break;
         }
         yield return new WaitForSeconds(duration);
 
@@ -109,9 +106,6 @@ public class PlayerController : MonoBehaviour
             case BuffType.Range:
                 currentRange /= modifier;
                 rangeTrigger.radius = currentRange;
-                break;
-            case BuffType.SoulRate:
-                currentSoulsRate /= modifier;
                 break;
         }
     }

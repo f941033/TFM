@@ -6496,8 +6496,19 @@ MonoBehaviour:
   playerController: {fileID: 844376031}
   selectionManager: {fileID: 1548371233}
   tilemap: {fileID: 2063852903}
+  drawPileImage: {fileID: 515426501}
+  discardPileImage: {fileID: 1667874408}
+  panelTimeScale: {fileID: 1012198801}
   prefabCard: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
   panelCard: {fileID: 934916987}
+  soulsBar: {fileID: 885787625}
+  countDownObject: {fileID: 391539994}
+  startingDeck: []
+  spawnEnemies: {fileID: 694397033}
+  panelGo: {fileID: 1141026837}
+  textNumberOfCardsDeck: {fileID: 1498456598}
+  textNumberOfCardsDiscardPile: {fileID: 1336435715}
+  panelCardEndWave: {fileID: 934916987}
   messageText: {fileID: 138911130}
 --- !u!4 &462794454
 Transform:
@@ -11203,8 +11214,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1880551133}
-        m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
+      - m_Target: {fileID: 462794453}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SkipCountDown
         m_Mode: 1
         m_Arguments:
@@ -27883,21 +27894,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000ff71ce28851a4b82e39f0db8ff070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelTimeScale: {fileID: 1012198801}
   prefabCard: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
   panelCard: {fileID: 774299043}
   zonaValidaTilemap: {fileID: 2063852903}
   gameManager: {fileID: 462794453}
-  textNumberOfCardsDeck: {fileID: 1498456598}
-  textNumberOfCardsDiscardPile: {fileID: 1336435715}
-  countDownObject: {fileID: 391539994}
-  panelGo: {fileID: 1141026837}
-  drawPileImage: {fileID: 515426501}
-  discardPileImage: {fileID: 1667874408}
-  soulsBar: {fileID: 885787625}
-  audioManager: {fileID: 1545725397}
-  spawnEnemies: {fileID: 694397033}
-  startingDeck: []
   drawPile: []
   discardPile: []
   handSize: 5

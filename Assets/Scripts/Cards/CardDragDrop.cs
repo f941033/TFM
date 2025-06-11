@@ -16,6 +16,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private Vector2 originalAnchoredPosition;
     public CardData cardData;
     internal CardManager Deck;
+    internal GameManager gameManager;
     public PlayerController player;
 
     public Tilemap tilemap;
@@ -52,6 +53,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         if (layerDrag == null)
             Debug.LogError("No se encontró el DragLayer en la escena.");
         player = FindFirstObjectByType<PlayerController>();
+        gameManager = FindFirstObjectByType<GameManager>();
     }
 
     void Start()
@@ -232,11 +234,11 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         }
         else
         {
-            if (Deck.discardPile.Count == 1) Deck.ActivateDiscardPileImage();
+            if (Deck.discardPile.Count == 1) gameManager.ActivateDiscardPileImage();
 
             if (cardData is TrapCardData trap)
                 player.SpendSouls(trap.cost);
-            Deck.UpdateTextNumberOfCardsDiscard();
+            gameManager.UpdateTextNumberOfCardsDiscard();
         }
 
         canvasGroup.blocksRaycasts = true;

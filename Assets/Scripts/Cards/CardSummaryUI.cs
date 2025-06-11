@@ -81,7 +81,7 @@ public class CardSummaryUI : MonoBehaviour
     {
         Time.timeScale = 1f;
         canvasDeck.SetActive(false);
-        cardManager.PreparationPhase(selectedCards);
+        gameManager.PreparationPhase(selectedCards);
         //playerController.BaseHealth = baseHealth;
         gameManager.SetSelectedCards(selectedCards);
         //cardManager.PreparationPhase(selectedCards);

@@ -8,24 +8,13 @@ using System.Collections;
 
 public class CardManager : MonoBehaviour
 {
-    public GameObject panelTimeScale;
     public GameObject prefabCard;
     public Transform panelCard;
     public Tilemap zonaValidaTilemap;
     private PlayerController player;
     public GameManager gameManager;
-    public TextMeshProUGUI textNumberOfCardsDeck;
-    public TextMeshProUGUI textNumberOfCardsDiscardPile;
-    public GameObject countDownObject;
-    public GameObject panelGo;
-    public GameObject drawPileImage;
-    public GameObject discardPileImage;
-    public GameObject soulsBar;
-    public AudioManager audioManager;
-    public SpawnEnemies spawnEnemies;
 
     [Header("Variables del mazo")]
-    public List<CardData> startingDeck;
     public List<CardData> drawPile = new List<CardData>();
     public List<CardData> discardPile = new List<CardData>();
     private List<GameObject> cardsInHand = new List<GameObject>();
@@ -39,96 +28,7 @@ public class CardManager : MonoBehaviour
         currentHandSize = handSize;
     }
 
-    public void ActivateDiscardPileImage()
-    {
-        discardPileImage.SetActive(true);
-    }
-
-    public void UpdateTextNumberOfCardsDiscard()
-    {
-        textNumberOfCardsDiscardPile.text = discardPile.Count.ToString();
-    }
-
-    //----------------------------------------------------------
-    //                   FASE DE PREPARACION
-    //----------------------------------------------------------
-    public void PreparationPhase(List<CardData> selectedCards)
-    {
-        panelTimeScale.SetActive(false);
-        drawPileImage.SetActive(true);
-        countDownObject.SetActive(true);
-        ClearPanelCard();
-        soulsBar.SetActive(true);
-        player.RefillSouls();
-        GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
-
-        Debug.Log("vida base del player: " + FindFirstObjectByType<PlayerController>().baseHealth.ToString());
-        startingDeck = new List<CardData>(selectedCards);
-
-        //Crear el mazo de cartas de tipo TRAMPA
-        foreach (CardData card in startingDeck)
-        {
-            if (card.cardType == CardType.Trap)
-            {
-                drawPile.Add(card);
-            }
-        }
-
-        discardPile.Clear();
-        discardPileImage.SetActive(false);
-        Debug.Log(startingDeck.Count);
-        textNumberOfCardsDeck.text = startingDeck.Count.ToString();
-
-        Shuffle(drawPile);
-        Shuffle(startingDeck);
-        DrawFullHand();
-
-        // ---------------PUNTOS DE SPAWN DE ENEMIGOS-----------------
-        spawnEnemies.DesactivarLuces();
-        spawnEnemies.GenerarPuntosSpawn(gameManager.numberWave);
-
-    }
-
-    //----------------------------------------------------------
-    //                   INICIO FASE DE ACCION
-    //----------------------------------------------------------
-    public void StartRun()
-    {
-        countDownObject.SetActive(false);
-        panelTimeScale.SetActive(true);
-        StartCoroutine("PanelGo");
-
-        ClearPanelCard();
-        drawPile = new List<CardData>();
-
-        drawPileImage.SetActive(true);
-
-        soulsBar.SetActive(false);
-
-        //Crear el mazo de cartas de tipo ACCI�N
-        foreach (CardData card in startingDeck)
-        {
-            if (card.cardType != CardType.Trap)
-            {
-                drawPile.Add(card);
-            }
-        }
-
-        discardPile.Clear();
-        discardPileImage.SetActive(false);
-        Debug.Log(startingDeck.Count);
-        textNumberOfCardsDeck.text = drawPile.Count.ToString();
-
-        Shuffle(drawPile);
-        DrawFullHand();
-
-        var spawner = GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>();
-        spawner.StartCoroutine(spawner.GenerarEnemigos());
-
-    }
-
-
-    void ClearPanelCard()
+    public void ClearPanelCard()
     {
         foreach (Transform card in panelCard)
         {
@@ -151,7 +51,7 @@ public class CardManager : MonoBehaviour
         drawPile.RemoveAt(0);
 
 
-        textNumberOfCardsDeck.text = drawPile.Count.ToString();
+        gameManager.textNumberOfCardsDeck.text = drawPile.Count.ToString();
 
         var cardData = Instantiate(prefabCard, panelCard);
         CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
@@ -216,17 +116,5 @@ public class CardManager : MonoBehaviour
             DrawCard();
             count--;
         }
-    }
-
-    public void SkipCountDown()
-    {
-        StartRun();
-    }
-
-    IEnumerator PanelGo()
-    {
-        panelGo.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
-        panelGo.SetActive(false);
     }
 }

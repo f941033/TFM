@@ -39,13 +39,13 @@ public class Tutorial : MonoBehaviour
 
         foreach (var card in allCards)
         {
-            if (card.cardName == "Foso" || card.cardName == "Ácido" || card.cardName == "Electrocución" || card.cardName == "Bomba" || card.cardName == "Sierra")
+            if (card.cardName == "Foso" || card.cardName == "ï¿½cido corrosivo" || card.cardName == "Electrocuciï¿½n" || card.cardName == "Bomba" || card.cardName == "Sierra giratoria")
             
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
 
-                if (card.cardName == "Ácido"  || card.cardName == "Bomba" || card.cardName == "Sierra")
+                if (card.cardName == "ï¿½cido corrosivo"  || card.cardName == "Bomba" || card.cardName == "Sierra giratoria")
                 {
                     startingDeck.Add(card);
                     baseHealth += card.healthModifier;
@@ -76,7 +76,7 @@ public class Tutorial : MonoBehaviour
     {
         healthText.text = baseHealth.ToString();
         playerController.baseHealth = baseHealth;
-        cardManager.PreparationPhase(startingDeck);
+        gameManager.PreparationPhase(startingDeck);
         gameManager.SetSelectedCards(startingDeck);
         gameObject.SetActive(false);
     }

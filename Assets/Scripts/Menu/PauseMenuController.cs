@@ -29,14 +29,14 @@ public class PauseMenuController : MonoBehaviour
     public GameObject cardPrefab;
 
     private bool isPaused = false;
-    private CardManager cardManager;
+    private GameManager gameManager;
 
     void Awake()
     {
         // encontremos el gestor de cartas para leer el deck actual
-        cardManager = FindFirstObjectByType<CardManager>();
-        if (cardManager == null)
-            Debug.LogError("[PauseMenuController] No encontré ningún CardManager en la escena");
+        gameManager = FindFirstObjectByType<GameManager>();
+        if (gameManager == null)
+            Debug.LogError("[PauseMenuController] No encontré ningún GameManager en la escena");
 
         // hooks de botones
         resumeButton.onClick.AddListener(ResumeGame);
@@ -101,8 +101,8 @@ public class PauseMenuController : MonoBehaviour
         foreach (Transform child in deckGridContainer)
             Destroy(child.gameObject);
 
-        // asumimos que cardManager.startingDeck o bien otro listado es tu mazo actual
-        foreach (var card in cardManager.startingDeck.OrderBy(c => c.cardName))
+        // asumimos que gameManager.startingDeck o bien otro listado es tu mazo actual
+        foreach (var card in gameManager.startingDeck.OrderBy(c => c.cardName))
         {
             var cardData = Instantiate(cardPrefab, deckGridContainer);
             CardUI cardUI = cardData.GetComponentInChildren<CardUI>();

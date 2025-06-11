@@ -6,6 +6,5 @@ namespace DeckboundDungeon.Cards.Buff
         Damage,
         AttackSpeed,
         Range,
-        SoulRate,
     }
 }
