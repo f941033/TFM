@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipo: 2
-  health: 100
+  health: 450
   currentHealth: 0
   attackRate: 1
   attackRange: 1
@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5d59d8638f9f945965a878c37e74a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 0.5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128

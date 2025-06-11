@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpawnEnemies : MonoBehaviour
 {
-    public GameObject enemy;
+    public GameObject enemyPrefab, heroePrefab;
     public GameObject[] spawnWaypoints;
     private List<GameObject> spawnListPoints = new List<GameObject>();
     private List<GameObject> chosenPoints = new List<GameObject>();
@@ -100,12 +100,22 @@ public class SpawnEnemies : MonoBehaviour
             int randomWP = Random.Range(0, chosenPoints.Count);
             Transform chosenPoint = chosenPoints[randomWP].transform;
 
-            Instantiate(enemy, chosenPoint.position, Quaternion.identity);
+            Instantiate(enemyPrefab, chosenPoint.position, Quaternion.identity);
             enemiesCounter++;
             Debug.Log("enemiesToSpawn: " + enemiesToSpawn + ", enemiesCounter: " + enemiesCounter);
         }
 
-        
+
+        // ---------------- INSTANCIAR EL HÉROE CADA 5 RONDAS -------------------
+        bool isSpecialRound = (FindAnyObjectByType<GameManager>().numberWave % 5 == 0);
+        if (isSpecialRound)
+        {
+            int randomWP = Random.Range(0, chosenPoints.Count);
+            Transform chosenPoint = chosenPoints[randomWP].transform;
+            Instantiate(heroePrefab, chosenPoint.position, Quaternion.identity);
+            enemiesCounter++;
+        }
+
     }
 
   
