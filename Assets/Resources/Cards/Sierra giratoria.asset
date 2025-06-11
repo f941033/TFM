@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
   m_Name: Sierra giratoria
   m_EditorClassIdentifier: 
-  cardName: Sierra
+  cardName: Saw
   description: "Da\xF1o 15%"
   cardType: 1
   healthModifier: 15

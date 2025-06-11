@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
   m_Name: "\xC1cido corrosivo"
   m_EditorClassIdentifier: 
-  cardName: "\xC1cido"
+  cardName: Acid
   description: "Da\xF1o 10% "
   cardType: 1
   healthModifier: 20

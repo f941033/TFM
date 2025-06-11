@@ -10,6 +10,7 @@ public class SpawnEnemies : MonoBehaviour
     private List<GameObject> spawnListPoints = new List<GameObject>();
     private List<GameObject> chosenPoints = new List<GameObject>();
     private int enemiesToSpawn, enemiesCounter;
+    bool isSpecialRound = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -88,9 +89,14 @@ public class SpawnEnemies : MonoBehaviour
     public IEnumerator GenerarEnemigos()
     {
         enemiesToSpawn = FindFirstObjectByType<GameManager>().enemiesToKillInCurrentWave;
+        isSpecialRound = (FindAnyObjectByType<GameManager>().numberWave % 5 == 0);
+        if(isSpecialRound)
+        {
+            FindFirstObjectByType<GameManager>().enemiesToKillInCurrentWave++;
+        }
         enemiesCounter = 0;
 
-        for (int i = 1;i<=enemiesToSpawn;i++)
+        for (int i = 1; i <= enemiesToSpawn; i++)
         {
             yield return new WaitForSeconds(Random.Range(1.5f,3f));
 
@@ -107,7 +113,7 @@ public class SpawnEnemies : MonoBehaviour
 
 
         // ---------------- INSTANCIAR EL HÉROE CADA 5 RONDAS -------------------
-        bool isSpecialRound = (FindAnyObjectByType<GameManager>().numberWave % 5 == 0);
+
         if (isSpecialRound)
         {
             int randomWP = Random.Range(0, chosenPoints.Count);

@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         // Buscar la carta de torreta
         foreach (CardData card in allCards)
         {
-            if (card.cardName.Contains("Torreta"))
+            if (card.cardName.Contains("Turrent"))
             {
                 turretCard = card;
                 break;

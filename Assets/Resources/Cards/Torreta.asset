@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
   m_Name: Torreta
   m_EditorClassIdentifier: 
-  cardName: Torreta
+  cardName: Turrent
   description: "Dispara autom\xE1ticamente a los enemigos"
   cardType: 1
   healthModifier: -5

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
   m_Name: Bomba
   m_EditorClassIdentifier: 
-  cardName: Bomba
+  cardName: Bomb
   description: "Explosi\xF3n sorpresa"
   cardType: 1
   healthModifier: -5
   numberOfTiles: 0
-  used: 0
+  used: 1
   uses: 1
   trapPrefab: {fileID: 7377369047218687532, guid: 7b28963f52b32a24cb176128db09215a, type: 3}
   cost: 4
