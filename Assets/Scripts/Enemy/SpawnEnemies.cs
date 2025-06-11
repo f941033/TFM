@@ -30,6 +30,7 @@ public class SpawnEnemies : MonoBehaviour
     {   
         chosenPoints.Clear();
 
+        //número de puntos de spawn
         int numberOfSpawnPoints = roundNumber >= 20 ? 4 : Mathf.Clamp((roundNumber - 1) / 5 + 1, 1, 4);
 
         // Crear una copia temporal de la lista original
@@ -55,18 +56,30 @@ public class SpawnEnemies : MonoBehaviour
     }
     private void ActivarLuces()
     {
-        foreach (GameObject go in chosenPoints)
+        foreach (GameObject spawnPoint in chosenPoints)
         {
-            go.transform.GetChild(0).gameObject.SetActive(true);
+
+            for (var i = 0; i < spawnPoint.transform.childCount; i++)
+            {
+                spawnPoint.transform.GetChild(i).GetComponent<Animator>().SetBool("enabled", true);
+                spawnPoint.transform.GetChild(i).GetChild(0).gameObject.SetActive(true);
+            }
+
         }
 
     }
 
     public void DesactivarLuces()
     {
-        foreach (GameObject go in chosenPoints)
+        foreach (GameObject spawnPoint in chosenPoints)
         {
-            go.transform.GetChild(0).gameObject.SetActive(false);
+
+            for (var i = 0; i < spawnPoint.transform.childCount; i++)
+            {
+                spawnPoint.transform.GetChild(i).GetComponent<Animator>().SetBool("enabled", false);
+                spawnPoint.transform.GetChild(i).GetChild(0).gameObject.SetActive(false);
+            }
+
         }
 
     }
