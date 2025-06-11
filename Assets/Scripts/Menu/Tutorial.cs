@@ -39,13 +39,13 @@ public class Tutorial : MonoBehaviour
 
         foreach (var card in allCards)
         {
-            if (card.cardName == "Foso" || card.cardName == "Ácido corrosivo" || card.cardName == "Electrocución" || card.cardName == "Bomba" || card.cardName == "Sierra giratoria")
+            if (card.cardName == "Foso" || card.cardName == "Ácido" || card.cardName == "Electrocución" || card.cardName == "Bomba" || card.cardName == "Sierra")
             
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
 
-                if (card.cardName == "Ácido corrosivo"  || card.cardName == "Bomba" || card.cardName == "Sierra giratoria")
+                if (card.cardName == "Ácido"  || card.cardName == "Bomba" || card.cardName == "Sierra")
                 {
                     startingDeck.Add(card);
                     baseHealth += card.healthModifier;
@@ -57,7 +57,7 @@ public class Tutorial : MonoBehaviour
                 }
             }
 
-            if (card.cardName == "PegaLeches10000")
+            if (card.cardName == "PegaLeches")
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;

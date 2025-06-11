@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Foso
   m_EditorClassIdentifier: 
   cardName: Foso
-  description: "Muerte instant\xE1nea."
+  description: "Muerte instant\xE1nea"
   cardType: 1
   healthModifier: -5
   numberOfTiles: 4

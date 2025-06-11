@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bomba
   m_EditorClassIdentifier: 
   cardName: Bomba
-  description: "Explosi\xF3n sorpresa."
+  description: "Explosi\xF3n sorpresa"
   cardType: 1
   healthModifier: -5
   numberOfTiles: 0
