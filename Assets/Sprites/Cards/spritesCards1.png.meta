@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: 4d5fdc7579356db4fb2ed35788943e4f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7016791643503596147
+    second: spritesCards1_0
+  - first:
+      213: -5242737869497840570
+    second: spritesCards1_1
+  - first:
+      213: 3044703621313735267
+    second: spritesCards1_2
+  - first:
+      213: -150524817418140242
+    second: spritesCards1_3
+  - first:
+      213: -1956387151737941140
+    second: spritesCards1_4
+  - first:
+      213: -9059720787935888975
+    second: spritesCards1_5
+  - first:
+      213: -5955424579639391390
+    second: spritesCards1_6
+  - first:
+      213: -3662575301778170357
+    second: spritesCards1_7
+  - first:
+      213: -723619484916337183
+    second: spritesCards1_8
+  - first:
+      213: -8888723090196920892
+    second: spritesCards1_9
+  - first:
+      213: -5138542172477738656
+    second: spritesCards1_10
+  - first:
+      213: 3709695414952083801
+    second: spritesCards1_11
+  - first:
+      213: -9105047575930999559
+    second: spritesCards1_12
+  - first:
+      213: 5981828716870871614
+    second: spritesCards1_13
+  - first:
+      213: 681583607328064288
+    second: spritesCards1_14
+  - first:
+      213: 7193397032546572447
+    second: spritesCards1_15
+  - first:
+      213: -5929345655599346405
+    second: spritesCards1_16
+  - first:
+      213: 7078430558115230143
+    second: spritesCards1_17
+  - first:
+      213: 6388193646137730938
+    second: spritesCards1_18
+  - first:
+      213: -3534768467519826249
+    second: spritesCards1_19
+  - first:
+      213: -5458695345590915995
+    second: spritesCards1_20
+  - first:
+      213: -4789570108258303150
+    second: spritesCards1_21
+  - first:
+      213: -4499586775662544457
+    second: spritesCards1_22
+  - first:
+      213: 4637810431329494271
+    second: spritesCards1_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Spikes_Card
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 709
+        width: 826
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 707a1b9f34a4498459a69b93ba4e5fd7
+      internalID: -857629342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pit_Card
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 709
+        width: 826
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45cb2b6560e189347859c8fd1a0cec11
+      internalID: 877911320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Saws_Card
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 709
+        width: 826
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac6a2dad93d0cbf47ac594a314342547
+      internalID: -1285000583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Acid_Card
+      rect:
+        serializedVersion: 2
+        x: 2478
+        y: 709
+        width: 826
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dcf4227f134197498185b2f5566e8e4
+      internalID: -657138803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomb_Card
+      rect:
+        serializedVersion: 2
+        x: 3304
+        y: 709
+        width: 826
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c13b769ea70942742a1f3aeddc8bb939
+      internalID: 1711113281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Box_Card
+      rect:
+        serializedVersion: 2
+        x: 4130
+        y: 709
+        width: 826
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b33e49521aaad2644a58505791a5fd5c
+      internalID: -1669249693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Electricity_Card
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 826
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 796b2fa8a92dfb34988c9c57548f99e9
+      internalID: -486609375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turret_Card
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 0
+        width: 826
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57610093c7647aa499bb719e92ca3d35
+      internalID: -763708711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkIncr_Card
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 0
+        width: 826
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ac171e69f04c4c468cfbb1e5ef11d6d
+      internalID: -11930394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoulsIncr_Card
+      rect:
+        serializedVersion: 2
+        x: 2478
+        y: 0
+        width: 826
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5633a2f6cdb1f314f8ec2881d9583d80
+      internalID: -1633327677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpeedIncr_Card
+      rect:
+        serializedVersion: 2
+        x: 3304
+        y: 0
+        width: 826
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f9aed27240294444b6da1a44bbeb611
+      internalID: 1662136614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 29df5564f5d0f134fb47b033b353c617
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Acid_Card: -657138803
+      AtkIncr_Card: -11930394
+      Bomb_Card: 1711113281
+      Box_Card: -1669249693
+      Electricity_Card: -486609375
+      Pit_Card: 877911320
+      Saws_Card: -1285000583
+      SoulsIncr_Card: -1633327677
+      SpeedIncr_Card: 1662136614
+      Spikes_Card: -857629342
+      Turret_Card: -763708711
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
