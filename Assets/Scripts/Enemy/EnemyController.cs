@@ -1,9 +1,20 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
+    public enum TipoDeEnemigo
+    {
+        Aventurero,
+        Zapador,
+        Heroe,
+        Paladin,
+        Mago,
+        Destructor
+    }
+    public TipoDeEnemigo tipo;
     Transform target;
     [SerializeField] private float health = 50f;
     [SerializeField] private float currentHealth;
@@ -11,7 +22,7 @@ public class EnemyController : MonoBehaviour
     private float attackCooldown = 0f;
     public float attackRate = 1f;
     public float attackRange = 1f;
-    private bool  playerInRange = false;
+    private bool playerInRange = false;
     public int gold;
     private Animator animator;
     private AudioSource audioSource;
@@ -23,15 +34,18 @@ public class EnemyController : MonoBehaviour
 
     public GameObject effectGoldPrefab;
 
-    void Awake(){
+    void Awake()
+    {
         currentHealth = health;
     }
 
-    public void receiveDamage(float damage){
+    public void receiveDamage(float damage)
+    {
         currentHealth -= damage;
-        healthBarUI.fillAmount = currentHealth/health;
+        healthBarUI.fillAmount = currentHealth / health;
         GetComponent<Damageable>().TakeDamage(damage);
-        if(currentHealth <=0 ){
+        if (currentHealth <= 0)
+        {
             Die();
         }
     }
@@ -55,19 +69,19 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-        void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
-            playerInRange   = true;
-            attackCooldown  = 1f / attackRate; // forzamos espera antes del primer golpe
+            playerInRange = true;
+            attackCooldown = 1f / attackRate; // forzamos espera antes del primer golpe
         }
     }
 
     void Update()
     {
 
-        if(!playerInRange) return;
+        if (!playerInRange) return;
 
         if (attackCooldown > 0f)
             attackCooldown -= Time.deltaTime;
@@ -86,12 +100,22 @@ public class EnemyController : MonoBehaviour
         if (player != null)
         {
             audioSource.PlayOneShot(attackSound);
-            animator.SetTrigger("attack");
+
+            switch (tipo){
+                case TipoDeEnemigo.Aventurero:
+                    animator.SetTrigger("attack");
+                    break;
+                case TipoDeEnemigo.Heroe:
+                    animator.SetBool("attacking", true); 
+                    break;
+            }
+            
             player.receiveDamage(damage);
         }
     }
 
-    private void Die(){
+    private void Die()
+    {
         PlayerController player = target.GetComponent<PlayerController>();
         player?.AddGold(gold);
         Instantiate(effectGoldPrefab, transform.position, Quaternion.identity);

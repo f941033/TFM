@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
         OnHealthChanged?.Invoke(currentHealth);
         OnSoulsChanged?.Invoke(currentSouls);
-
+  
         textGold.text = amountGold.ToString();
 
         anim = GetComponent<Animator>();
@@ -206,6 +206,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Die()
     {
+        PlayerPrefs.SetInt("OroGuardado", amountGold);
         SceneManager.LoadScene("GameOver");
     }
 

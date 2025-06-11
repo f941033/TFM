@@ -24,4 +24,10 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void RestartGame()
+    {
+        PlayerPrefs.SetInt("ReinicioDesdeGameOver", 1);
+        SceneManager.LoadScene("Game");
+    }
 }
