@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1fc63ab785f1fb44a66583e8ae0b945, type: 3}
   m_Name: RiseSpeedAttack
   m_EditorClassIdentifier: 
-  cardName: MasRapido
+  cardName: Att
   description: Ataque +20%, 15 segundos
   cardType: 0
   healthModifier: 0
+  numberOfTiles: 0
   buffType: 2
   modifier: 1.2
   duration: 15

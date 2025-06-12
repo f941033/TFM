@@ -15,12 +15,25 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Image damageImage;
     [SerializeField] private Image useImage;
     [SerializeField] private Image costImage;
+    [SerializeField] private Image spriteImage;
 
     public void setCardUI(CardData cardData)
     {
+        var sprite = Resources.Load<Sprite>("Sprites/Cards/" + cardData.name);
         data = cardData;
         textName.text = data.cardName;
         textDescription.text = data.description;
+        if (sprite != null)
+        {
+            spriteImage.sprite = sprite;
+            spriteImage.enabled = true;
+        }
+        else
+        {
+            spriteImage.enabled = false;
+            Debug.LogWarning($"[CardUI] No encontré el sprite Resources/Sprites/Cards/{cardData.name}.png");
+        }
+
         if (cardData is TrapCardData trap)
         {
             textCost.text = trap.cost.ToString();
