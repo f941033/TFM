@@ -98,7 +98,7 @@ public class SpawnEnemies : MonoBehaviour
 
         for (int i = 1; i <= enemiesToSpawn; i++)
         {
-            yield return new WaitForSeconds(Random.Range(1.5f,3f));
+            yield return new WaitForSeconds(Random.Range(0.75f,1.15f));
 
             if (chosenPoints.Count == 0)
                 continue;
@@ -106,7 +106,10 @@ public class SpawnEnemies : MonoBehaviour
             int randomWP = Random.Range(0, chosenPoints.Count);
             Transform chosenPoint = chosenPoints[randomWP].transform;
 
-            Instantiate(enemyPrefab, chosenPoint.position, Quaternion.identity);
+            Vector2 offset = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f));
+            Vector2 spawnPosition = new Vector2(chosenPoint.position.x, chosenPoint.position.y) + offset;
+
+            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
             enemiesCounter++;
             Debug.Log("enemiesToSpawn: " + enemiesToSpawn + ", enemiesCounter: " + enemiesCounter);
         }
