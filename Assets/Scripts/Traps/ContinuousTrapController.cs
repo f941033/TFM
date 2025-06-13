@@ -45,7 +45,7 @@ public class ContinuousTrapController : MonoBehaviour
             {
                 if(hit.CompareTag("Enemy")){
                     Debug.Log("He detectado un enemigo, le hago daño");
-                    hit.GetComponent<EnemyController>().receiveDamage(damage * Time.deltaTime);
+                    hit.GetComponent<EnemyController>().ReceiveDamage(damage * Time.deltaTime);
                 }
             }
 

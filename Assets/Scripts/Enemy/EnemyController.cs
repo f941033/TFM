@@ -39,7 +39,7 @@ public class EnemyController : MonoBehaviour
         currentHealth = health;
     }
 
-    public void receiveDamage(float damage)
+    public void ReceiveDamage(float damage)
     {
         currentHealth -= damage;
         healthBarUI.fillAmount = currentHealth / health;

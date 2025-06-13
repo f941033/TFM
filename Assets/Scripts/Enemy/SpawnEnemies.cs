@@ -90,11 +90,20 @@ public class SpawnEnemies : MonoBehaviour
     {
         enemiesToSpawn = FindFirstObjectByType<GameManager>().enemiesToKillInCurrentWave;
         isSpecialRound = (FindAnyObjectByType<GameManager>().numberWave % 5 == 0);
-        if(isSpecialRound)
+        enemiesCounter = 0;
+
+        // ---------------- INSTANCIAR EL HÉROE CADA 5 RONDAS -------------------
+
+        if (isSpecialRound)
         {
             FindFirstObjectByType<GameManager>().enemiesToKillInCurrentWave++;
+            int randomWP = Random.Range(0, chosenPoints.Count);
+            Transform chosenPoint = chosenPoints[randomWP].transform;
+            Instantiate(heroePrefab, chosenPoint.position, Quaternion.identity);
+            enemiesCounter++;
         }
-        enemiesCounter = 0;
+
+        
 
         for (int i = 1; i <= enemiesToSpawn; i++)
         {
@@ -111,19 +120,7 @@ public class SpawnEnemies : MonoBehaviour
 
             Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
             enemiesCounter++;
-            Debug.Log("enemiesToSpawn: " + enemiesToSpawn + ", enemiesCounter: " + enemiesCounter);
-        }
-
-
-        // ---------------- INSTANCIAR EL HÉROE CADA 5 RONDAS -------------------
-
-        if (isSpecialRound)
-        {
-            int randomWP = Random.Range(0, chosenPoints.Count);
-            Transform chosenPoint = chosenPoints[randomWP].transform;
-            Instantiate(heroePrefab, chosenPoint.position, Quaternion.identity);
-            enemiesCounter++;
-        }
+        }        
 
     }
 

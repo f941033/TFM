@@ -57,7 +57,7 @@ public class TrapController : MonoBehaviour
             foreach(var hit in hits)
             {
                 if(hit.CompareTag("Enemy"))
-                    hit.GetComponent<EnemyController>().receiveDamage(cloud.damage * Time.deltaTime);
+                    hit.GetComponent<EnemyController>().ReceiveDamage(cloud.damage * Time.deltaTime);
             }
 
             elapsed += Time.deltaTime;

@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyController>().receiveDamage(damage);
+            other.GetComponent<EnemyController>().ReceiveDamage(damage);
             Destroy(gameObject);
         }
     }

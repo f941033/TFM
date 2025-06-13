@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
 
         EnemyController target = targetsInRange[0];
 
-        target.receiveDamage(currentDamage);
+        target.ReceiveDamage(currentDamage);
 
         //Aquí van animaciones, sonido y otros menesteres
         anim.SetTrigger("attack");

@@ -8,14 +8,36 @@ public class BombController : MonoBehaviour
 
     public Animator animator;
 
-    void OnTriggerEnter2D(Collider2D other)
+    public float rangoDeteccion = 2.0f;
+    private bool activada = false;
+
+    private void Start()
     {
-        if (other.CompareTag("Enemy"))
+        animator = GetComponent<Animator>();
+    }
+    void Update()
+    {
+        if (activada) return; // Evita reactivar si ya está activada
+
+        GameObject[] enemigos = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemigo in enemigos)
         {
-            animator.SetTrigger("explode");
-            Invoke("Explode",0.75f);
+            float distancia = Vector2.Distance(transform.position, enemigo.transform.position);
+            if (distancia <= rangoDeteccion)
+            {
+                ActivarTrampa(enemigo);
+                break;
+            }
         }
     }
+
+    void ActivarTrampa(GameObject enemigo)
+    {
+        activada = true;
+        animator.SetTrigger("explode");
+        Invoke("Explode", 0.75f);
+    }
+
 
     void Explode()
     {
@@ -31,21 +53,21 @@ public class BombController : MonoBehaviour
             Destroy(explosion.gameObject, explosion.main.duration);
         }
 
-        // Aplicar daño en área
-        //Collider2D[] hits = Physics2D.OverlapCircleAll(
-        //    transform.position,
-        //    explosionRadius
-        //);
+        //Aplicar daño en área
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
+            transform.position,
+            explosionRadius
+        );
 
-        //foreach (Collider2D hit in hits)
-        //{
-        //    if (hit.CompareTag("Enemy"))
-        //    {
-        //        hit.GetComponent<EnemyHealth>().TakeDamage(damage);
-        //    }
-        //}
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                hit.GetComponent<EnemyController>().ReceiveDamage(damage);
+            }
+        }
 
-        //Destroy(gameObject); // Destruir la bomba
+        Destroy(gameObject); // Destruir la bomba
     }
 
 
