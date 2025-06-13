@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 533710063301047464}
   - component: {fileID: 8862617074969215597}
   - component: {fileID: 6179150980493115244}
+  - component: {fileID: 8219622360497768172}
   m_Layer: 7
   m_Name: MuroPrefab
   m_TagString: PlayerWall
@@ -165,3 +166,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+--- !u!114 &8219622360497768172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7377369047218687532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315147079aa939d4ebfc1dd16c867bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8862617074969215597}
   - component: {fileID: 9129331489736713682}
   - component: {fileID: 435674054882401364}
+  - component: {fileID: 5652064212195468965}
   m_Layer: 0
   m_Name: BombaPrefab
   m_TagString: PlayerWall
@@ -190,5 +191,16 @@ MonoBehaviour:
   explosionEffect: {fileID: 1440080390595227449, guid: 455da485095718447818cd1b37962ad5, type: 3}
   explosionRadius: 2
   damage: 50
-  animator: {fileID: 0}
   rangoDeteccion: 2
+--- !u!114 &5652064212195468965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7377369047218687532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315147079aa939d4ebfc1dd16c867bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

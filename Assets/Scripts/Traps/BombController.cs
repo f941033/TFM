@@ -6,7 +6,7 @@ public class BombController : MonoBehaviour
     public float explosionRadius = 3f;
     public int damage = 50;
 
-    public Animator animator;
+    Animator animator;
 
     public float rangoDeteccion = 2.0f;
     private bool activada = false;

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private List<CardData> selectedCards = new List<CardData>();
     private CardData[] allCards;
 
+    public bool inPrepPhase = false;
     public TextMeshProUGUI textNumberWave;
     public GameObject panelEndWave;
     public CardManager cardManager;
@@ -196,6 +197,7 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
+        inPrepPhase = true;
         ChangePhase(GamePhase.Preparation);
         panelTimeScale.SetActive(false);
         drawPileImage.SetActive(true);
@@ -237,6 +239,7 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void StartRun()
     {
+        inPrepPhase = false;
         ChangePhase(GamePhase.Action);
         countDownObject.SetActive(false);
         panelTimeScale.SetActive(true);

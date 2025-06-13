@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8862617074969215597}
   - component: {fileID: 3651776166605178254}
   - component: {fileID: 5443385788290627460}
+  - component: {fileID: 6834330247894914458}
   m_Layer: 0
   m_Name: AcidoCorrosivoPrefab
   m_TagString: PlayerWall
@@ -192,3 +193,16 @@ MonoBehaviour:
   - {fileID: 1271570384, guid: cedcf761cf91fb444b84124550d65f60, type: 3}
   - {fileID: 1941603583, guid: cedcf761cf91fb444b84124550d65f60, type: 3}
   - {fileID: 1941603583, guid: cedcf761cf91fb444b84124550d65f60, type: 3}
+--- !u!114 &6834330247894914458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7377369047218687532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315147079aa939d4ebfc1dd16c867bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
