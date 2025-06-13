@@ -203,6 +203,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 315147079aa939d4ebfc1dd16c867bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  spawnPointLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  checkRadius: 0.5
 --- !u!1001 &4802678513945851509
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6416,6 +6416,7 @@ MonoBehaviour:
   initialEnemiesToKill: 3
   enemiesToKillInCurrentWave: 0
   numberWave: 1
+  inPrepPhase: 0
   textNumberWave: {fileID: 1640885441}
   panelEndWave: {fileID: 587340171}
   cardManager: {fileID: 1880551133}

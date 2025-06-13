@@ -20,6 +20,6 @@ MonoBehaviour:
   used: 0
   uses: 3
   trapPrefab: {fileID: 7377369047218687532, guid: 9a2fa0d2eccd66542994497079b4a580, type: 3}
-  cost: 5
+  cost: 4
   damage: 20
   trapSizeInTiles: {x: 1, y: 1}

@@ -172,10 +172,10 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     }
 
     // Obtener todas las torretas en escena
-    TorretaController[] GetAllTurrets()
-    {
-        return FindObjectsByType<TorretaController>(FindObjectsSortMode.None);
-    }
+    //TorretaController[] GetAllTurrets()
+    //{
+    //    return FindObjectsByType<TorretaController>(FindObjectsSortMode.None);
+    //}
 
     public void OnEndDrag(PointerEventData eventData)
     {

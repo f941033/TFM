@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour
         cardManager.ClearPanelCard();
         soulsBar.SetActive(true);
         playerController.RefillSouls();
-        GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
+        //GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
 
         Debug.Log("vida base del player: " + FindFirstObjectByType<PlayerController>().baseHealth.ToString());
         startingDeck = new List<CardData>(selectedCards);
