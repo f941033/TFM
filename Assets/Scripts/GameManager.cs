@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour
             var cardData = Instantiate(prefabCard, panelCard);
             CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
             cardUI.setCardUI(card);
+            Destroy(cardData.GetComponent<CardDragDrop>());
         }
     }
 
