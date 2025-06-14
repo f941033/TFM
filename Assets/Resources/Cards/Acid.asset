@@ -23,3 +23,5 @@ MonoBehaviour:
   cost: 3
   damage: 10
   trapSizeInTiles: {x: 1, y: 1}
+  reduceSpeed: 0.15
+  seconds: 3

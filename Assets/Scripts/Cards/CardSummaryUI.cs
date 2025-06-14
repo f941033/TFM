@@ -23,7 +23,7 @@ public class CardSummaryUI : MonoBehaviour
     private void Start()
     {
         counterText.text = selectedCards.Count + "/" + maxCardDeck;
-        GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StopCameraMovement");
+        //GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StopCameraMovement");
         baseHealth = playerController.BaseHealth;
         baseHealthText.text = "Salud base: " + baseHealth;
     }

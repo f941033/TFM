@@ -3,8 +3,7 @@ using UnityEngine;
 public class BombController : MonoBehaviour
 {
     public ParticleSystem explosionEffect;
-    public float explosionRadius = 3f;
-    public int damage = 50;
+    public float explosionRadius = 4f;
 
     Animator animator;
 
@@ -25,13 +24,13 @@ public class BombController : MonoBehaviour
             float distancia = Vector2.Distance(transform.position, enemigo.transform.position);
             if (distancia <= rangoDeteccion)
             {
-                ActivarTrampa(enemigo);
+                ActivarTrampa();
                 break;
             }
         }
     }
 
-    void ActivarTrampa(GameObject enemigo)
+    void ActivarTrampa()
     {
         activada = true;
         animator.SetTrigger("explode");
@@ -63,7 +62,7 @@ public class BombController : MonoBehaviour
         {
             if (hit.CompareTag("Enemy"))
             {
-                hit.GetComponent<EnemyController>().ReceiveDamage(damage);
+                hit.GetComponent<EnemyMovement>().ApplyKnockback();
             }
         }
 

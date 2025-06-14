@@ -49,6 +49,11 @@ public class EnemyController : MonoBehaviour
             Die();
         }
     }
+
+    public void ReduceSpeed(float speedPercent, int seconds)
+    {
+        GetComponent<EnemyMovement>().ReduceSpeed(speedPercent, seconds);
+    }
     void Start()
     {
         target = GameObject.Find("Player").transform;

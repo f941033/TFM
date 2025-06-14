@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2482154488743781958}
   - component: {fileID: 9095754354565158295}
   - component: {fileID: 5251543137311675111}
+  - component: {fileID: -849098514757533435}
   m_Layer: 0
   m_Name: EffectGold
   m_TagString: Untagged
@@ -4931,3 +4932,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-849098514757533435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312088903935544102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe609c7a210bd0429aba8e92ec96597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

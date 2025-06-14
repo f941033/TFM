@@ -11,6 +11,12 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector2 currentDirection;
     private bool isMoving = false;
+    private int damage = 25;
+
+    [Header("Knockback")]
+    public float knockbackDuration = 0.2f; // Duración del desplazamiento
+    public int knockbackTiles = 5; // Celdas a retroceder
+    private bool isKnockbackActive = false;
 
     void Start()
     {
@@ -119,6 +125,56 @@ public class EnemyMovement : MonoBehaviour
         isMoving = false;
     }
 
+    public void ReduceSpeed(float speedPercent, int seconds)
+    {
+        if (speedPercent == 0f) return;
+        StartCoroutine(ReduceSpeedCoroutine(speedPercent, seconds));
+        
+    }
 
-    
+    IEnumerator ReduceSpeedCoroutine(float speedPercent, int seconds)
+    {
+        yield return new WaitForSeconds(1.5f);
+        float speedTemp = moveSpeed;
+        moveSpeed *= speedPercent;
+        yield return new WaitForSeconds(seconds);
+        moveSpeed = speedTemp;
+    }
+
+
+    //------------ EFECTO ONDA EXPANSIVA DE LA BOMBA -------------------
+    public void ApplyKnockback()
+    {
+        if (!isKnockbackActive)
+        {
+            //this.damage = damage;
+            StartCoroutine(KnockbackCoroutine());            
+        }
+    }
+
+    IEnumerator KnockbackCoroutine()
+    {
+        isKnockbackActive = true;
+        StopCoroutine(MoveRoutine()); // Detiene el movimiento normal
+
+        Vector2 knockbackDirection = -currentDirection; // Dirección contraria al movimiento
+        Vector2 startPos = transform.position;
+        Vector2 targetPos = startPos + (knockbackDirection * tileSize * knockbackTiles);
+
+        float elapsed = 0f;
+
+        while (elapsed < knockbackDuration)
+        {
+            transform.position = Vector2.Lerp(startPos, targetPos, elapsed / knockbackDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPos;
+        isKnockbackActive = false;
+        GetComponent<EnemyController>().ReceiveDamage(damage);
+        StartCoroutine(MoveRoutine()); // Reanuda el movimiento normal
+    }
+
+
 }
