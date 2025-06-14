@@ -7,6 +7,7 @@ using UnityEngine;
 public class SpawnEnemies : MonoBehaviour
 {
     public GameObject canvasSpawnPointPrefab;
+    public GameObject canvasHeroeInfoPrefab;
     public GameObject enemyPrefab, heroePrefab;
     public GameObject[] spawnWaypoints;
     private List<GameObject> spawnListPoints = new List<GameObject>();
@@ -128,7 +129,17 @@ public class SpawnEnemies : MonoBehaviour
             GameObject canvas = Instantiate(canvasSpawnPointPrefab, puerta.transform);
             TextMeshProUGUI textoPanel = canvas.GetComponentInChildren<TextMeshProUGUI>();
             textoPanel.text = "x" + enemigosPorPuerta[puerta].ToString();
+
+            if(isSpecialRound && puerta.transform == heroePoint)
+            {
+                canvas.transform.Find("PanelInfoHeroe").gameObject.SetActive(true);
+            }
+            else
+            {
+                canvas.transform.GetChild(0).Find("PanelInfoHeroe").gameObject.SetActive(false);
+            }
         }
+
     }
     public IEnumerator GenerarEnemigos()
     { 
