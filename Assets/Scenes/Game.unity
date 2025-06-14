@@ -8018,6 +8018,7 @@ GameObject:
   - component: {fileID: 587340172}
   - component: {fileID: 587340174}
   - component: {fileID: 587340173}
+  - component: {fileID: 587340175}
   m_Layer: 5
   m_Name: PanelEndWave
   m_TagString: Untagged
@@ -8085,6 +8086,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587340171}
   m_CullTransparentMesh: 1
+--- !u!114 &587340175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587340171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 50
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &609515129
 GameObject:
   m_ObjectHideFlags: 0
@@ -10776,6 +10803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f274dbfbdee7244b960e933b17819b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasSpawnPointPrefab: {fileID: 1031688393237169650, guid: 9dc715dabfa5bfa4993dc39b5eebcd6b, type: 3}
   enemyPrefab: {fileID: 2698680304010752485, guid: 9eb514c593f603d4dbd8ae472aecaaba, type: 3}
   heroePrefab: {fileID: 5049656263412520055, guid: e5105f855299e9745b7895e21395c074, type: 3}
   spawnWaypoints:
@@ -15243,9 +15271,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 587340172}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 960, y: -548.8335}
   m_SizeDelta: {x: 1066.4067, y: 343.04657}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &934916988
@@ -21001,9 +21029,9 @@ RectTransform:
   - {fileID: 308273919}
   m_Father: {fileID: 587340172}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 248}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 960, y: -987.56335}
   m_SizeDelta: {x: 160, y: 82.3331}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1217266725
@@ -21565,9 +21593,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 587340172}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 275}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 960, y: -167.43674}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1319590581
@@ -21590,10 +21618,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xA1ENHORABUENA!\nFIN OLEADA"
+  m_text: "\xA1ENHORABUENA, FIN OLEADA!\nElige una carta para tu mazo"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7beba86790a2e304ea3bf19ee6241b4b, type: 2}
+  m_sharedMaterial: {fileID: -1874789186171507545, guid: 7beba86790a2e304ea3bf19ee6241b4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21617,8 +21645,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 66.52
-  m_fontSizeBase: 66.52
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -34600,8 +34628,8 @@ MonoBehaviour:
   m_text: "Haz zoom y mueve el mapa con la rueda del rat\xF3n\nHaz clic en el deck
     para ver todas las cartas del mazo\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7beba86790a2e304ea3bf19ee6241b4b, type: 2}
+  m_sharedMaterial: {fileID: -1874789186171507545, guid: 7beba86790a2e304ea3bf19ee6241b4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -34625,8 +34653,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.58
-  m_fontSizeBase: 54.58
+  m_fontSize: 63
+  m_fontSizeBase: 63
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -34955,7 +34983,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.91601884, b: 0, a: 1}
-    m_PressedColor: {r: 1, g: 0.91764706, b: 0, a: 1}
+    m_PressedColor: {r: 1, g: 0.1537725, b: 0, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1

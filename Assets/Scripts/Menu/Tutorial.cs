@@ -39,7 +39,7 @@ public class Tutorial : MonoBehaviour
 
         foreach (var card in allCards)
         {
-            if (card.cardName == "Pit" || card.cardName == "Acid" || card.cardName == "Electrocution" || card.cardName == "Bomb" || card.cardName == "Saw")
+            if (card.cardName == "Pit" || card.cardName == "Acid" || card.cardName == "Shock" || card.cardName == "Bomb" || card.cardName == "Saw")
             
             {
                 startingDeck.Add(card);

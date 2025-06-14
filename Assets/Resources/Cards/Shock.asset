@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
-  m_Name: Electricity
+  m_Name: Shock
   m_EditorClassIdentifier: 
-  cardName: Electricity
+  cardName: Shock
   description: "Da\xF1o 15%"
   cardType: 1
   healthModifier: 10

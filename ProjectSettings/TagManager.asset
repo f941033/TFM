@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Foso
   - PlayerWall
+  - CanvasEnemies
   layers:
   - Default
   - TransparentFX

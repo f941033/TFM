@@ -246,6 +246,8 @@ public class GameManager : MonoBehaviour
         panelTimeScale.SetActive(true);
         StartCoroutine("PanelGo");
 
+        EliminarCanvasEnemies();
+
         cardManager.ClearPanelCard();
         cardManager.drawPile = new List<CardData>();
 
@@ -272,6 +274,15 @@ public class GameManager : MonoBehaviour
 
         var spawner = GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>();
         spawner.StartCoroutine(spawner.GenerarEnemigos());
+    }
+
+    void EliminarCanvasEnemies()
+    {
+        GameObject[] canvasEnemies = GameObject.FindGameObjectsWithTag("CanvasEnemies");
+        foreach (var item in canvasEnemies)
+        {
+            Destroy(item);
+        }
     }
 
     public void ActivateDiscardPileImage()
