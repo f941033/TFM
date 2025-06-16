@@ -4,6 +4,7 @@ namespace DeckboundDungeon.GamePhase
     {
         Preparation,
         Action,
+        Reward,
         Shop
     }
 }

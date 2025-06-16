@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
     private Coroutine HideMessageCO;
     public static GamePhase CurrentPhase { get; private set; }
     public static event Action<GamePhase> OnPhaseChanged;
+    [SerializeField] private MerchantUI merchantUI;
+    [SerializeField] private MerchantItem keyItemAsset;        // arrástralo en el Inspector
+    [SerializeField] private MerchantItem potionItemAsset;     // idem
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -142,6 +145,10 @@ public class GameManager : MonoBehaviour
         messageText.gameObject.SetActive(false);
         cardManager.ClearPanelCard();
         panelEndWave.SetActive(false);
+        if (numberWave % 5 == 0)
+        {
+            MerchantShop();
+        }
         numberWave++;
         textNumberWave.text = "Ronda: " + numberWave;
         enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
@@ -302,5 +309,57 @@ public class GameManager : MonoBehaviour
         panelGo.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         panelGo.SetActive(false);
+    }
+
+    void MerchantShop()
+    {
+        var shopList = new List<MerchantItem>();
+        // 1 llave
+        shopList.Add(keyItemAsset);
+        // 1 poción
+        shopList.Add(potionItemAsset);
+
+        // 2 cartas aleatorias de tipo Trap o Buff
+        var all = Resources.LoadAll<CardData>("Cards");
+        var pool = new List<CardData>();
+        foreach (var cards in all) if (cards.cardType == CardType.Trap || cards.cardType == CardType.Buff) pool.Add(cards);
+        for (int i = 0; i < 2; i++)
+        {
+            var pick = pool[UnityEngine.Random.Range(0, pool.Count)];
+            var cardItem = ScriptableObject.CreateInstance<CardItem>();
+            cardItem.itemName = pick.cardName;
+            //cardItem.icon     = /* tu icono */;
+            cardItem.cost = pick.goldCost;
+            cardItem.cardData = pick;
+            shopList.Add(cardItem);
+        }
+
+        // 2 cartas “deck effect” (deck cards)
+        pool.Clear();
+
+        foreach (var cards in all) if (cards.cardType == CardType.DeckEffect) pool.Add(cards);
+        for (int i = 0; i < 2; i++)
+        {
+            var pick = pool[UnityEngine.Random.Range(0, pool.Count)];
+            var cardItem = ScriptableObject.CreateInstance<CardItem>();
+            cardItem.itemName = pick.cardName;
+            //cardItem.icon     = /* tu icono */;
+            cardItem.cost = pick.goldCost;
+            cardItem.cardData = pick;
+            shopList.Add(cardItem);
+        }
+
+        merchantUI.Show(shopList);
+        return;
+    }
+
+    public void PreparationPhase()
+    {
+        PreparationPhase(selectedCards);
+    }
+
+    public void AddCardToDeck(CardData card)
+    {
+        selectedCards.Add(card);
     }
 }

@@ -233,6 +233,9 @@ public class PlayerController : MonoBehaviour
     public float CurrentSoulsRate => currentSoulsRate;
     public float CurrentSouls => currentSouls;
     public float MaxSouls => maxSouls;
-    public float AmountGold => amountGold;
+    public int AmountGold => amountGold;
 
+    public void Heal(float health) {
+        currentHealth +=  (int)health;
+    }
 }
