@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
     }
     public TipoDeEnemigo tipo;
     Transform target;
-    [SerializeField] private float health = 50f;
+    [SerializeField] private float health;
     [SerializeField] private float currentHealth;
     private float damage = 10f;
     private float attackCooldown = 0f;
