@@ -11,7 +11,7 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector2 currentDirection;
     private bool isMoving = false;
-    private int damage = 25;
+    //private int damage = 25;
 
     [Header("Knockback")]
     public float knockbackDuration = 0.2f; // Duración del desplazamiento
@@ -172,6 +172,7 @@ public class EnemyMovement : MonoBehaviour
 
         transform.position = targetPos;
         isKnockbackActive = false;
+        int damage = GetComponent<TrapCardData>().damage;
         GetComponent<EnemyController>().ReceiveDamage(damage);
         StartCoroutine(MoveRoutine()); // Reanuda el movimiento normal
     }
