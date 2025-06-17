@@ -34,10 +34,25 @@ public class MerchantUI : MonoBehaviour
                 go = Instantiate(cardSlotPrefab, contentParent);
                 var ui = go.GetComponent<CardUI>();
                 ui.setCardUI(cardItem.cardData);
-                /* var btn = go.GetComponentInChildren<Button>();
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() => OnBuyClicked(cardItem)); */
-        }
+                
+                var buyBtn = go.GetComponentInChildren<Button>();
+                buyBtn.onClick.RemoveAllListeners();
+                buyBtn.onClick.AddListener(() =>
+                {
+                    if (player.AmountGold >= item.cost)
+                    {
+                        player.SpendGold(item.cost);
+                        // En tu CardItem debes tener algo como:
+                        gm.AddCardToDeck(cardItem.cardData);
+                        gm.ShowMessage($"¡Has comprado “{item.itemName}”!", 2f);
+                        buyBtn.interactable = false; // desactivar
+                    }
+                    else
+                    {
+                        gm.ShowMessage("No tienes suficiente oro", 2f);
+                    }
+                });
+            }
             else
             {
                 // si no, es pocion/llave: usamos merchantItemPrefab
@@ -63,13 +78,11 @@ public class MerchantUI : MonoBehaviour
         player.SpendGold(item.cost);
         item.Apply(player, gm);
         gm.ShowMessage($"Compraste “{item.itemName}”", 2f);
-        // opcional: desactivar el botón tras comprar
     }
 
     public void Close()
     {
         canvaMerchant.SetActive(false);
-        Debug.Log("Clico en cerrar");
-        //gm.PreparationPhase();
+        gm.PreparationPhase();
     }
 }

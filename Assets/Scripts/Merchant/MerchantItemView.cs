@@ -20,6 +20,10 @@ public class MerchantItemView : MonoBehaviour
         onBuy = onBuyClicked;
 
         buyButton.onClick.RemoveAllListeners();
-        buyButton.onClick.AddListener(() => onBuy(data));
+        buyButton.onClick.AddListener(() =>
+        {
+            onBuy(data);
+            buyButton.interactable = false;
+        });
     }
 }

@@ -18,6 +18,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Image costImage;
     [SerializeField] private Image spriteImage;
     [SerializeField] private TextMeshProUGUI goldCostText;
+    [SerializeField] private Button buyButton;
 
     public void setCardUI(CardData cardData)
     {
@@ -27,8 +28,8 @@ public class CardUI : MonoBehaviour
         textDescription.text = data.description;
         goldCostText.text = data.goldCost.ToString();
         bool inShop = GameManager.CurrentPhase == GamePhase.Merchant;
-        Debug.Log("Esta carta" + cardData.name + " va a mostrar el oro? " + inShop);
         goldCostText.gameObject.SetActive(inShop);
+        buyButton.gameObject.SetActive(inShop);
         if (sprite != null)
         {
             spriteImage.sprite = sprite;
@@ -85,5 +86,19 @@ public class CardUI : MonoBehaviour
         // Solo mostrar el texto de coste de oro en la fase de tienda
         bool inShop = newPhase == GamePhase.Merchant;
         goldCostText.gameObject.SetActive(inShop);
+    }
+
+    public void Initialize(GameManager gm, CardManager deck)
+    {
+        // Limpiamos listeners
+        buyButton.onClick.RemoveAllListeners();
+
+        // Añadimos el nuestro
+        buyButton.onClick.AddListener(() => {
+            var data = this.data;
+            gm.AddCardToDeck(data);
+            gm.ShowMessage($"Carta «{data.cardName}» añadida al mazo", 2f);
+            buyButton.interactable = false;
+        });
     }
 }

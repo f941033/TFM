@@ -170,8 +170,6 @@ public class GameManager : MonoBehaviour
             if (item.cardName == selectedName)
                 selectedCards.Add(item);
         }
-
-        PreparationPhase(selectedCards);
     }
 
     public void ChangePhase(GamePhase newPhase)
@@ -329,7 +327,6 @@ public class GameManager : MonoBehaviour
             var pick = pool[UnityEngine.Random.Range(0, pool.Count)];
             var cardItem = ScriptableObject.CreateInstance<CardItem>();
             cardItem.itemName = pick.cardName;
-            //cardItem.icon     = tu icono ;
             cardItem.cost = pick.goldCost;
             cardItem.cardData = pick;
             shopList.Add(cardItem);
@@ -344,7 +341,6 @@ public class GameManager : MonoBehaviour
             var pick = pool[UnityEngine.Random.Range(0, pool.Count)];
             var cardItem = ScriptableObject.CreateInstance<CardItem>();
             cardItem.itemName = pick.cardName;
-            //cardItem.icon     =  tu icono ;
             cardItem.cost = pick.goldCost;
             cardItem.cardData = pick;
             shopList.Add(cardItem);
@@ -367,5 +363,6 @@ public class GameManager : MonoBehaviour
     public void AddCardToDeck(CardData card)
     {
         selectedCards.Add(card);
+        Debug.Log("He entrado en añadir carta");
     }
 }
