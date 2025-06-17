@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768f56fd69afdc84caec304809ca511e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0.9, b: 0.6, a: 1}
+  hoverColor: {r: 0.3443396, g: 1, b: 0.7557343, a: 0.78431374}
   cardImage: {fileID: 0}
 --- !u!114 &3138034295888315653
 MonoBehaviour:
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardImage: {fileID: 2075047113887814455}
-  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 0, g: 1, b: 0, a: 0.8235294}
   deselectedColor: {r: 1, g: 1, b: 1, a: 1}
   isSelected: 0
   textName: {fileID: 8496887275114331779}
