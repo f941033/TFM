@@ -9,6 +9,7 @@ public class BombController : MonoBehaviour
 
     public float rangoDeteccion = 2.0f;
     private bool activada = false;
+    public int damage;
 
     private void Start()
     {
@@ -62,7 +63,7 @@ public class BombController : MonoBehaviour
         {
             if (hit.CompareTag("Enemy"))
             {
-                hit.GetComponent<EnemyMovement>().ApplyKnockback();
+                hit.GetComponent<EnemyMovement>().ApplyKnockback(damage);
             }
         }
 

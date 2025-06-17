@@ -368,8 +368,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 1440080390595227449, guid: 455da485095718447818cd1b37962ad5, type: 3}
   explosionRadius: 2
-  damage: 50
   rangoDeteccion: 2
+  damage: 30
 --- !u!114 &5652064212195468965
 MonoBehaviour:
   m_ObjectHideFlags: 0
