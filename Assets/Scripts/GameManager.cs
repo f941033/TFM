@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
         messageText.gameObject.SetActive(false);
         cardManager.ClearPanelCard();
         panelEndWave.SetActive(false);
-        if (numberWave % 1 == 0)
+        if (numberWave % 5 == 0)
         {
             MerchantShop();
         }
