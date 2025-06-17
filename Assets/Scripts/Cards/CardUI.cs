@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using DeckboundDungeon.GamePhase;
 public class CardUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textName;
@@ -16,6 +17,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Image useImage;
     [SerializeField] private Image costImage;
     [SerializeField] private Image spriteImage;
+    [SerializeField] private TextMeshProUGUI goldCostText;
 
     public void setCardUI(CardData cardData)
     {
@@ -23,6 +25,10 @@ public class CardUI : MonoBehaviour
         data = cardData;
         textName.text = data.cardName;
         textDescription.text = data.description;
+        goldCostText.text = data.goldCost.ToString();
+        bool inShop = GameManager.CurrentPhase == GamePhase.Merchant;
+        Debug.Log("Esta carta" + cardData.name + " va a mostrar el oro? " + inShop);
+        goldCostText.gameObject.SetActive(inShop);
         if (sprite != null)
         {
             spriteImage.sprite = sprite;
@@ -60,15 +66,24 @@ public class CardUI : MonoBehaviour
             textDamage.gameObject.SetActive(false);
         }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    void Awake()
     {
-        
+        //GameManager gameManager = FindFirstObjectByType<GameManager>();
+        //GameManager.OnPhaseChanged += HandlePhaseChanged;
+        // Ajustamos el estado inicial **con la fase actual**
+        HandlePhaseChanged(GameManager.CurrentPhase);
+        Debug.Log(GameManager.CurrentPhase);
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDisable()
     {
-        
+    }
+
+    private void HandlePhaseChanged(GamePhase newPhase)
+    {
+        // Solo mostrar el texto de coste de oro en la fase de tienda
+        bool inShop = newPhase == GamePhase.Merchant;
+        goldCostText.gameObject.SetActive(inShop);
     }
 }

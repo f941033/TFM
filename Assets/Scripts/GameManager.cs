@@ -41,16 +41,17 @@ public class GameManager : MonoBehaviour
     public static GamePhase CurrentPhase { get; private set; }
     public static event Action<GamePhase> OnPhaseChanged;
     private MerchantUI merchantUI;
-    [SerializeField] private MerchantItem keyItemAsset;        // arrástralo en el Inspector
-    [SerializeField] private MerchantItem potionItemAsset;     // idem
+    [SerializeField] private MerchantItem keyItemAsset;
+    [SerializeField] private MerchantItem potionItemAsset;
+    [SerializeField] private GameObject panelMerchant;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        merchantUI = FindFirstObjectByType<MerchantUI>();
         ChangePhase(GamePhase.Preparation);
         textNumberWave.text = "Ronda: " + numberWave.ToString();
         enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
-        merchantUI = FindFirstObjectByType<MerchantUI>();
     }
 
 
@@ -314,13 +315,12 @@ public class GameManager : MonoBehaviour
 
     void MerchantShop()
     {
+        ChangePhase(GamePhase.Merchant);
+        Debug.Log(CurrentPhase);
+        panelMerchant.SetActive(true);
         var shopList = new List<MerchantItem>();
-        // 1 llave
-        shopList.Add(keyItemAsset);
-        // 1 poción
-        shopList.Add(potionItemAsset);
 
-        // 2 cartas aleatorias de tipo Trap o Buff
+        // 1 cartas aleatorias de tipo Trap o Buff
         var all = Resources.LoadAll<CardData>("Cards");
         var pool = new List<CardData>();
         foreach (var cards in all) if (cards.cardType == CardType.Trap || cards.cardType == CardType.Buff) pool.Add(cards);
@@ -329,7 +329,7 @@ public class GameManager : MonoBehaviour
             var pick = pool[UnityEngine.Random.Range(0, pool.Count)];
             var cardItem = ScriptableObject.CreateInstance<CardItem>();
             cardItem.itemName = pick.cardName;
-            //cardItem.icon     = /* tu icono */;
+            //cardItem.icon     = tu icono ;
             cardItem.cost = pick.goldCost;
             cardItem.cardData = pick;
             shopList.Add(cardItem);
@@ -348,8 +348,12 @@ public class GameManager : MonoBehaviour
             cardItem.cost = pick.goldCost;
             cardItem.cardData = pick;
             shopList.Add(cardItem);
-        }
+        } 
         
+        // 1 llave
+        shopList.Add(keyItemAsset);
+        // 1 poción
+        shopList.Add(potionItemAsset);
 
         merchantUI.Show(shopList);
         return;

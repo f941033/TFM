@@ -6154,7 +6154,6 @@ GameObject:
   m_Component:
   - component: {fileID: 424245358}
   - component: {fileID: 424245360}
-  - component: {fileID: 424245359}
   m_Layer: 5
   m_Name: PanelMerchant
   m_TagString: Untagged
@@ -6184,36 +6183,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &424245359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424245357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &424245360
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6621,6 +6590,7 @@ MonoBehaviour:
   messageText: {fileID: 138911130}
   keyItemAsset: {fileID: 11400000, guid: a18ae2c106bb27c4cbf6f18f11d5f40f, type: 2}
   potionItemAsset: {fileID: 11400000, guid: 0451ebaf759f985418e7322a660174c6, type: 2}
+  panelMerchant: {fileID: 339884724}
 --- !u!4 &462794454
 Transform:
   m_ObjectHideFlags: 0
@@ -19373,7 +19343,7 @@ GameObject:
   - component: {fileID: 1126757714}
   - component: {fileID: 1126757717}
   - component: {fileID: 1126757716}
-  - component: {fileID: 1126757715}
+  - component: {fileID: 1126757718}
   m_Layer: 5
   m_Name: PanelItems
   m_TagString: Untagged
@@ -19400,32 +19370,6 @@ RectTransform:
   m_AnchoredPosition: {x: -7.970703, y: 36.532684}
   m_SizeDelta: {x: -629.691, y: -362.67}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1126757715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1126757713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &1126757716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19464,6 +19408,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126757713}
   m_CullTransparentMesh: 1
+--- !u!114 &1126757718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126757713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 250
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 1
+  m_CellSize: {x: 200, y: 300}
+  m_Spacing: {x: 100, y: 50}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &1127114197
 GameObject:
   m_ObjectHideFlags: 0
@@ -22662,7 +22630,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1338439130}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1643290420}
+        m_TargetAssemblyTypeName: MerchantUI, Assembly-CSharp
+        m_MethodName: Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1338439130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25942,7 +25922,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contentParent: {fileID: 1126757714}
-  merchantItemViewPrefab: {fileID: 708602774470903686, guid: ce0cdd36fdc9ea942830383b7b073d71, type: 3}
+  canvaMerchant: {fileID: 339884724}
+  cardSlotPrefab: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
+  merchantItemViewPrefab: {fileID: 4593650895277504444, guid: 648402edd47d1394c9a8ea72b3ecca70, type: 3}
 --- !u!1 &1667874408
 GameObject:
   m_ObjectHideFlags: 0

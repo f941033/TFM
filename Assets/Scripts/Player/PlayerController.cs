@@ -226,7 +226,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public float CurrentHealth   => currentHealth;
+    public void AddKey()
+    {
+        FindFirstObjectByType<GameManager>().ShowMessage("No estás capacitado para verlo!!", 2);
+    }
+
+    public float CurrentHealth => currentHealth;
     public float CurrentDamage   => currentDamage;
     public float CurrentAttackSpeed => currentAttackSpeed;
     public float CurrentRange    => currentRange;
@@ -235,7 +240,10 @@ public class PlayerController : MonoBehaviour
     public float MaxSouls => maxSouls;
     public int AmountGold => amountGold;
 
-    public void Heal(float health) {
-        currentHealth +=  (int)health;
+    public void Heal(float health)
+    {
+        Debug.Log(health);
+        currentHealth *= (int)health;
+        OnHealthChanged?.Invoke(currentHealth);
     }
 }

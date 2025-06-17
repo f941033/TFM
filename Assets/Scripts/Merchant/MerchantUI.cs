@@ -1,11 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
+using DeckboundDungeon.GamePhase;
+using UnityEngine.UI;
 
 public class MerchantUI : MonoBehaviour
 {
     [SerializeField] private Transform contentParent;
-    [SerializeField] private GameObject merchantItemViewPrefab; // el prefab de arriba
-
+    [SerializeField] private GameObject canvaMerchant;
+    [SerializeField] private GameObject cardSlotPrefab;
+    [SerializeField] private GameObject merchantItemViewPrefab;
     private PlayerController player;
     private CardManager deck;
     private GameManager gm;
@@ -19,14 +22,35 @@ public class MerchantUI : MonoBehaviour
 
     public void Show(List<MerchantItem> shopItems)
     {
-        contentParent.gameObject.SetActive(true);
-        foreach (Transform t in contentParent) Destroy(t.gameObject);
-        foreach (var item in shopItems)
-        {
-            var go = Instantiate(merchantItemViewPrefab, contentParent);
-            var view = go.GetComponent<MerchantItemView>();
-            view.Setup(item, OnBuyClicked);
+        foreach (Transform t in contentParent) 
+        Destroy(t.gameObject);
+
+        // 2) Instanciar uno por uno
+        foreach (var item in shopItems) {
+        GameObject go;
+            if (item is CardItem cardItem)
+            {
+                // si es carta usamos el prefab de carta
+                go = Instantiate(cardSlotPrefab, contentParent);
+                var ui = go.GetComponent<CardUI>();
+                ui.setCardUI(cardItem.cardData);
+                /* var btn = go.GetComponentInChildren<Button>();
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(() => OnBuyClicked(cardItem)); */
         }
+            else
+            {
+                // si no, es pocion/llave: usamos merchantItemPrefab
+                go = Instantiate(merchantItemViewPrefab, contentParent);
+                var ui = go.GetComponent<MerchantItemView>();
+                ui.Setup(item, OnBuyClicked);
+            }
+        // asegurar escala 1:1
+        //go.GetComponent<RectTransform>().localScale = Vector3.one;
+    }
+
+    // 3) Mostrar el panel
+    gameObject.SetActive(true);
     }
 
     private void OnBuyClicked(MerchantItem item)
@@ -44,7 +68,8 @@ public class MerchantUI : MonoBehaviour
 
     public void Close()
     {
-        contentParent.gameObject.SetActive(false);
-        gm.PreparationPhase();
+        canvaMerchant.SetActive(false);
+        Debug.Log("Clico en cerrar");
+        //gm.PreparationPhase();
     }
 }
