@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     private Coroutine HideMessageCO;
     public static GamePhase CurrentPhase { get; private set; }
     public static event Action<GamePhase> OnPhaseChanged;
-    [SerializeField] private MerchantUI merchantUI;
+    private MerchantUI merchantUI;
     [SerializeField] private MerchantItem keyItemAsset;        // arrástralo en el Inspector
     [SerializeField] private MerchantItem potionItemAsset;     // idem
 
@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         ChangePhase(GamePhase.Preparation);
         textNumberWave.text = "Ronda: " + numberWave.ToString();
         enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
+        merchantUI = FindFirstObjectByType<MerchantUI>();
     }
 
 
@@ -145,7 +146,7 @@ public class GameManager : MonoBehaviour
         messageText.gameObject.SetActive(false);
         cardManager.ClearPanelCard();
         panelEndWave.SetActive(false);
-        if (numberWave % 5 == 0)
+        if (numberWave % 1 == 0)
         {
             MerchantShop();
         }
@@ -337,17 +338,18 @@ public class GameManager : MonoBehaviour
         // 2 cartas “deck effect” (deck cards)
         pool.Clear();
 
-        foreach (var cards in all) if (cards.cardType == CardType.DeckEffect) pool.Add(cards);
+         foreach (var cards in all) if (cards.cardType == CardType.DeckEffect) pool.Add(cards);
         for (int i = 0; i < 2; i++)
         {
             var pick = pool[UnityEngine.Random.Range(0, pool.Count)];
             var cardItem = ScriptableObject.CreateInstance<CardItem>();
             cardItem.itemName = pick.cardName;
-            //cardItem.icon     = /* tu icono */;
+            //cardItem.icon     =  tu icono ;
             cardItem.cost = pick.goldCost;
             cardItem.cardData = pick;
             shopList.Add(cardItem);
         }
+        
 
         merchantUI.Show(shopList);
         return;

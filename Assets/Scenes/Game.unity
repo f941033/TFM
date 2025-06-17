@@ -6619,6 +6619,8 @@ MonoBehaviour:
   textNumberOfCardsDiscardPile: {fileID: 1336435715}
   panelCardEndWave: {fileID: 934916987}
   messageText: {fileID: 138911130}
+  keyItemAsset: {fileID: 11400000, guid: a18ae2c106bb27c4cbf6f18f11d5f40f, type: 2}
+  potionItemAsset: {fileID: 11400000, guid: 0451ebaf759f985418e7322a660174c6, type: 2}
 --- !u!4 &462794454
 Transform:
   m_ObjectHideFlags: 0
@@ -25939,8 +25941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db97511b93b369438004a2f7340697b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopItemPrefab: {fileID: 708602774470903686, guid: ce0cdd36fdc9ea942830383b7b073d71, type: 3}
-  itemsContainer: {fileID: 1126757714}
+  contentParent: {fileID: 1126757714}
+  merchantItemViewPrefab: {fileID: 708602774470903686, guid: ce0cdd36fdc9ea942830383b7b073d71, type: 3}
 --- !u!1 &1667874408
 GameObject:
   m_ObjectHideFlags: 0

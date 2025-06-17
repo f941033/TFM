@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3543596183018189460}
-  - component: {fileID: 4098134175014583451}
   m_Layer: 0
   m_Name: MerchantItem
   m_TagString: Untagged
@@ -33,22 +32,6 @@ Transform:
   - {fileID: 426617121732149996}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4098134175014583451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708602774470903686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c82ec28cf26bb248b95842a909e460b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconImage: {fileID: 6868673372547323906}
-  nameText: {fileID: 49303630907194992}
-  costText: {fileID: 1562651055165632179}
-  buyButton: {fileID: 7479178455710897406}
 --- !u!1 &1453757473387285967
 GameObject:
   m_ObjectHideFlags: 0
