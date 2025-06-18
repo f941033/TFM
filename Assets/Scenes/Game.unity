@@ -6565,7 +6565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialEnemiesToKill: 3
   enemiesToKillInCurrentWave: 0
-  numberWave: 1
+  numberWave: 0
   inPrepPhase: 0
   textNumberWave: {fileID: 1640885441}
   panelEndWave: {fileID: 587340171}
@@ -11095,7 +11095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasSpawnPointPrefab: {fileID: 1031688393237169650, guid: 9dc715dabfa5bfa4993dc39b5eebcd6b, type: 3}
-  canvasHeroeInfoPrefab: {fileID: 0}
+  canvasHeroeInfoPrefab: {fileID: 8665243076676532010, guid: 904277eabbe6c0343b0c5fee0ec5c6a2, type: 3}
   enemyPrefab: {fileID: 2698680304010752485, guid: 9eb514c593f603d4dbd8ae472aecaaba, type: 3}
   heroePrefab: {fileID: 5049656263412520055, guid: e5105f855299e9745b7895e21395c074, type: 3}
   spawnWaypoints:

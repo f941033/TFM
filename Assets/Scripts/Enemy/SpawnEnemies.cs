@@ -14,7 +14,7 @@ public class SpawnEnemies : MonoBehaviour
     private List<GameObject> chosenPoints = new List<GameObject>();
     private Dictionary<GameObject, int> enemigosPorPuerta;
     private Transform heroePoint;
-    private int enemiesToSpawn, enemiesCounter;
+    //private int enemiesToSpawn, enemiesCounter;
     bool isSpecialRound = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,7 +32,7 @@ public class SpawnEnemies : MonoBehaviour
 
     }
 
-    public void GenerarPuntosSpawn(int roundNumber)
+    public void GenerarPuntosSpawn(int roundNumber, int enemiesToKillInCurrentWave)
     {
         chosenPoints.Clear();
 
@@ -59,7 +59,7 @@ public class SpawnEnemies : MonoBehaviour
 
 
         ActivarLuces();
-        CalcularNumeroEnemigos();
+        CalcularNumeroEnemigos(roundNumber, enemiesToKillInCurrentWave);
     }
     private void ActivarLuces()
     {
@@ -92,14 +92,14 @@ public class SpawnEnemies : MonoBehaviour
     }
 
 
-    void CalcularNumeroEnemigos()
+    void CalcularNumeroEnemigos(int roundNumber, int enemiesToKillInCurrentWave)
     {
-        enemiesToSpawn = FindFirstObjectByType<GameManager>().enemiesToKillInCurrentWave;
-        isSpecialRound = (FindAnyObjectByType<GameManager>().numberWave % 5 == 0);
+        //enemiesToSpawn = enemiesToKillInCurrentWave;
+        isSpecialRound = (roundNumber % 5 == 0);
 
         enemigosPorPuerta = new Dictionary<GameObject, int>();
 
-        for (int i = 1; i <= enemiesToSpawn; i++)
+        for (int i = 1; i <= enemiesToKillInCurrentWave; i++)
         {
             if (chosenPoints.Count == 0)
                 continue;
@@ -143,7 +143,7 @@ public class SpawnEnemies : MonoBehaviour
     }
     public IEnumerator GenerarEnemigos()
     { 
-        enemiesCounter = 0;
+        //enemiesCounter = 0;
 
         // ---------------- INSTANCIAR EL HÉROE CADA 5 RONDAS -------------------
 
@@ -154,7 +154,7 @@ public class SpawnEnemies : MonoBehaviour
             //Transform chosenPoint = chosenPoints[randomWP].transform;
             //Instantiate(heroePrefab, chosenPoint.position, Quaternion.identity);
             Instantiate(heroePrefab, heroePoint.position, Quaternion.identity);
-            enemiesCounter++;
+            //enemiesCounter++;
         }
 
         foreach (var puerta in enemigosPorPuerta.Keys)
@@ -166,6 +166,7 @@ public class SpawnEnemies : MonoBehaviour
                 Vector2 offset = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f));
                 Vector2 spawnPosition = new Vector2(puerta.transform.position.x, puerta.transform.position.y) + offset;
                 Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                //enemiesCounter++;
             }
         }
 

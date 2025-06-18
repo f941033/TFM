@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private int enemiesDied = 0;
     public int initialEnemiesToKill = 3;
     public int enemiesToKillInCurrentWave;
-    public int numberWave = 1;
+    public int numberWave = 0;
     private List<CardData> selectedCards = new List<CardData>();
     private CardData[] allCards;
 
@@ -50,8 +50,8 @@ public class GameManager : MonoBehaviour
     {
         merchantUI = FindFirstObjectByType<MerchantUI>();
         ChangePhase(GamePhase.Preparation);
-        textNumberWave.text = "Ronda: " + numberWave.ToString();
-        enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
+        //textNumberWave.text = "Ronda: " + numberWave.ToString();
+        //enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
     }
 
 
@@ -155,9 +155,9 @@ public class GameManager : MonoBehaviour
         {
             PreparationPhase();
         }
-        numberWave++;
-        textNumberWave.text = "Ronda: " + numberWave;
-        enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
+        //numberWave++;
+        //textNumberWave.text = "Ronda: " + numberWave;
+        //enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
 
 
         /*------------------------------------------------
@@ -211,6 +211,11 @@ public class GameManager : MonoBehaviour
     {
         inPrepPhase = true;
         ChangePhase(GamePhase.Preparation);
+
+        numberWave++;
+        textNumberWave.text = "Ronda: " + numberWave;
+        enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
+
         panelTimeScale.SetActive(false);
         drawPileImage.SetActive(true);
         countDownObject.SetActive(true);
@@ -242,7 +247,7 @@ public class GameManager : MonoBehaviour
 
         // ---------------PUNTOS DE SPAWN DE ENEMIGOS-----------------
         spawnEnemies.DesactivarLuces();
-        spawnEnemies.GenerarPuntosSpawn(numberWave);
+        spawnEnemies.GenerarPuntosSpawn(numberWave, enemiesToKillInCurrentWave);
 
     }
 
