@@ -132,7 +132,7 @@ public class SpawnEnemies : MonoBehaviour
 
             if(isSpecialRound && puerta.transform == heroePoint)
             {
-                canvas.transform.Find("PanelInfoHeroe").gameObject.SetActive(true);
+                canvas.transform.GetChild(0).Find("PanelInfoHeroe").gameObject.SetActive(true);
             }
             else
             {
