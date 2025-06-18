@@ -35,7 +35,7 @@ public class PlayerSoulsBar : MonoBehaviour
     private void UpdateSoulsBar(float newSouls)
     {
         soulsSlider.value = newSouls;
-         soulsText.text = $"{(int)newSouls}/{(int)maxSouls}";
+        soulsText.text = $"{(int)newSouls}/{(int)maxSouls}";
     }
     private void CreateTicks()
     {
@@ -54,8 +54,8 @@ public class PlayerSoulsBar : MonoBehaviour
 
             float yPos = Mathf.Lerp(
                 -containerHeight * 0.5f,
-                 containerHeight * 0.5f,
-                 normalizedPos
+                containerHeight * 0.5f,
+                normalizedPos
             );
 
             // Ajustamos el RectTransform de la marca

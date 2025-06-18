@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     Transform target;
     [SerializeField] private float health;
     [SerializeField] private float currentHealth;
-    private float damage = 10f;
+    [SerializeField] private float damage = 10f;
     private float attackCooldown = 0f;
     public float attackRate = 1f;
     public float attackRange = 1f;

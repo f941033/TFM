@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float currentSouls;
     [SerializeField] private float currentSoulsRate;
     [SerializeField] private int amountGold = 50;
-    
+
 
     //[Header("Events")]
     public event Action<float> OnSoulsChanged;
@@ -61,19 +61,21 @@ public class PlayerController : MonoBehaviour
 
         OnHealthChanged?.Invoke(currentHealth);
         OnSoulsChanged?.Invoke(currentSouls);
-  
+
         textGold.text = amountGold.ToString();
 
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void ApplyTemporaryBuff(BuffType buff, float modifier, float duration){
+    public void ApplyTemporaryBuff(BuffType buff, float modifier, float duration)
+    {
 
         StartCoroutine(ApplyBuffCoroutine(buff, modifier, duration));
     }
 
-    public IEnumerator ApplyBuffCoroutine( BuffType buff, float modifier, float duration){
+    public IEnumerator ApplyBuffCoroutine(BuffType buff, float modifier, float duration)
+    {
         switch (buff)
         {
             case BuffType.Health:
@@ -130,7 +132,7 @@ public class PlayerController : MonoBehaviour
     {
         targetsInRange.RemoveAll(e => e == null);
 
-        if (targetsInRange.Count == 0) 
+        if (targetsInRange.Count == 0)
             return;
 
         EnemyController target = targetsInRange[0];
@@ -166,7 +168,8 @@ public class PlayerController : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0f, baseHealth);
 
         OnHealthChanged?.Invoke(currentHealth);
-        if(currentHealth <=0 ){
+        if (currentHealth <= 0)
+        {
             Die();
         }
     }
@@ -184,16 +187,16 @@ public class PlayerController : MonoBehaviour
     }
     public void AddGold(int gold)
     {
-        amountGold+= gold;
+        amountGold += gold;
         textGold.text = amountGold.ToString();
 
         OnGoldChanged?.Invoke(gold);
     }
     public void SpendGold(int gold)
     {
-        if(amountGold >= gold)
+        if (amountGold >= gold)
         {
-            amountGold-=gold;
+            amountGold -= gold;
             textGold.text = amountGold.ToString();
             OnGoldChanged?.Invoke(gold);
         }
@@ -223,6 +226,7 @@ public class PlayerController : MonoBehaviour
         {
             baseHealth = value;
             currentHealth = value;
+            OnHealthChanged?.Invoke(currentHealth);
         }
     }
 
@@ -232,9 +236,9 @@ public class PlayerController : MonoBehaviour
     }
 
     public float CurrentHealth => currentHealth;
-    public float CurrentDamage   => currentDamage;
+    public float CurrentDamage => currentDamage;
     public float CurrentAttackSpeed => currentAttackSpeed;
-    public float CurrentRange    => currentRange;
+    public float CurrentRange => currentRange;
     public float CurrentSoulsRate => currentSoulsRate;
     public float CurrentSouls => currentSouls;
     public float MaxSouls => maxSouls;

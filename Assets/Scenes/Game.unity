@@ -5678,8 +5678,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -42.1337, y: 30.1}
-  m_SizeDelta: {x: 84.2673, y: 43.6075}
+  m_AnchoredPosition: {x: -59.8221, y: 30.1}
+  m_SizeDelta: {x: 119.6441, y: 43.6075}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &387794939
 MonoBehaviour:
@@ -14684,6 +14684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 1520440480}
   player: {fileID: 844376031}
+  healthValueText: {fileID: 387794939}
 --- !u!114 &844376034
 MonoBehaviour:
   m_ObjectHideFlags: 0

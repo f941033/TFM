@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         merchantUI = FindFirstObjectByType<MerchantUI>();
-        MerchantShop();
         ChangePhase(GamePhase.Preparation);
         textNumberWave.text = "Ronda: " + numberWave.ToString();
         enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
@@ -151,6 +150,10 @@ public class GameManager : MonoBehaviour
         if (numberWave % 5 == 0)
         {
             MerchantShop();
+        }
+        else
+        {
+            PreparationPhase();
         }
         numberWave++;
         textNumberWave.text = "Ronda: " + numberWave;

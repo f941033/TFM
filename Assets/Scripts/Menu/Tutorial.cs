@@ -75,7 +75,7 @@ public class Tutorial : MonoBehaviour
     public void PlayButton()
     {
         healthText.text = baseHealth.ToString();
-        playerController.baseHealth = baseHealth;
+        playerController.BaseHealth = baseHealth;
         gameManager.PreparationPhase(startingDeck);
         gameManager.SetSelectedCards(startingDeck);
         gameObject.SetActive(false);
