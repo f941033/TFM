@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DeckboundDungeon.GamePhase;
 
 public class PlayerSoulsBar : MonoBehaviour
 {
@@ -63,5 +64,4 @@ public class PlayerSoulsBar : MonoBehaviour
             tickRT.anchoredPosition = new Vector2(0f, yPos);
         }
     }
-
 }
