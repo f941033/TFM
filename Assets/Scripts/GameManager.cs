@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
         messageText.gameObject.SetActive(false);
         cardManager.ClearPanelCard();
         panelEndWave.SetActive(false);
-        if (numberWave % 5 == 0)
+        if (numberWave % 1 == 0)
         {
             MerchantShop();
         }
@@ -209,6 +209,7 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
+        soulsBar.SetActive(false);
         inPrepPhase = true;
         ChangePhase(GamePhase.Preparation);
         panelTimeScale.SetActive(false);
@@ -317,6 +318,7 @@ public class GameManager : MonoBehaviour
 
     void MerchantShop()
     {
+        soulsBar.SetActive(false);
         ChangePhase(GamePhase.Merchant);
         Debug.Log(CurrentPhase);
         panelMerchant.SetActive(true);

@@ -35,6 +35,9 @@ public class MerchantUI : MonoBehaviour
                 var ui = go.GetComponent<CardUI>();
                 ui.setCardUI(cardItem.cardData);
                 
+                Destroy(go.GetComponent<CardDragDrop>());
+                Destroy(go.GetComponent<CardSelector>());
+                Destroy(go.GetComponent<CardHoverInHand>());
                 var buyBtn = go.GetComponentInChildren<Button>();
                 buyBtn.onClick.RemoveAllListeners();
                 buyBtn.onClick.AddListener(() =>
