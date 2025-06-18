@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
   m_Name: Turret
   m_EditorClassIdentifier: 
-  cardName: Turrent
+  cardName: Turret
   description: "Dispara autom\xE1ticamente a los enemigos"
   cardType: 1
   healthModifier: -5
   numberOfTiles: 0
+  goldCost: 0
   used: 0
   uses: 0
   trapPrefab: {fileID: 7377369047218687532, guid: 7867a5b053835a3459000edc0ede0dc2, type: 3}
   cost: 10
   damage: 10
   trapSizeInTiles: {x: 1, y: 1}
+  reduceSpeed: 0
+  seconds: 0

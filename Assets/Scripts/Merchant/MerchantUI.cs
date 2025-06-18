@@ -73,6 +73,11 @@ public class MerchantUI : MonoBehaviour
 
     private void OnBuyClicked(MerchantItem item)
     {
+        if (item is PotionItem && player.CurrentHealth >= player.BaseHealth)
+        {
+            gm.ShowMessage("¡Tu vida ya está completa, no seas un gastizo!", 2f);
+            return;
+        }
         if (player.AmountGold < item.cost)
         {
             gm.ShowMessage("No tienes suficiente oro", 2f);

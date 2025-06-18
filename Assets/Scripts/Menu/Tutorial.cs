@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using DeckboundDungeon.GamePhase;
 
 public class Tutorial : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Tutorial : MonoBehaviour
     void Start()
     {
         baseHealth = playerController.baseHealth;
+        gameManager.ChangePhase(GamePhase.Tutorial);
         GenerateDeckPredef();
     }
 

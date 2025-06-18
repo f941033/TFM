@@ -246,8 +246,7 @@ public class PlayerController : MonoBehaviour
 
     public void Heal(float health)
     {
-        Debug.Log(health);
-        currentHealth *= (int)health;
+        currentHealth = Mathf.Min(currentHealth + health, baseHealth);
         OnHealthChanged?.Invoke(currentHealth);
     }
 }

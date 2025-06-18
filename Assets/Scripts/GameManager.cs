@@ -88,45 +88,34 @@ public class GameManager : MonoBehaviour
         {
             Destroy(t.gameObject);
         }
+        ChangePhase(GamePhase.CardSelection);
         allCards = Resources.LoadAll<CardData>("Cards");
+        var pool = new List<CardData>(allCards);
         List<CardData> selectedCards = new List<CardData>();
         bool isSpecialRound = (numberWave % 5 == 0);
-        CardData turretCard = null;
-
-        // Buscar la carta de torreta
-        foreach (CardData card in allCards)
-        {
-            if (card.cardName.Contains("Turrent"))
-            {
-                turretCard = card;
-                break;
-            }
-        }
+        CardData turretCard = pool.Find(c => c.cardName.Contains("Turret"));
 
         if (isSpecialRound && turretCard != null)
         {
-            // Añadir 1 carta de torreta y 2 aleatorias
             selectedCards.Add(turretCard);
-
+            pool.Remove(turretCard);
             // Generar 2 cartas aleatorias que no sean la torreta
             for (int i = 0; i < 2; i++)
             {
-                CardData randomCard;
-                do
-                {
-                    randomCard = allCards[UnityEngine.Random.Range(0, allCards.Length)];
-                } while (randomCard == turretCard);
-
-                selectedCards.Add(randomCard);
+                int idx = UnityEngine.Random.Range(0, pool.Count);
+                selectedCards.Add(pool[idx]);
+                pool.RemoveAt(idx);
             }
-
         }
+
         else
         {
             // Cartas completamente aleatorias
             for (int i = 0; i < 3; i++)
             {
-                selectedCards.Add(allCards[UnityEngine.Random.Range(0, allCards.Length)]);
+                int idx = UnityEngine.Random.Range(0, pool.Count);
+                selectedCards.Add(pool[idx]);
+                pool.RemoveAt(idx);
             }
         }
 
@@ -147,7 +136,7 @@ public class GameManager : MonoBehaviour
         messageText.gameObject.SetActive(false);
         cardManager.ClearPanelCard();
         panelEndWave.SetActive(false);
-        if (numberWave % 1 == 0)
+        if (numberWave % 5 == 0)
         {
             MerchantShop();
         }
