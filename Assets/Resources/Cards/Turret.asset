@@ -17,7 +17,7 @@ MonoBehaviour:
   cardType: 1
   healthModifier: -5
   numberOfTiles: 0
-  goldCost: 0
+  goldCost: 150
   used: 0
   uses: 0
   trapPrefab: {fileID: 7377369047218687532, guid: 7867a5b053835a3459000edc0ede0dc2, type: 3}
