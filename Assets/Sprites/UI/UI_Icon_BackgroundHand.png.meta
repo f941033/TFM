@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bd51548010e0595418e0089587fbf8f9
+guid: 9cc19af5dfc7b4b4287e68ba9f666b6f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6391399019768103929
-    second: pile_0
+      213: 5230362690109627353
+    second: UI_Icon_BackgroundHand_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pile_0
+      name: UI_Icon_BackgroundHand_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 19
-        width: 1036
-        height: 1530
+        x: 0
+        y: 0
+        width: 1917
+        height: 263
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f3ce0f9b8fc2b850800000000000000
-      internalID: 6391399019768103929
+      spriteID: 9dbd07ea72bf59840800000000000000
+      internalID: 5230362690109627353
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pile_0: 6391399019768103929
+      UI_Icon_BackgroundHand_0: 5230362690109627353
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
