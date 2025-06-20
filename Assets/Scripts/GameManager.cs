@@ -136,14 +136,7 @@ public class GameManager : MonoBehaviour
         messageText.gameObject.SetActive(false);
         cardManager.ClearPanelCard();
         panelEndWave.SetActive(false);
-        if (numberWave % 5 == 0)
-        {
-            MerchantShop();
-        }
-        else
-        {
-            PreparationPhase();
-        }
+        
         //numberWave++;
         //textNumberWave.text = "Ronda: " + numberWave;
         //enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
@@ -162,6 +155,15 @@ public class GameManager : MonoBehaviour
         {
             if (item.cardName == selectedName)
                 selectedCards.Add(item);
+        }
+
+        if (numberWave % 5 == 0)
+        {
+            MerchantShop();
+        }
+        else
+        {
+            PreparationPhase();
         }
     }
 

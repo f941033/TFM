@@ -213,6 +213,7 @@ MonoBehaviour:
   tipo: 2
   health: 200
   currentHealth: 0
+  damage: 2.5
   attackRate: 1
   attackRange: 1
   gold: 200
@@ -432,6 +433,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   tileSize: {x: 0.5, y: 0.5}
+  knockbackDuration: 0.2
+  knockbackTiles: 5
 --- !u!114 &1010592873871219012
 MonoBehaviour:
   m_ObjectHideFlags: 0

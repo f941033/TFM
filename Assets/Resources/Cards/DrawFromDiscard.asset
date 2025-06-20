@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DrawFromDiscard
   m_EditorClassIdentifier: 
   cardName: Vuelta del abismo
-  description: "Devuelve a tu mano la\xFAltijma carta usada"
+  description: "Devuelve a tu mano la \xFAltiima carta usada"
   cardType: 2
   healthModifier: 0
   numberOfTiles: 0
