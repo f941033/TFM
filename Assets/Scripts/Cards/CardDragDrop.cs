@@ -240,7 +240,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 player.SpendSouls(trap.cost);
             gameManager.UpdateTextNumberOfCardsDiscard();
         }
-
+        canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
     }
 }
