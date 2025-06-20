@@ -26,6 +26,8 @@ public class ChangeCardPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.name.Contains("TurretPrefab")) return;
+
         if (estaArrastrando)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -67,6 +69,8 @@ public class ChangeCardPosition : MonoBehaviour
     void OnMouseDown()
     {
         if (!FindAnyObjectByType<GameManager>().inPrepPhase) return;
+        if (gameObject.name.Contains("TurretPrefab") ) return;
+
         // Empieza el arrastre
         estaArrastrando = true;
     }
@@ -76,6 +80,7 @@ public class ChangeCardPosition : MonoBehaviour
     void OnMouseUp()
     {
         if (!FindAnyObjectByType<GameManager>().inPrepPhase) return;
+        if (gameObject.name.Contains("TurretPrefab")) return;
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPos = tilemap.WorldToCell(worldPos);
