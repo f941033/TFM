@@ -43737,8 +43737,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Haz zoom y mueve el mapa con la rueda del rat\xF3n\nHaz clic en el deck
-    para ver todas las cartas del mazo\n"
+  m_text: 'No invocas cartas. Desatas condenas.
+
+    Que empiece la masacre'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7beba86790a2e304ea3bf19ee6241b4b, type: 2}
   m_sharedMaterial: {fileID: -1874789186171507545, guid: 7beba86790a2e304ea3bf19ee6241b4b, type: 2}
