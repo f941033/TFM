@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MerchantItem keyItemAsset;
     [SerializeField] private MerchantItem potionItemAsset;
     [SerializeField] private GameObject panelMerchant;
+    public bool hasKey = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

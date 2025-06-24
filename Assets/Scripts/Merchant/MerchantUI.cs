@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MerchantUI : MonoBehaviour
 {
+    public Image key;
     [SerializeField] private Transform contentParent;
     [SerializeField] private GameObject canvaMerchant;
     [SerializeField] private GameObject cardSlotPrefab;
@@ -73,11 +74,11 @@ public class MerchantUI : MonoBehaviour
 
     private void OnBuyClicked(MerchantItem item)
     {
-        if (item is KeyItem && player.CurrentHealth >= player.BaseHealth)
-        {
-            gm.ShowMessage("¡Tu vida ya está completa, no seas un gastizo!", 2f);
-            return;
-        }
+        //if (item is KeyItem && player.CurrentHealth >= player.BaseHealth)
+        //{
+        //    gm.ShowMessage("¡Tu vida ya está completa, no seas un gastizo!", 2f);
+        //    return;
+        //}
         if (player.AmountGold < item.cost)
         {
             gm.ShowMessage("No tienes suficiente oro", 2f);
@@ -86,6 +87,17 @@ public class MerchantUI : MonoBehaviour
         player.SpendGold(item.cost);
         item.Apply(player, gm);
         gm.ShowMessage($"Compraste “{item.itemName}”", 2f);
+
+        if (item.itemName.Contains("Llave"))
+        {
+            gm.hasKey = true;
+            key.gameObject.SetActive(true);
+        }
+    }
+
+    public void DeactiveKey()
+    {
+        key.gameObject.SetActive(false);
     }
 
     public void Close()

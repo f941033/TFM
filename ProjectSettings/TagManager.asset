@@ -9,6 +9,7 @@ TagManager:
   - Foso
   - PlayerWall
   - CanvasEnemies
+  - ColliderSala
   layers:
   - Default
   - TransparentFX

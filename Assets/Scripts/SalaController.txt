@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,10 +10,11 @@ public class SalaController : MonoBehaviour
     public GameObject[] wayPoints;
     public GameObject[] removeWayPoints;
     public SpawnEnemies spawnEnemiesController;
+    //bool cartaAbrirSala = false;
     public GameManager gm;
 
     static GameObject[] salas;
-    static int indexSala = 0;
+    static int indexSala;
     GameObject parent;
     MerchantUI merchant;
 
@@ -22,20 +22,21 @@ public class SalaController : MonoBehaviour
     void Start()
     {
         merchant = FindAnyObjectByType<MerchantUI>();
-        parent = transform.parent.gameObject;
+        parent = gameObject.GetComponentInParent<GameObject>();
         originalColor = tilemap.color;
-
         if (gameObject.tag == "salaCentral")
         {
             estaLibre = true;
         }
-
         if (salas != null) return;
         else
         {
             salas = GameObject.FindGameObjectsWithTag("ColliderSala");
-            salas = salas.OrderBy(sala => sala.transform.GetSiblingIndex()).ToArray();
-            indexSala++;
+            foreach (var sala in salas)
+            {
+                sala.SetActive(false);
+            }
+            indexSala = 0;
         }
 
     }
@@ -52,28 +53,26 @@ public class SalaController : MonoBehaviour
         {
             gm.hasKey = false;
             merchant.DeactiveKey();
+            estaLibre = true;
 
             foreach (var item in parent.GetComponentsInChildren<SalaController>())
             {
-                item.estaLibre = true;
-                spawnEnemiesController.AddWayPoints(item.wayPoints, item.removeWayPoints);
-                item.tilemap.gameObject.SetActive(false);
+                item.gameObject.SetActive(false);
             }
-
             indexSala++;
+
+            spawnEnemiesController.AddWayPoints(wayPoints, removeWayPoints);
         }
 
     }
 
     private void OnMouseEnter()
     {
-        if (gameObject.tag == "salaCentral") return;
-
         if (gm.hasKey && parent == salas[indexSala])
         {
             foreach (var item in parent.GetComponentsInChildren<SalaController>())
             {
-                item.tilemap.color = Color.red;
+                item.tilemap.color = Color.red; ;
             }
         }
 
@@ -81,8 +80,6 @@ public class SalaController : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (gameObject.tag == "salaCentral") return;
-
         foreach (var item in parent.GetComponentsInChildren<SalaController>())
         {
             item.tilemap.color = originalColor;
