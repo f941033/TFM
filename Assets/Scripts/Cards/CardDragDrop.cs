@@ -185,6 +185,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
         Vector3Int cellPos = dropTilemap.WorldToCell(worldPos);
+        bool isSet = false;
 
         if (dropTilemap.HasTile(cellPos))
         {
@@ -194,53 +195,73 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 SalaController sala = col.GetComponent<SalaController>();
                 if (sala != null && sala.estaLibre)
                 {
-                    if (cardData.cardType == CardType.Trap)
-                    {
-                        dropTilemap.SetTileFlags(cellPos, TileFlags.None);
-                        //dropTilemap.SetColor(cellPos, Color.green);
+                    Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
 
-                        Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
-                        cardData.Play(player, worldCenter);
-
-                    }
-                    if (cardData.cardType == CardType.DeckEffect)
+                    // CARTA DECK EFFECT
+                    if (cardData is DeckEffectCardData deckEffect)
                     {
-                        if (Deck.discardPile.Count == 0)
+                        switch (deckEffect.effectType)
                         {
-                            Debug.Log("No hay cartas en la pila de descartes");
-                            goto End_Drop;
+                            case DeckEffectCardData.Effect.DrawFromDiscard:
+                                if (Deck.discardPile.Count == 0)
+                                {
+                                    gameManager.ShowMessage("No hay cartas en la pila de descartes", 2);
+                                    break;
+                                }
+                                deckEffect.Play(player, worldCenter);
+                                Debug.Log("Hay descartes");
+                                Deck.CardPlayed(gameObject, cardData);
+                                
+                                isSet = true;
+                                break;
+
+                            case DeckEffectCardData.Effect.Draw:
+                                deckEffect.Play(player, worldCenter);
+                                Deck.CardPlayed(gameObject, cardData);
+                                isSet = true;
+                                break;
                         }
                     }
+
+                    // CARTA TRAMPA
+                    else if (cardData.cardType == CardType.Trap)
+                    {
+                        dropTilemap.SetTileFlags(cellPos, TileFlags.None);
+                        cardData.Play(player, worldCenter);
+                        Deck.CardPlayed(gameObject, cardData);
+                        isSet = true;
+                    }
+
                     if (hasPrevious)
                     {
                         highlightMap.SetTile(previousCell, null);
                         hasPrevious = false;
                     }
-                    Deck.CardPlayed(gameObject, cardData);
-                    cartaColocada = true;
                 }
             }
-            canvasGroup.alpha = 1f;
-            canvasGroup.blocksRaycasts = true;
-            isDragging = false;
         }
 
-    End_Drop:
-        if (!cartaColocada)
+        isDragging = false;
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = true;
+
+        if (!isSet)
         {
+            // Revertir la carta a su posición original
             transform.SetParent(originalTransform, true);
             transform.SetSiblingIndex(cardIndex);
             rectTransform.anchoredPosition = originalAnchoredPosition;
         }
         else
         {
-            if (Deck.discardPile.Count == 1) gameManager.ActivateDiscardPileImage();
+            // Actualizar cosas tras colocar la carta
+            if (Deck.discardPile.Count == 1)
+                gameManager.ActivateDiscardPileImage();
 
             if (cardData is TrapCardData trap)
                 player.SpendSouls(trap.cost);
+
             gameManager.UpdateTextNumberOfCardsDiscard();
         }
-        canvasGroup.alpha = 1f;
-        canvasGroup.blocksRaycasts = true;
     }
 }
