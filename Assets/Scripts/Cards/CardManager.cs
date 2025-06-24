@@ -17,15 +17,15 @@ public class CardManager : MonoBehaviour
     [Header("Variables del mazo")]
     public List<CardData> drawPile = new List<CardData>();
     public List<CardData> discardPile = new List<CardData>();
-    private List<GameObject> cardsInHand = new List<GameObject>();
-    public byte handSize = 5;
+    public List<GameObject> cardsInHand = new List<GameObject>();
+    public byte handSize = 4;
     public byte currentHandSize;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = FindFirstObjectByType<PlayerController>();
-        currentHandSize = handSize;
+        //currentHandSize = handSize;
     }
 
     public void ClearPanelCard()
@@ -56,7 +56,7 @@ public class CardManager : MonoBehaviour
         var cardData = Instantiate(prefabCard, panelCard);
         CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
         cardUI.setCardUI(cardToDraw);
-        if (cardToDraw.cardType == CardType.Trap)
+        if (cardToDraw.cardType == CardType.Trap || cardToDraw.cardType == CardType.DeckEffect)
         {
             var drag = cardData.GetComponent<CardDragDrop>();
             drag.dropTilemap = zonaValidaTilemap;
@@ -75,12 +75,26 @@ public class CardManager : MonoBehaviour
 
     public void DrawFullHand()
     {
-
         while (cardsInHand.Count < currentHandSize && (drawPile.Count > 0 || discardPile.Count > 0))
         {
-            DrawCard();
-        }
+            if (drawPile.Count == 0 && discardPile.Count > 0)
+            {
+                // Mezclar descartes y pasarlos al drawPile
+                drawPile.AddRange(discardPile);
+                Shuffle(drawPile);
+                discardPile.Clear();
+                FindFirstObjectByType<GameManager>().UpdateTextNumberOfCardsDiscard();
+            }
 
+            if (drawPile.Count > 0)
+            {
+                DrawCard();
+            }
+            else
+            {
+                break; // no se puede robar más
+            }
+        }
     }
 
     public void CardPlayed(GameObject card, CardData cardData)
@@ -112,9 +126,50 @@ public class CardManager : MonoBehaviour
             CardData cardData = discardPile[discardPile.Count - 1];
             discardPile.RemoveAt(discardPile.Count - 1);
 
-            drawPile.Insert(0, cardData);
-            DrawCard();
+            var cardObj = Instantiate(prefabCard, panelCard);
+            var cardUI = cardObj.GetComponentInChildren<CardUI>();
+            cardUI.setCardUI(cardData);
+
+            Debug.Log("la carta cogida de descartes es: " + cardData.cardName);
+            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect)
+            {
+                var drag = cardObj.GetComponent<CardDragDrop>();
+                drag.dropTilemap = zonaValidaTilemap;
+                drag.cardData = cardData;
+                drag.player = player;
+                drag.Deck = this;
+            }
+            else if (cardData is BuffCardData buffData)
+            {
+                Destroy(cardObj.GetComponent<CardDragDrop>());
+                var hability = cardObj.GetComponentInChildren<HabilityCardHandler>(includeInactive: true);
+                hability.Initialize(buffData, player);
+            }
+
+            cardsInHand.Add(cardObj);
+            //DrawCard();
             count--;
         }
+    }
+
+    public void DiscardHand()
+    {
+        // suponemos que cardsInHand es la lista privada de GameObject de cartas
+        foreach (var cardGO in cardsInHand)
+        {
+            // sacamos el CardData de cada carta
+            var ui = cardGO.GetComponentInChildren<CardUI>();
+            if (ui != null && ui.data != null)
+                discardPile.Add(ui.data);
+
+            Destroy(cardGO);
+        }
+        cardsInHand.Clear();
+
+        // avisa al GameManager para actualizar UI de pila de descarte, si quieres
+        FindFirstObjectByType<GameManager>().UpdateTextNumberOfCardsDiscard();
+
+        if (discardPile.Count > 0)
+            gameManager.ActivateDiscardPileImage();
     }
 }

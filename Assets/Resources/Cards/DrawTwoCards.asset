@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67c56239af7c64f448cf71fafba9ab99, type: 3}
-  m_Name: DrawFromDiscard
+  m_Name: DrawTwoCards
   m_EditorClassIdentifier: 
-  cardName: Vuelta del abismo
-  description: "Devuelve a tu mano la \xFAltiima de la pila de descartes"
+  cardName: RobaCartas
+  description: Roba dos cartas
   cardType: 2
-  healthModifier: 0
+  healthModifier: 20
   numberOfTiles: 0
-  goldCost: 150
-  effectType: 0
-  count: 1
+  goldCost: 40
+  effectType: 2
+  count: 2
   duration: 0

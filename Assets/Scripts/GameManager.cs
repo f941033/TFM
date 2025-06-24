@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 using System.Collections;
@@ -44,6 +45,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MerchantItem keyItemAsset;
     [SerializeField] private MerchantItem potionItemAsset;
     [SerializeField] private GameObject panelMerchant;
+    [SerializeField] private int currentPrepHand = 1;
+    [SerializeField] private const int totalPrepHands = 3;
+    [SerializeField] private Button btnNextHand;
+    [SerializeField] private TextMeshProUGUI prepHandCounterText;
     public bool hasKey = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -51,6 +56,7 @@ public class GameManager : MonoBehaviour
     {
         merchantUI = FindFirstObjectByType<MerchantUI>();
         ChangePhase(GamePhase.Preparation);
+        btnNextHand.onClick.AddListener(NextPreparationHand);
         //textNumberWave.text = "Ronda: " + numberWave.ToString();
         //enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
     }
@@ -93,8 +99,9 @@ public class GameManager : MonoBehaviour
         allCards = Resources.LoadAll<CardData>("Cards");
         var pool = new List<CardData>(allCards);
         List<CardData> selectedCards = new List<CardData>();
-        bool isSpecialRound = (numberWave % 5 == 0);
-        CardData turretCard = pool.Find(c => c.cardName.Contains("Turret"));
+        bool isSpecialRound = (numberWave > 0) && (numberWave % 5 == 0);
+
+        CardData turretCard = pool.Find(c => c.cardName.Equals("Turret"));
 
         if (isSpecialRound && turretCard != null)
         {
@@ -112,7 +119,9 @@ public class GameManager : MonoBehaviour
         else
         {
             // Cartas completamente aleatorias
-            for (int i = 0; i < 3; i++)
+            CardData robaCard = pool.Find(c => c.cardName.Equals("RobaCartas"));
+            selectedCards.Add(robaCard);
+            for (int i = 0; i < 2; i++)
             {
                 int idx = UnityEngine.Random.Range(0, pool.Count);
                 selectedCards.Add(pool[idx]);
@@ -132,12 +141,11 @@ public class GameManager : MonoBehaviour
 
     public void PlayAnotherRun()
     {
-        Debug.Log("vamos a por otra ronda");
 
         messageText.gameObject.SetActive(false);
         cardManager.ClearPanelCard();
         panelEndWave.SetActive(false);
-        
+
         //numberWave++;
         //textNumberWave.text = "Ronda: " + numberWave;
         //enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
@@ -201,6 +209,10 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
+        cardManager.currentHandSize = 3;
+        currentPrepHand = 1;
+        UpdatePrepHandUI();
+        btnNextHand.transform.parent.gameObject.SetActive(true);
         soulsBar.SetActive(false);
         inPrepPhase = true;
         ChangePhase(GamePhase.Preparation);
@@ -211,19 +223,18 @@ public class GameManager : MonoBehaviour
 
         panelTimeScale.SetActive(false);
         drawPileImage.SetActive(true);
-        countDownObject.SetActive(true);
+        //countDownObject.SetActive(true);
         cardManager.ClearPanelCard();
         soulsBar.SetActive(true);
         playerController.RefillSouls();
         //GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
 
-        Debug.Log("vida base del player: " + FindFirstObjectByType<PlayerController>().baseHealth.ToString());
         startingDeck = new List<CardData>(selectedCards);
 
         //Crear el mazo de cartas de tipo TRAMPA
         foreach (CardData card in startingDeck)
         {
-            if (card.cardType == CardType.Trap)
+            if (card.cardType == CardType.Trap || card.cardType == CardType.DeckEffect)
             {
                 cardManager.drawPile.Add(card);
             }
@@ -236,7 +247,14 @@ public class GameManager : MonoBehaviour
 
         cardManager.Shuffle(cardManager.drawPile);
         cardManager.Shuffle(startingDeck);
-        cardManager.DrawFullHand();
+
+        //Esto es lo nuevo de las manos
+        currentPrepHand = 1;
+        btnNextHand.gameObject.SetActive(true); // mostrar botón
+
+        cardManager.ClearPanelCard();
+        cardManager.DrawFullHand(); // primera mano
+
 
         // ---------------PUNTOS DE SPAWN DE ENEMIGOS-----------------
         spawnEnemies.DesactivarLuces();
@@ -267,7 +285,7 @@ public class GameManager : MonoBehaviour
         //Crear el mazo de cartas de tipo ACCI�N
         foreach (CardData card in startingDeck)
         {
-            if (card.cardType != CardType.Trap)
+            if (card.cardType != CardType.Trap && card.cardType != CardType.DeckEffect)
             {
                 cardManager.drawPile.Add(card);
             }
@@ -338,7 +356,7 @@ public class GameManager : MonoBehaviour
         // 2 cartas “deck effect” (deck cards)
         pool.Clear();
 
-         foreach (var cards in all) if (cards.cardType == CardType.DeckEffect) pool.Add(cards);
+        foreach (var cards in all) if (cards.cardType == CardType.DeckEffect) pool.Add(cards);
         for (int i = 0; i < 2; i++)
         {
             var pick = pool[UnityEngine.Random.Range(0, pool.Count)];
@@ -347,8 +365,8 @@ public class GameManager : MonoBehaviour
             cardItem.cost = pick.goldCost;
             cardItem.cardData = pick;
             shopList.Add(cardItem);
-        } 
-        
+        }
+
         // 1 llave
         shopList.Add(keyItemAsset);
         // 1 poción
@@ -366,6 +384,24 @@ public class GameManager : MonoBehaviour
     public void AddCardToDeck(CardData card)
     {
         selectedCards.Add(card);
-        Debug.Log("He entrado en añadir carta");
+    }
+
+    private void NextPreparationHand()
+    {
+        cardManager.DiscardHand();
+        cardManager.DrawFullHand();
+
+        currentPrepHand++;
+        UpdatePrepHandUI();
+
+        if (currentPrepHand > totalPrepHands)
+        {
+            btnNextHand.gameObject.SetActive(false);
+            StartRun();
+        }
+    }
+    private void UpdatePrepHandUI()
+    {
+        prepHandCounterText.text = $"{currentPrepHand}/{totalPrepHands}";
     }
 }
