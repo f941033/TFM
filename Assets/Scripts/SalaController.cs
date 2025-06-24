@@ -73,7 +73,7 @@ public class SalaController : MonoBehaviour
         {
             foreach (var item in parent.GetComponentsInChildren<SalaController>())
             {
-                item.tilemap.color = Color.red;
+                item.tilemap.color = Color.yellow;
             }
         }
 
