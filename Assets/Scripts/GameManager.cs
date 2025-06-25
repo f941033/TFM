@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     public GameObject prefabCard;
     public Transform panelCard;
     public GameObject soulsBar;
-    public GameObject countDownObject;
     public List<CardData> startingDeck;
     public SpawnEnemies spawnEnemies;
     public GameObject panelGo;
@@ -269,7 +268,7 @@ public class GameManager : MonoBehaviour
     {
         inPrepPhase = false;
         ChangePhase(GamePhase.Action);
-        countDownObject.SetActive(false);
+        btnNextHand.gameObject.SetActive(false);
         panelTimeScale.SetActive(true);
         StartCoroutine("PanelGo");
 
@@ -396,7 +395,6 @@ public class GameManager : MonoBehaviour
 
         if (currentPrepHand > totalPrepHands)
         {
-            btnNextHand.gameObject.SetActive(false);
             StartRun();
         }
     }
