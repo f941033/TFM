@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MerchantUI : MonoBehaviour
 {
     public Image key;
+    public RoomsManager roomsManager;
     [SerializeField] private Transform contentParent;
     [SerializeField] private GameObject canvaMerchant;
     [SerializeField] private GameObject cardSlotPrefab;
@@ -79,6 +80,7 @@ public class MerchantUI : MonoBehaviour
         //    gm.ShowMessage("¡Tu vida ya está completa, no seas un gastizo!", 2f);
         //    return;
         //}
+
         if (player.AmountGold < item.cost)
         {
             gm.ShowMessage("No tienes suficiente oro", 2f);
@@ -92,6 +94,7 @@ public class MerchantUI : MonoBehaviour
         {
             gm.hasKey = true;
             key.gameObject.SetActive(true);
+            roomsManager.OpenRing();
         }
     }
 

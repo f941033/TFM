@@ -21,7 +21,7 @@ MonoBehaviour:
   used: 0
   uses: 0
   trapPrefab: {fileID: 7377369047218687532, guid: 7867a5b053835a3459000edc0ede0dc2, type: 3}
-  cost: 500
+  cost: 10
   damage: 15
   trapSizeInTiles: {x: 1, y: 1}
   reduceSpeed: 0

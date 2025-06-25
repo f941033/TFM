@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int numberWave = 0;
     private List<CardData> selectedCards = new List<CardData>();
     private CardData[] allCards;
+    private MerchantUI merchant;
 
     public bool inPrepPhase = false;
     public TextMeshProUGUI textNumberWave;
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button btnNextHand;
     [SerializeField] private TextMeshProUGUI prepHandCounterText;
     public bool hasKey = false;
+    public TextMeshProUGUI nextHandText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
         btnNextHand.onClick.AddListener(NextPreparationHand);
         //textNumberWave.text = "Ronda: " + numberWave.ToString();
         //enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
+        merchant = FindAnyObjectByType<MerchantUI>();
     }
 
 
@@ -208,6 +211,7 @@ public class GameManager : MonoBehaviour
         cardManager.currentHandSize = 3;
         currentPrepHand = 1;
         UpdatePrepHandUI();
+        merchant.DeactiveKey();
         btnNextHand.transform.parent.gameObject.SetActive(true);
         soulsBar.SetActive(false);
         inPrepPhase = true;
@@ -398,5 +402,7 @@ public class GameManager : MonoBehaviour
     private void UpdatePrepHandUI()
     {
         prepHandCounterText.text = $"{currentPrepHand}/{totalPrepHands}";
+        if (currentPrepHand == totalPrepHands) nextHandText.text = "Run";
+        else nextHandText.text = "Next Hand";
     }
 }
