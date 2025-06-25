@@ -1291,7 +1291,6 @@ MonoBehaviour:
   wayPoints: []
   removeWayPoints: []
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!1 &108344239
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,7 +2194,6 @@ MonoBehaviour:
   wayPoints: []
   removeWayPoints: []
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &179173845
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19445,6 +19443,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372548004}
   m_CullTransparentMesh: 1
+--- !u!1 &379334546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 379334547}
+  - component: {fileID: 379334548}
+  m_Layer: 0
+  m_Name: RoomsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &379334547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379334546}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 421110705}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &379334548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379334546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f23b5fd481d644a8dcf6a50b6f4ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &387794937
 GameObject:
   m_ObjectHideFlags: 0
@@ -19950,7 +19992,6 @@ MonoBehaviour:
   removeWayPoints:
   - {fileID: 0}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &411383682
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20117,6 +20158,7 @@ Transform:
   - {fileID: 1880551134}
   - {fileID: 1643290419}
   - {fileID: 2082548421}
+  - {fileID: 379334547}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &424091937
@@ -20423,7 +20465,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &437076986
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20555,7 +20596,6 @@ MonoBehaviour:
   prefabCard: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
   panelCard: {fileID: 934916987}
   soulsBar: {fileID: 885787625}
-  countDownObject: {fileID: 0}
   startingDeck: []
   spawnEnemies: {fileID: 694397033}
   panelGo: {fileID: 1141026837}
@@ -20570,6 +20610,7 @@ MonoBehaviour:
   btnNextHand: {fileID: 237369736}
   prepHandCounterText: {fileID: 562629571}
   hasKey: 0
+  nextHandText: {fileID: 818748482}
 --- !u!4 &462794454
 Transform:
   m_ObjectHideFlags: 0
@@ -20635,7 +20676,6 @@ MonoBehaviour:
   wayPoints: []
   removeWayPoints: []
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &469541154
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20989,7 +21029,6 @@ MonoBehaviour:
   wayPoints: []
   removeWayPoints: []
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!1 &515426501
 GameObject:
   m_ObjectHideFlags: 0
@@ -21430,7 +21469,6 @@ MonoBehaviour:
   wayPoints: []
   removeWayPoints: []
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!1 &544414979
 GameObject:
   m_ObjectHideFlags: 0
@@ -23193,7 +23231,6 @@ MonoBehaviour:
   removeWayPoints:
   - {fileID: 0}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &663679325
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23748,7 +23785,6 @@ MonoBehaviour:
   removeWayPoints:
   - {fileID: 22281040}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &704813448
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24759,7 +24795,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &747832104
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -34742,7 +34777,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &1050009670
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -34954,7 +34988,6 @@ MonoBehaviour:
   removeWayPoints:
   - {fileID: 1094370590}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &1070399077
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -43189,7 +43222,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &1134902206
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -45437,7 +45469,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &1237776914
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -53798,7 +53829,6 @@ MonoBehaviour:
   removeWayPoints:
   - {fileID: 69432781}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &1352838735
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -55598,7 +55628,6 @@ MonoBehaviour:
   wayPoints: []
   removeWayPoints: []
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &1561435646
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -56616,6 +56645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: {fileID: 842259376}
+  roomsManager: {fileID: 379334548}
   contentParent: {fileID: 424091938}
   canvaMerchant: {fileID: 961963528}
   cardSlotPrefab: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
@@ -56964,7 +56994,6 @@ MonoBehaviour:
   wayPoints: []
   removeWayPoints: []
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!1 &1667874408
 GameObject:
   m_ObjectHideFlags: 0
@@ -57685,7 +57714,6 @@ MonoBehaviour:
   removeWayPoints:
   - {fileID: 1974343097}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &1747701058
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -57800,7 +57828,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &1761887848
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -58036,7 +58063,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &1777768568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -58269,7 +58295,6 @@ MonoBehaviour:
   wayPoints: []
   removeWayPoints: []
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &1797121543
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -60526,7 +60551,6 @@ MonoBehaviour:
   wayPoints: []
   removeWayPoints: []
   spawnEnemiesController: {fileID: 694397033}
-  gm: {fileID: 462794453}
 --- !u!61 &2011027351
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -11,32 +11,32 @@ public class SalaController : MonoBehaviour
     public GameObject[] wayPoints;
     public GameObject[] removeWayPoints;
     public SpawnEnemies spawnEnemiesController;
-    public GameManager gm;
+    //public GameManager gm;
 
-    static GameObject[] salas;
-    static int indexSala = 0;
-    GameObject parent;
-    MerchantUI merchant;
+    //static GameObject[] salas;
+    //static int indexSala = 0;
+    //GameObject parent;
+    //MerchantUI merchant;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        merchant = FindAnyObjectByType<MerchantUI>();
-        parent = transform.parent.gameObject;
-        originalColor = tilemap.color;
+        //merchant = FindAnyObjectByType<MerchantUI>();
+        //parent = transform.parent.gameObject;
+        //originalColor = tilemap.color;
 
         if (gameObject.tag == "salaCentral")
         {
             estaLibre = true;
         }
 
-        if (salas != null) return;
-        else
-        {
-            salas = GameObject.FindGameObjectsWithTag("ColliderSala");
-            salas = salas.OrderBy(sala => sala.transform.GetSiblingIndex()).ToArray();
-            indexSala++;
-        }
+        //if (salas != null) return;
+        //else
+        //{
+        //    salas = GameObject.FindGameObjectsWithTag("ColliderSala");
+        //    salas = salas.OrderBy(sala => sala.transform.GetSiblingIndex()).ToArray();
+        //    indexSala++;
+        //}
 
     }
 
@@ -46,49 +46,48 @@ public class SalaController : MonoBehaviour
 
     }
 
-    private void OnMouseDown()
+    //private void OnMouseDown()
+    //{
+    //    if (gm.hasKey && parent == salas[indexSala])
+    //    {
+    //        gm.hasKey = false;
+    //        merchant.DeactiveKey();
+
+    //        foreach (var item in parent.GetComponentsInChildren<SalaController>())
+    //        {
+    //            item.estaLibre = true;
+    //            spawnEnemiesController.AddWayPoints(item.wayPoints, item.removeWayPoints);
+    //            item.tilemap.gameObject.SetActive(false);
+    //        }
+
+    //        indexSala++;
+    //    }
+
+    //}
+
+    public void OpenRoom()
     {
-        if (gm.hasKey && parent == salas[indexSala])
-        {
-            gm.hasKey = false;
-            merchant.DeactiveKey();
-
-            foreach (var item in parent.GetComponentsInChildren<SalaController>())
-            {
-                item.estaLibre = true;
-                spawnEnemiesController.AddWayPoints(item.wayPoints, item.removeWayPoints);
-                item.tilemap.gameObject.SetActive(false);
-            }
-
-            indexSala++;
-        }
-
+        estaLibre = true;
+        spawnEnemiesController.AddWayPoints(wayPoints, removeWayPoints);
+        tilemap.gameObject.SetActive(false);
     }
 
-    private void OnMouseEnter()
-    {
-        if (gameObject.tag == "salaCentral") return;
+    //private void OnMouseEnter()
+    //{
+    //    if (gameObject.tag == "salaCentral") return;
 
-        if (gm.hasKey && parent == salas[indexSala])
-        {
-            foreach (var item in parent.GetComponentsInChildren<SalaController>())
-            {
-                item.tilemap.color = Color.yellow;
-            }
-        }
+    //    if (gm.hasKey && parent == salas[indexSala])
+    //    {
+    //        foreach (var item in parent.GetComponentsInChildren<SalaController>())
+    //        {
+    //            item.tilemap.color = Color.yellow;
+    //        }
+    //    }
 
-    }
+    //}
 
-    private void OnMouseExit()
-    {
-        if (gameObject.tag == "salaCentral") return;
 
-        foreach (var item in parent.GetComponentsInChildren<SalaController>())
-        {
-            item.tilemap.color = originalColor;
-        }
 
-    }
 
     //bool esSalaContigua()
     //{
