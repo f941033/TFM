@@ -117,10 +117,7 @@ public class GameManager : MonoBehaviour
 
         else
         {
-            // Cartas completamente aleatorias
-            CardData robaCard = pool.Find(c => c.cardName.Equals("RobaCartas"));
-            selectedCards.Add(robaCard);
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 int idx = UnityEngine.Random.Range(0, pool.Count);
                 selectedCards.Add(pool[idx]);

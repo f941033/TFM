@@ -19,6 +19,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Image spriteImage;
     [SerializeField] private TextMeshProUGUI goldCostText;
     [SerializeField] private Button buyButton;
+    [SerializeField] private Button detailsButton;
 
     public void setCardUI(CardData cardData)
     {
@@ -30,6 +31,7 @@ public class CardUI : MonoBehaviour
         bool inShop = GameManager.CurrentPhase == GamePhase.Merchant;
         goldCostText.gameObject.SetActive(inShop);
         buyButton.gameObject.SetActive(inShop);
+        detailsButton.gameObject.SetActive(GameManager.CurrentPhase == GamePhase.Deck);
         if (sprite != null)
         {
             spriteImage.sprite = sprite;
@@ -94,11 +96,28 @@ public class CardUI : MonoBehaviour
         buyButton.onClick.RemoveAllListeners();
 
         // Añadimos el nuestro
-        buyButton.onClick.AddListener(() => {
+        buyButton.onClick.AddListener(() =>
+        {
             var data = this.data;
             gm.AddCardToDeck(data);
             gm.ShowMessage($"Carta «{data.cardName}» añadida al mazo", 2f);
             buyButton.interactable = false;
         });
+    }
+        public void ShowData()
+    {
+        Debug.Log("Estoy clicando la carta y voy a mostrar los datos");
+        // Solo en fases donde quieras permitir ver detalles:
+        if (GameManager.CurrentPhase == GamePhase.Deck ||
+            GameManager.CurrentPhase == GamePhase.Pause)
+        {
+            var cardDetails = FindFirstObjectByType<CardDetailUI>();
+             if (cardDetails == null)
+            {
+                Debug.LogWarning("[CardUI] No hay ningún CardDetailUI en escena");
+                return;
+            }
+            cardDetails.Show(data);
+        }
     }
 }
