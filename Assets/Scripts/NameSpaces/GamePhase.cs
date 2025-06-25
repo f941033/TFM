@@ -7,7 +7,9 @@ namespace DeckboundDungeon.GamePhase
         Preparation,
         Action,
         Reward,
-        Merchant
+        Merchant,
+        Pause,
+        Deck
     }
 }
 

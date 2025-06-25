@@ -4,6 +4,7 @@ using DeckboundDungeon.Cards;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
+using DeckboundDungeon.GamePhase;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -110,17 +111,20 @@ public class PauseMenuController : MonoBehaviour
 
             var drag = cardData.GetComponent<CardDragDrop>();
             if (drag != null) Destroy(drag);
-            //cd.cardData = card;
-            //cd.isSelectable = false;
-            // si tu CardDeck en modo selección activa border, lo desactivamos aquí:
-            //cd.selectionBorder.SetActive(false);
 
         }
     }
 
     public void ShowCardsDeck()
     {
+        gameManager.ChangePhase(GamePhase.Deck);
         deckPanel.SetActive(true);
         PopulateDeckGrid();
+    }
+
+    public void CloseDeckInfo()
+    {
+        FindFirstObjectByType<CardDetailUI>().Hide();
+        deckPanel.SetActive(false);
     }
 }
