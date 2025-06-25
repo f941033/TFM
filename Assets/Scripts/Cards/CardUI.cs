@@ -8,13 +8,13 @@ public class CardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textDescription;
     [SerializeField] private TextMeshProUGUI textCost;
     [SerializeField] private TextMeshProUGUI textDamage;
-    [SerializeField] private TextMeshProUGUI textUse;
+    //[SerializeField] private TextMeshProUGUI textUse;
     [HideInInspector] public CardData data;
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Sprite trapBackground;
     [SerializeField] private Sprite buffBackground;
     [SerializeField] private Image damageImage;
-    [SerializeField] private Image useImage;
+    //[SerializeField] private Image useImage;
     [SerializeField] private Image costImage;
     [SerializeField] private Image spriteImage;
     [SerializeField] private TextMeshProUGUI goldCostText;
@@ -44,16 +44,16 @@ public class CardUI : MonoBehaviour
         if (cardData is TrapCardData trap)
         {
             textCost.text = trap.cost.ToString();
-            textUse.text = trap.uses.ToString();
+            //textUse.text = trap.uses.ToString();
             backgroundImage.sprite = trapBackground;
         }
         else
         {
             textCost.gameObject.SetActive(false);
-            textUse.gameObject.SetActive(false);
+            //textUse.gameObject.SetActive(false);
             backgroundImage.sprite = buffBackground;
             damageImage.gameObject.SetActive(false);
-            useImage.gameObject.SetActive(false);
+            //useImage.gameObject.SetActive(false);
             costImage.gameObject.SetActive(false);
         }
         if (data.cardType == CardType.Trap)

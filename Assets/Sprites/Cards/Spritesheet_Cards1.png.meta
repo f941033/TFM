@@ -1,0 +1,607 @@
+fileFormatVersion: 2
+guid: aa5b37749b01d5f408ebdca2b3198a24
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2551219397173627497
+    second: Spritesheet_Cards1_0
+  - first:
+      213: 6817816981098416819
+    second: Spritesheet_Cards1_1
+  - first:
+      213: 6653219015117297657
+    second: Spritesheet_Cards1_2
+  - first:
+      213: 4564628065078994459
+    second: Spritesheet_Cards1_3
+  - first:
+      213: -7127539106270014213
+    second: Spritesheet_Cards1_4
+  - first:
+      213: -7811523939532769466
+    second: Spritesheet_Cards1_5
+  - first:
+      213: -6872879805091842236
+    second: Spritesheet_Cards1_6
+  - first:
+      213: -7867678932118662302
+    second: Spritesheet_Cards1_7
+  - first:
+      213: 6969338320338048960
+    second: Spritesheet_Cards1_8
+  - first:
+      213: 3669176433886107848
+    second: Spritesheet_Cards1_9
+  - first:
+      213: 2286080486149089054
+    second: Spritesheet_Cards1_10
+  - first:
+      213: 4934752065089030942
+    second: Spritesheet_Cards1_11
+  - first:
+      213: -7101805252363399705
+    second: Spritesheet_Cards1_12
+  - first:
+      213: 1311849550883256842
+    second: Spritesheet_Cards1_13
+  - first:
+      213: -833072271446053697
+    second: Spritesheet_Cards1_14
+  - first:
+      213: -6661023938454019827
+    second: Spritesheet_Cards1_15
+  - first:
+      213: -118799386859430363
+    second: Spritesheet_Cards1_16
+  - first:
+      213: -790874427542876313
+    second: Spritesheet_Cards1_17
+  - first:
+      213: -5947918061905052546
+    second: Spritesheet_Cards1_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CardBase_Purple
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 962
+        width: 887
+        height: 1402
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96ace985680c76320800000000000000
+      internalID: 2551219397173627497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardBase_Brown
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 959
+        width: 888
+        height: 1403
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ba4ff50c60cd9e50800000000000000
+      internalID: 6817816981098416819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LifePlus_Icon
+      rect:
+        serializedVersion: 2
+        x: 1793
+        y: 2134
+        width: 234
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f7d0f8a17bf45c50800000000000000
+      internalID: 6653219015117297657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TextBlock_Purple
+      rect:
+        serializedVersion: 2
+        x: 2070
+        y: 1986
+        width: 747
+        height: 378
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b16efce6a01d85f30800000000000000
+      internalID: 4564628065078994459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet_Cards1_4
+      rect:
+        serializedVersion: 2
+        x: 2824
+        y: 2321
+        width: 237
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf4121832f4e51d90800000000000000
+      internalID: -7127539106270014213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet_Cards1_5
+      rect:
+        serializedVersion: 2
+        x: 2824
+        y: 2274
+        width: 237
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64770bd3d54e79390800000000000000
+      internalID: -7811523939532769466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet_Cards1_6
+      rect:
+        serializedVersion: 2
+        x: 2827
+        y: 2232
+        width: 232
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4477b893b30ae90a0800000000000000
+      internalID: -6872879805091842236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardLevel_Purple
+      rect:
+        serializedVersion: 2
+        x: 2825
+        y: 2146
+        width: 180
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2631e3c22b360d290800000000000000
+      internalID: -7867678932118662302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LifeLess_Icon
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 1936
+        width: 200
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c75447f64018b060800000000000000
+      internalID: 6969338320338048960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardLevel_Brown
+      rect:
+        serializedVersion: 2
+        x: 2826
+        y: 2067
+        width: 180
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c81408c6888be230800000000000000
+      internalID: 3669176433886107848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Souls_Icon
+      rect:
+        serializedVersion: 2
+        x: 1818
+        y: 1699
+        width: 183
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e176ed8071ac9bf10800000000000000
+      internalID: 2286080486149089054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TextBlock_Brown
+      rect:
+        serializedVersion: 2
+        x: 2070
+        y: 1592
+        width: 747
+        height: 378
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1bc1469bd2cb7440800000000000000
+      internalID: 4934752065089030942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Damage_Icon
+      rect:
+        serializedVersion: 2
+        x: 1807
+        y: 1444
+        width: 191
+        height: 231
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ed40ecffb1517d90800000000000000
+      internalID: -7101805252363399705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardType_Purple
+      rect:
+        serializedVersion: 2
+        x: 2070
+        y: 1500
+        width: 186
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0af62f4730a43210800000000000000
+      internalID: 1311849550883256842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DamageArea_Icon
+      rect:
+        serializedVersion: 2
+        x: 1779
+        y: 1190
+        width: 293
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbcea34de255074f0800000000000000
+      internalID: -833072271446053697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardType_Brown
+      rect:
+        serializedVersion: 2
+        x: 2070
+        y: 1408
+        width: 186
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d012314050a4f83a0800000000000000
+      internalID: -6661023938454019827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet_Cards1_16
+      rect:
+        serializedVersion: 2
+        x: 1837
+        y: 974
+        width: 119
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52e95ba4690f95ef0800000000000000
+      internalID: -118799386859430363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex_Purple
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 976
+        height: 905
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76fcd5cf5ef3605f0800000000000000
+      internalID: -790874427542876313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex_Brown
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 0
+        width: 977
+        height: 905
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7cf40f3900c47da0800000000000000
+      internalID: -5947918061905052546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 93be9693fcbcc044cae0ecf61c38878b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      CardBase_Brown: 6817816981098416819
+      CardBase_Purple: 2551219397173627497
+      CardLevel_Brown: 3669176433886107848
+      CardLevel_Purple: -7867678932118662302
+      CardType_Brown: -6661023938454019827
+      CardType_Purple: 1311849550883256842
+      DamageArea_Icon: -833072271446053697
+      Damage_Icon: -7101805252363399705
+      LifeLess_Icon: 6969338320338048960
+      LifePlus_Icon: 6653219015117297657
+      Souls_Icon: 2286080486149089054
+      TextBlock_Brown: 4934752065089030942
+      TextBlock_Purple: 4564628065078994459
+      Vortex_Brown: -5947918061905052546
+      Vortex_Purple: -790874427542876313
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
