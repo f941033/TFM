@@ -195,7 +195,10 @@ public class SpawnEnemies : MonoBehaviour
 
     public void AddWayPoints(GameObject[] posiciones, GameObject[] removePoints)
     {
+        if (posiciones == null && removePoints == null) return;
+
         RemoveWayPoints(removePoints);
+
         foreach (GameObject point in posiciones)
             if (!spawnListPoints.Contains(point))
                 spawnListPoints.Add(point);
