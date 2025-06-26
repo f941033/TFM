@@ -72,7 +72,7 @@ public class EnemyMovement : MonoBehaviour
     bool TryMove(Vector2 direction)
     {
         Vector2 nextPosition = (Vector2)transform.position + direction * tileSize;
-        return !Physics2D.OverlapBox(nextPosition, tileSize * 0.8f, 0f, obstacleLayer);
+        return !Physics2D.OverlapBox(nextPosition, tileSize * 0.15f, 0f, obstacleLayer);
     }
 
     Vector2 GetBestAlternativeDirection()

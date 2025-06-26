@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5172520577351278187}
   - component: {fileID: 4400319751222912287}
-  - component: {fileID: 533710063301047464}
-  - component: {fileID: 8862617074969215597}
-  - component: {fileID: 6179150980493115244}
-  - component: {fileID: 8219622360497768172}
+  - component: {fileID: 8039906409337976944}
+  - component: {fileID: 8070588079354797069}
+  - component: {fileID: 6149826641807183830}
+  - component: {fileID: 8351551584099394247}
   m_Layer: 7
   m_Name: MuroPrefab
   m_TagString: PlayerWall
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &533710063301047464
+--- !u!114 &8039906409337976944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,7 +107,7 @@ MonoBehaviour:
   player: {fileID: 0}
   cellPos: {x: 0, y: 0, z: 0}
   initialColor: {r: 0, g: 0, b: 0, a: 0}
---- !u!61 &8862617074969215597
+--- !u!61 &8070588079354797069
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.03880453, y: -0.40432894}
+  m_Offset: {x: 0, y: 0.032675147}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -151,22 +151,22 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 6.9167957, y: 3.0794294}
+  m_Size: {x: 6.8742104, y: 6.6441517}
   m_EdgeRadius: 0
---- !u!114 &6179150980493115244
+--- !u!114 &6149826641807183830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7377369047218687532}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a933f8ea940cbd14e9f661b619789d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
---- !u!114 &8219622360497768172
+--- !u!114 &8351551584099394247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
