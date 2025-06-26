@@ -14,7 +14,7 @@ public class ChangeCardPosition : MonoBehaviour
 
     public float checkRadius = 0.1f; // Radio para verificación de colisión
     PlayerController player;
-    Vector3 previousPosition;
+    //Vector3 previousPosition;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -76,7 +76,7 @@ public class ChangeCardPosition : MonoBehaviour
         if (!FindAnyObjectByType<GameManager>().inPrepPhase) return;
         if (gameObject.name.Contains("TurretPrefab") ) return;
 
-        previousPosition = transform.position;
+        //previousPosition = transform.position;
 
         // Empieza el arrastre
         estaArrastrando = true;
@@ -96,8 +96,6 @@ public class ChangeCardPosition : MonoBehaviour
 
         if (IsPositionValid(cellPos))
         {
-            estaArrastrando = false;
-
             // 1. Convertir posición del mouse a celda del tilemap
             Vector3 mouseScreenPos = Input.mousePosition;
             mouseScreenPos.z = Mathf.Abs(Camera.main.transform.position.z); // Z = 10
