@@ -8,20 +8,25 @@ public class CardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textDescription;
     [SerializeField] private TextMeshProUGUI textCost;
     [SerializeField] private TextMeshProUGUI textDamage;
-    //[SerializeField] private TextMeshProUGUI textUse;
     [HideInInspector] public CardData data;
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Sprite trapBackground;
     [SerializeField] private Sprite buffBackground;
     [SerializeField] private Image damageImage;
-    //[SerializeField] private Image useImage;
     [SerializeField] private Image costImage;
     [SerializeField] private Image spriteImage;
     [SerializeField] private TextMeshProUGUI goldCostText;
     [SerializeField] private Button buyButton;
     [SerializeField] private Button detailsButton;
+    [SerializeField] private Image descriptionImage;
+    [SerializeField] private Sprite descriptionBackgroundTrap;
+    [SerializeField] private Image typeImage;
+    [SerializeField] private Sprite typeBackgroundTrap;
+    [SerializeField] private TextMeshProUGUI textType;
+    [SerializeField] private Image vortexImage;
+    [SerializeField] private Sprite vortexBackgroundTrap;
 
-    public void setCardUI(CardData cardData)
+    public void SetCardUI(CardData cardData)
     {
         var sprite = Resources.Load<Sprite>("Sprites/Cards/" + cardData.name);
         data = cardData;
@@ -32,6 +37,8 @@ public class CardUI : MonoBehaviour
         goldCostText.gameObject.SetActive(inShop);
         buyButton.gameObject.SetActive(inShop);
         detailsButton.gameObject.SetActive(GameManager.CurrentPhase == GamePhase.Deck);
+
+        //Esto es para añadir el sprite de la carta
         if (sprite != null)
         {
             spriteImage.sprite = sprite;
@@ -43,29 +50,23 @@ public class CardUI : MonoBehaviour
             Debug.LogWarning($"[CardUI] No encontré el sprite Resources/Sprites/Cards/{cardData.name}.png");
         }
 
+        //Esto es para añadir el fondo y todos los componentes de la carta que no son el sprite
         if (cardData is TrapCardData trap)
         {
             textCost.text = trap.cost.ToString();
-            //textUse.text = trap.uses.ToString();
             backgroundImage.sprite = trapBackground;
+            textDamage.text = trap.damage.ToString();
+            descriptionImage.sprite = descriptionBackgroundTrap;
+            typeImage.sprite = typeBackgroundTrap;
+            textType.text = "TRAP";
+            vortexImage.sprite = vortexBackgroundTrap;
         }
         else
         {
             textCost.gameObject.SetActive(false);
-            //textUse.gameObject.SetActive(false);
             backgroundImage.sprite = buffBackground;
             damageImage.gameObject.SetActive(false);
-            //useImage.gameObject.SetActive(false);
             costImage.gameObject.SetActive(false);
-        }
-        if (data.cardType == CardType.Trap)
-        {
-            var trapData = cardData as TrapCardData;
-            if (trapData != null)
-                textDamage.text = trapData.damage.ToString();
-        }
-        else
-        {
             textDamage.gameObject.SetActive(false);
         }
     }

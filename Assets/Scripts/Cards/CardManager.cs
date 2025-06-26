@@ -55,7 +55,7 @@ public class CardManager : MonoBehaviour
 
         var cardData = Instantiate(prefabCard, panelCard);
         CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
-        cardUI.setCardUI(cardToDraw);
+        cardUI.SetCardUI(cardToDraw);
         if (cardToDraw.cardType == CardType.Trap || cardToDraw.cardType == CardType.DeckEffect)
         {
             var drag = cardData.GetComponent<CardDragDrop>();
@@ -83,6 +83,7 @@ public class CardManager : MonoBehaviour
                 drawPile.AddRange(discardPile);
                 Shuffle(drawPile);
                 discardPile.Clear();
+                gameManager.DeactivateDiscardPileImage();
                 FindFirstObjectByType<GameManager>().UpdateTextNumberOfCardsDiscard();
             }
 
@@ -128,7 +129,7 @@ public class CardManager : MonoBehaviour
 
             var cardObj = Instantiate(prefabCard, panelCard);
             var cardUI = cardObj.GetComponentInChildren<CardUI>();
-            cardUI.setCardUI(cardData);
+            cardUI.SetCardUI(cardData);
 
             Debug.Log("la carta cogida de descartes es: " + cardData.cardName);
             if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect)

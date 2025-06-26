@@ -27,12 +27,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public float checkRadius = 0.5f; // Radio para verificación de colisión
     public GameObject borderPrefab_1, borderPrefab_4;
     private GameObject currentBorder;        //borde temporal durante el arrastre
-
-
-    //private TextMeshProUGUI textNumberOfCardsDiscard;
-    //private GameObject discardPileImage;
-
-    private bool cartaColocada = false;
     [SerializeField] private GraphicRaycaster raycasterUI;
 
     [Header("Zona válida")]

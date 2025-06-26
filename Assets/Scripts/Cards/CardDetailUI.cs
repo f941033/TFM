@@ -27,7 +27,7 @@ public class CardDetailUI : MonoBehaviour
         // instancia la carta (sin lógica de drag/drop)
         var go = Instantiate(cardPrefab, cardContainer);
         var ui = go.GetComponent<CardUI>();
-        ui.setCardUI(data);
+        ui.SetCardUI(data);
 
         Destroy(go.GetComponent<CardDragDrop>());
         Destroy(go.GetComponent<CardSelector>());

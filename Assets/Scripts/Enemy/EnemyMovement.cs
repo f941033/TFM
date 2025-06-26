@@ -3,18 +3,18 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [Header("Configuración")]
+    [Header("Configuraciï¿½n")]
     public float moveSpeed = 1f;
     public LayerMask obstacleLayer;
     public Vector2 tileSize = new Vector2(1f, 1f);
     Transform player; // Asigna el transform del jugador
 
     private Vector2 currentDirection;
-    private bool isMoving = false;
+    //private bool isMoving = false;
     private int damage;
 
     [Header("Knockback")]
-    public float knockbackDuration = 0.2f; // Duración del desplazamiento
+    public float knockbackDuration = 0.2f; // Duraciï¿½n del desplazamiento
     public int knockbackTiles = 5; // Celdas a retroceder
     private bool isKnockbackActive = false;
 
@@ -28,17 +28,17 @@ public class EnemyMovement : MonoBehaviour
     {
         while (true)
         {
-            // Calcular dirección óptima hacia el jugador
+            // Calcular direcciï¿½n ï¿½ptima hacia el jugador
             Vector2 optimalDirection = CalculateOptimalDirection();
 
-            // Intentar mover en dirección óptima
+            // Intentar mover en direcciï¿½n ï¿½ptima
             if (TryMove(optimalDirection))
             {
                 currentDirection = optimalDirection;
             }
             else
             {
-                // Buscar dirección alternativa
+                // Buscar direcciï¿½n alternativa
                 currentDirection = GetBestAlternativeDirection();
             }
 
@@ -103,13 +103,13 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
-        // Si todas las direcciones están bloqueadas, forzar movimiento
+        // Si todas las direcciones estï¿½n bloqueadas, forzar movimiento
         return bestDirection != Vector2.zero ? bestDirection : -currentDirection;
     }
 
     IEnumerator MoveToNextTile(Vector2 direction)
     {
-        isMoving = true;
+        //isMoving = true;
         Vector2 startPos = transform.position;
         Vector2 targetPos = startPos + direction * tileSize;
         float elapsed = 0f;
@@ -122,7 +122,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
         transform.position = targetPos;
-        isMoving = false;
+        //isMoving = false;
     }
 
     public void ReduceSpeed(float speedPercent, int seconds)
@@ -157,7 +157,7 @@ public class EnemyMovement : MonoBehaviour
         isKnockbackActive = true;
         StopCoroutine(MoveRoutine()); // Detiene el movimiento normal
 
-        Vector2 knockbackDirection = -currentDirection; // Dirección contraria al movimiento
+        Vector2 knockbackDirection = -currentDirection; // Direcciï¿½n contraria al movimiento
         Vector2 startPos = transform.position;
         Vector2 targetPos = startPos + (knockbackDirection * tileSize * knockbackTiles);
 
