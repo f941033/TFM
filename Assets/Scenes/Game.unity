@@ -21616,6 +21616,7 @@ MonoBehaviour:
   deckPanel: {fileID: 1346398581}
   deckGridContainer: {fileID: 1734575779}
   cardPrefab: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
+  titleText: {fileID: 1026563029}
 --- !u!4 &560255916
 Transform:
   m_ObjectHideFlags: 0
@@ -57471,7 +57472,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 175, y: 280}

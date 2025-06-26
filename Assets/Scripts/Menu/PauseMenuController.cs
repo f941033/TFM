@@ -4,6 +4,7 @@ using DeckboundDungeon.Cards;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using DeckboundDungeon.GamePhase;
 
 public class PauseMenuController : MonoBehaviour
@@ -32,6 +33,7 @@ public class PauseMenuController : MonoBehaviour
     private bool isPaused = false;
     private GameManager gameManager;
     private CardManager cardManager;
+    [SerializeField] private TextMeshProUGUI titleText;
 
     void Awake()
     {
@@ -138,6 +140,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void ShowCardsDeck()
     {
+        titleText.text = "DECK";
         gameManager.ChangePhase(GamePhase.Deck);
         deckPanel.SetActive(true);
         PopulateDeckGrid();
@@ -145,6 +148,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void ShowCardsDiscard()
     {
+        titleText.text = "DISCARD";
         gameManager.ChangePhase(GamePhase.Deck);
         deckPanel.SetActive(true);
         PopulateDiscardGrid();
