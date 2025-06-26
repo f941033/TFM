@@ -67,14 +67,21 @@ MonoBehaviour:
   textDamage: {fileID: 7874559390015761224}
   data: {fileID: 0}
   backgroundImage: {fileID: 2075047113887814455}
-  trapBackground: {fileID: 2551219397173627497, guid: aa5b37749b01d5f408ebdca2b3198a24, type: 3}
-  buffBackground: {fileID: 6817816981098416819, guid: aa5b37749b01d5f408ebdca2b3198a24, type: 3}
+  trapBackground: {fileID: 6817816981098416819, guid: aa5b37749b01d5f408ebdca2b3198a24, type: 3}
+  buffBackground: {fileID: 2551219397173627497, guid: aa5b37749b01d5f408ebdca2b3198a24, type: 3}
   damageImage: {fileID: 2400003060270256869}
   costImage: {fileID: 7056149638346329167}
   spriteImage: {fileID: 6144249354334679010}
   goldCostText: {fileID: 1488844834297742990}
   buyButton: {fileID: 8855550731502941212}
   detailsButton: {fileID: 661023340292930171}
+  descriptionImage: {fileID: 5936451221525624311}
+  descriptionBackgroundTrap: {fileID: 8362875893643066145, guid: 9425ded1a2c7a794f93e74482c7f990a, type: 3}
+  typeImage: {fileID: 4830226301088995777}
+  typeBackgroundTrap: {fileID: -6661023938454019827, guid: aa5b37749b01d5f408ebdca2b3198a24, type: 3}
+  textType: {fileID: 385913448503571333}
+  vortexImage: {fileID: 3865787656338941956}
+  vortexBackgroundTrap: {fileID: -5947918061905052546, guid: aa5b37749b01d5f408ebdca2b3198a24, type: 3}
 --- !u!114 &7752803208183232184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,8 +401,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19.9, y: -10.1}
-  m_SizeDelta: {x: 41.4393, y: 16.7962}
+  m_AnchoredPosition: {x: -19, y: -8.2191}
+  m_SizeDelta: {x: 40.6215, y: 14.9153}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &5437746669287050046
 CanvasRenderer:
@@ -425,7 +432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TRAP
+  m_text: BUFF
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6a97e55e74dc004a9576273afc6cb51, type: 2}
   m_sharedMaterial: {fileID: -5812306414449821641, guid: e6a97e55e74dc004a9576273afc6cb51, type: 2}
@@ -1248,8 +1255,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076293945, y: 0.000015258789}
-  m_SizeDelta: {x: 1028.0328, y: 1625.2194}
+  m_AnchoredPosition: {x: -43.1, y: 0.000015258789}
+  m_SizeDelta: {x: 1002.1382, y: 1625.2194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4391155355434645998
 CanvasRenderer:
@@ -1690,7 +1697,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1838,7 +1845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -25.54303, y: -180.77002}
+  m_AnchoredPosition: {x: -25.54309, y: -180.77002}
   m_SizeDelta: {x: 359.918, y: 361.536}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &4586439794857150784

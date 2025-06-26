@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI prepHandCounterText;
     public bool hasKey = false;
     public TextMeshProUGUI nextHandText;
+    [SerializeField] private Button skipButton;
+    private GamePhase previousPhase;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -133,7 +135,7 @@ public class GameManager : MonoBehaviour
         {
             var cardData = Instantiate(prefabCard, panelCard);
             CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
-            cardUI.setCardUI(card);
+            cardUI.SetCardUI(card);
             Destroy(cardData.GetComponent<CardDragDrop>());
         }
     }
@@ -177,8 +179,14 @@ public class GameManager : MonoBehaviour
 
     public void ChangePhase(GamePhase newPhase)
     {
+        previousPhase = CurrentPhase;
         CurrentPhase = newPhase;
         OnPhaseChanged?.Invoke(newPhase);
+    }
+
+    public void RestorePreviousPhase()
+    {
+        ChangePhase(previousPhase);
     }
 
     public void SetSelectedCards(List<CardData> selectedCards)
@@ -292,7 +300,7 @@ public class GameManager : MonoBehaviour
         }
 
         cardManager.discardPile.Clear();
-        discardPileImage.SetActive(false);
+        DeactivateDiscardPileImage();
         Debug.Log(startingDeck.Count);
         textNumberOfCardsDeck.text = cardManager.drawPile.Count.ToString();
 
@@ -315,6 +323,11 @@ public class GameManager : MonoBehaviour
     public void ActivateDiscardPileImage()
     {
         discardPileImage.SetActive(true);
+    }
+
+    public void DeactivateDiscardPileImage()
+    {
+        discardPileImage.SetActive(false);
     }
     public void UpdateTextNumberOfCardsDiscard()
     {
@@ -388,6 +401,7 @@ public class GameManager : MonoBehaviour
 
     private void NextPreparationHand()
     {
+        skipButton.gameObject.SetActive(true);
         cardManager.DiscardHand();
         cardManager.DrawFullHand();
 
@@ -397,6 +411,10 @@ public class GameManager : MonoBehaviour
         if (currentPrepHand > totalPrepHands)
         {
             StartRun();
+        }
+        else if(currentPrepHand == totalPrepHands)
+        {
+            skipButton.gameObject.SetActive(false);
         }
     }
     private void UpdatePrepHandUI()

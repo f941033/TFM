@@ -35,7 +35,7 @@ public class MerchantUI : MonoBehaviour
                 // si es carta usamos el prefab de carta
                 go = Instantiate(cardSlotPrefab, contentParent);
                 var ui = go.GetComponent<CardUI>();
-                ui.setCardUI(cardItem.cardData);
+                ui.SetCardUI(cardItem.cardData);
                 
                 Destroy(go.GetComponent<CardDragDrop>());
                 Destroy(go.GetComponent<CardSelector>());

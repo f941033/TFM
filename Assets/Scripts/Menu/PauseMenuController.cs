@@ -31,11 +31,13 @@ public class PauseMenuController : MonoBehaviour
 
     private bool isPaused = false;
     private GameManager gameManager;
+    private CardManager cardManager;
 
     void Awake()
     {
         // encontremos el gestor de cartas para leer el deck actual
         gameManager = FindFirstObjectByType<GameManager>();
+        cardManager = FindFirstObjectByType<CardManager>();
         if (gameManager == null)
             Debug.LogError("[PauseMenuController] No encontré ningún GameManager en la escena");
 
@@ -103,11 +105,30 @@ public class PauseMenuController : MonoBehaviour
             Destroy(child.gameObject);
 
         // asumimos que gameManager.startingDeck o bien otro listado es tu mazo actual
-        foreach (var card in gameManager.startingDeck.OrderBy(c => c.cardName))
+        foreach (var card in cardManager.drawPile.OrderBy(c => c.cardName))
         {
             var cardData = Instantiate(cardPrefab, deckGridContainer);
             CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
-            cardUI.setCardUI(card);
+            cardUI.SetCardUI(card);
+
+            var drag = cardData.GetComponent<CardDragDrop>();
+            if (drag != null) Destroy(drag);
+
+        }
+    }
+
+    private void PopulateDiscardGrid()
+    {
+        // limpiamos cualquier hijo previo
+        foreach (Transform child in deckGridContainer)
+            Destroy(child.gameObject);
+
+        // asumimos que gameManager.startingDeck o bien otro listado es tu mazo actual
+        foreach (var card in cardManager.discardPile.OrderBy(c => c.cardName))
+        {
+            var cardData = Instantiate(cardPrefab, deckGridContainer);
+            CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
+            cardUI.SetCardUI(card);
 
             var drag = cardData.GetComponent<CardDragDrop>();
             if (drag != null) Destroy(drag);
@@ -122,9 +143,17 @@ public class PauseMenuController : MonoBehaviour
         PopulateDeckGrid();
     }
 
+    public void ShowCardsDiscard()
+    {
+        gameManager.ChangePhase(GamePhase.Deck);
+        deckPanel.SetActive(true);
+        PopulateDiscardGrid();
+    }
+
     public void CloseDeckInfo()
     {
         FindFirstObjectByType<CardDetailUI>().Hide();
         deckPanel.SetActive(false);
+        gameManager.RestorePreviousPhase();
     }
 }
