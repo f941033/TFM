@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6324640441843781617}
   - component: {fileID: 1010592873871219012}
   - component: {fileID: 3798340640353009490}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Heroe
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -210,12 +210,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d16ac8cb826c04f9d10f61dee5c09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tipo: 2
+  type: 0
   health: 200
   currentHealth: 0
   damage: 2.5
-  attackRate: 1
-  attackRange: 1
+  currentAttackRate: 0
+  currentAttackRange: 0
   gold: 200
   healthBarUI: {fileID: 9134756188311282571}
   attackSound: {fileID: 8300000, guid: 69130e6cc9b086d408fbd356cc0c5ce9, type: 3}

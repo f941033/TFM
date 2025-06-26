@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dadffe2894632804ca0e394ee289fe72, type: 3}
+  m_Name: ZeroZone
+  m_EditorClassIdentifier: 
+  cardName: Zona zero
+  description: Reduce el ataque de los enemigos un 50 % durante 15 segundos en la
+    zona afectada
+  cardType: 3
+  healthModifier: 10
+  numberOfTiles: 0
+  goldCost: 50
+  areaPreviewPrefab: {fileID: 1444403662060021971, guid: 2f572ff95ce351c40b49b59d18805cfe, type: 3}
+  applyDamage: 0
+  damage: 1
+  applyDebuff: 1
+  debuffDuration: 15
+  debuffs:
+  - type: 3
+    multiplier: 0.5
+  effectRadius: 10
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 2048

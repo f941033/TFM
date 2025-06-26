@@ -56,7 +56,7 @@ public class CardManager : MonoBehaviour
         var cardData = Instantiate(prefabCard, panelCard);
         CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
         cardUI.SetCardUI(cardToDraw);
-        if (cardToDraw.cardType == CardType.Trap || cardToDraw.cardType == CardType.DeckEffect)
+        if (cardToDraw.cardType == CardType.Trap || cardToDraw.cardType == CardType.DeckEffect || cardToDraw.cardType == CardType.Hability)
         {
             var drag = cardData.GetComponent<CardDragDrop>();
             drag.dropTilemap = zonaValidaTilemap;
@@ -100,13 +100,16 @@ public class CardManager : MonoBehaviour
 
     public void CardPlayed(GameObject card, CardData cardData)
     {
-        for (int i = 0; i < discardPile.Count; i++)
+        if (cardData.cardType != CardType.Hability)
         {
-
+            cardsInHand.Remove(card);
+            discardPile.Add(cardData);
+            Destroy(card);
         }
-        cardsInHand.Remove(card);
-        discardPile.Add(cardData);
-        Destroy(card);
+        else
+        {
+            
+        }
 
     }
 
@@ -132,7 +135,7 @@ public class CardManager : MonoBehaviour
             cardUI.SetCardUI(cardData);
 
             Debug.Log("la carta cogida de descartes es: " + cardData.cardName);
-            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect)
+            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect || cardData.cardType == CardType.Hability)
             {
                 var drag = cardObj.GetComponent<CardDragDrop>();
                 drag.dropTilemap = zonaValidaTilemap;

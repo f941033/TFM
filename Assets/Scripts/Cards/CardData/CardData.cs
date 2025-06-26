@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum CardType { Buff, Trap, DeckEffect }
+public enum CardType { Buff, Trap, DeckEffect, Hability }
 
 public abstract class CardData : ScriptableObject
 {

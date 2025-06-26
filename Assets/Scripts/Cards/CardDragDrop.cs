@@ -229,6 +229,14 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                         Deck.CardPlayed(gameObject, cardData);
                         isSet = true;
                     }
+                    //CARTA HABILIDAD
+                    else if (cardData.cardType == CardType.Hability)
+                    {
+                        dropTilemap.SetTileFlags(cellPos, TileFlags.None);
+                        cardData.Play(player, worldCenter);
+                        Deck.CardPlayed(gameObject, cardData);
+                        isSet = true;
+                    }
 
                     if (hasPrevious)
                     {

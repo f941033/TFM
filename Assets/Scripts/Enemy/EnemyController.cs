@@ -2,10 +2,11 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using System.Collections;
 
 public class EnemyController : MonoBehaviour
 {
-    public enum TipoDeEnemigo
+    public enum EnemyType
     {
         Aventurero,
         Zapador,
@@ -14,14 +15,17 @@ public class EnemyController : MonoBehaviour
         Mago,
         Destructor
     }
-    public TipoDeEnemigo tipo;
+    public EnemyType type;
     Transform target;
     [SerializeField] private float health;
     [SerializeField] private float currentHealth;
     [SerializeField] private float damage = 10f;
+    private float originalDamage;
     private float attackCooldown = 0f;
-    public float attackRate = 1f;
-    public float attackRange = 1f;
+    private float attackRate = 1f;
+    public float currentAttackRate;
+    private float attackRange = 1f;
+    public float currentAttackRange;
     private bool playerInRange = false;
     public int gold;
     private Animator animator;
@@ -33,10 +37,14 @@ public class EnemyController : MonoBehaviour
     public AudioClip attackSound;
 
     public GameObject effectGoldPrefab;
+    private Coroutine debuffCoroutine;
 
     void Awake()
     {
         currentHealth = health;
+        currentAttackRate = attackRate;
+        currentAttackRange = attackRange;
+        originalDamage = damage;
     }
 
     public void ReceiveDamage(float damage)
@@ -79,7 +87,7 @@ public class EnemyController : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             playerInRange = true;
-            attackCooldown = 1f / attackRate; // forzamos espera antes del primer golpe
+            attackCooldown = 1f / currentAttackRate; // forzamos espera antes del primer golpe
         }
     }
 
@@ -92,10 +100,10 @@ public class EnemyController : MonoBehaviour
             attackCooldown -= Time.deltaTime;
 
         float distancia = Vector2.Distance(transform.position, target.position);
-        if (distancia <= attackRange && attackCooldown <= 0f)
+        if (distancia <= currentAttackRange && attackCooldown <= 0f)
         {
             Attack();
-            attackCooldown = 1f / attackRate;
+            attackCooldown = 1f / currentAttackRate;
         }
     }
 
@@ -106,15 +114,16 @@ public class EnemyController : MonoBehaviour
         {
             audioSource.PlayOneShot(attackSound);
 
-            switch (tipo){
-                case TipoDeEnemigo.Aventurero:
+            switch (type)
+            {
+                case EnemyType.Aventurero:
                     animator.SetTrigger("attack");
                     break;
-                case TipoDeEnemigo.Heroe:
-                    animator.SetBool("attacking", true); 
+                case EnemyType.Heroe:
+                    animator.SetBool("attacking", true);
                     break;
             }
-            
+
             player.receiveDamage(damage);
         }
     }
@@ -139,5 +148,43 @@ public class EnemyController : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(center, radius);
+    }
+
+    public void ApplyDebuff(HabilityCardData data)
+    {
+        if (debuffCoroutine != null)
+            StopCoroutine(debuffCoroutine);
+
+        debuffCoroutine = StartCoroutine(HandleDebuff(data));
+    }
+
+    private IEnumerator HandleDebuff(HabilityCardData data)
+    {
+        foreach (var debuff in data.debuffs)
+        {
+            switch (debuff.type)
+            {
+                case DebuffType.Speed:
+                    GetComponent<EnemyMovement>().ReduceSpeed(debuff.multiplier, (int)data.debuffDuration);
+                    break;
+                case DebuffType.Damage:
+                    damage *=debuff.multiplier;
+                    break;
+                case DebuffType.AttackRate:
+                    currentAttackRate *= debuff.multiplier;
+                    break;
+                case DebuffType.AttackRange:
+                    currentAttackRange *= debuff.multiplier;
+                    break;
+            }
+        }
+
+        yield return new WaitForSeconds(data.debuffDuration);
+
+        // Restaurar
+        currentAttackRate = attackRate;
+        currentAttackRange = attackRange;
+        damage = originalDamage;
+        debuffCoroutine = null;
     }
 }
