@@ -10,11 +10,9 @@ public class ChangeCardPosition : MonoBehaviour
 
     public LayerMask obstacleLayers; // Capas de obstáculos (paredes, etc.)
     public LayerMask spawnPointLayers;
-    LayerMask trapLayers;
-
+    
     public float checkRadius = 0.1f; // Radio para verificación de colisión
     PlayerController player;
-    Vector3 previousPosition;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,7 +21,6 @@ public class ChangeCardPosition : MonoBehaviour
         tilemap = GameObject.Find("Tilemap Laberinto").GetComponent<Tilemap>();
         obstacleTilemap = GameObject.Find("Paredes").GetComponent<Tilemap>();
         player = FindFirstObjectByType<PlayerController>();
-        trapLayers = LayerMask.GetMask("TrapLayer");
     }
 
     // Update is called once per frame
@@ -64,10 +61,8 @@ public class ChangeCardPosition : MonoBehaviour
             isOutsidePlayerRange = false;
         }
 
-        // 3. Verificar si ya hay una trampa en esta celda
-        bool isCellOccupied = Physics2D.OverlapCircle(worldPos, checkRadius, trapLayers) != null;
 
-        return isPhysicallyValid && isOutsidePlayerRange && !isCellOccupied; 
+        return isPhysicallyValid && isOutsidePlayerRange;
     }
 
 
@@ -75,8 +70,6 @@ public class ChangeCardPosition : MonoBehaviour
     {
         if (!FindAnyObjectByType<GameManager>().inPrepPhase) return;
         if (gameObject.name.Contains("TurretPrefab") ) return;
-
-        previousPosition = transform.position;
 
         // Empieza el arrastre
         estaArrastrando = true;
@@ -88,8 +81,6 @@ public class ChangeCardPosition : MonoBehaviour
     {
         if (!FindAnyObjectByType<GameManager>().inPrepPhase) return;
         if (gameObject.name.Contains("TurretPrefab")) return;
-
-        estaArrastrando = false;
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPos = tilemap.WorldToCell(worldPos);
@@ -112,12 +103,6 @@ public class ChangeCardPosition : MonoBehaviour
             // 3. Actualizar posición
             transform.position = finalPosition;
         }
-        //else
-        //{
-        //    // Regresar a la posición original
-        //    estaArrastrando = false;
-        //    transform.position = previousPosition;
-        //}
 
 
     }

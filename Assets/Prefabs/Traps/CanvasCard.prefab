@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 5144811714197006885}
   - component: {fileID: 191266180660166168}
   - component: {fileID: 7007092685561737475}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CanvasCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}

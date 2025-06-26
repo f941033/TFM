@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 9129331489736713682}
   - component: {fileID: 435674054882401364}
   - component: {fileID: 5652064212195468965}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BombaPrefab
   m_TagString: PlayerWall
   m_Icon: {fileID: 0}

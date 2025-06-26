@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5443385788290627460}
   - component: {fileID: 6834330247894914458}
   - component: {fileID: 4482955020863290435}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AcidoCorrosivoPrefab
   m_TagString: PlayerWall
   m_Icon: {fileID: 0}
@@ -375,6 +375,10 @@ PrefabInstance:
     - target: {fileID: 8967870596001977829, guid: 20404f76f17a2ae44acc13380c3f1bd1, type: 3}
       propertyPath: m_Name
       value: CanvasCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967870596001977829, guid: 20404f76f17a2ae44acc13380c3f1bd1, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

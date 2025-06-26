@@ -22,6 +22,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public Tilemap tilemap;
     public LayerMask obstacleLayers; // Capas de obstáculos (paredes, etc.)
     public LayerMask spawnPointLayers;
+    LayerMask trapLayers;
     public Tilemap obstacleTilemap; // Tilemap de obstáculos (opcional)
     public float checkRadius = 0.5f; // Radio para verificación de colisión
     public GameObject borderPrefab_1, borderPrefab_4;
@@ -62,6 +63,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         highlightMap = GameObject.Find("Tilemap Highlighted").GetComponent<Tilemap>();
         tilemap = GameObject.Find("Tilemap Laberinto").GetComponent<Tilemap>();
         obstacleTilemap = GameObject.Find("Paredes").GetComponent<Tilemap>();
+        trapLayers = LayerMask.GetMask("TrapLayer");
     }
 
     void Update()
@@ -167,8 +169,10 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             isOutsidePlayerRange = false;
         }
 
+        // 3. Verificar si ya hay una trampa en esta celda
+        bool isCellOccupied = Physics2D.OverlapCircle(worldPos, checkRadius, trapLayers) != null;
 
-        return isPhysicallyValid && isOutsidePlayerRange;
+        return isPhysicallyValid && isOutsidePlayerRange && !isCellOccupied;
     }
 
     // Obtener todas las torretas en escena

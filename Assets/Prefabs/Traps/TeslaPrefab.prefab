@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1642892240333669262}
   - component: {fileID: 182459270340964787}
   - component: {fileID: -4669937142706482902}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TeslaPrefab
   m_TagString: PlayerWall
   m_Icon: {fileID: 0}
@@ -341,6 +341,10 @@ PrefabInstance:
     - target: {fileID: 8967870596001977829, guid: 20404f76f17a2ae44acc13380c3f1bd1, type: 3}
       propertyPath: m_Name
       value: CanvasCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967870596001977829, guid: 20404f76f17a2ae44acc13380c3f1bd1, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
