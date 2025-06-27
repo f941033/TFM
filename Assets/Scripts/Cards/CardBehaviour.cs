@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class CardBehaviour : MonoBehaviour
 {
-    public int enemiesToKill = 3;
+    public int enemiesToKill = 6;
     public TextMeshProUGUI healthText;
 
     int enemiesKilled = 0;
