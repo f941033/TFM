@@ -201,8 +201,8 @@ TextureImporter:
       name: LifePlus_Icon
       rect:
         serializedVersion: 2
-        x: 1793
-        y: 2134
+        x: 2685
+        y: 2135
         width: 234
         height: 200
       alignment: 0
@@ -223,8 +223,8 @@ TextureImporter:
       name: TextBlock_Purple
       rect:
         serializedVersion: 2
-        x: 2070
-        y: 1986
+        x: 2963
+        y: 1978
         width: 747
         height: 378
       alignment: 0
@@ -245,7 +245,7 @@ TextureImporter:
       name: Spritesheet_Cards1_4
       rect:
         serializedVersion: 2
-        x: 2824
+        x: 3720
         y: 2321
         width: 237
         height: 43
@@ -267,7 +267,7 @@ TextureImporter:
       name: Spritesheet_Cards1_5
       rect:
         serializedVersion: 2
-        x: 2824
+        x: 3721
         y: 2274
         width: 237
         height: 43
@@ -289,7 +289,7 @@ TextureImporter:
       name: Spritesheet_Cards1_6
       rect:
         serializedVersion: 2
-        x: 2827
+        x: 3721
         y: 2232
         width: 232
         height: 36
@@ -311,12 +311,12 @@ TextureImporter:
       name: CardLevel_Purple
       rect:
         serializedVersion: 2
-        x: 2825
-        y: 2146
-        width: 180
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 3717
+        y: 2149
+        width: 183
+        height: 71
+      alignment: 9
+      pivot: {x: 0.4853102, y: 0.5093427}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -333,7 +333,7 @@ TextureImporter:
       name: LifeLess_Icon
       rect:
         serializedVersion: 2
-        x: 1810
+        x: 2703
         y: 1936
         width: 200
         height: 186
@@ -355,10 +355,10 @@ TextureImporter:
       name: CardLevel_Brown
       rect:
         serializedVersion: 2
-        x: 2826
+        x: 3718
         y: 2067
-        width: 180
-        height: 71
+        width: 182
+        height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -377,8 +377,8 @@ TextureImporter:
       name: Souls_Icon
       rect:
         serializedVersion: 2
-        x: 1818
-        y: 1699
+        x: 2712
+        y: 1697
         width: 183
         height: 222
       alignment: 0
@@ -399,8 +399,8 @@ TextureImporter:
       name: TextBlock_Brown
       rect:
         serializedVersion: 2
-        x: 2070
-        y: 1592
+        x: 2961
+        y: 1596
         width: 747
         height: 378
       alignment: 0
@@ -421,7 +421,7 @@ TextureImporter:
       name: Damage_Icon
       rect:
         serializedVersion: 2
-        x: 1807
+        x: 2700
         y: 1444
         width: 191
         height: 231
@@ -443,8 +443,8 @@ TextureImporter:
       name: CardType_Purple
       rect:
         serializedVersion: 2
-        x: 2070
-        y: 1500
+        x: 3961
+        y: 2288
         width: 186
         height: 76
       alignment: 0
@@ -465,7 +465,7 @@ TextureImporter:
       name: DamageArea_Icon
       rect:
         serializedVersion: 2
-        x: 1779
+        x: 2673
         y: 1190
         width: 293
         height: 236
@@ -487,8 +487,8 @@ TextureImporter:
       name: CardType_Brown
       rect:
         serializedVersion: 2
-        x: 2070
-        y: 1408
+        x: 3961
+        y: 2194
         width: 186
         height: 76
       alignment: 0
@@ -509,7 +509,7 @@ TextureImporter:
       name: Spritesheet_Cards1_16
       rect:
         serializedVersion: 2
-        x: 1837
+        x: 2730
         y: 974
         width: 119
         height: 192
@@ -571,6 +571,116 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: TextBlock_Gray
+      rect:
+        serializedVersion: 2
+        x: 2972
+        y: 1190
+        width: 756
+        height: 394
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 7, z: 6, w: 9}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa47ef4eae6d7f04fbd62f61fd0f8efc
+      internalID: 1535521908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardType_Gray
+      rect:
+        serializedVersion: 2
+        x: 3960
+        y: 2101
+        width: 183
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 132dabecf6a505e4da64474ff77341c8
+      internalID: 363654372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardLevel_Gray
+      rect:
+        serializedVersion: 2
+        x: 3717
+        y: 1986
+        width: 182
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 2, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1551df410298e9541a03a2da7ccb03ce
+      internalID: 81703327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardBase_Gray
+      rect:
+        serializedVersion: 2
+        x: 1780
+        y: 959
+        width: 890
+        height: 1405
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7412dcaf55d78d941a925e0379c483ab
+      internalID: -1415871108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex_Gray
+      rect:
+        serializedVersion: 2
+        x: 1953
+        y: 0
+        width: 988
+        height: 905
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 2, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4d478dc77b7e644da1dc6440a8a158e
+      internalID: -6056427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -586,10 +696,13 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       CardBase_Brown: 6817816981098416819
+      CardBase_Gray: -1415871108
       CardBase_Purple: 2551219397173627497
       CardLevel_Brown: 3669176433886107848
+      CardLevel_Gray: 81703327
       CardLevel_Purple: -7867678932118662302
       CardType_Brown: -6661023938454019827
+      CardType_Gray: 363654372
       CardType_Purple: 1311849550883256842
       DamageArea_Icon: -833072271446053697
       Damage_Icon: -7101805252363399705
@@ -597,8 +710,10 @@ TextureImporter:
       LifePlus_Icon: 6653219015117297657
       Souls_Icon: 2286080486149089054
       TextBlock_Brown: 4934752065089030942
+      TextBlock_Gray: 1535521908
       TextBlock_Purple: 4564628065078994459
       Vortex_Brown: -5947918061905052546
+      Vortex_Gray: -6056427
       Vortex_Purple: -790874427542876313
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
