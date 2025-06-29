@@ -156,7 +156,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void CloseDeckInfo()
     {
-        FindFirstObjectByType<CardDetailUI>().Hide();
+        //FindFirstObjectByType<CardDetailUI>().Hide();
         deckPanel.SetActive(false);
         gameManager.RestorePreviousPhase();
     }
