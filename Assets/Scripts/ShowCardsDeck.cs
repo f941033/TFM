@@ -13,7 +13,7 @@ public class ShowCardsDeck : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GetComponent<Image>().color = Color.magenta;
+        //GetComponent<Image>().color = Color.magenta;
     }
 
     public void OnPointerExit(PointerEventData eventData)

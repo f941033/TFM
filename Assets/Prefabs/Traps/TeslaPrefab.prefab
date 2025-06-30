@@ -189,7 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651f21b5280fa24418219bd7980f86b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesToKill: 4
   healthText: {fileID: 7515096311545527557}
 --- !u!114 &-4669937142706482902
 MonoBehaviour:
@@ -224,7 +223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1714239230020021975, guid: 20404f76f17a2ae44acc13380c3f1bd1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.112
+      value: -0.0842
       objectReference: {fileID: 0}
     - target: {fileID: 3257750853083845499, guid: 20404f76f17a2ae44acc13380c3f1bd1, type: 3}
       propertyPath: m_Pivot.x

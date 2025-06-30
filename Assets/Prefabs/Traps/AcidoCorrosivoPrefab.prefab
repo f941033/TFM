@@ -342,7 +342,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651f21b5280fa24418219bd7980f86b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesToKill: 8
   healthText: {fileID: 8730941431781964907}
 --- !u!1001 &2516402920262845915
 PrefabInstance:
@@ -458,7 +457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6613122528411875760, guid: 20404f76f17a2ae44acc13380c3f1bd1, type: 3}
       propertyPath: m_fontSize
-      value: 0.15
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 6613122528411875760, guid: 20404f76f17a2ae44acc13380c3f1bd1, type: 3}
       propertyPath: m_fontStyle
@@ -478,7 +477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6613122528411875760, guid: 20404f76f17a2ae44acc13380c3f1bd1, type: 3}
       propertyPath: m_fontSizeBase
-      value: 0.15
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 6613122528411875760, guid: 20404f76f17a2ae44acc13380c3f1bd1, type: 3}
       propertyPath: m_fontColor32.rgba
