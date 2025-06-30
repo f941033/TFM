@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class ChangeSprite : MonoBehaviour
 {
+    public GameObject sprite;
     public Sprite[] sprites;
     private Animator animator;
-    int index = 0;
-
+    int index = 0;    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -23,8 +22,8 @@ public class ChangeSprite : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            if (index == 0) animator.enabled = false;
-            GetComponent<SpriteRenderer>().sprite = sprites[index];
+            if (index == 0) sprite.GetComponent<Animator>().enabled = false;
+            sprite.GetComponent<SpriteRenderer>().sprite = sprites[index];
             index++;
 
             if (index == sprites.Length)

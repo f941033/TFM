@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class CardBehaviour : MonoBehaviour
 {
-    public int enemiesToKill = 6;
+    int enemiesToKill;
     public TextMeshProUGUI healthText;
 
     int enemiesKilled = 0;
@@ -12,6 +12,7 @@ public class CardBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        enemiesToKill = GetComponent<TrapController>().cardData.uses;
         if (healthText != null) healthText.text = (enemiesToKill - enemiesKilled).ToString();
     }
 

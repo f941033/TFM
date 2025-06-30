@@ -119,9 +119,9 @@ public class GameManager : MonoBehaviour
                 pool.RemoveAt(idx);
             }
         }
-
         else
         {
+            pool.Remove(turretCard);
             for (int i = 0; i < 3; i++)
             {
                 int idx = UnityEngine.Random.Range(0, pool.Count);
@@ -277,7 +277,7 @@ public class GameManager : MonoBehaviour
     {
         inPrepPhase = false;
         ChangePhase(GamePhase.Action);
-        btnNextHand.gameObject.SetActive(false);
+        btnNextHand.transform.parent.gameObject.SetActive(false);
         panelTimeScale.SetActive(true);
         StartCoroutine("PanelGo");
 

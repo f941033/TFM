@@ -16,7 +16,7 @@ MonoBehaviour:
   description: "Da\xF1o 10% "
   cardType: 1
   healthModifier: 20
-  numberOfTiles: 0
+  numberOfTiles: 4
   goldCost: 150
   used: 0
   uses: 8

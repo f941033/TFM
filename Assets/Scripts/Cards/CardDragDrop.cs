@@ -209,7 +209,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                                 deckEffect.Play(player, worldCenter);
                                 Debug.Log("Hay descartes");
                                 Deck.CardPlayed(gameObject, cardData);
-                                
+
                                 isSet = true;
                                 break;
 
@@ -236,6 +236,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                         cardData.Play(player, worldCenter);
                         Deck.CardPlayed(gameObject, cardData);
                         isSet = true;
+
+                        ReturnToHand();
                     }
 
                     if (hasPrevious)
@@ -269,5 +271,15 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
             gameManager.UpdateTextNumberOfCardsDiscard();
         }
+    }
+    
+    private void ReturnToHand()
+    {
+        transform.SetParent(originalTransform, true);
+        transform.SetSiblingIndex(cardIndex);
+        rectTransform.anchoredPosition = originalAnchoredPosition;
+
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = true;
     }
 }
