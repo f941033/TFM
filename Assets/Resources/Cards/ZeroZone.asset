@@ -20,6 +20,7 @@ MonoBehaviour:
   numberOfTiles: 0
   goldCost: 50
   areaPreviewPrefab: {fileID: 1444403662060021971, guid: 2f572ff95ce351c40b49b59d18805cfe, type: 3}
+  cooldown: 20
   applyDamage: 0
   damage: 1
   applyDebuff: 1

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class HabilityCardData : CardData
 {
     public GameObject areaPreviewPrefab;
+    public float cooldown; 
 
     [Header("Daño")]
     public bool applyDamage = true;

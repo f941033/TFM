@@ -83,6 +83,25 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (cardData.cardType == CardType.Hability)
+        {
+            var handler = GetComponent<HabilityCardHandler>();
+            Debug.Log(handler != null);
+            if (handler != null && handler.cooldownRemaining > 0f)
+            {
+                gameManager.ShowMessage("¡Esta habilidad está en cooldown!", 2);
+
+                // Cancela el drag: 
+                eventData.pointerDrag = null;
+                eventData.pointerPress = null;
+
+                isDragging = false;
+                canvasGroup.blocksRaycasts = true;
+                canvasGroup.alpha = 1f;
+                return;
+            }
+        }
+
         if (cardData is TrapCardData trap)
         {
             if (!player.TrySpendSouls(trap.cost))
@@ -235,8 +254,13 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                         dropTilemap.SetTileFlags(cellPos, TileFlags.None);
                         cardData.Play(player, worldCenter);
                         Deck.CardPlayed(gameObject, cardData);
-                        isSet = true;
 
+                        var handler = GetComponent<HabilityCardHandler>();
+                        if (handler != null)
+                            handler.StartCooldown();
+
+                        isSet = true;
+                        
                         ReturnToHand();
                     }
 

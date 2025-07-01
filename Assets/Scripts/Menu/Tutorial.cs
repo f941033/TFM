@@ -69,7 +69,7 @@ public class Tutorial : MonoBehaviour
                 //    startingDeck.Add(card);
                 //}
             }
-            if (card.cardName == "Vuelta del abismo" || card.cardName == "RobaCartas")
+            if (card.cardName == "Vuelta del abismo" || card.cardName == "RobaCartas" || card.cardName == "Bola de fuego")
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;

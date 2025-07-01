@@ -19,12 +19,13 @@ MonoBehaviour:
   numberOfTiles: 0
   goldCost: 0
   areaPreviewPrefab: {fileID: 1444403662060021971, guid: 2f572ff95ce351c40b49b59d18805cfe, type: 3}
+  cooldown: 20
   applyDamage: 1
   damage: 30
   applyDebuff: 0
   debuffDuration: 2
   debuffs: []
-  effectRadius: 10
+  effectRadius: 2
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2048

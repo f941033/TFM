@@ -56,7 +56,7 @@ public class CardManager : MonoBehaviour
         var cardData = Instantiate(prefabCard, panelCard);
         CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
         cardUI.SetCardUI(cardToDraw);
-        if (cardToDraw.cardType == CardType.Trap || cardToDraw.cardType == CardType.DeckEffect || cardToDraw.cardType == CardType.Hability)
+        if (cardToDraw.cardType == CardType.Trap || cardToDraw.cardType == CardType.DeckEffect)
         {
             var drag = cardData.GetComponent<CardDragDrop>();
             drag.dropTilemap = zonaValidaTilemap;
@@ -64,10 +64,21 @@ public class CardManager : MonoBehaviour
             drag.player = player;
             drag.Deck = this;
         }
+        else if (cardToDraw.cardType == CardType.Hability)
+        {
+            var drag = cardData.GetComponent<CardDragDrop>();
+            drag.dropTilemap = zonaValidaTilemap;
+            drag.cardData = cardToDraw;
+            drag.player = player;
+            drag.Deck = this;
+
+            HabilityCardHandler hability = cardData.GetComponentInChildren<HabilityCardHandler>();
+            hability.Initialize(cardToDraw, player);
+        }
         else if (cardToDraw is BuffCardData buffData)
         {
             Destroy(cardData.GetComponent<CardDragDrop>());
-            HabilityCardHandler hability = cardData.GetComponentInChildren<HabilityCardHandler>(includeInactive: true);
+            HabilityCardHandler hability = cardData.GetComponentInChildren<HabilityCardHandler>();
             hability.Initialize(buffData, player);
         }
         cardsInHand.Add(cardData);
@@ -146,7 +157,7 @@ public class CardManager : MonoBehaviour
             else if (cardData is BuffCardData buffData)
             {
                 Destroy(cardObj.GetComponent<CardDragDrop>());
-                var hability = cardObj.GetComponentInChildren<HabilityCardHandler>(includeInactive: true);
+                var hability = cardObj.GetComponentInChildren<HabilityCardHandler>();
                 hability.Initialize(buffData, player);
             }
 
