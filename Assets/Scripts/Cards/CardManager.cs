@@ -47,6 +47,16 @@ public class CardManager : MonoBehaviour
 
     public void DrawCard()
     {
+        if (drawPile.Count == 0 && discardPile.Count > 0)
+        {
+            // Mezclar descartes y pasarlos al drawPile
+            drawPile.AddRange(discardPile);
+            Shuffle(drawPile);
+            discardPile.Clear();
+            gameManager.DeactivateDiscardPileImage();
+            FindFirstObjectByType<GameManager>().UpdateTextNumberOfCardsDiscard();
+        }
+
         var cardToDraw = drawPile[0];
         drawPile.RemoveAt(0);
 
@@ -88,24 +98,7 @@ public class CardManager : MonoBehaviour
     {
         while (cardsInHand.Count < currentHandSize && (drawPile.Count > 0 || discardPile.Count > 0))
         {
-            if (drawPile.Count == 0 && discardPile.Count > 0)
-            {
-                // Mezclar descartes y pasarlos al drawPile
-                drawPile.AddRange(discardPile);
-                Shuffle(drawPile);
-                discardPile.Clear();
-                gameManager.DeactivateDiscardPileImage();
-                FindFirstObjectByType<GameManager>().UpdateTextNumberOfCardsDiscard();
-            }
-
-            if (drawPile.Count > 0)
-            {
-                DrawCard();
-            }
-            else
-            {
-                break; // no se puede robar más
-            }
+            DrawCard();
         }
     }
 
