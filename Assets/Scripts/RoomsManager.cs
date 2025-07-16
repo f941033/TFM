@@ -20,13 +20,13 @@ public class RoomsManager : MonoBehaviour
         
     }
 
-    public void OpenRing()
-    {
-        var rooms = salas[indexSala].GetComponentsInChildren<SalaController>();
-        foreach (SalaController room in rooms )
-        {
-            room.OpenRoom();
-        }
-        indexSala++;
-    }
+    //public void OpenRing()
+    //{
+    //    var rooms = salas[indexSala].GetComponentsInChildren<SalaController>();
+    //    foreach (SalaController room in rooms )
+    //    {
+    //        room.OpenRoom();
+    //    }
+    //    indexSala++;
+    //}
 }

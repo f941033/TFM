@@ -7,23 +7,23 @@ public class SalaController : MonoBehaviour
     public Tilemap tilemap;
     Color originalColor;
     public bool estaLibre = false;
-    //public GameObject[] salasContiguas;
+    public GameObject[] salasContiguas;
     public GameObject[] wayPoints;
     public GameObject[] removeWayPoints;
     public SpawnEnemies spawnEnemiesController;
-    //public GameManager gm;
+    public GameManager gm;
 
     //static GameObject[] salas;
     //static int indexSala = 0;
-    //GameObject parent;
-    //MerchantUI merchant;
+    GameObject parent;
+    MerchantUI merchant;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //merchant = FindAnyObjectByType<MerchantUI>();
-        //parent = transform.parent.gameObject;
-        //originalColor = tilemap.color;
+        merchant = FindAnyObjectByType<MerchantUI>();
+        parent = transform.parent.gameObject;
+        originalColor = tilemap.color;
 
         if (gameObject.tag == "salaCentral")
         {
@@ -46,60 +46,68 @@ public class SalaController : MonoBehaviour
 
     }
 
-    //private void OnMouseDown()
-    //{
-    //    if (gm.hasKey && parent == salas[indexSala])
-    //    {
-    //        gm.hasKey = false;
-    //        merchant.DeactiveKey();
-
-    //        foreach (var item in parent.GetComponentsInChildren<SalaController>())
-    //        {
-    //            item.estaLibre = true;
-    //            spawnEnemiesController.AddWayPoints(item.wayPoints, item.removeWayPoints);
-    //            item.tilemap.gameObject.SetActive(false);
-    //        }
-
-    //        indexSala++;
-    //    }
-
-    //}
-
-    public void OpenRoom()
+    private void OnMouseDown()
     {
-        estaLibre = true;
-        spawnEnemiesController.AddWayPoints(wayPoints, removeWayPoints);
-        tilemap.gameObject.SetActive(false);
+        if (gm.hasKey && esSalaContigua())
+        {
+            gm.hasKey = false;
+            merchant.DeactiveKey();
+
+            foreach (var item in parent.GetComponentsInChildren<SalaController>())
+            {
+                item.estaLibre = true;
+                spawnEnemiesController.AddWayPoints(item.wayPoints, item.removeWayPoints);
+                item.tilemap.gameObject.SetActive(false);
+            }
+
+            gm.PreparationPhase();
+            //indexSala++;
+        }
+
     }
 
-    //private void OnMouseEnter()
+    //public void OpenRoom()
     //{
-    //    if (gameObject.tag == "salaCentral") return;
-
-    //    if (gm.hasKey && parent == salas[indexSala])
-    //    {
-    //        foreach (var item in parent.GetComponentsInChildren<SalaController>())
-    //        {
-    //            item.tilemap.color = Color.yellow;
-    //        }
-    //    }
-
+    //    estaLibre = true;
+    //    spawnEnemiesController.AddWayPoints(wayPoints, removeWayPoints);
+    //    tilemap.gameObject.SetActive(false);
     //}
 
+    private void OnMouseEnter()
+    {
+        if (gameObject.tag == "salaCentral") return;
+
+        if (gm.hasKey && esSalaContigua())
+        {
+            foreach (var item in parent.GetComponentsInChildren<SalaController>())
+            {
+                item.tilemap.color = Color.yellow;
+            }
+        }
+
+    }
+
+    private void OnMouseExit()
+    {
+        foreach (var item in parent.GetComponentsInChildren<SalaController>())
+        {
+            item.tilemap.color = originalColor;
+        }
+    }
 
 
-
-    //bool esSalaContigua()
-    //{
-    //    foreach (GameObject sala in salasContiguas)
-    //    {
-    //        if (sala.GetComponent<SalaController>().estaLibre)
-    //        {
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
+    bool esSalaContigua()
+    {
+        if (salasContiguas == null) return false;
+        foreach (GameObject sala in salasContiguas)
+        {
+            if (sala.GetComponent<SalaController>().estaLibre)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     //public void TengoCartaAbrirSala()
     //{

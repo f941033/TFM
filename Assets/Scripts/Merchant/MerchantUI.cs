@@ -94,7 +94,7 @@ public class MerchantUI : MonoBehaviour
         {
             gm.hasKey = true;
             key.gameObject.SetActive(true);
-            roomsManager.OpenRing();
+            //roomsManager.OpenRing();
         }
     }
 
@@ -106,6 +106,6 @@ public class MerchantUI : MonoBehaviour
     public void Close()
     {
         canvaMerchant.SetActive(false);
-        gm.PreparationPhase();
+        //gm.PreparationPhase();
     }
 }
