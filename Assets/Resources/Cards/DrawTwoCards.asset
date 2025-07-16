@@ -17,7 +17,7 @@ MonoBehaviour:
   cardType: 2
   healthModifier: 20
   numberOfTiles: 0
-  goldCost: 40
+  goldCost: 213
   effectType: 2
   count: 2
   duration: 0
