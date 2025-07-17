@@ -62,34 +62,46 @@ public class TorretaController : MonoBehaviour
             if (distance <= detectionRadius)
             {
                 currentEnemiesInRange.Add(enemy.transform);
+                if (!enemiesInRange.Contains(enemy.transform))
+                    enemiesInRange.Add(enemy.transform); // Añadir solo si es nuevo
             }
         }
 
-        // 4. Actualizar lista principal
+        // 4. Actualizar lista principal. Eliminar enemigos que ya no están en rango
         enemiesInRange.RemoveAll(enemy =>
             enemy == null ||
             !currentEnemiesInRange.Contains(enemy)
         );
 
         // 5. A�adir nuevos enemigos
-        foreach (Transform enemy in currentEnemiesInRange)
-        {
-            if (!enemiesInRange.Contains(enemy))
-            {
-                enemiesInRange.Add(enemy);
-            }
-        }
+        //foreach (Transform enemy in currentEnemiesInRange)
+        //{
+        //    if (!enemiesInRange.Contains(enemy))
+        //    {
+        //        enemiesInRange.Add(enemy);
+        //    }
+        //}
     }
 
     void Update()
     {
         if (canShoot)
         {
-            FindNearestTarget();
+            //FindNearestTarget();
+
+            UpdateCurrentTarget();
             AimAndShoot();
         }
     }
 
+    void UpdateCurrentTarget()
+    {
+        // El objetivo es siempre el primero que entró y sigue en rango
+        if (enemiesInRange.Count > 0)
+            currentTarget = enemiesInRange[0];
+        else
+            currentTarget = null;
+    }
     void FindNearestTarget()
     {
         float shortestDistance = Mathf.Infinity;
@@ -159,6 +171,7 @@ public class TorretaController : MonoBehaviour
             if (projectilesNumber == 0)
             {
                 canShoot = false;
+                Destroy(gameObject);
             }
         }
     }
