@@ -89,6 +89,11 @@ public class EnemyController : MonoBehaviour
             playerInRange = true;
             attackCooldown = 1f / currentAttackRate; // forzamos espera antes del primer golpe
         }
+
+        if (col.CompareTag("DeathZone"))
+        {
+            Die(); 
+        }
     }
 
     void Update()

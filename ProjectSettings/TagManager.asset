@@ -10,6 +10,7 @@ TagManager:
   - PlayerWall
   - CanvasEnemies
   - ColliderSala
+  - DeathZone
   layers:
   - Default
   - TransparentFX
