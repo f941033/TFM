@@ -12,7 +12,7 @@ public class ChangeCardPosition : MonoBehaviour
     public LayerMask spawnPointLayers;
     LayerMask trapLayers;
 
-    public float checkRadius = 0.1f; // Radio para verificación de colisión
+    public float checkRadius = 0.05f; // Radio para verificación de colisión
     PlayerController player;
     //Vector3 previousPosition;
 
@@ -29,7 +29,7 @@ public class ChangeCardPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.name.Contains("TurretPrefab")) return;
+        //if (gameObject.name.Contains("TurretPrefab")) return;
 
         if (estaArrastrando)
         {
@@ -74,7 +74,7 @@ public class ChangeCardPosition : MonoBehaviour
     void OnMouseDown()
     {
         if (!FindAnyObjectByType<GameManager>().inPrepPhase) return;
-        if (gameObject.name.Contains("TurretPrefab") ) return;
+        //if (gameObject.name.Contains("TurretPrefab") ) return;
 
         //previousPosition = transform.position;
 
@@ -87,7 +87,7 @@ public class ChangeCardPosition : MonoBehaviour
     void OnMouseUp()
     {
         if (!FindAnyObjectByType<GameManager>().inPrepPhase) return;
-        if (gameObject.name.Contains("TurretPrefab")) return;
+        //if (gameObject.name.Contains("TurretPrefab")) return;
 
         estaArrastrando = false;
 
