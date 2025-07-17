@@ -23,13 +23,14 @@ public class TorretaController : MonoBehaviour
     private float fireCountdown = 0f;
 
     private AudioSource audioSource;
-    private int projectilesNumber = 50;
+    public int projectilesNumber = 50;
     private bool canShoot = true;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         StartCoroutine(EnemyDetectionRoutine());
+        healthText.text = projectilesNumber.ToString();
     }
 
     IEnumerator EnemyDetectionRoutine()
@@ -171,7 +172,7 @@ public class TorretaController : MonoBehaviour
             if (projectilesNumber == 0)
             {
                 canShoot = false;
-                Destroy(gameObject);
+                Destroy(transform.parent.gameObject);
             }
         }
     }

@@ -109,6 +109,7 @@ MonoBehaviour:
   firePoint: {fileID: 6160494710280513426}
   healthText: {fileID: 1986210861274530081}
   checkInterval: 0.3
+  projectilesNumber: 50
 --- !u!82 &8768354133262798304
 AudioSource:
   m_ObjectHideFlags: 0
@@ -449,7 +450,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
