@@ -235,6 +235,7 @@ public class GameManager : MonoBehaviour
         cardManager.ClearPanelCard();
         soulsBar.SetActive(true);
         playerController.RefillSouls();
+        cardManager.drawPile.Clear();
         //GameObject.Find("Main Camera").GetComponent<CameraMovement>().SendMessage("StartCameraMovement");
 
         startingDeck = new List<CardData>(selectedCards);
@@ -289,7 +290,7 @@ public class GameManager : MonoBehaviour
         drawPileImage.SetActive(true);
 
         soulsBar.SetActive(false);
-
+        cardManager.drawPile.Clear();
         //Crear el mazo de cartas de tipo ACCI�N
         foreach (CardData card in startingDeck)
         {
