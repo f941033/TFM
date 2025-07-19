@@ -11,6 +11,8 @@ TagManager:
   - CanvasEnemies
   - ColliderSala
   - DeathZone
+  - FixedTrap
+  - CanvasInfo
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,5 @@
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -17,6 +18,7 @@ public class SalaController : MonoBehaviour
     //static int indexSala = 0;
     GameObject parent;
     MerchantUI merchant;
+    GameObject panelInfo;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +26,22 @@ public class SalaController : MonoBehaviour
         merchant = FindAnyObjectByType<MerchantUI>();
         parent = transform.parent.gameObject;
         originalColor = tilemap.color;
+
+        foreach (Transform t in GetComponentsInChildren<Transform>(true))
+        {
+            if (t.CompareTag("CanvasInfo"))
+            {
+                panelInfo = t.gameObject;
+                break;
+            }
+        }
+        if (panelInfo != null)
+        {
+            TextMeshProUGUI tmp = panelInfo.GetComponentInChildren<TextMeshProUGUI>(true); // El parámetro true busca aunque el objeto esté inactivo.
+            if (tmp != null) tmp.text = "x" + CountTrapsInRoom();
+        }
+
+
 
         if (gameObject.tag == "salaCentral")
         {
@@ -48,6 +66,10 @@ public class SalaController : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (gameObject.tag == "salaCentral") return;
+
+        panelInfo.gameObject.SetActive(false);
+
         if (gm.hasKey && esSalaContigua())
         {
             gm.hasKey = false;
@@ -77,6 +99,8 @@ public class SalaController : MonoBehaviour
     {
         if (gameObject.tag == "salaCentral") return;
 
+        if (esSalaContigua()) panelInfo.gameObject.SetActive(true);
+
         if (gm.hasKey && esSalaContigua())
         {
             foreach (var item in parent.GetComponentsInChildren<SalaController>())
@@ -89,6 +113,10 @@ public class SalaController : MonoBehaviour
 
     private void OnMouseExit()
     {
+        if (gameObject.tag == "salaCentral") return;
+
+        panelInfo.gameObject.SetActive(false);
+
         foreach (var item in parent.GetComponentsInChildren<SalaController>())
         {
             item.tilemap.color = originalColor;
@@ -113,4 +141,22 @@ public class SalaController : MonoBehaviour
     //{
     //    cartaAbrirSala = true;
     //}
+
+    public int CountTrapsInRoom()
+    {
+        int trapCount = 0;
+        Collider2D roomCollider = GetComponent<Collider2D>();
+        GameObject[] traps = GameObject.FindGameObjectsWithTag("FixedTrap");
+
+        foreach (GameObject trap in traps)
+        {
+            if (trap == null) continue;
+            Vector2 pos = trap.transform.position;
+            if (roomCollider.OverlapPoint(pos))
+            {
+                trapCount++;
+            }
+        }
+        return trapCount;
+    }
 }
