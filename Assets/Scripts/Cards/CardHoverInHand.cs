@@ -1,10 +1,11 @@
+using DeckboundDungeon.GamePhase;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardHoverInHand : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [Header("Configuración")]   
+    [Header("Configuración")]
     public Color hoverColor = new Color(1f, 0.9f, 0.6f, 1f); // Color al hacer hover 
     private Color originalColor;
 
@@ -12,6 +13,12 @@ public class CardHoverInHand : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
     public Image cardImage; // Asigna el componente Image de la carta
     private CardSelector cardSelector;
 
+    // --------- NUEVO HOVER EN ESCALA -------------  //
+    private RectTransform rectTransform;
+    private Vector3 originalScale;
+    private float selecScale = 1.5f;
+    private int indiceOriginal;
+    // ----------------------------------------------- //
 
     void Awake()
     {
@@ -19,30 +26,58 @@ public class CardHoverInHand : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
             cardImage = GetComponentInChildren<Image>();
         originalColor = cardImage.color;
         cardSelector = GetComponent<CardSelector>();
+
+        // --------- NUEVO HOVER EN ESCALA -------------  //
+        rectTransform = GetComponent<RectTransform>();
+        originalScale = rectTransform.localScale;
+        // ----------------------------------------------- //
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!cardSelector.isSelected)
-            cardImage.color = hoverColor;
+
+        // --------- NUEVO HOVER EN ESCALA -------------  //
+        if (GameManager.CurrentPhase == GamePhase.Preparation || GameManager.CurrentPhase == GamePhase.Action)
+        {
+            indiceOriginal = transform.GetSiblingIndex();
+            transform.SetAsLastSibling();
+            rectTransform.localScale = originalScale * selecScale;
+        }
+        // ----------------------------------------------- //
+        else
+        {
+            if (!cardSelector.isSelected)
+                cardImage.color = hoverColor;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!cardSelector.isSelected)
+        // --------- NUEVO HOVER EN ESCALA -------------  //
+        if (GameManager.CurrentPhase == GamePhase.Preparation || GameManager.CurrentPhase == GamePhase.Action)
+        {
+            transform.SetSiblingIndex(indiceOriginal);
+            rectTransform.localScale = originalScale;
+        }
+        // ----------------------------------------------- //
+        else
+        {
+            if (!cardSelector.isSelected)
             cardImage.color = originalColor;
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 }

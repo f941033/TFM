@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using DeckboundDungeon.Cards;
 using TMPro;
+using DeckboundDungeon.GamePhase;
 
 public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -83,6 +84,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        
+
         if (cardData.cardType == CardType.Hability)
         {
             var handler = GetComponent<HabilityCardHandler>();
@@ -138,11 +141,14 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         {
             currentBorder = Instantiate(borderPrefab_1);
         }
+
+        
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         if (!isDragging) return;
+        
         rectTransform.position = Input.mousePosition;
 
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(eventData.position);
@@ -282,6 +288,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             // Revertir la carta a su posición original
             transform.SetParent(originalTransform, true);
             transform.SetSiblingIndex(cardIndex);
+            transform.localScale = Vector3.one;
             rectTransform.anchoredPosition = originalAnchoredPosition;
         }
         else
@@ -302,6 +309,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         transform.SetParent(originalTransform, true);
         transform.SetSiblingIndex(cardIndex);
         rectTransform.anchoredPosition = originalAnchoredPosition;
+        transform.localScale = Vector3.one;
 
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
