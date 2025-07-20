@@ -173,7 +173,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 709
+        y: 1417
         width: 826
         height: 709
       alignment: 0
@@ -194,8 +194,8 @@ TextureImporter:
       name: Pit_Card
       rect:
         serializedVersion: 2
-        x: 826
-        y: 709
+        x: 825
+        y: 1417
         width: 826
         height: 709
       alignment: 0
@@ -216,8 +216,8 @@ TextureImporter:
       name: Saws_Card
       rect:
         serializedVersion: 2
-        x: 1652
-        y: 709
+        x: 1650
+        y: 1417
         width: 826
         height: 709
       alignment: 0
@@ -238,8 +238,8 @@ TextureImporter:
       name: Acid_Card
       rect:
         serializedVersion: 2
-        x: 2478
-        y: 709
+        x: 2476
+        y: 1417
         width: 826
         height: 709
       alignment: 0
@@ -261,7 +261,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3304
-        y: 709
+        y: 1417
         width: 826
         height: 709
       alignment: 0
@@ -283,7 +283,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4130
-        y: 709
+        y: 1417
         width: 826
         height: 709
       alignment: 0
@@ -305,7 +305,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 707
         width: 826
         height: 709
       alignment: 0
@@ -327,7 +327,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 826
-        y: 0
+        y: 707
         width: 826
         height: 709
       alignment: 0
@@ -348,8 +348,8 @@ TextureImporter:
       name: AtkIncr_Card
       rect:
         serializedVersion: 2
-        x: 1652
-        y: 0
+        x: 1651
+        y: 707
         width: 826
         height: 709
       alignment: 0
@@ -371,7 +371,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2478
-        y: 0
+        y: 706
         width: 826
         height: 709
       alignment: 0
@@ -393,7 +393,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3304
-        y: 0
+        y: 707
         width: 826
         height: 709
       alignment: 0
@@ -415,11 +415,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4130
-        y: 3
+        y: 715
         width: 831
         height: 702
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -428,6 +428,28 @@ TextureImporter:
       bones: []
       spriteID: f9d56c5e7ea17654ea5d700c70ecac17
       internalID: 421503429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Draw2Cards_Card
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 826
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1d48b23a86d6f94e81692aec77f6943
+      internalID: 800245295
       vertices: []
       indices: 
       edges: []
@@ -450,6 +472,7 @@ TextureImporter:
       AtkIncr_Card: -11930394
       Bomb_Card: 1711113281
       Box_Card: -1669249693
+      Draw2Cards_Card: 800245295
       Electricity_Card: -486609375
       Fireball_Card: 421503429
       Pit_Card: 877911320
