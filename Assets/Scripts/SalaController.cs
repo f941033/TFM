@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 public class SalaController : MonoBehaviour
 {
     public Tilemap tilemap;
+    public Tilemap borderTilemap;
     Color originalColor;
     public bool estaLibre = false;
     public GameObject[] salasContiguas;
@@ -99,7 +100,11 @@ public class SalaController : MonoBehaviour
     {
         if (gameObject.tag == "salaCentral") return;
 
-        if (esSalaContigua()) panelInfo.gameObject.SetActive(true);
+        if (!gm.hasKey && esSalaContigua())
+        {
+            borderTilemap.gameObject.SetActive(true);
+            panelInfo.gameObject.SetActive(true);
+        }
 
         if (gm.hasKey && esSalaContigua())
         {
@@ -109,6 +114,8 @@ public class SalaController : MonoBehaviour
             }
         }
 
+        
+
     }
 
     private void OnMouseExit()
@@ -116,6 +123,7 @@ public class SalaController : MonoBehaviour
         if (gameObject.tag == "salaCentral") return;
 
         panelInfo.gameObject.SetActive(false);
+        borderTilemap.gameObject.SetActive(false);
 
         foreach (var item in parent.GetComponentsInChildren<SalaController>())
         {
