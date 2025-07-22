@@ -1,131 +1,155 @@
-
-using System.Collections;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-     //float moveSpeed = 10f;
-     //float borderThickness = 0.5f;
-     Vector2 mapSize = new Vector2(55f, 55f); // Tama�o del mapa
-     float cameraZOffset = -30f; // Mantener la c�mara en esta profundidad
+    [Header("Límites del Laberinto")]
+    public float xMin = -10f;
+    public float xMax = 10f;
+    public float yMin = -10f;
+    public float yMax = 10f;
+
+    [Header("Configuración de Movimiento")]
+    public float dragSpeed = 2f;
+
+    [Header("Configuración de Zoom")]
+    public float zoomSpeed = 5f;
+    public float minZoom = 3f;
+    public float maxZoom = 20f;
 
     private Camera mainCamera;
-    private float cameraHeight;
-    private float cameraWidth;
+    private Vector3 dragOrigin;
+    private Vector3 lastMousePosition;
+    private bool isDragging = false;
+    float cameraZOffset = -30f; // Mantener la cámara en esta profundidad
 
-    private float zoomSpeed = 5f;
-    private float minZoom = 4f;
-    private float maxZoom = 30f;
-
-    private Vector3 dragOriginMaze;
-    private bool isDraggingMaze = false;
 
     void Start()
     {
-
+        // Obtener la cámara principal
         mainCamera = Camera.main;
-        // Calcular el tama�o de la c�mara en el mundo (importante hacerlo en Start)
-        cameraHeight = 2f * mainCamera.orthographicSize;
-        cameraWidth = cameraHeight * mainCamera.aspect;
+        if (mainCamera == null)
+            mainCamera = GetComponent<Camera>();
 
-        // Asegurar que la c�mara inicie en el centro del mapa (o donde se desee)
-        transform.position = new Vector3(mapSize.x / 2f, mapSize.y / 2f, cameraZOffset);
+        if (mainCamera == null)
+        {
+            Debug.LogError("No se pudo encontrar el componente Camera. Asegúrate de que este script esté en un objeto con una cámara.");
+        }
+
+        // Asegurar que la cámara inicie en el centro del mapa donde está el player
+        Vector3 playerPosition = FindAnyObjectByType<PlayerController>().transform.position;
+        transform.position = new Vector3(playerPosition.x, playerPosition.y, cameraZOffset);
     }
 
     void Update()
     {
-        /* --------------------------------------------
-         *              ZOOM CON RUEDA
-         * --------------------------------------------*/             
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll != 0f)
-        {
-            mainCamera.orthographicSize -= scroll * zoomSpeed;
-            mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, minZoom, maxZoom);
-        }
+        HandleMouseDrag();
+        HandleZoom();
+    }
 
-
-
-        /*--------------------------------------------
-         *         ARRASTRE DEL NIVEL CON RUEDA
-         *--------------------------------------------*/
-
-        // Detectar inicio del arrastre con la rueda del rat�n (bot�n 2)
+    void HandleMouseDrag()
+    {
+        // Detectar cuando se presiona la rueda del ratón (botón medio)
         if (Input.GetMouseButtonDown(2))
         {
-            dragOriginMaze = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            isDraggingMaze = true;
+            dragOrigin = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            isDragging = true;
         }
 
-        // Mientras se mantenga presionado el bot�n central
-        if (isDraggingMaze && Input.GetMouseButton(2))
+        // Mientras se mantiene presionada la rueda del ratón
+        if (Input.GetMouseButton(2) && isDragging)
         {
-            Vector3 currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 difference = dragOriginMaze - currentPos;
-            transform.position += difference;
+            Vector3 currentMousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 difference = dragOrigin - currentMousePosition;
+
+            // Calcular la nueva posición
+            Vector3 targetPosition = transform.position + difference;
+
+            // Aplicar límites de movimiento
+            targetPosition = ApplyCameraBounds(targetPosition);
+
+            // Aplicar la posición con los límites
+            transform.position = targetPosition;
         }
 
-        // Al soltar la rueda del rat�n
+        // Cuando se suelta la rueda del ratón
         if (Input.GetMouseButtonUp(2))
         {
-            isDraggingMaze = false;
+            isDragging = false;
         }
     }
 
+    void HandleZoom()
+    {
+        // Obtener el input de la rueda del ratón para hacer zoom
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
 
+        if (scroll != 0f && mainCamera != null)
+        {
+            // Para cámara ortográfica
+            if (mainCamera.orthographic)
+            {
+                mainCamera.orthographicSize -= scroll * zoomSpeed;
+                mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, minZoom, maxZoom);
+            }
+            // Para cámara en perspectiva
+            else
+            {
+                mainCamera.fieldOfView -= scroll * zoomSpeed * 10f;
+                mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView, minZoom * 3f, maxZoom * 3f);
+            }
 
-    //-------------- EL MOVIMIENTO DE C�MARA YA NO SE USA -----------------
- 
-    //public void StartCameraMovement()
-    //{
-    //    Debug.Log("arrancando movimiento de c�mara");
-    //    //StartCoroutine("MoveCamera");
-    //}
+            // Después del zoom, verificar que la cámara siga dentro de los límites
+            transform.position = ApplyCameraBounds(transform.position);
+        }
+    }
 
-    //public void StopCameraMovement()
-    //{
-    //    Debug.Log("parando movimiento de c�mara");
-    //    StopCoroutine("MoveCamera");
-    //}
+    Vector3 ApplyCameraBounds(Vector3 targetPosition)
+    {
+        if (mainCamera == null) return targetPosition;
 
+        // Calcular el tamaño visible de la cámara
+        float camHeight, camWidth;
 
-    //IEnumerator MoveCamera()
-    //{
-    //    while (true)
-    //    {
-    //        Vector3 mousePos = Input.mousePosition;
-    //        Vector3 cameraPos = transform.position;
+        if (mainCamera.orthographic)
+        {
+            // Para cámara ortográfica
+            camHeight = mainCamera.orthographicSize;
+            camWidth = camHeight * mainCamera.aspect;
+        }
+        else
+        {
+            // Para cámara en perspectiva (aproximación)
+            float distance = Mathf.Abs(targetPosition.z);
+            camHeight = distance * Mathf.Tan(mainCamera.fieldOfView * 0.5f * Mathf.Deg2Rad);
+            camWidth = camHeight * mainCamera.aspect;
+        }
 
-    //        // Movimiento Horizontal
-    //        if (mousePos.x >= Screen.width - borderThickness)
-    //        {
-    //            cameraPos.x += moveSpeed * Time.deltaTime;
-    //        }
-    //        else if (mousePos.x <= borderThickness)
-    //        {
-    //            cameraPos.x -= moveSpeed * Time.deltaTime;
-    //        }
+        // Aplicar los límites considerando el tamaño de la cámara
+        float limitedX = Mathf.Clamp(targetPosition.x, xMin + camWidth, xMax - camWidth);
+        float limitedY = Mathf.Clamp(targetPosition.y, yMin + camHeight, yMax - camHeight);
 
-    //        // Movimiento Vertical
-    //        if (mousePos.y >= Screen.height - borderThickness)
-    //        {
-    //            cameraPos.y += moveSpeed * Time.deltaTime;
-    //        }
-    //        else if (mousePos.y <= borderThickness)
-    //        {
-    //            cameraPos.y -= moveSpeed * Time.deltaTime;
-    //        }
+        // Mantener la posición Z original
+        return new Vector3(limitedX, limitedY, targetPosition.z);
+    }
 
-    //        // Limitar la posici�n de la c�mara al tama�o del mapa
-    //        // Aqu� es CLAVE restar la mitad del tama�o de la c�mara para centrarla
-    //        cameraPos.x = Mathf.Clamp(cameraPos.x, 0f + cameraWidth / 2, mapSize.x - cameraWidth / 2);
-    //        cameraPos.y = Mathf.Clamp(cameraPos.y, 0f + cameraHeight / 2, mapSize.y - cameraHeight / 2);
+    // Método para ajustar los límites dinámicamente si es necesario
+    public void SetBounds(float newXMin, float newXMax, float newYMin, float newYMax)
+    {
+        xMin = newXMin;
+        xMax = newXMax;
+        yMin = newYMin;
+        yMax = newYMax;
 
-    //        transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraZOffset);
-    //        yield return null;
-    //    }
-    //}
+        // Verificar inmediatamente si la cámara está dentro de los nuevos límites
+        transform.position = ApplyCameraBounds(transform.position);
+    }
 
-
-    
+    // Método para visualizar los límites en el editor (opcional)
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Vector3 center = new Vector3((xMin + xMax) / 2f, (yMin + yMax) / 2f, transform.position.z);
+        Vector3 size = new Vector3(xMax - xMin, yMax - yMin, 0.1f);
+        Gizmos.DrawWireCube(center, size);
+    }
 }
