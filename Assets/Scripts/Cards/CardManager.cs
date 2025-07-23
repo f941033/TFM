@@ -16,7 +16,7 @@ public class CardManager : MonoBehaviour
     public GameManager gameManager;
 
     [Header("Variables de la mano")]
-    float fanSpread = 10f;
+    float fanSpread = 7.5f;
     float cardSpacing = -150f;
     float verticalSpacing = 100f;
 
@@ -110,17 +110,17 @@ public class CardManager : MonoBehaviour
         if (cardCount == 1)
         {
             cardsInHand[0].transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-            cardsInHand[0].transform.localPosition = new Vector3(0f, 100f, 0f);
+            cardsInHand[0].transform.localPosition = new Vector3(0f, 75f, 0f);
             return;
         }
 
         for (int i = 0; i < cardCount; i++)
         {
-            float rotationAngle = fanSpread * (i - (cardCount - 1) / 2f);
+            float rotationAngle = (fanSpread * (i - (cardCount - 1) / 2f));
             cardsInHand[i].transform.localRotation = Quaternion.Euler(0f, 0f, rotationAngle);
 
-            float horizontalOffset = cardSpacing * (i - (cardCount - 1) / 2f);
-            float normalizedPosition = (2f * i / (cardCount - 1) - 1f) / 2f; // Normalize card position between -1,1
+            float horizontalOffset = (cardSpacing * (i - (cardCount - 1) / 2f));
+            float normalizedPosition = (2f * i / (cardCount - 1) - 1f)/2f ; // Normalize card position between -1,1
             float verticalOffset = verticalSpacing * (1 - normalizedPosition * normalizedPosition );
 
             //set card position

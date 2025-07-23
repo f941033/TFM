@@ -16,7 +16,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     // --------- NUEVO HOVER EN ESCALA -------------  //
     private RectTransform rectTransform;
     private Vector3 originalScale;
-    private float selecScale = 1.5f;
+    private float selecScale = 1.25f;
     private int indiceOriginal;
     // ----------------------------------------------- //
 
@@ -43,6 +43,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
             indiceOriginal = transform.GetSiblingIndex();
             transform.SetAsLastSibling();
             rectTransform.localScale = originalScale * selecScale;
+            rectTransform.position += new Vector3(0f, 1f);
         }
         // ----------------------------------------------- //
         else
