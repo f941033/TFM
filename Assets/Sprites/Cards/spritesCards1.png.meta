@@ -419,7 +419,7 @@ TextureImporter:
         width: 831
         height: 702
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -428,6 +428,28 @@ TextureImporter:
       bones: []
       spriteID: f9d56c5e7ea17654ea5d700c70ecac17
       internalID: 421503429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Draw2Cards_Card
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1418
+        width: 826
+        height: 707
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e5776091d5a089469cb0ac0708bf008
+      internalID: -1615764547
       vertices: []
       indices: 
       edges: []
@@ -450,6 +472,7 @@ TextureImporter:
       AtkIncr_Card: -11930394
       Bomb_Card: 1711113281
       Box_Card: -1669249693
+      Draw2Cards_Card: -1615764547
       Electricity_Card: -486609375
       Fireball_Card: 421503429
       Pit_Card: 877911320

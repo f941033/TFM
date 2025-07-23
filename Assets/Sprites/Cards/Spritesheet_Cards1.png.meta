@@ -422,9 +422,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2700
-        y: 1444
+        y: 1462
         width: 191
-        height: 231
+        height: 216
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -465,13 +465,13 @@ TextureImporter:
       name: DamageArea_Icon
       rect:
         serializedVersion: 2
-        x: 2673
-        y: 1190
-        width: 293
-        height: 236
+        x: 2700
+        y: 1203
+        width: 200
+        height: 223
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 1, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
@@ -580,7 +580,7 @@ TextureImporter:
         width: 756
         height: 394
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 7, z: 6, w: 9}
       customData: 
       outline: []
@@ -602,7 +602,7 @@ TextureImporter:
         width: 183
         height: 77
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -624,7 +624,7 @@ TextureImporter:
         width: 182
         height: 71
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 2, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -646,7 +646,7 @@ TextureImporter:
         width: 890
         height: 1405
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -668,7 +668,7 @@ TextureImporter:
         width: 988
         height: 905
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 2, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -677,6 +677,28 @@ TextureImporter:
       bones: []
       spriteID: f4d478dc77b7e644da1dc6440a8a158e
       internalID: -6056427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Uses_Icon
+      rect:
+        serializedVersion: 2
+        x: 2973
+        y: 974
+        width: 203
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffbf2d59f8151454790875e6ecb4715b
+      internalID: -497719855
       vertices: []
       indices: 
       edges: []
@@ -712,6 +734,7 @@ TextureImporter:
       TextBlock_Brown: 4934752065089030942
       TextBlock_Gray: 1535521908
       TextBlock_Purple: 4564628065078994459
+      Uses_Icon: -497719855
       Vortex_Brown: -5947918061905052546
       Vortex_Gray: -6056427
       Vortex_Purple: -790874427542876313
