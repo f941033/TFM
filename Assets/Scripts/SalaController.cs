@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -20,6 +22,7 @@ public class SalaController : MonoBehaviour
     GameObject parent;
     MerchantUI merchant;
     GameObject panelInfo;
+    List<FixedTrapBehaviour> trapsInRoom = new List<FixedTrapBehaviour>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -82,12 +85,21 @@ public class SalaController : MonoBehaviour
                 spawnEnemiesController.AddWayPoints(item.wayPoints, item.removeWayPoints);
                 item.tilemap.gameObject.SetActive(false);
             }
-
+            ActivarTrampas();
             gm.PreparationPhase();
             //indexSala++;
         }
 
     }
+
+    void ActivarTrampas()
+    {
+        foreach (var item in trapsInRoom)
+        {
+            item.ActivateAnimation();
+        }
+    }
+
 
     //public void OpenRoom()
     //{
@@ -108,6 +120,8 @@ public class SalaController : MonoBehaviour
 
         if (gm.hasKey && esSalaContigua())
         {
+            panelInfo.gameObject.SetActive(true);
+
             foreach (var item in parent.GetComponentsInChildren<SalaController>())
             {
                 item.tilemap.color = Color.yellow;
@@ -162,6 +176,7 @@ public class SalaController : MonoBehaviour
             Vector2 pos = trap.transform.position;
             if (roomCollider.OverlapPoint(pos))
             {
+                trapsInRoom.Add(trap.GetComponent<FixedTrapBehaviour>());
                 trapCount++;
             }
         }

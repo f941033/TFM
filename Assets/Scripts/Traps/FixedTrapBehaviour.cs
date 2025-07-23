@@ -25,4 +25,9 @@ public class FixedTrapBehaviour : MonoBehaviour
             enemy.ReceiveDamage(damage);
         }
     }
+
+    public void ActivateAnimation()
+    {
+        GetComponent<Animator>().SetTrigger("active");
+    }
 }
