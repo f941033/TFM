@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadffe2894632804ca0e394ee289fe72, type: 3}
   m_Name: FireBall
   m_EditorClassIdentifier: 
-  cardName: Bola de fuego
+  cardName: Fireball
   description: "Hace 30 de da\xF1o en el area colocada"
   cardType: 3
   healthModifier: 10

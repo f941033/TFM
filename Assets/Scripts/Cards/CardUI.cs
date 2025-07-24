@@ -12,19 +12,16 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Sprite trapBackground;
     [SerializeField] private Sprite buffBackground;
+    [SerializeField] private Sprite deckBackground;
     [SerializeField] private Image damageImage;
     [SerializeField] private Image costImage;
     [SerializeField] private Image spriteImage;
     [SerializeField] private TextMeshProUGUI goldCostText;
     [SerializeField] private Button buyButton;
     [SerializeField] private Button detailsButton;
-    [SerializeField] private Image descriptionImage;
-    [SerializeField] private Sprite descriptionBackgroundTrap;
     [SerializeField] private Image typeImage;
     [SerializeField] private Sprite typeBackgroundTrap;
     [SerializeField] private TextMeshProUGUI textType;
-    [SerializeField] private Image vortexImage;
-    [SerializeField] private Sprite vortexBackgroundTrap;
 
     public void SetCardUI(CardData cardData)
     {
@@ -56,10 +53,16 @@ public class CardUI : MonoBehaviour
             textCost.text = trap.cost.ToString();
             backgroundImage.sprite = trapBackground;
             textDamage.text = trap.damage.ToString();
-            descriptionImage.sprite = descriptionBackgroundTrap;
-            typeImage.sprite = typeBackgroundTrap;
             textType.text = "TRAP";
-            vortexImage.sprite = vortexBackgroundTrap;
+        }
+        else if (cardData is DeckEffectCardData deck)
+        {
+            textCost.gameObject.SetActive(false);
+            backgroundImage.sprite = deckBackground;
+            damageImage.gameObject.SetActive(false);
+            costImage.gameObject.SetActive(false);
+            textDamage.gameObject.SetActive(false);
+            textType.text = "BOUND";
         }
         else
         {
@@ -68,6 +71,7 @@ public class CardUI : MonoBehaviour
             damageImage.gameObject.SetActive(false);
             costImage.gameObject.SetActive(false);
             textDamage.gameObject.SetActive(false);
+            textType.text = "SPELL";
         }
     }
 
