@@ -112,7 +112,7 @@ public class SalaController : MonoBehaviour
     {
         if (gameObject.tag == "salaCentral") return;
 
-        if (!gm.hasKey && esSalaContigua())
+        if (!gm.hasKey && esSalaContigua() && !estaLibre)
         {
             borderTilemap.gameObject.SetActive(true);
             panelInfo.gameObject.SetActive(true);
