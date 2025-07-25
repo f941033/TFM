@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 9091948400574510089}
   - component: {fileID: 3731214054184592032}
   - component: {fileID: 6007496907360271110}
-  - component: {fileID: 8861304929858971163}
-  m_Layer: 0
+  - component: {fileID: -4316218221179634089}
+  m_Layer: 12
   m_Name: Minion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -136,10 +136,10 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!61 &6007496907360271110
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -174,7 +174,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.2032175, y: -0.08948326}
+  m_Offset: {x: -0.209692, y: -0.0786953}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -184,9 +184,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.2791233, y: 0.43968964}
+  m_Size: {x: 0.5337753, y: 0.5389595}
   m_EdgeRadius: 0
---- !u!114 &8861304929858971163
+--- !u!114 &-4316218221179634089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,20 +195,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3935197877417076588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb2958ed25b4a3e41b7d8476a5c56c21, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e20fdbf2b2fcf6469b771bb53b7d884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 8
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2048
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  moveSpeed: 3
-  attackDistance: 0.5
-  avoidanceDistance: 1.2
-  raycastCount: 5
-  damage: 25
-  timeBetweenHits: 1.1
-  maxHealth: 100
+  obstacleTilemap: {fileID: 0}
+  obstacleLayerName: Obstacle
+  damage: 10
+  timeBetweenHits: 0.75
+  cellSize: 1
+  moveDuration: 0.5
+  attackDistance: 1
