@@ -23,12 +23,14 @@ public class TorretaController : MonoBehaviour
     private float fireCountdown = 0f;
 
     private AudioSource audioSource;
+    private Animator animator;
     public int projectilesNumber = 50;
     private bool canShoot = true;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
         StartCoroutine(EnemyDetectionRoutine());
         healthText.text = projectilesNumber.ToString();
     }
@@ -142,7 +144,7 @@ public class TorretaController : MonoBehaviour
             {
                 if (fireCountdown <= 0f)
                     {
-                        Shoot();
+                        StartCoroutine(Shoot());
                         fireCountdown = 1f / fireRate;
                     }   
             }
@@ -150,11 +152,13 @@ public class TorretaController : MonoBehaviour
         }
     }
 
-    void Shoot()
+    IEnumerator Shoot()
     {
         if (projectilePrefab != null && firePoint != null && canShoot)
         {
+            animator.SetTrigger("fire");
             audioSource.Play();
+            yield return new WaitForSeconds(0.35f);
             GameObject projectile = Instantiate(
                 projectilePrefab,
                 firePoint.position,
