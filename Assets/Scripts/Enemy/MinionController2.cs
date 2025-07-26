@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class MinionController2 : MonoBehaviour
 {
@@ -14,8 +15,11 @@ public class MinionController2 : MonoBehaviour
     [SerializeField] string trapLayerName = "TrapLayer";
 
     [Header("Combate")]
-    [SerializeField] int damage = 1;
+    [SerializeField] int damage = 10;
     [SerializeField] float timeBetweenHits = 2f;
+    [SerializeField] private float health;
+    [SerializeField] private float currentHealth;
+    public Image healthBarUI;
 
     [Header("Movimiento en cuadrícula")]
     [SerializeField] float cellSize = 1f;
@@ -50,7 +54,7 @@ public class MinionController2 : MonoBehaviour
         Vector3Int.down    // Sur
     };
 
-    /* ------------------------ Unity ------------------------ */
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -62,6 +66,8 @@ public class MinionController2 : MonoBehaviour
 
         originPoint = SnapToGrid(transform.position);
         lastTargetPosition = Vector3.zero;
+
+        currentHealth = health;
     }
 
     void Update()
@@ -75,6 +81,7 @@ public class MinionController2 : MonoBehaviour
             case State.Chase: HandleChase(); break;
             case State.Attack: HandleAttack(); break;
             case State.Return: HandleReturn(); break;
+            case State.Dead: HandleDead(); break;
         }
     }
 
@@ -334,12 +341,34 @@ public class MinionController2 : MonoBehaviour
         {
             var enemyController = currentTarget.GetComponent<EnemyController>();
             if (enemyController != null)
+            {
                 enemyController.ReceiveDamage(damage);
+                enemyController.NotifyAttackedByMinion(this);
+            }
+                
         }
 
         yield return new WaitForSeconds(timeBetweenHits);
         canAttack = true;
     }
+
+    public void ReceiveDamage(float damage)
+    {
+        currentHealth -= damage;
+        healthBarUI.fillAmount = currentHealth / health;
+        if (currentHealth <= 0)
+        {
+            currentState = State.Dead;
+        }
+    }
+
+    /* ------------------------ Muerte ------------------------ */
+
+    void HandleDead()
+    {
+        Destroy(gameObject);
+    }
+
 
     /* ------------------------ Utilidades ------------------------ */
     Vector2 GetCardinalDirection(Vector3 rawDir)
@@ -366,7 +395,16 @@ public class MinionController2 : MonoBehaviour
         if (shouldFaceRight != isFacingRight)
         {
             isFacingRight = shouldFaceRight;
-            sr.flipX = !isFacingRight;
+            //sr.flipX = !isFacingRight;
+            if(isFacingRight)
+            {
+                transform.localScale = Vector3.one;
+            }
+            else
+            {
+                transform.localScale = new Vector3(-1,1,1);
+            }
+            
         }
     }
 

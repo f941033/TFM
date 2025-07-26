@@ -1,22 +1,18 @@
-using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 using System.Collections;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyController : MonoBehaviour
 {
-    public enum EnemyType
-    {
-        Aventurero,
-        Zapador,
-        Heroe,
-        Paladin,
-        Mago,
-        Destructor
-    }
+    public enum EnemyType { Aventurero, Zapador, Heroe, Paladin, Mago, Destructor }
+
     public EnemyType type;
-    Transform target;
+    Transform playerTarget;
+    Transform currentTarget;            // objetivo actual (Player o Minion)
+    MinionController2 minionTarget;     // referencia fuerte si atacando minion
+    bool attackingMinion = false;
+
     [SerializeField] private float health;
     [SerializeField] private float currentHealth;
     [SerializeField] private float damage = 10f;
@@ -24,7 +20,7 @@ public class EnemyController : MonoBehaviour
     private float attackCooldown = 0f;
     private float attackRate = 1f;
     public float currentAttackRate;
-    private float attackRange = 1f;
+    private float attackRange = 10f;
     public float currentAttackRange;
     private bool playerInRange = false;
     public int gold;
@@ -38,6 +34,7 @@ public class EnemyController : MonoBehaviour
 
     public GameObject effectGoldPrefab;
     private Coroutine debuffCoroutine;
+    private float moveSpeed;
 
     void Awake()
     {
@@ -47,38 +44,67 @@ public class EnemyController : MonoBehaviour
         originalDamage = damage;
     }
 
-    public void ReceiveDamage(float damage)
-    {
-        currentHealth -= damage;
-        healthBarUI.fillAmount = currentHealth / health;
-        GetComponent<Damageable>().TakeDamage(damage);
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void ReduceSpeed(float speedPercent, int seconds)
-    {
-        GetComponent<EnemyMovement>().ReduceSpeed(speedPercent, seconds);
-    }
     void Start()
     {
-        target = GameObject.Find("Player").transform;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
+        playerTarget = GameObject.Find("Player").transform;
+        currentTarget = playerTarget; // objetivo inicial
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        moveSpeed = GetComponent<EnemyMovement>().moveSpeed;
+    }
 
-        if (target.position.x < transform.position.x)
+    void Update()
+    {
+        if (currentHealth <= 0) return;
+        //if (!playerInRange) return;
+
+
+        if (currentTarget == null)
         {
-            spriteRenderer.flipX = true;
-            //transform.localScale = new Vector3(-1,1,1);
+            GoBackToPlayer();
+        }
+
+        // Controla el tiempo entre ataques
+        if (attackCooldown > 0f)
+            attackCooldown -= Time.deltaTime;
+
+        // Distancia al objetivo dinámico
+        float distance = Vector2.Distance(transform.position, currentTarget.position);
+
+        // El ataque se realiza si está cerca del objetivo
+        if ((attackingMinion || playerInRange) && distance <= currentAttackRange && attackCooldown <= 0f)
+        {
+            Attack();
+            attackCooldown = 1f / attackRate;
+        }        
+
+        FlipSprite();
+    }
+
+    private void Attack()
+    {
+        if (currentTarget == null) return;
+
+        audioSource.PlayOneShot(attackSound);
+        animator.SetBool("attacking", true);
+        GetComponent<EnemyMovement>().moveSpeed = 0;
+
+        if (minionTarget != null)
+        {
+            minionTarget.ReceiveDamage(damage);
+
         }
         else
         {
-            spriteRenderer.flipX = false;
-            //transform.localScale = new Vector3(1, 1, 1);
+            // Ataca al Player
+            var damageable = currentTarget.GetComponent<Damageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(damage);
+                currentTarget.GetComponent<PlayerController>().receiveDamage(damage);
+
+            }
         }
     }
 
@@ -87,72 +113,70 @@ public class EnemyController : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             playerInRange = true;
-            attackCooldown = 1f / currentAttackRate; // forzamos espera antes del primer golpe
+            attackCooldown = 1f / attackRate;
         }
 
         if (col.CompareTag("DeathZone"))
         {
-            Die(); 
+            Die();
         }
     }
 
-    void Update()
+    void OnTriggerExit2D(Collider2D col)
     {
+        if (col.CompareTag("Player"))
+            playerInRange = false;
+    }
 
-        if (!playerInRange) return;
-
-        if (attackCooldown > 0f)
-            attackCooldown -= Time.deltaTime;
-
-        float distancia = Vector2.Distance(transform.position, target.position);
-        if (distancia <= currentAttackRange && attackCooldown <= 0f)
+    // Llamar desde Minion al recibir daño si no se usan triggers: enemyController.NotifyAttackedByMinion(this)
+    public void NotifyAttackedByMinion(MinionController2 minion)
+    {
+        if (!attackingMinion && minion != null)
         {
-            Attack();
-            attackCooldown = 1f / currentAttackRate;
+            currentTarget = minion.transform;
+            minionTarget = minion;
+            attackingMinion = true;       
         }
     }
 
-    private void Attack()
+    // Cuando el minion muere
+    public void GoBackToPlayer()
     {
-        PlayerController player = target.GetComponent<PlayerController>();
-        if (player != null)
-        {
-            audioSource.PlayOneShot(attackSound);
+        currentTarget = playerTarget;
+        attackingMinion = false;
+        minionTarget = null;
+        animator.SetBool("attacking", false);
+        GetComponent<EnemyMovement>().moveSpeed = moveSpeed;
+    }
 
-            switch (type)
-            {
-                case EnemyType.Aventurero:
-                    animator.SetTrigger("attack");
-                    break;
-                case EnemyType.Heroe:
-                    animator.SetBool("attacking", true);
-                    break;
-            }
-
-            player.receiveDamage(damage);
-        }
+    public void ReceiveDamage(float damage)
+    {
+        currentHealth -= damage;
+        healthBarUI.fillAmount = currentHealth / health;
+        if (currentHealth <= 0) Die();
     }
 
     private void Die()
     {
-        PlayerController player = target.GetComponent<PlayerController>();
+        PlayerController player = playerTarget.GetComponent<PlayerController>();
         player?.AddGold(gold);
         Instantiate(effectGoldPrefab, transform.position, Quaternion.identity);
         FindFirstObjectByType<GameManager>().EnemyKaputt();
+
         Destroy(gameObject);
     }
 
-    void OnDrawGizmosSelected()
+    private void FlipSprite()
     {
-        var col = GetComponent<CircleCollider2D>();
-        if (col == null) return;
+        if (currentTarget == null) return;
+        bool flip = currentTarget.position.x < transform.position.x;
+        spriteRenderer.flipX = flip;
+    }
 
-        // El centro del círculo respecto al world
-        Vector3 center = transform.position + (Vector3)col.offset;
-        float radius = col.radius;
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(center, radius);
+    public void ReduceSpeed(float speedPercent, int seconds)
+    {
+        GetComponent<EnemyMovement>().ReduceSpeed(speedPercent, seconds);
     }
 
     public void ApplyDebuff(HabilityCardData data)
@@ -173,7 +197,7 @@ public class EnemyController : MonoBehaviour
                     GetComponent<EnemyMovement>().ReduceSpeed(debuff.multiplier, (int)data.debuffDuration);
                     break;
                 case DebuffType.Damage:
-                    damage *=debuff.multiplier;
+                    damage *= debuff.multiplier;
                     break;
                 case DebuffType.AttackRate:
                     currentAttackRate *= debuff.multiplier;
@@ -192,4 +216,6 @@ public class EnemyController : MonoBehaviour
         damage = originalDamage;
         debuffCoroutine = null;
     }
+
+
 }

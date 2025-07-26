@@ -24,15 +24,6 @@ public class EnemyMovement : MonoBehaviour
         StartCoroutine(MoveRoutine());
     }
 
-    public void RestartCoroutineMove()
-    {
-        StartCoroutine(MoveRoutine());
-    }
-
-    public void StopCoroutineMove()
-    {
-        StopCoroutine(MoveRoutine());
-    }
     IEnumerator MoveRoutine()
     {
         while (true)
@@ -184,5 +175,6 @@ public class EnemyMovement : MonoBehaviour
         GetComponent<EnemyController>().ReceiveDamage(damage);
         StartCoroutine(MoveRoutine()); // Reanuda el movimiento normal
     }
+
 
 }

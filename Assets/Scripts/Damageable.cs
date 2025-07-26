@@ -35,7 +35,7 @@ public class Damageable : MonoBehaviour
     private void ApplyDamage(float amount)
     {
         // Ejemplo genérico: si tienes currentHealth:
-        // currentHealth -= amount;
+        //currentHealth -= amount;
         // if (currentHealth <= 0) Die();
     }
 
