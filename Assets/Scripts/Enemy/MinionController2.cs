@@ -260,9 +260,9 @@ public class MinionController2 : MonoBehaviour
             return true;
 
         // Verificar si hay collider de trampa
-        Collider2D trapCollider = Physics2D.OverlapCircle(worldPos, 0.1f, LayerMask.GetMask(trapLayerName));
-        if (trapCollider != null)
-            return true;
+        //Collider2D trapCollider = Physics2D.OverlapCircle(worldPos, 0.1f, LayerMask.GetMask(trapLayerName));
+        //if (trapCollider != null)
+        //    return true;
 
         return false;
     }
@@ -395,15 +395,15 @@ public class MinionController2 : MonoBehaviour
         if (shouldFaceRight != isFacingRight)
         {
             isFacingRight = shouldFaceRight;
-            //sr.flipX = !isFacingRight;
-            if(isFacingRight)
-            {
-                transform.localScale = Vector3.one;
-            }
-            else
-            {
-                transform.localScale = new Vector3(-1,1,1);
-            }
+            sr.flipX = !isFacingRight;
+            //if(isFacingRight)
+            //{
+            //    transform.localScale = Vector3.one;
+            //}
+            //else
+            //{
+            //    transform.localScale = new Vector3(-1,1,1);
+            //}
             
         }
     }
