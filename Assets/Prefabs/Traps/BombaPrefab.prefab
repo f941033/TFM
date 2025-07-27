@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 5652064212195468965}
   m_Layer: 10
   m_Name: BombaPrefab
-  m_TagString: PlayerWall
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

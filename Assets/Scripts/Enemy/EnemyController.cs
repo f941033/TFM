@@ -5,7 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyController : MonoBehaviour
 {
-    public enum EnemyType { Aventurero, Zapador, Heroe, Paladin, Mago, Destructor }
+    public enum EnemyType { Aventurero, Zapador, Heroe, Paladin, Mago, Trampero }
 
     public EnemyType type;
     Transform playerTarget;
@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
     private float attackCooldown = 0f;
     private float attackRate = 1f;
     public float currentAttackRate;
-    private float attackRange = 10f;
+    private float attackRange = 1f;
     public float currentAttackRange;
     private bool playerInRange = false;
     public int gold;
@@ -35,6 +35,14 @@ public class EnemyController : MonoBehaviour
     public GameObject effectGoldPrefab;
     private Coroutine debuffCoroutine;
     private float moveSpeed;
+
+    [Header("Configuración Trampero")]
+    [SerializeField] private float trapAttackRange = 0.25f;     // distancia para atacar trampas
+    [SerializeField] private float trapAttackRate = 0.8f;      // velocidad de ataque a trampas
+    [SerializeField] private int damageTrap;
+    private Coroutine trapAttackCoroutine;  // corrutina para ataque continuo
+    bool attackingTrap = false;
+    Transform trapTarget;
 
     void Awake()
     {
@@ -69,16 +77,23 @@ public class EnemyController : MonoBehaviour
         if (attackCooldown > 0f)
             attackCooldown -= Time.deltaTime;
 
-        // Distancia al objetivo dinámico
-        float distance = Vector2.Distance(transform.position, currentTarget.position);
-
-        // El ataque se realiza si está cerca del objetivo
-        if ((attackingMinion || playerInRange) && distance <= currentAttackRange && attackCooldown <= 0f)
+        // NO atacar trampas desde Update, eso se maneja con corrutina
+        if (!attackingTrap)
         {
-            Attack();
-            attackCooldown = 1f / attackRate;
-        }        
 
+            // Distancia al objetivo dinámico
+            float distance = Vector2.Distance(transform.position, currentTarget.position);
+
+            // Determinar rango de ataque según el objetivo
+            //float effectiveAttackRange = attackingTrap ? trapAttackRange : currentAttackRange;
+
+            // El ataque se realiza si está cerca del objetivo
+            if ((attackingMinion || playerInRange || attackingTrap) && distance <= currentAttackRange && attackCooldown <= 0f)
+            {
+                Attack();
+                attackCooldown = 1f / attackRate;
+            }
+        }
         FlipSprite();
     }
 
@@ -89,6 +104,28 @@ public class EnemyController : MonoBehaviour
         audioSource.PlayOneShot(attackSound);
         animator.SetBool("attacking", true);
         GetComponent<EnemyMovement>().moveSpeed = 0;
+
+        //if (attackingTrap && trapTarget != null)
+        //{
+        //    // TRAMPERO: Atacar trampa
+        //    var trapComponent = trapTarget.GetComponent<CardBehaviour>();
+        //    if (trapComponent != null)
+        //    {
+        //        trapComponent.ReceiveDamage(5);
+
+        //        // Si la trampa fue destruida, volver al comportamiento normal
+        //        if (trapComponent == null)
+        //        {
+        //            GoBackToPlayer();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        // Si la trampa ya no existe, volver al player
+        //        GoBackToPlayer();
+        //    }
+        //}
+        //else
 
         if (minionTarget != null)
         {
@@ -106,6 +143,60 @@ public class EnemyController : MonoBehaviour
 
             }
         }
+        // Desactivar animación después de un tiempo
+        StartCoroutine(ResetAttackAnimation());
+    }
+
+    private IEnumerator ResetAttackAnimation()
+    {
+        yield return new WaitForSeconds(0.5f);
+        animator.SetBool("attacking", false);
+    }
+
+    // TRAMPERO: Método para iniciar ataque continuo a trampa
+    public void StartTrapAttack()
+    {
+        if (trapAttackCoroutine != null)
+            StopCoroutine(trapAttackCoroutine);
+
+        trapAttackCoroutine = StartCoroutine(ContinuousTrapAttack());
+    }
+
+    // TRAMPERO: Corrutina para atacar trampa continuamente
+    private IEnumerator ContinuousTrapAttack()
+    {
+        animator.SetBool("attacking", true);
+        GetComponent<EnemyMovement>().moveSpeed = 0;
+
+        while (attackingTrap && trapTarget != null)
+        {
+            // Verificar si la trampa sigue existiendo
+            var trapComponent = trapTarget.GetComponent<CardBehaviour>();
+            if (trapComponent == null)
+            {
+                // La trampa fue destruida
+                break;
+            }
+
+            // Reproducir sonido y atacar
+            if (audioSource != null && attackSound != null)
+                audioSource.PlayOneShot(attackSound);
+
+            trapComponent.ReceiveDamage(damageTrap);
+
+            // Esperar antes del siguiente ataque
+            yield return new WaitForSeconds(1f / trapAttackRate);
+
+            // Verificar de nuevo si la trampa fue destruida después del ataque
+            if (trapTarget == null || trapTarget.gameObject == null)
+            {
+                break;
+            }
+        }
+
+        // Ataque terminado, volver al comportamiento normal
+        GoBackToPlayer();
+        trapAttackCoroutine = null;
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -131,7 +222,7 @@ public class EnemyController : MonoBehaviour
     // Llamar desde Minion al recibir daño si no se usan triggers: enemyController.NotifyAttackedByMinion(this)
     public void NotifyAttackedByMinion(MinionController2 minion)
     {
-        if (!attackingMinion && minion != null)
+        if (!attackingMinion && !attackingTrap && minion != null)
         {
             currentTarget = minion.transform;
             minionTarget = minion;
@@ -139,14 +230,41 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // TRAMPERO: Método para notificar que se encontró una trampa en el camino
+    public void NotifyTrapFound(Transform trap)
+    {
+        // Solo el enemigo Trampero puede atacar trampas
+        if (type != EnemyType.Trampero) return;
+
+        // Solo cambiar objetivo si no está atacando un minion
+        if (!attackingMinion && trap != null)
+        {
+            currentTarget = trap;
+            trapTarget = trap;
+            attackingTrap = true;
+            // Iniciar ataque continuo a la trampa
+            StartTrapAttack();
+        }
+    }
+
     // Cuando el minion muere
     public void GoBackToPlayer()
     {
+        // Detener ataque a trampa si estaba activo
+        if (trapAttackCoroutine != null)
+        {
+            StopCoroutine(trapAttackCoroutine);
+            trapAttackCoroutine = null;
+        }
+
         currentTarget = playerTarget;
         attackingMinion = false;
         minionTarget = null;
+        attackingTrap = false;
+        trapTarget = null;
         animator.SetBool("attacking", false);
         GetComponent<EnemyMovement>().moveSpeed = moveSpeed;
+        GetComponent<EnemyMovement>().ClearTrapTarget();
     }
 
     public void ReceiveDamage(float damage)
@@ -158,6 +276,11 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        // Limpiar corrutinas antes de morir
+        if (trapAttackCoroutine != null)
+            StopCoroutine(trapAttackCoroutine);
+
+
         PlayerController player = playerTarget.GetComponent<PlayerController>();
         player?.AddGold(gold);
         Instantiate(effectGoldPrefab, transform.position, Quaternion.identity);

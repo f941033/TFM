@@ -13,6 +13,8 @@ TagManager:
   - DeathZone
   - FixedTrap
   - CanvasInfo
+  - Minion
+  - Trap
   layers:
   - Default
   - TransparentFX

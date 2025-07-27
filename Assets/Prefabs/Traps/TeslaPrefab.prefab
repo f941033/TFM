@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -4669937142706482902}
   m_Layer: 10
   m_Name: TeslaPrefab
-  m_TagString: PlayerWall
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

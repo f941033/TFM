@@ -8,6 +8,8 @@ public class EnemyMovement : MonoBehaviour
     public LayerMask obstacleLayer;
     public Vector2 tileSize = new Vector2(1f, 1f);
     Transform player; // Asigna el transform del jugador
+    Transform currentMoveTarget; // TRAMPERO: objetivo actual de movimiento (puede ser player o posición cerca de trampa)
+    private bool movingToTrap = false; // TRAMPERO: flag para saber si se está moviendo hacia una trampa
 
     private Vector2 currentDirection;
     //private bool isMoving = false;
@@ -17,6 +19,10 @@ public class EnemyMovement : MonoBehaviour
     public float knockbackDuration = 0.2f; // Duraci�n del desplazamiento
     public int knockbackTiles = 5; // Celdas a retroceder
     private bool isKnockbackActive = false;
+
+    [Header("Trampas")]
+    [SerializeField] private LayerMask trapLayer; // TRAMPERO: capa de las trampas
+    [SerializeField] private float trapDetectionDistance = 1.2f; // TRAMPERO: distancia para detectar trampas en el camino
 
     void Start()
     {
@@ -183,6 +189,43 @@ public class EnemyMovement : MonoBehaviour
         isKnockbackActive = false;
         GetComponent<EnemyController>().ReceiveDamage(damage);
         StartCoroutine(MoveRoutine()); // Reanuda el movimiento normal
+    }
+
+    //====================  TRAMPERO  ====================//
+
+    // Método para establecer que debe moverse hacia una trampa
+    public void SetTrapTarget(Transform trap)
+    {
+        if (trap != null)
+        {
+            // Calcular posición a una distancia segura de la trampa
+            Vector2 trapPos = trap.position;
+            Vector2 currentPos = transform.position;
+            Vector2 direction = (currentPos - trapPos).normalized;
+            Vector2 safePosition = trapPos + direction * trapDetectionDistance;
+
+            // Crear un GameObject temporal para marcar la posición objetivo
+            GameObject tempTarget = new GameObject("TrapTarget");
+            tempTarget.transform.position = safePosition;
+            currentMoveTarget = tempTarget.transform;
+            movingToTrap = true;
+        }
+    }
+
+    // Método para limpiar objetivo de trampa y volver al player
+    public void ClearTrapTarget()
+    {
+        if (movingToTrap && currentMoveTarget != player)
+        {
+            // Destruir el GameObject temporal si existe
+            if (currentMoveTarget != null && currentMoveTarget.gameObject.name == "TrapTarget")
+            {
+                Destroy(currentMoveTarget.gameObject);
+            }
+        }
+
+        currentMoveTarget = player;
+        movingToTrap = false;
     }
 
 }

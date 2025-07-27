@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 4482955020863290435}
   m_Layer: 10
   m_Name: AcidoCorrosivoPrefab
-  m_TagString: PlayerWall
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

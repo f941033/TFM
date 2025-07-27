@@ -12,7 +12,7 @@ public class MinionController2 : MonoBehaviour
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] Tilemap obstacleTilemap;
     [SerializeField] string obstacleLayerName = "Obstacle";
-    [SerializeField] string trapLayerName = "TrapLayer";
+    //[SerializeField] string trapLayerName = "TrapLayer";
 
     [Header("Combate")]
     [SerializeField] int damage = 10;

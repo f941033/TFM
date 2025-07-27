@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using DeckboundDungeon.Cards;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class TrapController : MonoBehaviour
 {
@@ -97,4 +98,5 @@ public class TrapController : MonoBehaviour
             // si hay otros Collider2D, añádelos aquí…
         }
     }
+
 }

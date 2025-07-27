@@ -10,15 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 8644850253124883057}
   - component: {fileID: 82206206760140676}
-  - component: {fileID: 4207214867668512070}
   - component: {fileID: -4158502336515314276}
   - component: {fileID: 1926716930358187792}
   - component: {fileID: 3160520848515133885}
   - component: {fileID: 8336800360263369524}
   - component: {fileID: 1805089658196643180}
-  - component: {fileID: 4395549438039636085}
+  - component: {fileID: 5914025910616218483}
+  - component: {fileID: 4000514698365673549}
   m_Layer: 11
-  m_Name: Enemigo
+  m_Name: Trampero
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 51
   m_Sprite: {fileID: -3927760931650398200, guid: c5b4a90547c53354cbe9fae58b62d510, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.49519405, g: 0.9811321, b: 0.58032703, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,28 +95,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &4207214867668512070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2698680304010752485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42d16ac8cb826c04f9d10f61dee5c09b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  health: 45
-  currentHealth: 0
-  damage: 10
-  currentAttackRate: 0
-  currentAttackRange: 0
-  gold: 5
-  healthBarUI: {fileID: 401947261328858020}
-  attackSound: {fileID: 8300000, guid: 69130e6cc9b086d408fbd356cc0c5ce9, type: 3}
-  effectGoldPrefab: {fileID: 7312088903935544102, guid: 262d3cbdda9907f44ac832ba54f20a2f, type: 3}
 --- !u!58 &-4158502336515314276
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -313,7 +291,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4395549438039636085
+--- !u!114 &5914025910616218483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698680304010752485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d16ac8cb826c04f9d10f61dee5c09b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 5
+  health: 60
+  currentHealth: 0
+  damage: 10
+  currentAttackRate: 0
+  currentAttackRange: 0
+  gold: 5
+  healthBarUI: {fileID: 401947261328858020}
+  attackSound: {fileID: 8300000, guid: 69130e6cc9b086d408fbd356cc0c5ce9, type: 3}
+  effectGoldPrefab: {fileID: 7312088903935544102, guid: 262d3cbdda9907f44ac832ba54f20a2f, type: 3}
+  trapAttackRange: 0.5
+  trapAttackRate: 0.8
+  damageTrap: 2
+--- !u!114 &4000514698365673549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -325,11 +328,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5d59d8638f9f945965a878c37e74a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
-  tileSize: {x: 0.5, y: 0.5}
+  tileSize: {x: 1, y: 1}
   knockbackDuration: 0.2
   knockbackTiles: 5
   trapLayer:
