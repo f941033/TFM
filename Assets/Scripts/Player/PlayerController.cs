@@ -22,13 +22,14 @@ public class PlayerController : MonoBehaviour
     private float baseRange = 1f;
     private float baseSoulsRate = 1f;
     [SerializeField] public float maxSouls = 15f;
+    public PlayerSoulsBar playerSouls;
 
     [Header("Current stats")]
     [SerializeField] private float currentHealth;
     [SerializeField] private float currentDamage;
     [SerializeField] private float currentAttackSpeed;
     [SerializeField] private float currentRange;
-    [SerializeField] public float currentSouls;
+    [SerializeField] private float currentSouls;
     [SerializeField] private float currentSoulsRate;
     [SerializeField] public int amountGold = 50;
 
@@ -248,5 +249,16 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth = Mathf.Min(currentHealth + health, baseHealth);
         OnHealthChanged?.Invoke(currentHealth);
+    }
+
+    public void IncCurrentSouls()
+    {
+        currentSouls++;
+    }
+
+    public void IncMaxSouls()
+    {
+        maxSouls++;
+        playerSouls.UpdateMaxSouls();
     }
 }

@@ -16,7 +16,7 @@ public class UpgradeManager : MonoBehaviour
     {
         ActualizarUI();
         upgradeButton.onClick.AddListener(MejorarContador);
-        monedasText.text = "Monedas: " + player.amountGold;
+        monedasText.text = player.amountGold.ToString();
     }
 
     void MejorarContador()
@@ -32,8 +32,8 @@ public class UpgradeManager : MonoBehaviour
         if (player.amountGold >= costoActual)
         {
             player.amountGold -= costoActual;
-            player.maxSouls++;
-            player.currentSouls++;
+            player.IncCurrentSouls();
+            player.IncMaxSouls();
             nivelActual++;
             ActualizarUI();
         }
@@ -45,8 +45,8 @@ public class UpgradeManager : MonoBehaviour
 
     void ActualizarUI()
     {
-        contadorAlmas.text = "Contador: " + player.CurrentSouls + "/" + player.maxSouls;
-        monedasText.text = "Monedas: " + player.amountGold;
+        contadorAlmas.text = player.CurrentSouls + "/" + player.maxSouls;
+        monedasText.text = player.amountGold.ToString();
         upgradeButton.interactable = nivelActual < costos.Length;
     }
 }

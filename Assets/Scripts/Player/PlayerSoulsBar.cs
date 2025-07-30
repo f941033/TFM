@@ -33,6 +33,10 @@ public class PlayerSoulsBar : MonoBehaviour
         player.OnSoulsChanged -= UpdateSoulsBar;
     }
 
+    public void UpdateMaxSouls()
+    {
+        maxSouls = player.MaxSouls;
+    }
     private void UpdateSoulsBar(float newSouls)
     {
         soulsSlider.value = newSouls;
