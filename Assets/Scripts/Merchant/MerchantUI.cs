@@ -54,7 +54,7 @@ public class MerchantUI : MonoBehaviour
                     }
                     else
                     {
-                        gm.ShowMessage("No tienes suficiente oro", 2f);
+                        gm.ShowMessage("No tienes suficiente oro", 2f); 
                     }
                 });
             }
@@ -106,6 +106,7 @@ public class MerchantUI : MonoBehaviour
     public void Close()
     {
         canvaMerchant.SetActive(false);
-        //gm.PreparationPhase();
+        if(!gm.hasKey)
+            gm.PreparationPhase();
     }
 }
