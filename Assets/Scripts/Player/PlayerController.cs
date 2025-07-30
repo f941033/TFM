@@ -21,16 +21,16 @@ public class PlayerController : MonoBehaviour
     private float baseAttackSpeed = 1f;
     private float baseRange = 1f;
     private float baseSoulsRate = 1f;
-    [SerializeField] private float maxSouls = 15f;
+    [SerializeField] public float maxSouls = 15f;
 
     [Header("Current stats")]
     [SerializeField] private float currentHealth;
     [SerializeField] private float currentDamage;
     [SerializeField] private float currentAttackSpeed;
     [SerializeField] private float currentRange;
-    [SerializeField] private float currentSouls;
+    [SerializeField] public float currentSouls;
     [SerializeField] private float currentSoulsRate;
-    [SerializeField] private int amountGold = 50;
+    [SerializeField] public int amountGold = 50;
 
 
     //[Header("Events")]
