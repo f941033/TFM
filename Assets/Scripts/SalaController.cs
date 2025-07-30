@@ -72,7 +72,7 @@ public class SalaController : MonoBehaviour
     {
         if (gameObject.tag == "salaCentral") return;
 
-        panelInfo.gameObject.SetActive(false);
+        if (panelInfo != null) panelInfo.gameObject.SetActive(false);
 
         if (gm.hasKey && esSalaContigua())
         {
@@ -115,12 +115,12 @@ public class SalaController : MonoBehaviour
         if (!gm.hasKey && esSalaContigua() && !estaLibre)
         {
             borderTilemap.gameObject.SetActive(true);
-            panelInfo.gameObject.SetActive(true);
+            if (panelInfo != null) panelInfo.gameObject.SetActive(true);
         }
 
         if (gm.hasKey && esSalaContigua())
         {
-            panelInfo.gameObject.SetActive(true);
+            if (panelInfo != null) panelInfo.gameObject.SetActive(true);
 
             foreach (var item in parent.GetComponentsInChildren<SalaController>())
             {
@@ -136,7 +136,7 @@ public class SalaController : MonoBehaviour
     {
         if (gameObject.tag == "salaCentral") return;
 
-        panelInfo.gameObject.SetActive(false);
+        if(panelInfo !=null) panelInfo.gameObject.SetActive(false);
         borderTilemap.gameObject.SetActive(false);
 
         foreach (var item in parent.GetComponentsInChildren<SalaController>())
