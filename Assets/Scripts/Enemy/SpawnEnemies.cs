@@ -208,6 +208,10 @@ public class SpawnEnemies : MonoBehaviour
     {
         if (!removePoints.IsUnityNull())
         foreach (GameObject point in removePoints)
-            spawnListPoints.Remove(point);
+            {
+                spawnListPoints.Remove(point);
+                point.SetActive(false);
+            }
+            
     }
 }
