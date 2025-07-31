@@ -690,7 +690,7 @@ TextureImporter:
         width: 203
         height: 125
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -699,6 +699,28 @@ TextureImporter:
       bones: []
       spriteID: ffbf2d59f8151454790875e6ecb4715b
       internalID: -497719855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Souls_IconAlone
+      rect:
+        serializedVersion: 2
+        x: 3721
+        y: 1707
+        width: 181
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfa7730af8c23fd49a836e0461804344
+      internalID: 381451539
       vertices: []
       indices: 
       edges: []
@@ -731,6 +753,7 @@ TextureImporter:
       LifeLess_Icon: 6969338320338048960
       LifePlus_Icon: 6653219015117297657
       Souls_Icon: 2286080486149089054
+      Souls_IconAlone: 381451539
       TextBlock_Brown: 4934752065089030942
       TextBlock_Gray: 1535521908
       TextBlock_Purple: 4564628065078994459
