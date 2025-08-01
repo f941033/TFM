@@ -128,7 +128,7 @@ public class SalaController : MonoBehaviour
             }
         }
 
-        
+
 
     }
 
@@ -136,12 +136,12 @@ public class SalaController : MonoBehaviour
     {
         if (gameObject.tag == "salaCentral") return;
 
-        if(panelInfo !=null) panelInfo.gameObject.SetActive(false);
+        if (panelInfo != null) panelInfo.gameObject.SetActive(false);
         borderTilemap.gameObject.SetActive(false);
 
         foreach (var item in parent.GetComponentsInChildren<SalaController>())
         {
-            item.tilemap.color = originalColor;
+            if (item != null) item.tilemap.color = originalColor;
         }
     }
 
@@ -151,10 +151,12 @@ public class SalaController : MonoBehaviour
         if (salasContiguas == null) return false;
         foreach (GameObject sala in salasContiguas)
         {
-            if (sala.GetComponent<SalaController>().estaLibre)
+            if (sala.GetComponent<SalaController>() == null)
             {
-                return true;
-            }
+                if (sala.GetComponent<SalaPolygonController>().estaLibre) return true;
+            }else
+                if(sala.GetComponent<SalaController>().estaLibre) return true;
+
         }
         return false;
     }
