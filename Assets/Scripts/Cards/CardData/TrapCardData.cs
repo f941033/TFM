@@ -8,6 +8,8 @@ public abstract class TrapCardData : CardData
     public GameObject trapPrefab;
     public float cost;
     public int damage;
+    [SerializeField] private bool isAreaDamage;
+    public bool IsAreaDamage => isAreaDamage;
     public Vector2Int trapSizeInTiles = Vector2Int.one;
 
     [Header ("Reduce speed")]

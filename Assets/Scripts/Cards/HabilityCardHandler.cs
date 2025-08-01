@@ -19,8 +19,8 @@ public class HabilityCardHandler : MonoBehaviour
 
         this.player = player;
 
-        overlayImage.fillAmount = 0;
-        overlayImage.gameObject.SetActive(false);
+        overlayImage.fillAmount = 1f;
+        overlayImage.gameObject.SetActive(true);
 
         if (card is BuffCardData)
         {
@@ -33,7 +33,7 @@ public class HabilityCardHandler : MonoBehaviour
         }
         else
         {
-            button.gameObject.SetActive(false);
+            button.gameObject.SetActive(true);
         }
         Debug.Log("he inicializado el overlay");
     }
@@ -45,16 +45,15 @@ public class HabilityCardHandler : MonoBehaviour
         if (cooldownRemaining > 0f)
         {
             cooldownRemaining -= Time.deltaTime;
-            overlayImage.fillAmount = cooldownRemaining / cooldown;
+            overlayImage.fillAmount = 1f - Mathf.Clamp01(cooldownRemaining / cooldown);
             if (cooldownRemaining <= 0f)
             {
-                overlayImage.gameObject.SetActive(false);
-                overlayImage.fillAmount = 0;
-                if (cardData is BuffCardData)
+                overlayImage.fillAmount = 1f;
+                button.interactable = true;
+                /* if (cardData is BuffCardData)
                 {
                     button.gameObject.SetActive(true);
-                    button.interactable = true;
-                }
+                } */
             }
         }
     }
@@ -80,7 +79,7 @@ public class HabilityCardHandler : MonoBehaviour
     public void StartCooldown()
     {
         cooldownRemaining = GetCooldownValue();
-        overlayImage.fillAmount = 1f;
+        overlayImage.fillAmount = 0f;
         Debug.Log("Activo el overlay");
         button.gameObject.SetActive(true);
         overlayImage.gameObject.SetActive(true);
@@ -99,6 +98,6 @@ public class HabilityCardHandler : MonoBehaviour
         if (cardData is HabilityCardData hability)
             return hability.cooldown;
 
-        return 1f;
+        return 0f;
     }
 }

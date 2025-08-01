@@ -10,6 +10,10 @@ public class HabilityCardData : CardData
     [Header("Daño")]
     public bool applyDamage = true;
     public int damage = 1;
+    [SerializeField] private bool isAreaDamage;
+    public bool IsDamage => applyDamage;
+    public bool IsAreaDamage => isAreaDamage;
+    
 
     [Header("Debuff")]
     public bool applyDebuff = false;

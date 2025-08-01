@@ -23,6 +23,7 @@ MonoBehaviour:
   trapPrefab: {fileID: 7377369047218687532, guid: 7b28963f52b32a24cb176128db09215a, type: 3}
   cost: 1
   damage: 30
+  isAreaDamage: 1
   trapSizeInTiles: {x: 1, y: 1}
   reduceSpeed: 0
   seconds: 0

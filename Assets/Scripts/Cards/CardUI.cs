@@ -14,13 +14,15 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Sprite buffBackground;
     [SerializeField] private Sprite deckBackground;
     [SerializeField] private Image damageImage;
+    [SerializeField] private Sprite areaDamageImage;
     [SerializeField] private Image costImage;
     [SerializeField] private Image spriteImage;
     [SerializeField] private TextMeshProUGUI goldCostText;
     [SerializeField] private Button buyButton;
     [SerializeField] private Button detailsButton;
-    [SerializeField] private Image typeImage;
     [SerializeField] private Sprite typeBackgroundTrap;
+    [SerializeField] private Sprite cooldownSprite;
+    [SerializeField] private Image cooldownFillImage;
     [SerializeField] private TextMeshProUGUI textType;
 
     public void SetCardUI(CardData cardData)
@@ -54,6 +56,8 @@ public class CardUI : MonoBehaviour
             backgroundImage.sprite = trapBackground;
             textDamage.text = trap.damage.ToString();
             textType.text = "TRAP";
+            if (trap.IsAreaDamage)
+                damageImage.sprite = areaDamageImage;
         }
         else if (cardData is DeckEffectCardData deck)
         {
@@ -66,11 +70,23 @@ public class CardUI : MonoBehaviour
         }
         else
         {
+            if (cardData is HabilityCardData hab)
+            {
+                if (!hab.IsDamage)
+                {
+                    damageImage.gameObject.SetActive(false);
+                    textDamage.gameObject.SetActive(false);
+                }
+                if(hab.IsAreaDamage)
+                    damageImage.sprite = areaDamageImage;
+            }
             textCost.gameObject.SetActive(false);
             backgroundImage.sprite = buffBackground;
             damageImage.gameObject.SetActive(false);
-            costImage.gameObject.SetActive(false);
             textDamage.gameObject.SetActive(false);
+            costImage.sprite = cooldownSprite;
+            cooldownFillImage.gameObject.SetActive(true);
+            Debug.Log("Es una carta de buff o hab y activo el cooldownImage");
             textType.text = "SPELL";
         }
     }
