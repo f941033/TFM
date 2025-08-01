@@ -22,6 +22,7 @@ MonoBehaviour:
   cooldown: 20
   applyDamage: 1
   damage: 30
+  isAreaDamage: 1
   applyDebuff: 0
   debuffDuration: 2
   debuffs: []
