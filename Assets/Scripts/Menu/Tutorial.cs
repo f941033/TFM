@@ -75,7 +75,11 @@ public class Tutorial : MonoBehaviour
                 baseHealth += card.healthModifier;
 
             }
-
+            if(card.cardName == "Gobblin"){
+                Debug.Log("He encontrado la carta gobblin");
+                startingDeck.Add(card);
+                baseHealth += card.healthModifier;
+            }
 
         }
     }

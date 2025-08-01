@@ -4,24 +4,9 @@ using UnityEngine.UIElements;
 [CreateAssetMenu(menuName = "Cards/InstantTrapCardData")]
 public class InstantTrapCardData : TrapCardData
 {
-    //public LayerMask obstacleLayers; // Asigna las capas de obstáculos REALES (ej: "Walls", "Default")
+    //public LayerMask obstacleLayers; // Asigna las capas de obstï¿½culos REALES (ej: "Walls", "Default")
     public override void Play(PlayerController player, Vector3 worldPosition)
     {
-        /*
-        // Verificar colisiones solo con obstáculos físicos (no triggers)
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(
-            worldPosition,
-            0.45f,
-            obstacleLayers
-        );
-        if(colliders.Length == 0 )
-        {
-            var trap = Instantiate(trapPrefab, worldPosition, Quaternion.identity);
-            var trapCon = trap.GetComponent<TrapController>();
-            trapCon.cardData = this;
-            trapCon.player = player;
-        }*/
-
         var trap = Instantiate(trapPrefab, worldPosition, Quaternion.identity);
         var trapCon = trap.GetComponent<TrapController>();
         trapCon.cardData = this;

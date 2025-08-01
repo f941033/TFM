@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbaa927a4f55dca4f9819d650a52f962, type: 3}
+  m_Name: Gobblin
+  m_EditorClassIdentifier: 
+  cardName: Gobblin
+  description: Invoca 3 gobblins
+  cardType: 4
+  healthModifier: 0
+  numberOfTiles: 0
+  goldCost: 60
+  minionPrefab: {fileID: 3935197877417076588, guid: d0e61f34527c8924c8f28b9077bd4d2b, type: 3}
+  numberOfMinions: 2
+  cost: 4

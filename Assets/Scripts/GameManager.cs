@@ -243,7 +243,7 @@ public class GameManager : MonoBehaviour
         //Crear el mazo de cartas de tipo TRAMPA
         foreach (CardData card in startingDeck)
         {
-            if (card.cardType == CardType.Trap || card.cardType == CardType.DeckEffect)
+            if (card.cardType == CardType.Trap || card.cardType == CardType.DeckEffect || card.cardType == CardType.Summon)
             {
                 cardManager.drawPile.Add(card);
             }
@@ -294,7 +294,7 @@ public class GameManager : MonoBehaviour
         //Crear el mazo de cartas de tipo ACCI�N
         foreach (CardData card in startingDeck)
         {
-            if (card.cardType != CardType.Trap && card.cardType != CardType.DeckEffect)
+            if (card.cardType != CardType.Trap && card.cardType != CardType.DeckEffect && card.cardType != CardType.Summon)
             {
                 cardManager.drawPile.Add(card);
             }

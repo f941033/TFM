@@ -75,7 +75,7 @@ public class CardManager : MonoBehaviour
         CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
         cardUI.SetCardUI(cardToDraw);
 
-        if (cardToDraw.cardType == CardType.Trap || cardToDraw.cardType == CardType.DeckEffect)
+        if (cardToDraw.cardType == CardType.Trap || cardToDraw.cardType == CardType.DeckEffect || cardToDraw.cardType == CardType.Summon)
         {
             var drag = cardData.GetComponent<CardDragDrop>();
             drag.dropTilemap = zonaValidaTilemap;
@@ -145,10 +145,6 @@ public class CardManager : MonoBehaviour
             discardPile.Add(cardData);
             Destroy(card);
             UpdateHandVisuals();
-        }
-        else
-        {
-
         }
 
     }
