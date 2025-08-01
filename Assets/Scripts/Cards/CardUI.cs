@@ -68,6 +68,13 @@ public class CardUI : MonoBehaviour
             textDamage.gameObject.SetActive(false);
             textType.text = "BOUND";
         }
+        else if (cardData is SummonCardData summon){
+            textCost.text = summon.cost.ToString();
+            backgroundImage.sprite = trapBackground;
+            damageImage.gameObject.SetActive(false);
+            textDamage.gameObject.SetActive(false);
+            textType.text = "SUMMON";
+        }
         else
         {
             if (cardData is HabilityCardData hab)
@@ -93,9 +100,6 @@ public class CardUI : MonoBehaviour
 
     void Awake()
     {
-        //GameManager gameManager = FindFirstObjectByType<GameManager>();
-        //GameManager.OnPhaseChanged += HandlePhaseChanged;
-        // Ajustamos el estado inicial **con la fase actual**
         HandlePhaseChanged(GameManager.CurrentPhase);
         Debug.Log(GameManager.CurrentPhase);
     }

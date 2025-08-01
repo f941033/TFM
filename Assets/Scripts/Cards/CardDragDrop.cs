@@ -120,6 +120,21 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 return;
             }
         }
+        if (cardData is SummonCardData summon)
+        {
+            if (!player.TrySpendSouls(summon.cost))
+            {
+                FindFirstObjectByType<GameManager>().ShowMessage("¡No tienes suficientes almas!", 2);
+                Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
+                // sonido de que la carta no se puede jugar
+                eventData.pointerDrag = null;
+                eventData.pointerPress = null;
+                canvasGroup.blocksRaycasts = true;
+                isDragging = false;
+                canvasGroup.alpha = 1f;
+                return;
+            }
+        }
         originalAnchoredPosition = rectTransform.anchoredPosition;
         originalTransform = transform.parent;
         cardIndex = transform.GetSiblingIndex();
@@ -268,6 +283,13 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                         isSet = true;
                         
                         ReturnToHand();
+                    }else if (cardData.cardType == CardType.Summon)
+                    {
+                        Debug.Log("He soltado la carta summon");
+                        dropTilemap.SetTileFlags(cellPos, TileFlags.None);
+                        cardData.Play(player, worldCenter);
+                        Deck.CardPlayed(gameObject, cardData);
+                        isSet = true;
                     }
 
                     if (hasPrevious)
@@ -299,6 +321,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
             if (cardData is TrapCardData trap)
                 player.SpendSouls(trap.cost);
+            if (cardData is SummonCardData summon)
+                player.SpendSouls(summon.cost);
 
             gameManager.UpdateTextNumberOfCardsDiscard();
         }
