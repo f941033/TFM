@@ -145,6 +145,9 @@ public class EnemyController : MonoBehaviour
         }
         // Desactivar animación después de un tiempo
         //StartCoroutine(ResetAttackAnimation());
+
+
+
     }
 
     private IEnumerator ResetAttackAnimation()
@@ -265,6 +268,7 @@ public class EnemyController : MonoBehaviour
         animator.SetBool("attacking", false);
         GetComponent<EnemyMovement>().moveSpeed = moveSpeed;
         GetComponent<EnemyMovement>().ClearTrapTarget();
+        GetComponent<EnemyMovement>().ClearAndRepath();
     }
 
     public void ReceiveDamage(float damage)
