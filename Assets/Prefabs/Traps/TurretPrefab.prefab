@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 5
   fireRate: 1
-  detectionRadius: 3
+  detectionRadius: 4
   projectilePrefab: {fileID: 3188030190352859303, guid: 785e2115f350a0247b05846776feacfe, type: 3}
   firePoint: {fileID: 6160494710280513426}
   healthText: {fileID: 1986210861274530081}

@@ -9,7 +9,7 @@ public class TorretaController : MonoBehaviour
     [Header("Configuraci�n")]
     public float rotationSpeed = 5f;
     public float fireRate = 1f;
-    public float detectionRadius = 3f;
+    public float detectionRadius = 10f;
     public GameObject projectilePrefab;
     public Transform firePoint; // Objeto hijo del ca��n donde salen los proyectiles
     public TextMeshProUGUI healthText;
