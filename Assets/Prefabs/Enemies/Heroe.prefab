@@ -210,10 +210,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d16ac8cb826c04f9d10f61dee5c09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 2
   health: 200
   currentHealth: 0
-  damage: 2.5
+  damage: 20
   currentAttackRate: 0
   currentAttackRange: 0
   gold: 200
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5d59d8638f9f945965a878c37e74a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
+  moveSpeed: 0.75
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -403,7 +403,7 @@ MonoBehaviour:
   knockbackTiles: 5
   trapLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   trapDetectionDistance: 1.2
   playerTag: Player
   path: []
