@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour
     private float moveSpeed;
 
     [Header("Configuración Trampero")]
-    [SerializeField] private float trapAttackRange = 0.25f;     // distancia para atacar trampas
+    //[SerializeField] private float trapAttackRange = 0.25f;     // distancia para atacar trampas
     [SerializeField] private float trapAttackRate = 0.8f;      // velocidad de ataque a trampas
     [SerializeField] private int damageTrap;
     private Coroutine trapAttackCoroutine;  // corrutina para ataque continuo
@@ -144,7 +144,7 @@ public class EnemyController : MonoBehaviour
             }
         }
         // Desactivar animación después de un tiempo
-        StartCoroutine(ResetAttackAnimation());
+        //StartCoroutine(ResetAttackAnimation());
     }
 
     private IEnumerator ResetAttackAnimation()

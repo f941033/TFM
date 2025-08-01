@@ -117,6 +117,8 @@ MonoBehaviour:
   healthBarUI: {fileID: 401947261328858020}
   attackSound: {fileID: 8300000, guid: 69130e6cc9b086d408fbd356cc0c5ce9, type: 3}
   effectGoldPrefab: {fileID: 7312088903935544102, guid: 262d3cbdda9907f44ac832ba54f20a2f, type: 3}
+  trapAttackRate: 0.8
+  damageTrap: 0
 --- !u!58 &-4158502336515314276
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -325,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5d59d8638f9f945965a878c37e74a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -336,6 +338,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   trapDetectionDistance: 1.2
+  playerTag: Player
+  path: []
+  pathIndex: 0
 --- !u!1001 &5262032807633087081
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [Header("Configuraci�n")]
+    [Header("Configuracion")]
     public float moveSpeed = 1f;
     public LayerMask obstacleLayer;
     public Vector2 tileSize = new Vector2(1f, 1f);
@@ -24,42 +25,214 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private LayerMask trapLayer; // TRAMPERO: capa de las trampas
     [SerializeField] private float trapDetectionDistance = 1.2f; // TRAMPERO: distancia para detectar trampas en el camino
 
+    // =========== MOVIMIENTO ORTOGONAL Y BFS ====================
+
+
+    public string playerTag = "Player";
+    GameObject playerObj;
+    private bool isMoving = false;
+    public List<Vector3> path = new List<Vector3>();
+    public int pathIndex = 0;
+    private readonly Vector2Int[] directions = {
+        Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right
+    };
+
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Transform>();
-        StartCoroutine(MoveRoutine());
+        playerObj = GameObject.FindWithTag(playerTag);
+        if (playerObj == null)
+        {
+            Debug.LogError("No se encontró Player con Tag " + playerTag);
+            enabled = false;
+            return;
+        }
+        player = playerObj.transform;
+        transform.position = SnapToGrid(transform.position);
+        StartCoroutine(MovementLoop());
+    }
+
+    IEnumerator MovementLoop()
+    {
+        while (true)
+        {
+            if (!isMoving)
+            {
+                List<Vector3> newPath = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
+                if (newPath != null && newPath.Count > 0)
+                {
+                    // El primer nodo del path es la tile actual, el segundo el destino inmediato
+                    path = newPath;
+                    pathIndex = 1;
+                    while (pathIndex < path.Count)
+                    {
+                        Vector3 nextTile = path[pathIndex];
+                        yield return StartCoroutine(MoveToTile(nextTile));
+                        pathIndex++;
+                    }
+                }
+            }
+            yield return new WaitForSeconds(0.15f); // balance rendimiento/respuesta
+        }
+    }
+
+    IEnumerator MoveToTile(Vector3 destino)
+    {
+        isMoving = true;
+        Vector3 origen = transform.position;
+        float duration = Vector3.Distance(origen, destino) / moveSpeed;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            transform.position = Vector3.Lerp(origen, destino, t);
+            yield return null;
+        }
+        transform.position = destino;
+        isMoving = false;
+    }
+
+    List<Vector3> FindPathBFS(Vector3 startWorld, Vector3 goalWorld)
+    {
+        Vector2Int start = WorldToGrid(startWorld);
+        Vector2Int goal = WorldToGrid(goalWorld);
+
+        Queue<Vector2Int> frontier = new Queue<Vector2Int>();
+        Dictionary<Vector2Int, Vector2Int> prev = new Dictionary<Vector2Int, Vector2Int>();
+        frontier.Enqueue(start);
+        prev[start] = start;
+
+        while (frontier.Count > 0)
+        {
+            Vector2Int current = frontier.Dequeue();
+            if (current == goal) break;
+
+            foreach (Vector2Int dir in directions)
+            {
+                Vector2Int next = current + dir;
+                if (prev.ContainsKey(next)) continue;
+                if (IsObstacle(next)) continue;
+
+                frontier.Enqueue(next);
+                prev[next] = current;
+            }
+        }
+
+        if (!prev.ContainsKey(goal)) return null; // no path
+
+        // Reconstruir path desde goal a start
+        List<Vector3> result = new List<Vector3>();
+        for (Vector2Int step = goal; ;)
+        {
+            result.Add(GridToWorld(step));
+            if (step == start) break;
+            step = prev[step];
+        }
+        result.Reverse();
+        return result;
+    }
+
+    // --- Tile utilities ---
+    public Vector3 SnapToGrid(Vector3 pos)
+    {
+        float x = Mathf.Round(pos.x / tileSize.x) * tileSize.x;
+        float y = Mathf.Round(pos.y / tileSize.y) * tileSize.y;
+        return new Vector3(x, y, pos.z);
+    }
+
+    Vector2Int WorldToGrid(Vector3 pos)
+    {
+        return new Vector2Int(Mathf.RoundToInt(pos.x / tileSize.x), Mathf.RoundToInt(pos.y / tileSize.y));
+    }
+    Vector3 GridToWorld(Vector2Int g)
+    {
+        return new Vector3(g.x * tileSize.x, g.y * tileSize.y, transform.position.z);
+    }
+
+    bool IsObstacle(Vector2Int gridPos)
+    {
+        Vector3 tileCenter = GridToWorld(gridPos);
+        Collider2D c = Physics2D.OverlapBox(tileCenter, tileSize * 0.8f, 0, obstacleLayer);
+        // Incluye paredes y muros del jugador (tag PlayerWall)
+        if (c == null) return false;
+        if (c.CompareTag("PlayerWall") || c.gameObject.layer == LayerMask.NameToLayer("Obstacle")) return true;
+        return false;
+    }
+
+
+    //=================================================================
+
+
+
+    //void Start()
+    //{
+    //    player = GameObject.Find("Player").GetComponent<Transform>();
+    //    StartCoroutine(MoveRoutine());
+    //}
+
+    // ==================== MÉTODOS PÚBLICOS (PRESERVADOS) ====================
+
+    public void ClearAndRepath()
+    {
+        StopAllCoroutines();          // 1  Frenar cualquier MoveToTile activo
+        isMoving = false;        // 2  Garantizar que el bucle vuelva a arrancar
+        //hasValidPath = false;        // 3  Obliga a que se calcule ruta de nuevo
+        path.Clear();
+        pathIndex = 0;
+
+        // Centrar en el grid
+        transform.position = SnapToGrid(transform.position);
+
+        // Reiniciar MovementLoop
+        StartCoroutine(MovementLoop());
     }
 
     public void RestartCoroutineMove()
     {
-        StartCoroutine(MoveRoutine());
+        StopAllCoroutines();
+        path.Clear();
+        pathIndex = 0;
+
+        // Asegurar posición alineada al grid
+        transform.position = SnapToGrid(transform.position);
+
+        // Pequeña pausa para asegurar que todo esté limpio
+        StartCoroutine(DelayedRestart());
+    }
+
+    IEnumerator DelayedRestart()
+    {
+        yield return new WaitForSeconds(0.1f); // Pequeña pausa
+        StartCoroutine(MovementLoop());
+        Debug.Log("MovementLoop reiniciado");
     }
 
     public void StopCoroutineMove()
     {
-        StopCoroutine(MoveRoutine());
+        StopAllCoroutines();
     }
-    IEnumerator MoveRoutine()
-    {
-        while (true)
-        {
-            // Calcular direcci�n �ptima hacia el jugador
-            Vector2 optimalDirection = CalculateOptimalDirection();
 
-            // Intentar mover en direcci�n �ptima
-            if (TryMove(optimalDirection))
-            {
-                currentDirection = optimalDirection;
-            }
-            else
-            {
-                // Buscar direcci�n alternativa
-                currentDirection = GetBestAlternativeDirection();
-            }
+    //IEnumerator MoveRoutine()
+    //{
+    //    while (true)
+    //    {
+    //        // Calcular direcci�n �ptima hacia el jugador
+    //        Vector2 optimalDirection = CalculateOptimalDirection();
 
-            yield return StartCoroutine(MoveToNextTile(currentDirection));
-        }
-    }
+    //        // Intentar mover en direcci�n �ptima
+    //        if (TryMove(optimalDirection))
+    //        {
+    //            currentDirection = optimalDirection;
+    //        }
+    //        else
+    //        {
+    //            // Buscar direcci�n alternativa
+    //            currentDirection = GetBestAlternativeDirection();
+    //        }
+
+    //        yield return StartCoroutine(MoveToNextTile(currentDirection));
+    //    }
+    //}
 
     Vector2 CalculateOptimalDirection()
     {
@@ -90,37 +263,37 @@ public class EnemyMovement : MonoBehaviour
         return !Physics2D.OverlapBox(nextPosition, tileSize * 0.15f, 0f, obstacleLayer);
     }
 
-    Vector2 GetBestAlternativeDirection()
-    {
-        Vector2[] directions = {
-            Vector2.up, Vector2.down,
-            Vector2.left, Vector2.right
-        };
+    //Vector2 GetBestAlternativeDirection()
+    //{
+    //    Vector2[] directions = {
+    //        Vector2.up, Vector2.down,
+    //        Vector2.left, Vector2.right
+    //    };
 
-        Vector2 bestDirection = currentDirection;
-        float minDistance = Mathf.Infinity;
-        Vector2 playerPos = player.position;
+    //    Vector2 bestDirection = currentDirection;
+    //    float minDistance = Mathf.Infinity;
+    //    Vector2 playerPos = player.position;
 
-        foreach (Vector2 dir in directions)
-        {
-            if (dir == -currentDirection) continue; // Evitar retroceder
+    //    foreach (Vector2 dir in directions)
+    //    {
+    //        if (dir == -currentDirection) continue; // Evitar retroceder
 
-            if (TryMove(dir))
-            {
-                Vector2 potentialPosition = (Vector2)transform.position + dir * tileSize;
-                float distance = Vector2.Distance(potentialPosition, playerPos);
+    //        if (TryMove(dir))
+    //        {
+    //            Vector2 potentialPosition = (Vector2)transform.position + dir * tileSize;
+    //            float distance = Vector2.Distance(potentialPosition, playerPos);
 
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    bestDirection = dir;
-                }
-            }
-        }
+    //            if (distance < minDistance)
+    //            {
+    //                minDistance = distance;
+    //                bestDirection = dir;
+    //            }
+    //        }
+    //    }
 
-        // Si todas las direcciones est�n bloqueadas, forzar movimiento
-        return bestDirection != Vector2.zero ? bestDirection : -currentDirection;
-    }
+    //    // Si todas las direcciones est�n bloqueadas, forzar movimiento
+    //    return bestDirection != Vector2.zero ? bestDirection : -currentDirection;
+    //}
 
     IEnumerator MoveToNextTile(Vector2 direction)
     {
@@ -170,7 +343,7 @@ public class EnemyMovement : MonoBehaviour
     IEnumerator KnockbackCoroutine()
     {
         isKnockbackActive = true;
-        StopCoroutine(MoveRoutine()); // Detiene el movimiento normal
+        //StopCoroutine(MoveRoutine()); // Detiene el movimiento normal
 
         Vector2 knockbackDirection = -currentDirection; // Direcci�n contraria al movimiento
         Vector2 startPos = transform.position;
@@ -188,7 +361,7 @@ public class EnemyMovement : MonoBehaviour
         transform.position = targetPos;
         isKnockbackActive = false;
         GetComponent<EnemyController>().ReceiveDamage(damage);
-        StartCoroutine(MoveRoutine()); // Reanuda el movimiento normal
+        //StartCoroutine(MoveRoutine()); // Reanuda el movimiento normal
     }
 
     //====================  TRAMPERO  ====================//

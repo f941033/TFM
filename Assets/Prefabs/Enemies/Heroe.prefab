@@ -197,7 +197,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 1
+  m_SpriteSortPoint: 0
 --- !u!114 &6147353642134830126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +220,8 @@ MonoBehaviour:
   healthBarUI: {fileID: 9134756188311282571}
   attackSound: {fileID: 8300000, guid: 69130e6cc9b086d408fbd356cc0c5ce9, type: 3}
   effectGoldPrefab: {fileID: 7312088903935544102, guid: 262d3cbdda9907f44ac832ba54f20a2f, type: 3}
+  trapAttackRate: 0.8
+  damageTrap: 0
 --- !u!50 &5260864895283530429
 Rigidbody2D:
   serializedVersion: 5
@@ -399,6 +401,13 @@ MonoBehaviour:
   tileSize: {x: 0.5, y: 0.5}
   knockbackDuration: 0.2
   knockbackTiles: 5
+  trapLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  trapDetectionDistance: 1.2
+  playerTag: Player
+  path: []
+  pathIndex: 0
 --- !u!114 &1010592873871219012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,7 +464,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.73025894, y: 0.59916115}
+  m_Size: {x: 1.1121254, y: 0.59916115}
   m_EdgeRadius: 0
 --- !u!1 &6461788855587241680
 GameObject:

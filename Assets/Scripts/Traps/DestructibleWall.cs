@@ -13,4 +13,9 @@ public class DestructibleWall : MonoBehaviour
             // Añadir efectos de destrucción aquí
         }
     }
+
+    public bool IsDead()
+    {
+        return health > 0;
+    }
 }
