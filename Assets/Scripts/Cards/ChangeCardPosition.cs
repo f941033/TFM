@@ -29,7 +29,7 @@ public class ChangeCardPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (gameObject.name.Contains("TurretPrefab")) return;
+        if (gameObject.name.Contains("TurretPrefab")) return;
 
         if (estaArrastrando)
         {

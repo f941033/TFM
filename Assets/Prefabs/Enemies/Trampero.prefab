@@ -313,7 +313,6 @@ MonoBehaviour:
   healthBarUI: {fileID: 401947261328858020}
   attackSound: {fileID: 8300000, guid: 69130e6cc9b086d408fbd356cc0c5ce9, type: 3}
   effectGoldPrefab: {fileID: 7312088903935544102, guid: 262d3cbdda9907f44ac832ba54f20a2f, type: 3}
-  trapAttackRange: 0.5
   trapAttackRate: 0.8
   damageTrap: 2
 --- !u!114 &4000514698365673549
@@ -332,13 +331,16 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
-  tileSize: {x: 1, y: 1}
+  tileSize: {x: 0.5, y: 0.5}
   knockbackDuration: 0.2
   knockbackTiles: 5
   trapLayer:
     serializedVersion: 2
     m_Bits: 1024
   trapDetectionDistance: 1.2
+  playerTag: Player
+  path: []
+  pathIndex: 0
 --- !u!1001 &5262032807633087081
 PrefabInstance:
   m_ObjectHideFlags: 0

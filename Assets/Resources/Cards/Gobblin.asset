@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Invoca 3 gobblins
   cardType: 4
   healthModifier: 0
-  numberOfTiles: 0
+  numberOfTiles: 4
   goldCost: 60
   minionPrefab: {fileID: 3935197877417076588, guid: d0e61f34527c8924c8f28b9077bd4d2b, type: 3}
   numberOfMinions: 2
