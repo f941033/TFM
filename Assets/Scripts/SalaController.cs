@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class SalaController : MonoBehaviour
@@ -70,6 +71,12 @@ public class SalaController : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // Verificar si el mouse está sobre UI antes de abrir la sala
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return; // No hacer nada si estamos haciendo clic en UI
+        }
+
         if (gameObject.tag == "salaCentral") return;
 
         if (panelInfo != null) panelInfo.gameObject.SetActive(false);
