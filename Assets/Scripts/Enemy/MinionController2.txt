@@ -7,10 +7,6 @@ using UnityEngine.UI;
 public class MinionController2 : MonoBehaviour
 {
     /* --------------- Ajustes visibles en el Inspector --------------- */
-
-    [Header("Coordinación")]
-    public static Dictionary<Transform, MinionController2> targetAssignments = new Dictionary<Transform, MinionController2>();
-
     [Header("Detección")]
     [SerializeField] float detectionRadius = 8f;
     [SerializeField] LayerMask enemyLayer;
@@ -31,9 +27,6 @@ public class MinionController2 : MonoBehaviour
     [SerializeField] float attackDistance = 1.5f; // Distancia de ataque (1 tile + margen)
 
     /* ---------------  Variables internas --------------- */
-
-    public static List<MinionController2> allMinions = new List<MinionController2>();
-
     Transform currentTarget;
     Vector3 originPoint;
     bool isFacingRight = true;
@@ -61,17 +54,7 @@ public class MinionController2 : MonoBehaviour
         Vector3Int.down    // Sur
     };
 
-    void Awake() { allMinions.Add(this); }
-    void OnDestroy() 
-    { 
-        allMinions.Remove(this);
-
-        if (currentTarget != null && targetAssignments.ContainsKey(currentTarget))
-        {
-            targetAssignments.Remove(currentTarget);
-        }
-    }
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -100,65 +83,14 @@ public class MinionController2 : MonoBehaviour
             case State.Return: HandleReturn(); break;
             case State.Dead: HandleDead(); break;
         }
-
-        // Limpiar objetivos muertos
-        if (currentTarget != null && currentTarget.gameObject == null)
-        {
-            if (targetAssignments.ContainsKey(currentTarget))
-            {
-                targetAssignments.Remove(currentTarget);
-            }
-            currentTarget = null;
-        }
     }
 
     /* ------------------------ Búsqueda ------------------------ */
     void FindTarget()
     {
-        //Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, enemyLayer);
-        //if (hit != null && hit.CompareTag("Enemy"))
-        //    currentTarget = hit.transform;
-
-        // ============= BÚSQUEDA DE ENEMIGOS ÚNICOS PARA ATACAR =============
-        // Buscar todos los enemigos en rango
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, detectionRadius, enemyLayer);
-
-        Transform bestTarget = null;
-        float closestDistance = Mathf.Infinity;
-
-        foreach (Collider2D enemy in enemies)
-        {
-            if (!enemy.CompareTag("Enemy")) continue;
-
-            // Verificar si este enemigo YA está siendo atacado por otro minion
-            if (targetAssignments.ContainsKey(enemy.transform) &&
-                targetAssignments[enemy.transform] != null &&
-                targetAssignments[enemy.transform] != this)
-            {
-                continue; // Saltar este enemigo, ya está ocupado
-            }
-
-            float distance = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                bestTarget = enemy.transform;
-            }
-        }
-
-        // Asignar el nuevo objetivo
-        if (bestTarget != null)
-        {
-            // Liberar objetivo anterior si tenía uno
-            if (currentTarget != null && targetAssignments.ContainsKey(currentTarget))
-            {
-                targetAssignments.Remove(currentTarget);
-            }
-
-            // Asignar nuevo objetivo
-            currentTarget = bestTarget;
-            targetAssignments[currentTarget] = this;
-        }
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, enemyLayer);
+        if (hit != null && hit.CompareTag("Enemy"))
+            currentTarget = hit.transform;
     }
 
     /* ------------------------ Estados ------------------------ */
@@ -367,24 +299,11 @@ public class MinionController2 : MonoBehaviour
     }
 
     /* -------------------- Movimiento en cuadrícula -------------------- */
-
-    bool IsTileReserved(Vector3 tilePos)
-    {
-        foreach (var minion in MinionController2.allMinions)
-        {
-            if (minion == this) continue;
-            if (Vector3.Distance(minion.transform.position, tilePos) < cellSize * 0.1f)
-                return true;
-            // Aquí puedes también comprobar si el minion tiene planeado moverse a tilePos
-        }
-        return false;
-    }
     void TryMove(Vector2 dir)
     {
         if (isMoving || dir == Vector2.zero) return;
 
         Vector3 targetWorldPos = SnapToGrid(transform.position) + (Vector3)(dir * cellSize);
-        if (IsTileReserved(targetWorldPos)) return; // ¡Ya reservado!
         Vector3Int cell = obstacleTilemap.WorldToCell(targetWorldPos);
 
         // Verificar que la celda no esté bloqueada antes de moverse
@@ -488,10 +407,6 @@ public class MinionController2 : MonoBehaviour
             
         }
     }
-
-    // ================== ASIGNACIÓN DE ENEMIGOS ==================
-
-
 
 
 }
