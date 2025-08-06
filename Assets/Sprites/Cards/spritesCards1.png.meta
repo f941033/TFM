@@ -454,6 +454,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: DrawBackCementary_Card
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 1418
+        width: 826
+        height: 708
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5599c0d4fa9aea64ea3ec26543fbed40
+      internalID: 45142556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: minions_Card
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 1418
+        width: 826
+        height: 708
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08c186b85aeaef746b725439ba80ccc1
+      internalID: 1078816704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -473,6 +517,7 @@ TextureImporter:
       Bomb_Card: 1711113281
       Box_Card: -1669249693
       Draw2Cards_Card: -1615764547
+      DrawBackCementary_Card: 45142556
       Electricity_Card: -486609375
       Fireball_Card: 421503429
       Pit_Card: 877911320
@@ -481,6 +526,7 @@ TextureImporter:
       SpeedIncr_Card: 1662136614
       Spikes_Card: -857629342
       Turret_Card: -763708711
+      minions_Card: 1078816704
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
