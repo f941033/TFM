@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1fc63ab785f1fb44a66583e8ae0b945, type: 3}
-  m_Name: RiseAttack
+  m_Name: DarkReap
   m_EditorClassIdentifier: 
-  cardName: PegaLeches
+  cardName: Dark Reap
   description: Ataque +50%, 10 segundos
   cardType: 0
   healthModifier: 0

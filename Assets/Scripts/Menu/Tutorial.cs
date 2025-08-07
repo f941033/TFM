@@ -59,7 +59,7 @@ public class Tutorial : MonoBehaviour
                 //}
             }
 
-            if (card.cardName == "PegaLeches")
+            if (card.cardName == "Dark Reap")
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
@@ -69,7 +69,7 @@ public class Tutorial : MonoBehaviour
                 //    startingDeck.Add(card);
                 //}
             }
-            if (card.cardName == "Abyss" || card.cardName == "2-Draw" || card.cardName == "Fireball")
+            if (card.cardName == "Abyss" || card.cardName == "2-Draw" || card.cardName == "Fireball" || card.cardName == "Zero Zone")
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;

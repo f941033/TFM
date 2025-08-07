@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadffe2894632804ca0e394ee289fe72, type: 3}
   m_Name: ZeroZone
   m_EditorClassIdentifier: 
-  cardName: Zona zero
+  cardName: Zero Zone
   description: Reduce el ataque de los enemigos un 50 % durante 15 segundos en la
     zona afectada
   cardType: 3
@@ -23,6 +23,7 @@ MonoBehaviour:
   cooldown: 20
   applyDamage: 0
   damage: 1
+  isAreaDamage: 0
   applyDebuff: 1
   debuffDuration: 15
   debuffs:
