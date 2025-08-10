@@ -22,7 +22,7 @@ public class MinionController2 : MonoBehaviour
     [SerializeField] int damage = 10;
     [SerializeField] float timeBetweenHits = 2f;
     [SerializeField] private float health;
-    [SerializeField] private float currentHealth;
+    [SerializeField] public float currentHealth;
     public Image healthBarUI;
 
     [Header("Movimiento en cuadrícula")]

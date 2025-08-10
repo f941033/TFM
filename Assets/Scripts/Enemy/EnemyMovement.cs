@@ -7,17 +7,16 @@ public class EnemyMovement : MonoBehaviour
     [Header("Configuracion")]
     public float moveSpeed = 1f;
     public LayerMask obstacleLayer;
-    public Vector2 tileSize = new Vector2(1f, 1f);
+    public Vector2 tileSize = new Vector2(0.5f, 0.5f);
     Transform player; // Asigna el transform del jugador
     Transform currentMoveTarget; // TRAMPERO: objetivo actual de movimiento (puede ser player o posición cerca de trampa)
     private bool movingToTrap = false; // TRAMPERO: flag para saber si se está moviendo hacia una trampa
 
     private Vector2 currentDirection;
-    //private bool isMoving = false;
     private int damage;
 
     [Header("Knockback")]
-    public float knockbackDuration = 0.2f; // Duraci�n del desplazamiento
+    public float knockbackDuration = 0.2f; // Duración del desplazamiento
     public int knockbackTiles = 5; // Celdas a retroceder
     private bool isKnockbackActive = false;
 
@@ -25,8 +24,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private LayerMask trapLayer; // TRAMPERO: capa de las trampas
     [SerializeField] private float trapDetectionDistance = 1.2f; // TRAMPERO: distancia para detectar trampas en el camino
 
-    // =========== MOVIMIENTO ORTOGONAL Y BFS ====================
+    [Header("Comportamiento de Emergencia")]
+    [SerializeField] public bool emergencyMode = false; // Flag para modo de emergencia (público para HeroeMovement)
+    [SerializeField] private Transform currentWallTarget = null; // Muro objetivo actual
+    [SerializeField] private float wallDetectionRange = 50f; // Rango para buscar muros
+    [SerializeField] private int wallApproachRadius = 4; // Radio para buscar posiciones cerca del muro
+    [SerializeField] private Vector3 wallTargetPosition; // Posición objetivo junto al muro
 
+    // =========== MOVIMIENTO ORTOGONAL Y BFS ====================
 
     public string playerTag = "Player";
     GameObject playerObj;
@@ -48,60 +53,294 @@ public class EnemyMovement : MonoBehaviour
         }
         player = playerObj.transform;
         transform.position = SnapToGrid(transform.position);
+
+        // Debug inicial
+        Debug.Log($"[{gameObject.name}] Iniciado. TileSize: {tileSize}. Posición inicial: {transform.position}");
+
+        // Verificar si hay camino al player al inicio
+        CheckInitialPathToPlayer();
+
         StartCoroutine(MovementLoop());
+    }
+
+    void CheckInitialPathToPlayer()
+    {
+        List<Vector3> initialPath = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
+        if (initialPath == null || initialPath.Count == 0)
+        {
+            Debug.Log($"[{gameObject.name}] No hay camino inicial al player. Activando modo de emergencia.");
+            ActivateEmergencyMode();
+        }
+        else
+        {
+            Debug.Log($"[{gameObject.name}] Camino inicial encontrado con {initialPath.Count} pasos.");
+        }
     }
 
     IEnumerator MovementLoop()
     {
         while (true)
         {
-            if (!isMoving && !isKnockbackActive)
+            if (!isMoving)
             {
-                List<Vector3> newPath = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
-                if (newPath != null && newPath.Count > 0)
+                if (emergencyMode)
                 {
-                    // El primer nodo del path es la tile actual, el segundo el destino inmediato
-                    path = newPath;
-                    pathIndex = 1;
-                    while (pathIndex < path.Count && !isKnockbackActive)
-                    {
-                        Vector3 nextTile = path[pathIndex];
-                        yield return StartCoroutine(MoveToTile(nextTile));
-                        pathIndex++;
-                    }
+                    yield return StartCoroutine(HandleEmergencyMovement());
+                }
+                else
+                {
+                    yield return StartCoroutine(HandleNormalMovement());
                 }
             }
             yield return new WaitForSeconds(0.15f); // balance rendimiento/respuesta
         }
     }
 
+    IEnumerator HandleNormalMovement()
+    {
+        List<Vector3> newPath = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
+        if (newPath != null && newPath.Count > 0)
+        {
+            // El primer nodo del path es la tile actual, el segundo el destino inmediato
+            path = newPath;
+            pathIndex = 1;
+            while (pathIndex < path.Count)
+            {
+                Vector3 nextTile = path[pathIndex];
+                yield return StartCoroutine(MoveToTile(nextTile));
+                pathIndex++;
+            }
+        }
+        else
+        {
+            // No hay camino, activar modo de emergencia
+            Debug.Log($"[{gameObject.name}] Camino perdido. Activando modo de emergencia.");
+            ActivateEmergencyMode();
+        }
+    }
+
+    IEnumerator HandleEmergencyMovement()
+    {
+        // Simplificar: buscar muro más cercano y moverse hacia él
+        Transform nearestWall = FindNearestReachableWall();
+
+        if (nearestWall != null)
+        {
+            Vector3 approachPosition = FindBestApproachPosition(nearestWall);
+
+            if (approachPosition != Vector3.zero)
+            {
+                Debug.Log($"[{gameObject.name}] Moviéndose hacia muro en {nearestWall.position}. Posición objetivo: {approachPosition}");
+
+                // Intentar moverse hacia la posición de aproximación
+                List<Vector3> wallPath = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(approachPosition));
+
+                if (wallPath != null && wallPath.Count > 0)
+                {
+                    currentWallTarget = nearestWall;
+                    wallTargetPosition = approachPosition;
+
+                    path = wallPath;
+                    pathIndex = 1;
+                    while (pathIndex < path.Count && currentWallTarget != null)
+                    {
+                        Vector3 nextTile = path[pathIndex];
+                        yield return StartCoroutine(MoveToTile(nextTile));
+                        pathIndex++;
+                    }
+
+                    // Una vez llegado cerca del muro, notificar al EnemyController para que lo ataque
+                    if (currentWallTarget != null)
+                    {
+                        Debug.Log($"[{gameObject.name}] Llegó cerca del muro. Iniciando ataque.");
+                        NotifyWallReached(currentWallTarget);
+                    }
+                }
+                else
+                {
+                    Debug.Log($"[{gameObject.name}] No se pudo calcular path hacia posición de aproximación {approachPosition}");
+                    yield return new WaitForSeconds(1f);
+                }
+            }
+            else
+            {
+                Debug.Log($"[{gameObject.name}] No se encontró posición de aproximación válida para el muro");
+                yield return new WaitForSeconds(1f);
+            }
+        }
+        else
+        {
+            Debug.Log($"[{gameObject.name}] No se encontraron muros alcanzables. Esperando...");
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
+    Transform FindNearestReachableWall()
+    {
+        // Buscar todos los objetos con tag PlayerWall
+        GameObject[] playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
+
+        if (playerWalls.Length == 0)
+        {
+            Debug.Log($"[{gameObject.name}] No se encontraron muros con tag PlayerWall en la escena");
+            return null;
+        }
+
+        Debug.Log($"[{gameObject.name}] Evaluando {playerWalls.Length} muros...");
+
+        Transform bestWall = null;
+        float bestDistance = float.MaxValue;
+        Vector3 bestApproachPos = Vector3.zero;
+
+        Vector3 currentPos = SnapToGrid(transform.position);
+
+        foreach (GameObject wall in playerWalls)
+        {
+            float distance = Vector3.Distance(currentPos, wall.transform.position);
+
+            if (distance <= wallDetectionRange)
+            {
+                // Buscar posición de aproximación para este muro
+                Vector3 approachPos = FindBestApproachPosition(wall.transform);
+
+                if (approachPos != Vector3.zero)
+                {
+                    // Verificar que se puede llegar a la posición de aproximación
+                    List<Vector3> testPath = FindPathBFS(currentPos, SnapToGrid(approachPos));
+
+                    if (testPath != null && testPath.Count > 0)
+                    {
+                        if (distance < bestDistance)
+                        {
+                            bestDistance = distance;
+                            bestWall = wall.transform;
+                            bestApproachPos = approachPos;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (bestWall != null)
+        {
+            Debug.Log($"[{gameObject.name}] Mejor muro encontrado a distancia {bestDistance}. Posición aproximación: {bestApproachPos}");
+        }
+        else
+        {
+            Debug.Log($"[{gameObject.name}] No se encontraron muros alcanzables de {playerWalls.Length} muros evaluados");
+        }
+
+        return bestWall;
+    }
+
+    Vector3 FindBestApproachPosition(Transform wall)
+    {
+        if (wall == null) return Vector3.zero;
+
+        Vector3 wallPos = SnapToGrid(wall.position);
+        Vector2Int wallGrid = WorldToGrid(wallPos);
+
+        // Buscar en un radio expandido alrededor del muro
+        for (int radius = 1; radius <= wallApproachRadius; radius++)
+        {
+            // Buscar en todas las direcciones del radio actual
+            for (int x = -radius; x <= radius; x++)
+            {
+                for (int y = -radius; y <= radius; y++)
+                {
+                    // Solo verificar posiciones en el borde del radio (no el interior)
+                    if (Mathf.Abs(x) != radius && Mathf.Abs(y) != radius) continue;
+
+                    Vector2Int checkGrid = wallGrid + new Vector2Int(x, y);
+
+                    // Verificar que la posición no sea un obstáculo
+                    if (!IsObstacle(checkGrid))
+                    {
+                        Vector3 checkWorld = GridToWorld(checkGrid);
+
+                        // Verificar que se puede llegar a esta posición
+                        List<Vector3> testPath = FindPathBFS(SnapToGrid(transform.position), checkWorld);
+                        if (testPath != null && testPath.Count > 0)
+                        {
+                            Debug.Log($"[{gameObject.name}] Posición de aproximación encontrada para muro: {checkWorld} (radio {radius})");
+                            return checkWorld;
+                        }
+                    }
+                }
+            }
+        }
+
+        Debug.Log($"[{gameObject.name}] No se encontró posición de aproximación válida para muro en {wallPos}");
+        return Vector3.zero;
+    }
+
+    void NotifyWallReached(Transform wall)
+    {
+        // Notificar al EnemyController que debe atacar este muro
+        EnemyController enemyController = GetComponent<EnemyController>();
+        if (enemyController != null)
+        {
+            enemyController.NotifyWallFound(wall);
+        }
+    }
+
+    public void OnWallDestroyed()
+    {
+        // Llamado cuando se destruye un muro
+        currentWallTarget = null;
+
+        // Verificar si ahora hay camino al player
+        List<Vector3> pathToPlayer = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
+        if (pathToPlayer != null && pathToPlayer.Count > 0)
+        {
+            Debug.Log($"[{gameObject.name}] Camino al player restaurado. Desactivando modo de emergencia.");
+            DeactivateEmergencyMode();
+        }
+        else
+        {
+            Debug.Log($"[{gameObject.name}] Camino aún bloqueado. Continuando en modo de emergencia.");
+        }
+    }
+
+    void ActivateEmergencyMode()
+    {
+        emergencyMode = true;
+        currentWallTarget = null;
+    }
+
+    public void DeactivateEmergencyMode()
+    {
+        emergencyMode = false;
+        currentWallTarget = null;
+    }
+
     IEnumerator MoveToTile(Vector3 destino)
     {
         isMoving = true;
+
         Vector3 origen = transform.position;
+        // Calcular y almacenar la dirección de movimiento
+        Vector2 moveDir = (destino - origen).normalized;
+        currentDirection = moveDir;
 
-        // CALCULAR Y GUARDAR LA DIRECCIÓN DEL MOVIMIENTO
-        Vector3 moveDirection = (destino - origen).normalized;
-        currentDirection = new Vector2(moveDirection.x, moveDirection.y);
-
-        float duration = Vector3.Distance(origen, destino) / moveSpeed;
+        float distance = Vector3.Distance(origen, destino);
+        float duration = distance / moveSpeed;
         float elapsed = 0f;
-        while (elapsed < duration && !isKnockbackActive)
+
+        while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
             transform.position = Vector3.Lerp(origen, destino, t);
             yield return null;
         }
-        // Solo snap si no hay knockback activo
-        if (!isKnockbackActive)
-        {
-            transform.position = destino;
-        }
+
+        transform.position = destino;
         isMoving = false;
     }
 
-    List<Vector3> FindPathBFS(Vector3 startWorld, Vector3 goalWorld)
+
+    public List<Vector3> FindPathBFS(Vector3 startWorld, Vector3 goalWorld)
     {
         Vector2Int start = WorldToGrid(startWorld);
         Vector2Int goal = WorldToGrid(goalWorld);
@@ -168,30 +407,33 @@ public class EnemyMovement : MonoBehaviour
         return false;
     }
 
-
-    //=================================================================
-
-
-
-    //void Start()
-    //{
-    //    player = GameObject.Find("Player").GetComponent<Transform>();
-    //    StartCoroutine(MoveRoutine());
-    //}
-
     // ==================== MÉTODOS PÚBLICOS (PRESERVADOS) ====================
 
     public void ClearAndRepath()
     {
-        if (isKnockbackActive) return;
-
-        StopAllCoroutines();          // 1  Frenar cualquier MoveToTile activo
-        isMoving = false;        // 2  Garantizar que el bucle vuelva a arrancar
+        StopAllCoroutines();
+        isMoving = false;
         path.Clear();
         pathIndex = 0;
 
         // Centrar en el grid
         transform.position = SnapToGrid(transform.position);
+
+        // Verificar si necesitamos modo de emergencia después del repath
+        List<Vector3> pathToPlayer = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
+        if (pathToPlayer == null || pathToPlayer.Count == 0)
+        {
+            if (!emergencyMode)
+            {
+                Debug.Log($"[{gameObject.name}] Repath: No hay camino, activando modo emergencia.");
+                ActivateEmergencyMode();
+            }
+        }
+        else if (emergencyMode)
+        {
+            Debug.Log($"[{gameObject.name}] Repath: Camino encontrado, desactivando modo emergencia.");
+            DeactivateEmergencyMode();
+        }
 
         // Reiniciar MovementLoop
         StartCoroutine(MovementLoop());
@@ -213,6 +455,14 @@ public class EnemyMovement : MonoBehaviour
     IEnumerator DelayedRestart()
     {
         yield return new WaitForSeconds(0.1f); // Pequeña pausa
+
+        // Verificar estado de emergency antes de reiniciar
+        List<Vector3> pathToPlayer = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
+        if (pathToPlayer == null || pathToPlayer.Count == 0)
+        {
+            ActivateEmergencyMode();
+        }
+
         StartCoroutine(MovementLoop());
         Debug.Log("MovementLoop reiniciado");
     }
@@ -222,92 +472,8 @@ public class EnemyMovement : MonoBehaviour
         StopAllCoroutines();
     }
 
-    //IEnumerator MoveRoutine()
-    //{
-    //    while (true)
-    //    {
-    //        // Calcular direcci�n �ptima hacia el jugador
-    //        Vector2 optimalDirection = CalculateOptimalDirection();
-
-    //        // Intentar mover en direcci�n �ptima
-    //        if (TryMove(optimalDirection))
-    //        {
-    //            currentDirection = optimalDirection;
-    //        }
-    //        else
-    //        {
-    //            // Buscar direcci�n alternativa
-    //            currentDirection = GetBestAlternativeDirection();
-    //        }
-
-    //        yield return StartCoroutine(MoveToNextTile(currentDirection));
-    //    }
-    //}
-
-    Vector2 CalculateOptimalDirection()
-    {
-        Vector2 playerPosition = player.position;
-        Vector2 currentPosition = transform.position;
-        Vector2 direction = Vector2.zero;
-
-        // Calcular diferencia en ambos ejes
-        float xDiff = playerPosition.x - currentPosition.x;
-        float yDiff = playerPosition.y - currentPosition.y;
-
-        // Priorizar el eje con mayor diferencia
-        if (Mathf.Abs(xDiff) > Mathf.Abs(yDiff))
-        {
-            direction.x = xDiff > 0 ? 1 : -1;
-        }
-        else
-        {
-            direction.y = yDiff > 0 ? 1 : -1;
-        }
-
-        return direction.normalized;
-    }
-
-    bool TryMove(Vector2 direction)
-    {
-        Vector2 nextPosition = (Vector2)transform.position + direction * tileSize;
-        return !Physics2D.OverlapBox(nextPosition, tileSize * 0.15f, 0f, obstacleLayer);
-    }
-
-    //Vector2 GetBestAlternativeDirection()
-    //{
-    //    Vector2[] directions = {
-    //        Vector2.up, Vector2.down,
-    //        Vector2.left, Vector2.right
-    //    };
-
-    //    Vector2 bestDirection = currentDirection;
-    //    float minDistance = Mathf.Infinity;
-    //    Vector2 playerPos = player.position;
-
-    //    foreach (Vector2 dir in directions)
-    //    {
-    //        if (dir == -currentDirection) continue; // Evitar retroceder
-
-    //        if (TryMove(dir))
-    //        {
-    //            Vector2 potentialPosition = (Vector2)transform.position + dir * tileSize;
-    //            float distance = Vector2.Distance(potentialPosition, playerPos);
-
-    //            if (distance < minDistance)
-    //            {
-    //                minDistance = distance;
-    //                bestDirection = dir;
-    //            }
-    //        }
-    //    }
-
-    //    // Si todas las direcciones est�n bloqueadas, forzar movimiento
-    //    return bestDirection != Vector2.zero ? bestDirection : -currentDirection;
-    //}
-
     IEnumerator MoveToNextTile(Vector2 direction)
     {
-        //isMoving = true;
         Vector2 startPos = transform.position;
         Vector2 targetPos = startPos + direction * tileSize;
         float elapsed = 0f;
@@ -320,14 +486,13 @@ public class EnemyMovement : MonoBehaviour
         }
 
         transform.position = targetPos;
-        //isMoving = false;
     }
 
     public void ReduceSpeed(float speedPercent, int seconds)
     {
         if (speedPercent == 0f) return;
         StartCoroutine(ReduceSpeedCoroutine(speedPercent, seconds));
-        
+
     }
 
     IEnumerator ReduceSpeedCoroutine(float speedPercent, int seconds)
@@ -339,70 +504,38 @@ public class EnemyMovement : MonoBehaviour
         moveSpeed = speedTemp;
     }
 
-
     //------------ EFECTO ONDA EXPANSIVA DE LA BOMBA -------------------
     public void ApplyKnockback(int damage)
     {
         if (!isKnockbackActive)
         {
             this.damage = damage;
-            StartCoroutine(KnockbackCoroutine());            
+            StartCoroutine(KnockbackCoroutine());
         }
     }
 
     IEnumerator KnockbackCoroutine()
     {
-        isKnockbackActive = true;       
-        isMoving = false;
+        isKnockbackActive = true;
+        StopCoroutine("MoveToTile"); // Detiene el movimiento normal
 
-        // CALCULAR DIRECCIÓN DE KNOCKBACK
-        Vector2 knockbackDirection;
-
-        if (currentDirection == Vector2.zero)
-        {
-            // Si no hay dirección, usar dirección desde player hacia enemigo
-            Vector2 fromPlayerToEnemy = (transform.position - player.position).normalized;
-            knockbackDirection = fromPlayerToEnemy;
-        }
-        else
-        {
-            knockbackDirection = -currentDirection; // Dirección contraria al movimiento
-        }
-
+        Vector2 knockbackDirection = -currentDirection; // Dirección contraria al movimiento
         Vector2 startPos = transform.position;
         Vector2 targetPos = startPos + (knockbackDirection * tileSize * knockbackTiles);
-
-        // SNAP AL GRID EL DESTINO
-        targetPos = SnapToGrid(targetPos);
 
         float elapsed = 0f;
 
         while (elapsed < knockbackDuration)
         {
+            transform.position = Vector2.Lerp(startPos, targetPos, elapsed / knockbackDuration);
             elapsed += Time.deltaTime;
-            float t = elapsed / knockbackDuration;
-            transform.position = Vector2.Lerp(startPos, targetPos, t);
             yield return null;
         }
 
-        // ASEGURAR QUE QUEDE EXACTAMENTE EN EL DESTINO
         transform.position = targetPos;
-
-        GetComponent<EnemyController>().ReceiveDamage(damage);
-
-        // ESPERAR UN MOMENTO ANTES DE REANUDAR
-        yield return new WaitForSeconds(0.5f);
-
-        // SOLO LIMPIAR VARIABLES, NO LLAMAR ClearAndRepath()
         isKnockbackActive = false;
-        isMoving = false;
-        path.Clear();
-        pathIndex = 0;
-
-
-        // MovementLoop ya está corriendo, solo necesita que isKnockbackActive = false
-        // NO llamar StartCoroutine(MovementLoop()) otra vez
-
+        GetComponent<EnemyController>().ReceiveDamage(damage);
+        ClearAndRepath();
     }
 
     //====================  TRAMPERO  ====================//
@@ -441,5 +574,4 @@ public class EnemyMovement : MonoBehaviour
         currentMoveTarget = player;
         movingToTrap = false;
     }
-
 }

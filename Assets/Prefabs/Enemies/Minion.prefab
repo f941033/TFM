@@ -205,14 +205,13 @@ MonoBehaviour:
     m_Bits: 2048
   obstacleTilemap: {fileID: 0}
   obstacleLayerName: Obstacle
-  trapLayerName: TrapLayer
   damage: 10
   timeBetweenHits: 1
   health: 100
   currentHealth: 0
   healthBarUI: {fileID: 6524022209200354690}
   cellSize: 1
-  moveDuration: 0.5
+  moveDuration: 0.25
   attackDistance: 1
 --- !u!1001 &1593013885118186575
 PrefabInstance:

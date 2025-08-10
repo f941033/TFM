@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float damage = 10f;
     private float originalDamage;
     private float attackCooldown = 0f;
-    private float attackRate = 1f;
+    private float attackRate = 0.5f;
     public float currentAttackRate;
     private float attackRange = 1f;
     public float currentAttackRange;
@@ -37,12 +37,18 @@ public class EnemyController : MonoBehaviour
     private float moveSpeed;
 
     [Header("Configuración Trampero")]
-    //[SerializeField] private float trapAttackRange = 0.25f;     // distancia para atacar trampas
     [SerializeField] private float trapAttackRate = 0.8f;      // velocidad de ataque a trampas
     [SerializeField] private int damageTrap;
     private Coroutine trapAttackCoroutine;  // corrutina para ataque continuo
     bool attackingTrap = false;
     Transform trapTarget;
+
+    [Header("Configuración Modo Emergencia")]
+    [SerializeField] private int damageWall = 1; // daño que hace a los muros en modo emergencia
+    [SerializeField] private float wallAttackRate = 1f; // velocidad de ataque a muros
+    private Coroutine wallAttackCoroutine;
+    bool attackingWall = false;
+    Transform wallTarget;
 
     void Awake()
     {
@@ -65,10 +71,50 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         if (currentHealth <= 0) return;
-        //if (!playerInRange) return;
+
+        UpdateFacingDirection();
+
+        // 1) Si atacando minion
+        if (attackingMinion)
+        {
+            // Si minion murió, volver a Walk
+            if (minionTarget == null || minionTarget.currentHealth <= 0)
+            {
+                attackingMinion = false;
+                animator.SetBool("attacking", false);
+                GetComponent<EnemyMovement>().ClearAndRepath();
+                return;
+            }
+
+            // Atacar mientras esté en rango
+            float dist = Vector2.Distance(transform.position, minionTarget.transform.position);
+            if (dist <= currentAttackRange)
+            {
+                if (attackCooldown <= 0f)
+                {
+                    Attack();
+                    attackCooldown = 1f / currentAttackRate;
+                }
+            }
+            else
+            {
+                // Si el minion se aleja, replantear camino hacia él
+                GetComponent<EnemyMovement>().ClearAndRepath();
+            }
+            return;
+        }
+
+        // 2) Si el minion murió, volver a Walk
+        if (attackingMinion && (minionTarget == null || minionTarget.currentHealth <= 0))
+        {
+            attackingMinion = false;
+            animator.SetBool("attacking", false);
+            GetComponent<EnemyMovement>().ClearAndRepath();
+        }
 
 
-        if (currentTarget == null)
+
+        if (currentTarget == null && !attackingWall)
         {
             GoBackToPlayer();
         }
@@ -77,25 +123,39 @@ public class EnemyController : MonoBehaviour
         if (attackCooldown > 0f)
             attackCooldown -= Time.deltaTime;
 
-        // NO atacar trampas desde Update, eso se maneja con corrutina
-        if (!attackingTrap)
+        // NO atacar trampas ni muros desde Update, eso se maneja con corrutina
+        if (!attackingTrap && !attackingWall)
         {
-
             // Distancia al objetivo dinámico
             float distance = Vector2.Distance(transform.position, currentTarget.position);
 
-            // Determinar rango de ataque según el objetivo
-            //float effectiveAttackRange = attackingTrap ? trapAttackRange : currentAttackRange;
-
             // El ataque se realiza si está cerca del objetivo
-            if ((attackingMinion || playerInRange || attackingTrap) && distance <= currentAttackRange && attackCooldown <= 0f)
+            if ((attackingMinion || playerInRange) && distance <= currentAttackRange && attackCooldown <= 0f)
             {
                 Attack();
                 attackCooldown = 1f / attackRate;
             }
         }
-        FlipSprite();
+        //FlipSprite();
     }
+
+    private bool facingRight = true;  // Track de la última orientación horizontal
+
+    private void UpdateFacingDirection()
+    {
+        if (currentTarget == null) return;
+
+        float dx = currentTarget.position.x - transform.position.x;
+
+        if (Mathf.Abs(dx) > 0.01f)  // Solo cambiar cuando hay diferencia horizontal significativa
+        {
+            facingRight = dx > 0;
+            spriteRenderer.flipX = !facingRight;
+        }
+        // Si dx es casi 0 (objetivo arriba/abajo), no tocar flipX: mantiene la última orientación
+    }
+
+
 
     private void Attack()
     {
@@ -105,32 +165,18 @@ public class EnemyController : MonoBehaviour
         animator.SetBool("attacking", true);
         GetComponent<EnemyMovement>().moveSpeed = 0;
 
-        //if (attackingTrap && trapTarget != null)
-        //{
-        //    // TRAMPERO: Atacar trampa
-        //    var trapComponent = trapTarget.GetComponent<CardBehaviour>();
-        //    if (trapComponent != null)
-        //    {
-        //        trapComponent.ReceiveDamage(5);
-
-        //        // Si la trampa fue destruida, volver al comportamiento normal
-        //        if (trapComponent == null)
-        //        {
-        //            GoBackToPlayer();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // Si la trampa ya no existe, volver al player
-        //        GoBackToPlayer();
-        //    }
-        //}
-        //else
-
         if (minionTarget != null)
         {
             minionTarget.ReceiveDamage(damage);
+            Debug.Log($"[{gameObject.name}] Atacando minion: daño {damage}");
 
+            // Si el minion muere con este ataque, limpiar estado
+            if (minionTarget.currentHealth <= 0)
+            {
+                Debug.Log($"[{gameObject.name}] Minion muerto. Volviendo al player.");
+                GoBackToPlayer();
+                return;
+            }
         }
         else
         {
@@ -140,21 +186,26 @@ public class EnemyController : MonoBehaviour
             {
                 damageable.TakeDamage(damage);
                 currentTarget.GetComponent<PlayerController>().receiveDamage(damage);
-
             }
         }
-        // Desactivar animación después de un tiempo
-        //StartCoroutine(ResetAttackAnimation());
 
-
-
+        StartCoroutine(ResetAttackAnimation());
     }
 
     private IEnumerator ResetAttackAnimation()
     {
         yield return new WaitForSeconds(0.5f);
         animator.SetBool("attacking", false);
+        GetComponent<EnemyMovement>().moveSpeed = moveSpeed;
+
+        // Si estábamos atacando un minion pero éste ya no existe, volver al player
+        if (attackingMinion && (minionTarget == null || minionTarget.currentHealth <= 0))
+        {
+            Debug.Log($"[{gameObject.name}] Finalizada animación de ataque y minion muerto. Retomando camino al player.");
+            GoBackToPlayer();
+        }
     }
+
 
     // TRAMPERO: Método para iniciar ataque continuo a trampa
     public void StartTrapAttack()
@@ -202,6 +253,66 @@ public class EnemyController : MonoBehaviour
         trapAttackCoroutine = null;
     }
 
+    // MODO EMERGENCIA: Método para notificar que se encontró un muro que atacar
+    public void NotifyWallFound(Transform wall)
+    {
+        if (!attackingMinion && !attackingTrap && wall != null)
+        {
+            currentTarget = wall;
+            wallTarget = wall;
+            attackingWall = true;
+            // Iniciar ataque continuo al muro
+            StartWallAttack();
+        }
+    }
+
+    // MODO EMERGENCIA: Método para iniciar ataque continuo a muro
+    public void StartWallAttack()
+    {
+        if (wallAttackCoroutine != null)
+            StopCoroutine(wallAttackCoroutine);
+
+        wallAttackCoroutine = StartCoroutine(ContinuousWallAttack());
+    }
+
+    // MODO EMERGENCIA: Corrutina para atacar muro continuamente
+    private IEnumerator ContinuousWallAttack()
+    {
+        animator.SetBool("attacking", true);
+        GetComponent<EnemyMovement>().moveSpeed = 0;
+
+        while (attackingWall && wallTarget != null)
+        {
+            // Verificar antes de cada ataque si hay camino al player
+            var movement = GetComponent<EnemyMovement>();
+            var path = movement.FindPathBFS(
+                movement.SnapToGrid(transform.position),
+                movement.SnapToGrid(playerTarget.position)
+            );
+            if (path != null && path.Count > 0)
+            {
+                // ¡Camino abierto! Salir del modo emergencia
+                attackingWall = false;
+                Debug.Log($"[{gameObject.name}] Camino al player disponible, deteniendo ataque a muros.");
+                break;
+            }
+
+            // Si llega aquí, el path sigue bloqueado → atacar muro
+            var wallComponent = wallTarget.GetComponent<DestructibleWall>();
+            if (wallComponent == null) break;
+            audioSource.PlayOneShot(attackSound);
+            wallComponent.TakeDamage(damageWall);
+
+            yield return new WaitForSeconds(1f / wallAttackRate);
+        }
+
+        // Limpieza tras terminar ataque (ya sea por muro destruido o path disponible)
+        GetComponent<EnemyMovement>().OnWallDestroyed();
+        GoBackToPlayer();
+        wallAttackCoroutine = null;
+    }
+
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
@@ -225,13 +336,31 @@ public class EnemyController : MonoBehaviour
     // Llamar desde Minion al recibir daño si no se usan triggers: enemyController.NotifyAttackedByMinion(this)
     public void NotifyAttackedByMinion(MinionController2 minion)
     {
-        if (!attackingMinion && !attackingTrap && minion != null)
-        {
-            currentTarget = minion.transform;
-            minionTarget = minion;
-            attackingMinion = true;       
-        }
+        if (minion == null) return;
+
+        // Cambiar objetivo
+        currentTarget = minion.transform;
+        minionTarget = minion;
+        attackingMinion = true;
+
+        // Orientación y animación de ataque
+        UpdateFacingDirection();
+        animator.SetBool("attacking", true);
+
+        // Parar movimiento
+        var movement = GetComponent<EnemyMovement>();
+        movement.StopCoroutineMove();
+        movement.moveSpeed = 0f;
+
+        // Resetear cooldown para ataque inmediato
+        attackCooldown = 0f;
+
+        Debug.Log($"[{gameObject.name}] Atacado por minion, entrando en ATTACK.");
     }
+
+
+
+
 
     // TRAMPERO: Método para notificar que se encontró una trampa en el camino
     public void NotifyTrapFound(Transform trap)
@@ -239,8 +368,8 @@ public class EnemyController : MonoBehaviour
         // Solo el enemigo Trampero puede atacar trampas
         if (type != EnemyType.Trampero) return;
 
-        // Solo cambiar objetivo si no está atacando un minion
-        if (!attackingMinion && trap != null)
+        // Solo cambiar objetivo si no está atacando un minion o muro
+        if (!attackingMinion && !attackingWall && trap != null)
         {
             currentTarget = trap;
             trapTarget = trap;
@@ -250,21 +379,31 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // Cuando el minion muere
+    // Cuando el minion muere o se termina cualquier ataque especial
     public void GoBackToPlayer()
     {
-        // Detener ataque a trampa si estaba activo
+        // Detener ataques activos
         if (trapAttackCoroutine != null)
         {
             StopCoroutine(trapAttackCoroutine);
             trapAttackCoroutine = null;
         }
+        if (wallAttackCoroutine != null)
+        {
+            StopCoroutine(wallAttackCoroutine);
+            wallAttackCoroutine = null;
+        }
 
+        // Resetear estados
         currentTarget = playerTarget;
         attackingMinion = false;
-        minionTarget = null;
         attackingTrap = false;
+        attackingWall = false;
+        minionTarget = null;
         trapTarget = null;
+        wallTarget = null;
+
+        // Resetear animación y movimiento
         animator.SetBool("attacking", false);
         GetComponent<EnemyMovement>().moveSpeed = moveSpeed;
         GetComponent<EnemyMovement>().ClearTrapTarget();
@@ -283,7 +422,8 @@ public class EnemyController : MonoBehaviour
         // Limpiar corrutinas antes de morir
         if (trapAttackCoroutine != null)
             StopCoroutine(trapAttackCoroutine);
-
+        if (wallAttackCoroutine != null)
+            StopCoroutine(wallAttackCoroutine);
 
         PlayerController player = playerTarget.GetComponent<PlayerController>();
         player?.AddGold(gold);
@@ -296,8 +436,21 @@ public class EnemyController : MonoBehaviour
     private void FlipSprite()
     {
         if (currentTarget == null) return;
-        bool flip = currentTarget.position.x < transform.position.x;
-        spriteRenderer.flipX = flip;
+
+        Vector3 direction = (currentTarget.position - transform.position).normalized;
+
+        // Voltear horizontalmente si el objetivo está principalmente a la izquierda/derecha
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            spriteRenderer.flipX = direction.x < 0;
+        }
+        else
+        {
+            // Para objetivos verticales, opcionalmente podemos usar otro sprite o animación.
+            // En este caso no invertimos horizontalmente, pero la animación de ataque seguirá.
+            // Si se desea que sprite gira verticalmente, habría que usar otra propiedad.
+            spriteRenderer.flipX = false;
+        }
     }
 
 
@@ -343,6 +496,4 @@ public class EnemyController : MonoBehaviour
         damage = originalDamage;
         debuffCoroutine = null;
     }
-
-
 }

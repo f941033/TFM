@@ -5,21 +5,31 @@ public class HeroeMovement : MonoBehaviour
 {
     Animator m_Animator;
     private EnemyMovement movimientoScript;
+    private EnemyController enemyController;
     float previousSpeed;
 
     private void Start()
     {
         m_Animator = GetComponent<Animator>();
         movimientoScript = GetComponent<EnemyMovement>();
+        enemyController = GetComponent<EnemyController>();
         previousSpeed = movimientoScript.moveSpeed;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "PlayerWall")
         {
-            Debug.Log("detectando caja");
-            m_Animator.SetBool("attacking", true);
-            StartCoroutine("DestroyBox", collision);
+            Debug.Log("Héroe detectando muro del jugador");
+
+            // Solo atacar si es su comportamiento normal (no en modo emergencia)
+            // En modo emergencia, EnemyController ya maneja el ataque
+            EnemyMovement movement = GetComponent<EnemyMovement>();
+            if (movement != null && !movement.emergencyMode)
+            {
+                m_Animator.SetBool("attacking", true);
+                StartCoroutine("DestroyBox", collision);
+            }
         }
     }
 
@@ -30,14 +40,14 @@ public class HeroeMovement : MonoBehaviour
         movimientoScript.moveSpeed = 0;
 
         DestructibleWall box = collision.gameObject.GetComponent<DestructibleWall>();
-        
-        while (box.health>0)        // golpea hasta destruir
+
+        while (box != null && box.health > 0)        // golpea hasta destruir
         {
             box.TakeDamage(1);
             yield return new WaitForSeconds(1);
         }
 
-        Debug.Log("muro destruido");
+        Debug.Log("Muro destruido por Héroe");
 
         yield return null;            // ► espera un frame: el collider ya no existe
         yield return null;
