@@ -9,6 +9,7 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator soulsAnimation;
     private float attackCooldown = 0f;
 
     private List<EnemyController> targetsInRange = new List<EnemyController>();
@@ -185,6 +186,7 @@ public class PlayerController : MonoBehaviour
     {
         currentSouls -= amount;
         OnSoulsChanged?.Invoke(currentSouls);
+        soulsAnimation.SetTrigger("soul");
     }
     public void AddGold(int gold)
     {
