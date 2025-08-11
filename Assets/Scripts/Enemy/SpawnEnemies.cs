@@ -163,7 +163,7 @@ public class SpawnEnemies : MonoBehaviour
             {
                 yield return new WaitForSeconds(Random.Range(0.75f, 1.15f));
 
-                Vector2 offset = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f));
+                Vector2 offset = new Vector2(Random.Range(-1.25f, 1.25f), Random.Range(-1.25f, 1.25f));
                 Vector2 spawnPosition = new Vector2(puerta.transform.position.x, puerta.transform.position.y) + offset;
                 Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
                 //enemiesCounter++;
