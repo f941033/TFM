@@ -20,8 +20,6 @@ public class StatsCanvasController : MonoBehaviour
 
     private void HandlePhaseChanged(GamePhase phase)
     {
-        Debug.Log("Estoy en la fase: " + phase);
-        // Solo lo mostramos en Preparación y Acción:
         bool show = phase == GamePhase.Preparation || phase == GamePhase.Action || phase == GamePhase.Merchant;
         statsPanel.SetActive(show);
     }

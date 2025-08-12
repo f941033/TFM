@@ -101,7 +101,6 @@ public class CardUI : MonoBehaviour
     void Awake()
     {
         HandlePhaseChanged(GameManager.CurrentPhase);
-        Debug.Log(GameManager.CurrentPhase);
     }
 
     void OnDisable()

@@ -102,6 +102,21 @@ public class GameManager : MonoBehaviour
         ChangePhase(GamePhase.CardSelection);
         allCards = Resources.LoadAll<CardData>("Cards");
         var pool = new List<CardData>(allCards);
+
+        //Buscamos las cartas que haya en el mazo inicial de tipo habilidad o bufo
+        var ownedSpellNames = new HashSet<string>();
+        if (startingDeck != null)
+        {
+            foreach (var c in startingDeck)
+            {
+                if (c == null) continue;
+                if (c.cardType == CardType.Buff || c.cardType == CardType.Hability)
+                    ownedSpellNames.Add(c.cardName);
+            }
+        }
+
+        pool.RemoveAll(c => (c.cardType == CardType.Buff || c.cardType == CardType.Hability) && ownedSpellNames.Contains(c.cardName));
+
         List<CardData> selectedCards = new List<CardData>();
         bool isSpecialRound = (numberWave > 0) && (numberWave % 5 == 0);
 
@@ -251,7 +266,6 @@ public class GameManager : MonoBehaviour
 
         cardManager.discardPile.Clear();
         discardPileImage.SetActive(false);
-        Debug.Log(startingDeck.Count);
         textNumberOfCardsDeck.text = startingDeck.Count.ToString();
 
         cardManager.Shuffle(cardManager.drawPile);
