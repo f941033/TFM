@@ -49,9 +49,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private const int totalPrepHands = 3;
     [SerializeField] private Button btnNextHand;
     [SerializeField] private TextMeshProUGUI prepHandCounterText;
+    public GameObject handleNextHand;
     public bool hasKey = false;
     public TextMeshProUGUI nextHandText;
     [SerializeField] private Button skipButton;
+    public GameObject runButton;
     private GamePhase previousPhase;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
     {
         merchantUI = FindFirstObjectByType<MerchantUI>();
         ChangePhase(GamePhase.Preparation);
+        skipButton.gameObject.SetActive(true);
         btnNextHand.onClick.AddListener(NextPreparationHand);
         //textNumberWave.text = "Ronda: " + numberWave.ToString();
         //enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
@@ -235,6 +238,7 @@ public class GameManager : MonoBehaviour
         currentPrepHand = 1;
         UpdatePrepHandUI();
         merchant.DeactiveKey();
+        runButton.SetActive(true); //mostrar run
         btnNextHand.transform.parent.gameObject.SetActive(true);
         soulsBar.SetActive(false);
         inPrepPhase = true;
@@ -292,7 +296,8 @@ public class GameManager : MonoBehaviour
     {
         inPrepPhase = false;
         ChangePhase(GamePhase.Action);
-        btnNextHand.transform.parent.gameObject.SetActive(false);
+        runButton.SetActive(false);
+        //btnNextHand.transform.parent.gameObject.SetActive(false); //ya no hace falta (revisar)
         panelTimeScale.SetActive(true);
         StartCoroutine("PanelGo");
 
@@ -350,6 +355,7 @@ public class GameManager : MonoBehaviour
     }
     public void SkipCountDown()
     {
+        handleNextHand.SetActive(false);  //ocultar next hand
         StartRun();
     }
     IEnumerator PanelGo()
@@ -416,7 +422,7 @@ public class GameManager : MonoBehaviour
 
     private void NextPreparationHand()
     {
-        skipButton.gameObject.SetActive(true);
+        //skipButton.gameObject.SetActive(true);
         cardManager.DiscardHand();
         cardManager.DrawFullHand();
 
@@ -429,13 +435,14 @@ public class GameManager : MonoBehaviour
         }
         else if(currentPrepHand == totalPrepHands)
         {
-            skipButton.gameObject.SetActive(false);
+            //skipButton.gameObject.SetActive(false);
+            handleNextHand.SetActive(false);
         }
     }
     private void UpdatePrepHandUI()
     {
         prepHandCounterText.text = $"{currentPrepHand}/{totalPrepHands}";
-        if (currentPrepHand == totalPrepHands) nextHandText.text = "Run";
-        else nextHandText.text = "Next Hand";
+        //if (currentPrepHand == totalPrepHands) nextHandText.text = "Run";
+        //else nextHandText.text = "Next Hand";
     }
 }
