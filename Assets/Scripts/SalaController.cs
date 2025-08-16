@@ -79,12 +79,15 @@ public class SalaController : MonoBehaviour
 
         if (gameObject.tag == "salaCentral") return;
 
-        if (panelInfo != null) panelInfo.gameObject.SetActive(false);
+        
 
-        if (gm.hasKey && esSalaContigua())
+        if (gm.hasKey && esSalaContigua() && !estaLibre)
         {
             gm.hasKey = false;
             merchant.DeactiveKey();
+
+            if (panelInfo != null) panelInfo.gameObject.SetActive(false);
+            borderTilemap.gameObject.SetActive(false);
 
             foreach (var item in parent.GetComponentsInChildren<SalaController>())
             {
@@ -119,14 +122,15 @@ public class SalaController : MonoBehaviour
     {
         if (gameObject.tag == "salaCentral") return;
 
-        if (!gm.hasKey && esSalaContigua() && !estaLibre)
+        //if (!gm.hasKey && esSalaContigua() && !estaLibre)
+        //{
+        //    borderTilemap.gameObject.SetActive(true);
+        //    if (panelInfo != null) panelInfo.gameObject.SetActive(true);
+        //}
+
+        if (gm.hasKey && esSalaContigua() && !estaLibre)
         {
             borderTilemap.gameObject.SetActive(true);
-            if (panelInfo != null) panelInfo.gameObject.SetActive(true);
-        }
-
-        if (gm.hasKey && esSalaContigua())
-        {
             if (panelInfo != null) panelInfo.gameObject.SetActive(true);
 
             foreach (var item in parent.GetComponentsInChildren<SalaController>())

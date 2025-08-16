@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gobblin
   m_EditorClassIdentifier: 
   cardName: Gobblin
-  description: Invoca 3 gobblins
+  description: Invoca 2 gobblins
   cardType: 4
   healthModifier: 0
   numberOfTiles: 1
