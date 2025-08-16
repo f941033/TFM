@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 56
+  m_SortingOrder: 49
   m_Sprite: {fileID: 6904827586536478556, guid: b98c8cad811813a4c9394173a35ab23c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -304,6 +304,10 @@ PrefabInstance:
     - target: {fileID: 2319233238297828525, guid: 3556efa85074e044da068d46597ad32f, type: 3}
       propertyPath: m_Name
       value: Canvas Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632410341699488279, guid: 3556efa85074e044da068d46597ad32f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 49
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

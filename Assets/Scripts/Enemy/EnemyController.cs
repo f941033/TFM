@@ -427,6 +427,7 @@ public class EnemyController : MonoBehaviour
 
         PlayerController player = playerTarget.GetComponent<PlayerController>();
         player?.AddGold(gold);
+        gold = 0;
         Instantiate(effectGoldPrefab, transform.position, Quaternion.identity);
         FindFirstObjectByType<GameManager>().EnemyKaputt();
 
@@ -495,5 +496,10 @@ public class EnemyController : MonoBehaviour
         currentAttackRange = attackRange;
         damage = originalDamage;
         debuffCoroutine = null;
+    }
+
+    public bool IsAlive()
+    {
+        return currentHealth > 0;
     }
 }

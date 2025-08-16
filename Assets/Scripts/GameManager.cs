@@ -80,11 +80,27 @@ public class GameManager : MonoBehaviour
     {
         enemiesDied++;
         Debug.Log("enemigo " + enemiesDied + " muerto");
-        if (enemiesDied == enemiesToKillInCurrentWave)
+        //if (enemiesDied == enemiesToKillInCurrentWave)
+        if (ZeroEnemies())
         {
             enemiesDied = 0;
             Invoke("EndWave", 1f);
         }
+    }
+
+    private bool ZeroEnemies()
+    {
+        EnemyController[] allEnemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
+
+        foreach (EnemyController enemy in allEnemies)
+        {
+            if (enemy != null && enemy.gameObject.activeInHierarchy && enemy.IsAlive())
+            {
+                return false; // Hay al menos un enemigo vivo
+            }
+        }
+
+        return true; // No hay enemigos vivos
     }
 
     void EndWave()

@@ -84,8 +84,12 @@ public class SpawnEnemies : MonoBehaviour
 
             for (var i = 0; i < spawnPoint.transform.childCount; i++)
             {
-                spawnPoint.transform.GetChild(i).GetComponent<Animator>().SetBool("enabled", false);
-                spawnPoint.transform.GetChild(i).GetChild(0).gameObject.SetActive(false);
+                GameObject go = spawnPoint.transform.GetChild(i).gameObject;
+                if (go.GetComponent<Animator>() != null) 
+                { 
+                    go.GetComponent<Animator>().SetBool("enabled", false);
+                }
+                go.transform.GetChild(0).gameObject.SetActive(false);
             }
 
         }        

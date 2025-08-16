@@ -394,7 +394,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 52
+  m_SortingOrder: 48
   m_Sprite: {fileID: -231842426, guid: cedcf761cf91fb444b84124550d65f60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -499,12 +499,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490b2e657b68f8a4395fb28d6ca419fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRadius: 3
+  checkInterval: 0.2
   tickRate: 1
-  attackRadius: 2
   areaDamage: 10
+  drawTargetBeam: 1
   connectionRadius: 10
-  rayDamage: 20
+  maxConnections: 2
+  connectionDealsDamage: 1
+  connectionDamage: 10
+  connectionHitThickness: 0.25
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2048
-  rayMaterial: {fileID: 0}
+  targetBeamMaterial: {fileID: 0}
+  connectionBeamMaterial: {fileID: 0}
+  debugLogs: 0

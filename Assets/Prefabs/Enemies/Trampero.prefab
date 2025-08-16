@@ -83,7 +83,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 51
+  m_SortingOrder: 49
   m_Sprite: {fileID: -3927760931650398200, guid: c5b4a90547c53354cbe9fae58b62d510, type: 3}
   m_Color: {r: 0.49519405, g: 0.9811321, b: 0.58032703, a: 1}
   m_FlipX: 0
@@ -315,6 +315,8 @@ MonoBehaviour:
   effectGoldPrefab: {fileID: 7312088903935544102, guid: 262d3cbdda9907f44ac832ba54f20a2f, type: 3}
   trapAttackRate: 0.8
   damageTrap: 2
+  damageWall: 1
+  wallAttackRate: 1
 --- !u!114 &4000514698365673549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +340,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   trapDetectionDistance: 1.2
+  emergencyMode: 0
+  currentWallTarget: {fileID: 0}
+  wallDetectionRange: 50
+  wallApproachRadius: 4
+  wallTargetPosition: {x: 0, y: 0, z: 0}
   playerTag: Player
   path: []
   pathIndex: 0
@@ -432,6 +439,10 @@ PrefabInstance:
     - target: {fileID: 2319233238297828525, guid: 3556efa85074e044da068d46597ad32f, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632410341699488279, guid: 3556efa85074e044da068d46597ad32f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 49
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

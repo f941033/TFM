@@ -11,6 +11,7 @@ public class MerchantUI : MonoBehaviour
     [SerializeField] private GameObject canvaMerchant;
     [SerializeField] private GameObject cardSlotPrefab;
     [SerializeField] private GameObject merchantItemViewPrefab;
+    [SerializeField] private GameObject soulsPanel;
     private PlayerController player;
     private CardManager deck;
     private GameManager gm;
@@ -24,19 +25,20 @@ public class MerchantUI : MonoBehaviour
 
     public void Show(List<MerchantItem> shopItems)
     {
-        foreach (Transform t in contentParent) 
-        Destroy(t.gameObject);
+        foreach (Transform t in contentParent)
+            Destroy(t.gameObject);
 
         // 2) Instanciar uno por uno
-        foreach (var item in shopItems) {
-        GameObject go;
+        foreach (var item in shopItems)
+        {
+            GameObject go;
             if (item is CardItem cardItem)
             {
                 // si es carta usamos el prefab de carta
                 go = Instantiate(cardSlotPrefab, contentParent);
                 var ui = go.GetComponent<CardUI>();
                 ui.SetCardUI(cardItem.cardData);
-                
+
                 Destroy(go.GetComponent<CardDragDrop>());
                 Destroy(go.GetComponent<CardSelector>());
                 Destroy(go.GetComponent<CardHoverInHand>());
@@ -54,7 +56,7 @@ public class MerchantUI : MonoBehaviour
                     }
                     else
                     {
-                        gm.ShowMessage("No tienes suficiente oro", 2f); 
+                        gm.ShowMessage("No tienes suficiente oro", 2f);
                     }
                 });
             }
@@ -65,12 +67,13 @@ public class MerchantUI : MonoBehaviour
                 var ui = go.GetComponent<MerchantItemView>();
                 ui.Setup(item, OnBuyClicked);
             }
-        // asegurar escala 1:1
-        //go.GetComponent<RectTransform>().localScale = Vector3.one;
-    }
+            // asegurar escala 1:1
+            //go.GetComponent<RectTransform>().localScale = Vector3.one;
+        }
 
-    // 3) Mostrar el panel
-    gameObject.SetActive(true);
+        // 3) Mostrar el panel
+        gameObject.SetActive(true);
+        soulsPanel.SetActive(false);
     }
 
     private void OnBuyClicked(MerchantItem item)
@@ -106,7 +109,8 @@ public class MerchantUI : MonoBehaviour
     public void Close()
     {
         canvaMerchant.SetActive(false);
-        if(!gm.hasKey)
+        soulsPanel.SetActive(true);
+        if (!gm.hasKey)
             gm.PreparationPhase();
     }
 }
