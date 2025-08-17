@@ -16,7 +16,6 @@ public class MinionController2 : MonoBehaviour
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] Tilemap obstacleTilemap;
     [SerializeField] string obstacleLayerName = "Obstacle";
-    //[SerializeField] string trapLayerName = "TrapLayer";
 
     [Header("Combate")]
     [SerializeField] int damage = 10;
@@ -62,8 +61,8 @@ public class MinionController2 : MonoBehaviour
     };
 
     void Awake() { allMinions.Add(this); }
-    void OnDestroy() 
-    { 
+    void OnDestroy()
+    {
         allMinions.Remove(this);
 
         if (currentTarget != null && targetAssignments.ContainsKey(currentTarget))
@@ -89,6 +88,9 @@ public class MinionController2 : MonoBehaviour
 
     void Update()
     {
+        // CORRECCIÓN: Verificar estado del objetivo ANTES de buscar nuevo
+        CheckTargetStatus();
+
         if (currentState != State.Dead && currentTarget == null)
             FindTarget();
 
@@ -100,25 +102,72 @@ public class MinionController2 : MonoBehaviour
             case State.Return: HandleReturn(); break;
             case State.Dead: HandleDead(); break;
         }
+    }
 
-        // Limpiar objetivos muertos
-        if (currentTarget != null && currentTarget.gameObject == null)
+    // NUEVO: Método para verificar el estado del objetivo actual
+    void CheckTargetStatus()
+    {
+        if (currentTarget == null) return;
+
+        bool shouldClearTarget = false;
+
+        // Verificar si el GameObject fue destruido
+        if (currentTarget.gameObject == null)
         {
-            if (targetAssignments.ContainsKey(currentTarget))
-            {
-                targetAssignments.Remove(currentTarget);
-            }
-            currentTarget = null;
+            shouldClearTarget = true;
         }
+        // Verificar si el enemigo está "muerto" (health <= 0 o componente EnemyController inactivo)
+        else
+        {
+            EnemyController enemyController = currentTarget.GetComponent<EnemyController>();
+            if (enemyController == null || !currentTarget.gameObject.activeInHierarchy)
+            {
+                shouldClearTarget = true;
+            }
+            // Verificar si el enemigo tiene salud <= 0
+            else
+            {
+                // Usando reflexión para acceder a currentHealth (ya que es private)
+                var healthField = typeof(EnemyController).GetField("currentHealth",
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (healthField != null)
+                {
+                    float enemyHealth = (float)healthField.GetValue(enemyController);
+                    if (enemyHealth <= 0)
+                    {
+                        shouldClearTarget = true;
+                    }
+                }
+            }
+        }
+
+        if (shouldClearTarget)
+        {
+            Debug.Log($"[{gameObject.name}] Objetivo eliminado. Cambiando a estado Return.");
+            ClearCurrentTarget();
+
+            // Forzar cambio de estado a Return si estaba atacando
+            if (currentState == State.Attack || currentState == State.Chase)
+            {
+                currentState = State.Return;
+                currentPath.Clear();
+            }
+        }
+    }
+
+    // NUEVO: Método para limpiar el objetivo actual
+    void ClearCurrentTarget()
+    {
+        if (currentTarget != null && targetAssignments.ContainsKey(currentTarget))
+        {
+            targetAssignments.Remove(currentTarget);
+        }
+        currentTarget = null;
     }
 
     /* ------------------------ Búsqueda ------------------------ */
     void FindTarget()
     {
-        //Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, enemyLayer);
-        //if (hit != null && hit.CompareTag("Enemy"))
-        //    currentTarget = hit.transform;
-
         // ============= BÚSQUEDA DE ENEMIGOS ÚNICOS PARA ATACAR =============
         // Buscar todos los enemigos en rango
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, detectionRadius, enemyLayer);
@@ -129,6 +178,10 @@ public class MinionController2 : MonoBehaviour
         foreach (Collider2D enemy in enemies)
         {
             if (!enemy.CompareTag("Enemy")) continue;
+
+            // Verificar que el enemigo esté vivo y activo
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+            if (enemyController == null || !enemy.gameObject.activeInHierarchy) continue;
 
             // Verificar si este enemigo YA está siendo atacado por otro minion
             if (targetAssignments.ContainsKey(enemy.transform) &&
@@ -150,23 +203,26 @@ public class MinionController2 : MonoBehaviour
         if (bestTarget != null)
         {
             // Liberar objetivo anterior si tenía uno
-            if (currentTarget != null && targetAssignments.ContainsKey(currentTarget))
-            {
-                targetAssignments.Remove(currentTarget);
-            }
+            ClearCurrentTarget();
 
             // Asignar nuevo objetivo
             currentTarget = bestTarget;
             targetAssignments[currentTarget] = this;
+            Debug.Log($"[{gameObject.name}] Nuevo objetivo asignado: {currentTarget.name}");
         }
     }
 
     /* ------------------------ Estados ------------------------ */
     void HandleIdle()
     {
+        // CORRECCIÓN: Limpiar triggers conflictivos y asegurar solo idle
+        anim.ResetTrigger("run");
+        anim.ResetTrigger("attack");
         anim.SetTrigger("idle");
+
         if (currentTarget != null)
         {
+            Debug.Log($"[{gameObject.name}] Idle -> Chase");
             currentState = State.Chase;
             currentPath.Clear(); // Limpiar path anterior
         }
@@ -176,6 +232,7 @@ public class MinionController2 : MonoBehaviour
     {
         if (currentTarget == null)
         {
+            Debug.Log($"[{gameObject.name}] Chase -> Return (no target)");
             currentState = State.Return;
             currentPath.Clear();
             return;
@@ -185,11 +242,15 @@ public class MinionController2 : MonoBehaviour
         float distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
         if (distanceToTarget <= attackDistance)
         {
+            Debug.Log($"[{gameObject.name}] Chase -> Attack (in range)");
             currentState = State.Attack;
             currentPath.Clear();
             return;
         }
 
+        // CORRECCIÓN: Limpiar triggers conflictivos antes de run
+        anim.ResetTrigger("idle");
+        anim.ResetTrigger("attack");
         anim.SetTrigger("run");
 
         // Calcular path hacia el enemigo, pero detenerse a 1 tile de distancia
@@ -211,6 +272,7 @@ public class MinionController2 : MonoBehaviour
     {
         if (currentTarget == null)
         {
+            Debug.Log($"[{gameObject.name}] Attack -> Return (no target)");
             currentState = State.Return;
             currentPath.Clear();
             return;
@@ -220,6 +282,7 @@ public class MinionController2 : MonoBehaviour
         float distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
         if (distanceToTarget > attackDistance + 0.5f)
         {
+            Debug.Log($"[{gameObject.name}] Attack -> Chase (target moved away)");
             currentState = State.Chase;
             currentPath.Clear();
             return;
@@ -237,32 +300,82 @@ public class MinionController2 : MonoBehaviour
     {
         if (currentTarget != null)
         {
+            Debug.Log($"[{gameObject.name}] Return -> Chase (new target found)");
             currentState = State.Chase;
             currentPath.Clear();
             return;
         }
 
-        if (Vector2.Distance(transform.position, originPoint) < 0.1f)
+        float distanceToOrigin = Vector2.Distance(transform.position, originPoint);
+
+        // CORRECCIÓN: Tolerancia mayor y snap al origen
+        if (distanceToOrigin < 0.3f)
         {
+            Debug.Log($"[{gameObject.name}] Return -> Idle (reached origin)");
             currentState = State.Idle;
             currentPath.Clear();
+
+            // Snap exacto al origen y forzar idle
+            rb.MovePosition(originPoint);
+            anim.ResetTrigger("run");
+            anim.ResetTrigger("attack");
+            anim.SetTrigger("idle");
             return;
         }
 
-        anim.SetTrigger("run");
-
-        // Calcular path hacia el origen
-        if (currentPath.Count == 0)
+        // CORRECCIÓN: Solo activar run si realmente se está moviendo
+        if (isMoving)
         {
+            anim.ResetTrigger("idle");
+            anim.ResetTrigger("attack");
+            anim.SetTrigger("run");
+        }
+        else
+        {
+            // Si no se está moviendo, forzar idle para evitar conflictos
+            anim.ResetTrigger("run");
+            anim.ResetTrigger("attack");
+            anim.SetTrigger("idle");
+        }
+
+        // CORRECCIÓN: Recalcular path más frecuentemente si está bloqueado
+        if (currentPath.Count == 0 || Vector3.Distance(transform.position, currentPath[Mathf.Min(currentPathIndex, currentPath.Count - 1)]) > 0.5f)
+        {
+            Debug.Log($"[{gameObject.name}] Recalculando path hacia origen");
             currentPath = FindPathBFS(transform.position, originPoint);
             currentPathIndex = 0;
         }
 
         // Seguir el path
         FollowPath();
+
+        // CORRECCIÓN: Si el path está vacío o completado pero aún no llegó, intentar acercarse directamente
+        if (currentPath.Count == 0 || currentPathIndex >= currentPath.Count)
+        {
+            if (!isMoving)
+            {
+                // Si no hay path pero está cerca, ir directamente
+                if (distanceToOrigin < 2f)
+                {
+                    Debug.Log($"[{gameObject.name}] Intentando movimiento directo hacia origen");
+                    Vector2 directDirection = GetCardinalDirection(originPoint - transform.position);
+                    TryMove(directDirection);
+                }
+                else
+                {
+                    Debug.Log($"[{gameObject.name}] Path completado pero no en origen. Forzando Idle.");
+                    currentState = State.Idle;
+                    rb.MovePosition(originPoint);
+                    anim.ResetTrigger("run");
+                    anim.ResetTrigger("attack");
+                    anim.SetTrigger("idle");
+                }
+            }
+        }
     }
 
-    /* -------------------- Pathfinding con BFS -------------------- */
+    /* -------------------- Pathfinding con BFS MEJORADO -------------------- */
+
     List<Vector3> FindPathBFS(Vector3 startWorld, Vector3 goalWorld)
     {
         if (obstacleTilemap == null) return new List<Vector3>();
@@ -290,7 +403,8 @@ public class MinionController2 : MonoBehaviour
                 if (cameFrom.ContainsKey(next))
                     continue;
 
-                if (IsCellBlocked(next))
+                // CORRECCIÓN: Considerar tanto obstáculos estáticos como minions
+                if (IsCellBlockedIncludingMinions(next))
                     continue;
 
                 frontier.Enqueue(next);
@@ -301,7 +415,10 @@ public class MinionController2 : MonoBehaviour
         // Reconstruir path
         List<Vector3> path = new List<Vector3>();
         if (!cameFrom.ContainsKey(goal))
-            return path; // No se encontró camino
+        {
+            // NUEVO: Si no hay camino directo, intentar path más flexible
+            return FindFlexiblePath(startWorld, goalWorld);
+        }
 
         Vector3Int current = goal;
         while (current != start)
@@ -312,6 +429,122 @@ public class MinionController2 : MonoBehaviour
 
         path.Reverse();
         return path;
+    }
+
+    // NUEVO: Método que considera minions como obstáculos temporales
+    bool IsCellBlockedIncludingMinions(Vector3Int cellPosition)
+    {
+        // Verificar obstáculos estáticos primero
+        if (IsCellBlocked(cellPosition))
+            return true;
+
+        // Verificar si hay otros minions en esta posición
+        Vector3 worldPos = obstacleTilemap.GetCellCenterWorld(cellPosition);
+
+        foreach (var minion in MinionController2.allMinions)
+        {
+            if (minion == this) continue; // No considerarse a sí mismo
+
+            // Si otro minion está en esta celda, considerarla bloqueada
+            if (Vector3.Distance(minion.transform.position, worldPos) < cellSize * 0.5f)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // NUEVO: Pathfinding más flexible para cuando hay bloqueos temporales
+    List<Vector3> FindFlexiblePath(Vector3 startWorld, Vector3 goalWorld)
+    {
+        if (obstacleTilemap == null) return new List<Vector3>();
+
+        Vector3Int start = obstacleTilemap.WorldToCell(startWorld);
+        Vector3Int goal = obstacleTilemap.WorldToCell(goalWorld);
+
+        // Buscar posiciones alternativas cerca del objetivo
+        List<Vector3Int> alternativeGoals = GetAlternativeGoals(goal);
+
+        foreach (Vector3Int altGoal in alternativeGoals)
+        {
+            Queue<Vector3Int> frontier = new Queue<Vector3Int>();
+            Dictionary<Vector3Int, Vector3Int> cameFrom = new Dictionary<Vector3Int, Vector3Int>();
+
+            frontier.Enqueue(start);
+            cameFrom[start] = start;
+
+            while (frontier.Count > 0)
+            {
+                Vector3Int current = frontier.Dequeue();
+
+                if (current == altGoal)
+                {
+                    // Encontró camino a objetivo alternativo
+                    List<Vector3> path = new List<Vector3>();
+                    Vector3Int step = altGoal;
+                    while (step != start)
+                    {
+                        path.Add(obstacleTilemap.GetCellCenterWorld(step));
+                        step = cameFrom[step];
+                    }
+                    path.Reverse();
+
+                    Debug.Log($"[{gameObject.name}] Encontrado camino alternativo con {path.Count} pasos");
+                    return path;
+                }
+
+                foreach (Vector3Int direction in directions)
+                {
+                    Vector3Int next = current + direction;
+
+                    if (cameFrom.ContainsKey(next))
+                        continue;
+
+                    // Solo considerar obstáculos estáticos, ignorar minions temporalmente
+                    if (IsCellBlocked(next))
+                        continue;
+
+                    frontier.Enqueue(next);
+                    cameFrom[next] = current;
+                }
+            }
+        }
+
+        Debug.Log($"[{gameObject.name}] No se encontró camino flexible");
+        return new List<Vector3>();
+    }
+
+    // NUEVO: Generar objetivos alternativos cerca del objetivo original
+    List<Vector3Int> GetAlternativeGoals(Vector3Int originalGoal)
+    {
+        List<Vector3Int> alternatives = new List<Vector3Int>();
+
+        // Agregar el objetivo original primero
+        alternatives.Add(originalGoal);
+
+        // Agregar posiciones en radio creciente
+        for (int radius = 1; radius <= 3; radius++)
+        {
+            for (int x = -radius; x <= radius; x++)
+            {
+                for (int y = -radius; y <= radius; y++)
+                {
+                    // Solo el borde del radio actual
+                    if (Mathf.Abs(x) != radius && Mathf.Abs(y) != radius) continue;
+
+                    Vector3Int altPos = originalGoal + new Vector3Int(x, y, 0);
+
+                    // Verificar que no sea un obstáculo estático
+                    if (!IsCellBlocked(altPos))
+                    {
+                        alternatives.Add(altPos);
+                    }
+                }
+            }
+        }
+
+        return alternatives;
     }
 
     bool IsCellBlocked(Vector3Int cellPosition)
@@ -326,11 +559,6 @@ public class MinionController2 : MonoBehaviour
         Collider2D obstacleCollider = Physics2D.OverlapCircle(worldPos, 0.1f, LayerMask.GetMask(obstacleLayerName));
         if (obstacleCollider != null)
             return true;
-
-        // Verificar si hay collider de trampa
-        //Collider2D trapCollider = Physics2D.OverlapCircle(worldPos, 0.1f, LayerMask.GetMask(trapLayerName));
-        //if (trapCollider != null)
-        //    return true;
 
         return false;
     }
@@ -366,7 +594,7 @@ public class MinionController2 : MonoBehaviour
         Flip(direction);
     }
 
-    /* -------------------- Movimiento en cuadrícula -------------------- */
+    /* -------------------- Movimiento en cuadrícula MEJORADO -------------------- */
 
     bool IsTileReserved(Vector3 tilePos)
     {
@@ -375,21 +603,44 @@ public class MinionController2 : MonoBehaviour
             if (minion == this) continue;
             if (Vector3.Distance(minion.transform.position, tilePos) < cellSize * 0.1f)
                 return true;
-            // Aquí puedes también comprobar si el minion tiene planeado moverse a tilePos
         }
         return false;
     }
+
     void TryMove(Vector2 dir)
     {
         if (isMoving || dir == Vector2.zero) return;
 
         Vector3 targetWorldPos = SnapToGrid(transform.position) + (Vector3)(dir * cellSize);
-        if (IsTileReserved(targetWorldPos)) return; // ¡Ya reservado!
         Vector3Int cell = obstacleTilemap.WorldToCell(targetWorldPos);
 
-        // Verificar que la celda no esté bloqueada antes de moverse
-        if (!IsCellBlocked(cell))
-            StartCoroutine(MoveToCell(targetWorldPos));
+        // Verificar obstáculos estáticos
+        if (IsCellBlocked(cell))
+            return;
+
+        // CORRECCIÓN: Si hay un minion, esperar un poco e intentar recalcular path
+        if (IsTileReserved(targetWorldPos))
+        {
+            // No moverse ahora, pero en el próximo frame intentar nuevo path
+            StartCoroutine(RecalculatePathAfterDelay());
+            return;
+        }
+
+        StartCoroutine(MoveToCell(targetWorldPos));
+    }
+
+    // NUEVO: Recalcular path después de un pequeño delay
+    IEnumerator RecalculatePathAfterDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        // Solo recalcular si estamos en Return y no hay target
+        if (currentState == State.Return && currentTarget == null)
+        {
+            Debug.Log($"[{gameObject.name}] Recalculando path por bloqueo de minion");
+            currentPath.Clear();
+            currentPathIndex = 0;
+        }
     }
 
     IEnumerator MoveToCell(Vector3 destino)
@@ -413,7 +664,10 @@ public class MinionController2 : MonoBehaviour
     IEnumerator PerformAttack()
     {
         canAttack = false;
+
+        // CORRECCIÓN: Limpiar triggers antes de attack
         anim.ResetTrigger("run");
+        anim.ResetTrigger("idle");
         anim.SetTrigger("attack");
 
         yield return new WaitForSeconds(0.35f);
@@ -423,10 +677,10 @@ public class MinionController2 : MonoBehaviour
             var enemyController = currentTarget.GetComponent<EnemyController>();
             if (enemyController != null)
             {
+                Debug.Log($"[{gameObject.name}] Atacando a {currentTarget.name}");
                 enemyController.ReceiveDamage(damage);
                 enemyController.NotifyAttackedByMinion(this);
             }
-                
         }
 
         yield return new WaitForSeconds(timeBetweenHits);
@@ -449,7 +703,6 @@ public class MinionController2 : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
 
     /* ------------------------ Utilidades ------------------------ */
     Vector2 GetCardinalDirection(Vector3 rawDir)
@@ -477,21 +730,6 @@ public class MinionController2 : MonoBehaviour
         {
             isFacingRight = shouldFaceRight;
             sr.flipX = !isFacingRight;
-            //if(isFacingRight)
-            //{
-            //    transform.localScale = Vector3.one;
-            //}
-            //else
-            //{
-            //    transform.localScale = new Vector3(-1,1,1);
-            //}
-            
         }
     }
-
-    // ================== ASIGNACIÓN DE ENEMIGOS ==================
-
-
-
-
 }

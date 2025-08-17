@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         if (ZeroEnemies())
         {
             enemiesDied = 0;
-            Invoke("EndWave", 1f);
+            //Invoke("EndWave", 1f);
         }
     }
 
