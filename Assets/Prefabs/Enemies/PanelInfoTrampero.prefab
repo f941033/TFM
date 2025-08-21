@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1, y: 0.96947}
+  m_SizeDelta: {x: 0.6875, y: 0.75927}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4328908055187146894
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6137154191440453430, guid: df11f16e9b6e4354883104518e5b2d4a, type: 3}
+  m_Sprite: {fileID: -8463223293062608085, guid: c5b4a90547c53354cbe9fae58b62d510, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -110,7 +110,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1, y: 0.84576}
+  m_SizeDelta: {x: 0.8123, y: 0.75927}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3612965775988269788
 CanvasRenderer:
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.06208366, w: 0}
+  m_margin: {x: 0, y: 0, z: -0.2434029, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 6501455468953343073}
   - component: {fileID: 1003934484129206668}
   m_Layer: 5
-  m_Name: PanelInfoHeroe
+  m_Name: PanelInfoTrampero
   m_TagString: CanvasEnemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 7
-  m_Spacing: -2.26
+  m_Spacing: -2.5
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
