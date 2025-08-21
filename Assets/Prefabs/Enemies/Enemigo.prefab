@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: -4158502336515314276}
   - component: {fileID: 1926716930358187792}
   - component: {fileID: 3160520848515133885}
-  - component: {fileID: 8336800360263369524}
   - component: {fileID: 1805089658196643180}
   - component: {fileID: 4395549438039636085}
+  - component: {fileID: 231339155780578276}
   m_Layer: 11
   m_Name: Enemigo
   m_TagString: Enemy
@@ -198,28 +198,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulDuration: 1
   flashCount: 3
---- !u!95 &8336800360263369524
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2698680304010752485}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 27ea1c37d885c8d4aaba97482ebac083, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!82 &1805089658196643180
 AudioSource:
   m_ObjectHideFlags: 0
@@ -348,6 +326,28 @@ MonoBehaviour:
   playerTag: Player
   path: []
   pathIndex: 0
+--- !u!95 &231339155780578276
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698680304010752485}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b748f2151e541b441a0a3f096b195852, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &5262032807633087081
 PrefabInstance:
   m_ObjectHideFlags: 0
