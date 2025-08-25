@@ -247,6 +247,7 @@ MonoBehaviour:
   overlayImage: {fileID: 5185899197930268730}
   warningCooldown: {fileID: 0}
   button: {fileID: 2698126561960785233}
+  cooldownText: {fileID: 2205115775731041931}
 --- !u!1 &493693752094882554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,7 +2296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ec5e840c367258b46bb57f5056ed4fa0, type: 3}
+  m_Sprite: {fileID: 381451539, guid: aa5b37749b01d5f408ebdca2b3198a24, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

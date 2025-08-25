@@ -12,6 +12,9 @@ public class HabilityCardHandler : MonoBehaviour
     [SerializeField] private Image overlayImage;
     [SerializeField] private TextMeshProUGUI warningCooldown;
     [SerializeField] private Button button;
+    [SerializeField] private TextMeshProUGUI cooldownText;
+    private Coroutine cooldownRoutine;
+    private int lastShownSeconds = -1;
 
     public void Initialize(CardData card, PlayerController player)
     {
@@ -27,7 +30,7 @@ public class HabilityCardHandler : MonoBehaviour
             Debug.Log("Se que es una carta bufo");
             button.gameObject.SetActive(true);
             button.interactable = true;
-            
+
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(OnClickBuff);
         }
@@ -40,6 +43,7 @@ public class HabilityCardHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         float cooldown = GetCooldownValue();
 
         if (cooldownRemaining > 0f)
@@ -50,12 +54,9 @@ public class HabilityCardHandler : MonoBehaviour
             {
                 overlayImage.fillAmount = 1f;
                 button.interactable = true;
-                /* if (cardData is BuffCardData)
-                {
-                    button.gameObject.SetActive(true);
-                } */
             }
         }
+        */
     }
 
     public void OnClickBuff()
@@ -78,13 +79,21 @@ public class HabilityCardHandler : MonoBehaviour
 
     public void StartCooldown()
     {
-        cooldownRemaining = GetCooldownValue();
+        cooldownText.gameObject.SetActive(true);
+        float cooldown = GetCooldownValue();
+        /*
         overlayImage.fillAmount = 0f;
         Debug.Log("Activo el overlay");
         button.gameObject.SetActive(true);
         overlayImage.gameObject.SetActive(true);
         if (button != null)
             button.interactable = false;
+        */
+        if (cooldown <= 0) return;
+        if (cooldownRoutine != null)
+            StopCoroutine(cooldownRoutine);
+
+        cooldownRoutine = StartCoroutine(CooldownRoutine(cooldown));
     }
 
     float GetCooldownValue()
@@ -100,4 +109,52 @@ public class HabilityCardHandler : MonoBehaviour
 
         return 0f;
     }
+
+    private IEnumerator CooldownRoutine(float duration)
+{
+    cooldownRemaining = duration;
+    lastShownSeconds = -1;
+
+    // estado inicial
+    if (overlayImage != null)
+    {
+        overlayImage.gameObject.SetActive(true);
+        overlayImage.fillAmount = 0f;
+    }
+   // if (button != null) button.interactable = false;
+    UpdateCooldownText(force:true);
+
+    while (cooldownRemaining > 0f)
+    {
+        cooldownRemaining -= Time.deltaTime;
+
+        if (overlayImage != null)
+            overlayImage.fillAmount = 1f - Mathf.Clamp01(cooldownRemaining / duration);
+
+        UpdateCooldownText(); // solo cambia el texto si el entero de segundos ha cambiado
+
+        yield return null; // cada frame
+    }
+
+    // Fin del CD
+    cooldownRemaining = 0f;
+    if (overlayImage != null) overlayImage.fillAmount = 1f;
+    if (button != null) button.interactable = true;
+
+    // Limpia o pon "Ready"
+    if (cooldownText != null) cooldownText.text = "";
+
+    cooldownRoutine = null;
+}
+
+private void UpdateCooldownText(bool force = false)
+{
+    if (cooldownText == null) return;
+    int s = Mathf.CeilToInt(Mathf.Max(0f, cooldownRemaining));
+    if (force || s != lastShownSeconds)
+    {
+        lastShownSeconds = s;
+        cooldownText.SetText(s > 0 ? s.ToString() : "");
+    }
+}
 }
