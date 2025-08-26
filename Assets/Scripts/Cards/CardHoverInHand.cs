@@ -17,7 +17,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     // Hover en escala y animación
     private RectTransform rectTransform;
     private Vector3 originalScale;
-    private Vector3 hoverStartPosition;    // Guarda posición al entrar
+    public Vector3 hoverStartPosition;    // Guarda posición al entrar
     private Vector3 targetHoverPosition;   // Posición a la que sube
     private float selecScale = 1.25f;
     [SerializeField] private float hoverYOffset = 50f;

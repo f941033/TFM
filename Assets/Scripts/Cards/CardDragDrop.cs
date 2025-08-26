@@ -40,6 +40,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private Vector3Int previousCell;
     private bool hasPrevious = false;
     private bool isDragging = false;
+    private Vector3 originalScale;
+    private Vector3 originalPosition;
 
     void Awake()
     {
@@ -50,6 +52,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             Debug.LogError("No se encontró el DragLayer en la escena.");
         player = FindFirstObjectByType<PlayerController>();
         gameManager = FindFirstObjectByType<GameManager>();
+        originalScale = rectTransform.localScale;
+        originalPosition = transform.position;
     }
 
     void Start()
@@ -310,8 +314,10 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             // Revertir la carta a su posición original
             transform.SetParent(originalTransform, true);
             transform.SetSiblingIndex(cardIndex);
-            transform.localScale = Vector3.one;
-            rectTransform.anchoredPosition = originalAnchoredPosition;
+            //transform.localScale = Vector3.one;
+            transform.localScale = originalScale;
+            //rectTransform.anchoredPosition = originalAnchoredPosition;
+            rectTransform.position = GetComponent<CardHoverInHand>().hoverStartPosition;
         }
         else
         {
