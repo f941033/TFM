@@ -514,6 +514,7 @@ GameObject:
   - component: {fileID: 3995611701245264748}
   - component: {fileID: 5322563837588064630}
   - component: {fileID: 937388574516757634}
+  - component: {fileID: 389802148193161784}
   m_Layer: 5
   m_Name: MerchantItem3
   m_TagString: Untagged
@@ -644,6 +645,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &389802148193161784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4593650895277504444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904053aa1a1625469fc0cd64f4fdd3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mount: {fileID: 0}
+  cardSlotPrefab: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
+  merchantItemViewPrefab: {fileID: 4593650895277504444, guid: 648402edd47d1394c9a8ea72b3ecca70, type: 3}
 --- !u!1 &5963886680989523501
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     private MerchantUI merchantUI;
     [SerializeField] private MerchantItem keyItemAsset;
     [SerializeField] private MerchantItem potionItemAsset;
+    [SerializeField] private MerchantItem soulsItemAsset;
     [SerializeField] private GameObject panelMerchant;
     [SerializeField] private int currentPrepHand = 1;
     [SerializeField] private const int totalPrepHands = 3;
@@ -201,7 +202,7 @@ public class GameManager : MonoBehaviour
                 selectedCards.Add(item);
         }
 
-        if (numberWave % 5 == 0)
+        if (numberWave % 1 == 0)
         {
             MerchantShop();
         }
@@ -383,9 +384,9 @@ public class GameManager : MonoBehaviour
 
     void MerchantShop()
     {
+        playerController.soulsBuyPerShop = 0;
         soulsBar.SetActive(false);
         ChangePhase(GamePhase.Merchant);
-        Debug.Log(CurrentPhase);
         panelMerchant.SetActive(true);
         var shopList = new List<MerchantItem>();
 
@@ -421,6 +422,8 @@ public class GameManager : MonoBehaviour
         shopList.Add(keyItemAsset);
         // 1 poción
         shopList.Add(potionItemAsset);
+
+        shopList.Add(soulsItemAsset);
 
         merchantUI.Show(shopList);
         return;

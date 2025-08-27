@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float currentSouls;
     [SerializeField] private float currentSoulsRate;
     [SerializeField] public int amountGold = 50;
+    [SerializeField] public byte soulsBuyPerShop = 0;
 
 
     //[Header("Events")]
@@ -236,6 +237,16 @@ public class PlayerController : MonoBehaviour
     public void AddKey()
     {
         FindFirstObjectByType<GameManager>().ShowMessage("No estás capacitado para verlo!!", 2);
+    }
+    public void AddSouls()
+    {
+        if (soulsBuyPerShop < 3)
+        {
+            currentSouls++;
+            maxSouls++;
+            playerSouls.UpdateMaxSouls();
+            soulsBuyPerShop++;
+        }
     }
 
     public float CurrentHealth => currentHealth;

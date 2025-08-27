@@ -11,6 +11,7 @@ public class MerchantUI : MonoBehaviour
     [SerializeField] private GameObject canvaMerchant;
     [SerializeField] private GameObject cardSlotPrefab;
     [SerializeField] private GameObject merchantItemViewPrefab;
+    [SerializeField] private GameObject shopItemEntryPrefab;
     [SerializeField] private GameObject soulsPanel;
     private PlayerController player;
     private CardManager deck;
@@ -26,80 +27,46 @@ public class MerchantUI : MonoBehaviour
     public void Show(List<MerchantItem> shopItems)
     {
         foreach (Transform t in contentParent)
-            Destroy(t.gameObject);
+        Destroy(t.gameObject);
 
-        // 2) Instanciar uno por uno
         foreach (var item in shopItems)
         {
-            GameObject go;
-            if (item is CardItem cardItem)
-            {
-                // si es carta usamos el prefab de carta
-                go = Instantiate(cardSlotPrefab, contentParent);
-                var ui = go.GetComponent<CardUI>();
-                ui.SetCardUI(cardItem.cardData);
-
-                Destroy(go.GetComponent<CardDragDrop>());
-                Destroy(go.GetComponent<CardSelector>());
-                Destroy(go.GetComponent<CardHoverInHand>());
-                var buyBtn = go.GetComponentInChildren<Button>();
-                buyBtn.onClick.RemoveAllListeners();
-                buyBtn.onClick.AddListener(() =>
-                {
-                    if (player.AmountGold >= item.cost)
-                    {
-                        player.SpendGold(item.cost);
-                        // En tu CardItem debes tener algo como:
-                        gm.AddCardToDeck(cardItem.cardData);
-                        gm.ShowMessage($"¡Has comprado “{item.itemName}”!", 2f);
-                        buyBtn.interactable = false; // desactivar
-                    }
-                    else
-                    {
-                        gm.ShowMessage("No tienes suficiente oro", 2f);
-                    }
-                });
-            }
-            else
-            {
-                // si no, es pocion/llave: usamos merchantItemPrefab
-                go = Instantiate(merchantItemViewPrefab, contentParent);
-                var ui = go.GetComponent<MerchantItemView>();
-                ui.Setup(item, OnBuyClicked);
-            }
-            // asegurar escala 1:1
-            //go.GetComponent<RectTransform>().localScale = Vector3.one;
+            var entryGO = Instantiate(shopItemEntryPrefab, contentParent);
+            var entry = entryGO.GetComponent<ShopItemEntry>();
+            entry.Setup(item, OnBuyClicked);
         }
 
-        // 3) Mostrar el panel
         gameObject.SetActive(true);
         soulsPanel.SetActive(false);
     }
 
     private void OnBuyClicked(MerchantItem item)
     {
-        //if (item is KeyItem && player.CurrentHealth >= player.BaseHealth)
-        //{
-        //    gm.ShowMessage("¡Tu vida ya está completa, no seas un gastizo!", 2f);
-        //    return;
-        //}
+        int finalCost = item.cost;
+        if (item is SoulsItem soulsItem)
+            finalCost = soulsItem.GetDynamicCost(player);
 
-        if (player.AmountGold < item.cost)
+        if (player.AmountGold < finalCost)
         {
             gm.ShowMessage("No tienes suficiente oro", 2f);
             return;
         }
-        player.SpendGold(item.cost);
+
+        player.SpendGold(finalCost);
         item.Apply(player, gm);
-        gm.ShowMessage($"Compraste “{item.itemName}”", 2f);
+
+        if (item is CardItem cardItem)
+            gm.AddCardToDeck(cardItem.cardData);
+
+        gm.ShowMessage($"Compraste “{item.itemName}” por {finalCost}", 2f);
 
         if (item.itemName.Contains("Llave"))
         {
             gm.hasKey = true;
             key.gameObject.SetActive(true);
-            //roomsManager.OpenRing();
         }
     }
+
 
     public void DeactiveKey()
     {

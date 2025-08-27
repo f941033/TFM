@@ -23,7 +23,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (nivelActual >= costos.Length)
         {
-            Debug.Log("¡Has alcanzado el máximo nivel!");
+            Debug.Log("ï¿½Has alcanzado el mï¿½ximo nivel!");
             return;
         }
 

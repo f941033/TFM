@@ -507,7 +507,7 @@ TextureImporter:
         width: 826
         height: 708
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -516,6 +516,28 @@ TextureImporter:
       bones: []
       spriteID: bd97760be1318e24a91ef7bada067f5f
       internalID: 1321773190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shock_Card
+      rect:
+        serializedVersion: 2
+        x: 3304
+        y: 1418
+        width: 826
+        height: 708
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd992160bfa8fff48b4a5fe0a79917d7
+      internalID: -235896832
       vertices: []
       indices: 
       edges: []
@@ -544,6 +566,7 @@ TextureImporter:
       Fireball_Card: 421503429
       Pit_Card: 877911320
       Saws_Card: -1285000583
+      Shock_Card: -235896832
       SoulsIncr_Card: -1633327677
       SpeedIncr_Card: 1662136614
       Spikes_Card: -857629342
