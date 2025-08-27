@@ -78,18 +78,17 @@ public class MerchantUI : MonoBehaviour
 
     private void OnBuyClicked(MerchantItem item)
     {
-        //if (item is KeyItem && player.CurrentHealth >= player.BaseHealth)
-        //{
-        //    gm.ShowMessage("¡Tu vida ya está completa, no seas un gastizo!", 2f);
-        //    return;
-        //}
+        int finalCost = item.cost;
 
-        if (player.AmountGold < item.cost)
+        if (item is SoulsItem soulsItem)
+            finalCost = soulsItem.GetDynamicCost(player);
+
+        if (player.AmountGold < finalCost)
         {
             gm.ShowMessage("No tienes suficiente oro", 2f);
             return;
         }
-        player.SpendGold(item.cost);
+        player.SpendGold(finalCost);
         item.Apply(player, gm);
         gm.ShowMessage($"Compraste “{item.itemName}”", 2f);
 
@@ -97,7 +96,6 @@ public class MerchantUI : MonoBehaviour
         {
             gm.hasKey = true;
             key.gameObject.SetActive(true);
-            //roomsManager.OpenRing();
         }
     }
 
