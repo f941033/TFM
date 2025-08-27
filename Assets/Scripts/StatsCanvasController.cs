@@ -23,4 +23,9 @@ public class StatsCanvasController : MonoBehaviour
         bool show = phase == GamePhase.Preparation || phase == GamePhase.Action || phase == GamePhase.Merchant;
         statsPanel.SetActive(show);
     }
+
+    private void Start()
+    {
+        statsPanel.SetActive(false);
+    }
 }
