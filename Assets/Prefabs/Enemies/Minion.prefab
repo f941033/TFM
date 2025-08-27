@@ -205,9 +205,9 @@ MonoBehaviour:
     m_Bits: 2048
   obstacleTilemap: {fileID: 0}
   obstacleLayerName: Obstacle
-  damage: 10
+  damage: 15
   timeBetweenHits: 1
-  health: 100
+  health: 35
   currentHealth: 0
   healthBarUI: {fileID: 6524022209200354690}
   cellSize: 1
