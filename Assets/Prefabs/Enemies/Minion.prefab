@@ -207,7 +207,7 @@ MonoBehaviour:
   obstacleLayerName: Obstacle
   damage: 15
   timeBetweenHits: 1
-  health: 35
+  health: 30
   currentHealth: 0
   healthBarUI: {fileID: 6524022209200354690}
   cellSize: 1
