@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e20fdbf2b2fcf6469b771bb53b7d884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 8
+  detectionRadius: 4
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2048
