@@ -40,6 +40,7 @@ public class EnemyController : MonoBehaviour
     [Header("Configuración Trampero")]
     [SerializeField] private float trapAttackRate = 0.8f;      // velocidad de ataque a trampas
     [SerializeField] private int damageTrap;
+    [SerializeField] private ParticleSystem particlesTrampero;
     private Coroutine trapAttackCoroutine;  // corrutina para ataque continuo
     bool attackingTrap = false;
     Transform trapTarget;
@@ -152,6 +153,25 @@ public class EnemyController : MonoBehaviour
         {
             facingRight = dx > 0;
             spriteRenderer.flipX = !facingRight;
+            if (particlesTrampero != null)
+            {
+                if (facingRight)
+                {
+                    ParticleSystem ps = particlesTrampero.GetComponentInChildren<ParticleSystem>();
+                    var main = ps.main;
+                    main.startRotation = 155 * Mathf.Deg2Rad;
+                    particlesTrampero.transform.localPosition = new Vector3(0.446f, 0.27f, 0f);
+                }
+
+                else
+                {
+                    ParticleSystem ps = particlesTrampero.GetComponentInChildren<ParticleSystem>();
+                    var main = ps.main;
+                    main.startRotation = -30 * Mathf.Deg2Rad;
+                    particlesTrampero.transform.localPosition = new Vector3(-0.363f, 0.27f, 0f);
+                }
+
+            }
         }
         // Si dx es casi 0 (objetivo arriba/abajo), no tocar flipX: mantiene la última orientación
     }
@@ -220,6 +240,7 @@ public class EnemyController : MonoBehaviour
     // TRAMPERO: Corrutina para atacar trampa continuamente
     private IEnumerator ContinuousTrapAttack()
     {
+        particlesTrampero.Play();
         animator.SetBool("attacking", true);
         GetComponent<EnemyMovement>().moveSpeed = 0;
 
@@ -250,6 +271,7 @@ public class EnemyController : MonoBehaviour
         }
 
         // Ataque terminado, volver al comportamiento normal
+        particlesTrampero.Stop();
         GoBackToPlayer();
         trapAttackCoroutine = null;
     }
@@ -403,6 +425,7 @@ public class EnemyController : MonoBehaviour
         minionTarget = null;
         trapTarget = null;
         wallTarget = null;
+        if(particlesTrampero != null) { particlesTrampero.Stop(); }
 
         // Resetear animación y movimiento
         animator.SetBool("attacking", false);
