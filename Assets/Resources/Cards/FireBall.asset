@@ -18,7 +18,7 @@ MonoBehaviour:
   healthModifier: 10
   numberOfTiles: 0
   goldCost: 166
-  areaPreviewPrefab: {fileID: 1444403662060021971, guid: 2f572ff95ce351c40b49b59d18805cfe, type: 3}
+  areaPreviewPrefab: {fileID: 1444403662060021971, guid: 6256c002e678d3a46ba54a4ec718e1bc, type: 3}
   cooldown: 20
   applyDamage: 1
   damage: 30

@@ -13,9 +13,11 @@ public class EnemyController : MonoBehaviour
     MinionController2 minionTarget;     // referencia fuerte si atacando minion
     bool attackingMinion = false;
 
+    [Header("Configuración Genérica")]
     [SerializeField] private float health;
     [SerializeField] private float currentHealth;
     [SerializeField] private float damage = 10f;
+    [SerializeField] private ParticleSystem particlesAttack;
     private float originalDamage;
     private float attackCooldown = 0f;
     private float attackRate = 0.5f;
@@ -182,7 +184,7 @@ public class EnemyController : MonoBehaviour
     {
         if (currentTarget == null) return;
 
-        audioSource.PlayOneShot(attackSound);
+        if(attackSound != null) audioSource.PlayOneShot(attackSound);
         animator.SetBool("attacking", true);
         GetComponent<EnemyMovement>().moveSpeed = 0;
 
@@ -255,7 +257,7 @@ public class EnemyController : MonoBehaviour
             }
 
             // Reproducir sonido y atacar
-            if (audioSource != null && attackSound != null)
+            if (audioSource != null && trapAttackSound != null)
                 audioSource.PlayOneShot(trapAttackSound);
 
             trapComponent.ReceiveDamage(damageTrap);
@@ -323,7 +325,7 @@ public class EnemyController : MonoBehaviour
             // Si llega aquí, el path sigue bloqueado → atacar muro
             var wallComponent = wallTarget.GetComponent<DestructibleWall>();
             if (wallComponent == null) break;
-            audioSource.PlayOneShot(attackSound);
+            if(attackSound != null) audioSource.PlayOneShot(attackSound);
             wallComponent.TakeDamage(damageWall);
 
             yield return new WaitForSeconds(1f / wallAttackRate);
@@ -525,5 +527,15 @@ public class EnemyController : MonoBehaviour
     public bool IsAlive()
     {
         return currentHealth > 0;
+    }
+
+    public void ActivateParticlesAttack()
+    {
+        if(particlesAttack != null)
+        {
+            particlesAttack.Play();
+            particlesAttack.GetComponent<AudioSource>().Play();
+        }
+            
     }
 }
