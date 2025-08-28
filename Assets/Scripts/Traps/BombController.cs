@@ -4,8 +4,10 @@ public class BombController : MonoBehaviour
 {
     public ParticleSystem explosionEffect;
     public float explosionRadius = 4f;
+    public AudioClip explosionSound;
 
     Animator animator;
+    AudioSource audioSource;
 
     public float rangoDeteccion = 2.0f;
     private bool activada = false;
@@ -14,6 +16,7 @@ public class BombController : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -38,9 +41,13 @@ public class BombController : MonoBehaviour
         Invoke("Explode", 0.75f);
     }
 
+    public void PlaySound()
+    {
+        audioSource.PlayOneShot(explosionSound);
+    }
 
     void Explode()
-    {
+    { 
         // Activar efecto de partículas
         if (explosionEffect != null)
         {
@@ -49,7 +56,9 @@ public class BombController : MonoBehaviour
                 transform.position,
                 Quaternion.identity
             );
+            
             explosion.Play();
+            
             Destroy(explosion.gameObject, explosion.main.duration);
         }
 

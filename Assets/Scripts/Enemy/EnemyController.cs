@@ -31,8 +31,9 @@ public class EnemyController : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip attackSound;
-
+    public AudioClip trapAttackSound;
     public GameObject effectGoldPrefab;
+
     private Coroutine debuffCoroutine;
     private float moveSpeed;
 
@@ -234,7 +235,7 @@ public class EnemyController : MonoBehaviour
 
             // Reproducir sonido y atacar
             if (audioSource != null && attackSound != null)
-                audioSource.PlayOneShot(attackSound);
+                audioSource.PlayOneShot(trapAttackSound);
 
             trapComponent.ReceiveDamage(damageTrap);
 

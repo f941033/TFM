@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using DeckboundDungeon.GamePhase;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class MerchantUI : MonoBehaviour
 {
@@ -79,5 +80,6 @@ public class MerchantUI : MonoBehaviour
         soulsPanel.SetActive(true);
         if (!gm.hasKey)
             gm.PreparationPhase();
+        else gm.ShowMessage("Selecciona la sala a abrir, si te atreves", 2f);
     }
 }
