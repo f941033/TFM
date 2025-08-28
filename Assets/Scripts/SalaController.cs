@@ -92,6 +92,7 @@ public class SalaController : MonoBehaviour
             foreach (var item in parent.GetComponentsInChildren<SalaController>())
             {
                 item.estaLibre = true;
+                gm.OpenRoom();
                 spawnEnemiesController.AddWayPoints(item.wayPoints, item.removeWayPoints);
                 item.tilemap.gameObject.SetActive(false);
             }

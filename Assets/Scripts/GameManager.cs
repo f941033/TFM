@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
     public GameObject runButton;
     private GamePhase previousPhase;
 
+    public int closedRooms;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -67,6 +69,8 @@ public class GameManager : MonoBehaviour
         //textNumberWave.text = "Ronda: " + numberWave.ToString();
         //enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
         merchant = FindAnyObjectByType<MerchantUI>();
+        closedRooms = FindObjectsByType<SalaController>(FindObjectsSortMode.None).Length - 1;
+        Debug.Log($"salas cerradas: {closedRooms}");
     }
 
 
@@ -202,7 +206,7 @@ public class GameManager : MonoBehaviour
                 selectedCards.Add(item);
         }
 
-        if (numberWave % 5 == 0)
+        if (numberWave % 1 == 0)
         {
             MerchantShop();
         }
@@ -463,5 +467,11 @@ public class GameManager : MonoBehaviour
         prepHandCounterText.text = $"{currentPrepHand}/{totalPrepHands}";
         //if (currentPrepHand == totalPrepHands) nextHandText.text = "Run";
         //else nextHandText.text = "Next Hand";
+    }
+
+    public void OpenRoom()
+    {
+        closedRooms--;
+        Debug.Log($"salas cerradas: {closedRooms}");
     }
 }

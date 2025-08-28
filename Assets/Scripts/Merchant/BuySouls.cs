@@ -47,7 +47,7 @@ public class UpgradeManager : MonoBehaviour
     {
         contadorAlmas.text = player.CurrentSouls + "/" + player.maxSouls;
         monedasText.text = player.amountGold.ToString();
-        upgradeButton.interactable = nivelActual < costos.Length;
+        upgradeButton.interactable = nivelActual < costos.Length;        
     }
 }
 
