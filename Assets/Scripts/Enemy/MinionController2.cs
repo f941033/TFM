@@ -36,6 +36,7 @@ public class MinionController2 : MonoBehaviour
     Transform currentTarget;
     Vector3 originPoint;
     bool isFacingRight = true;
+    AudioSource audioSource;
 
     Rigidbody2D rb;
     Animator anim;
@@ -84,6 +85,8 @@ public class MinionController2 : MonoBehaviour
         lastTargetPosition = Vector3.zero;
 
         currentHealth = health;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -731,5 +734,10 @@ public class MinionController2 : MonoBehaviour
             isFacingRight = shouldFaceRight;
             sr.flipX = !isFacingRight;
         }
+    }
+
+    public void ActivateSound()
+    {
+        audioSource.Play();
     }
 }
