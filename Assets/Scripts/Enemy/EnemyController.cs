@@ -185,6 +185,10 @@ public class EnemyController : MonoBehaviour
         if (currentTarget == null) return;
 
         if(attackSound != null) audioSource.PlayOneShot(attackSound);
+        if (type == EnemyType.Trampero)
+        {
+            particlesTrampero.Play();
+        }
         animator.SetBool("attacking", true);
         GetComponent<EnemyMovement>().moveSpeed = 0;
 
