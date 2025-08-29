@@ -526,11 +526,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8759425826186554283, guid: 41c384f138f4fe244bdeb0588d87fe84, type: 3}
       propertyPath: m_Volume
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: -8759425826186554283, guid: 41c384f138f4fe244bdeb0588d87fe84, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8759425826186554283, guid: 41c384f138f4fe244bdeb0588d87fe84, type: 3}
       propertyPath: m_Resource
@@ -551,6 +551,10 @@ PrefabInstance:
     - target: {fileID: 4748681987041982144, guid: 41c384f138f4fe244bdeb0588d87fe84, type: 3}
       propertyPath: m_Layer
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794655212493717476, guid: 41c384f138f4fe244bdeb0588d87fe84, type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7795210345721637939, guid: 41c384f138f4fe244bdeb0588d87fe84, type: 3}
       propertyPath: m_LocalScale.x

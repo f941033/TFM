@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private ParticleSystem particlesAttack;
     private float originalDamage;
     private float attackCooldown = 0f;
-    private float attackRate = 0.5f;
+    private float attackRate = 1.5f;
     public float currentAttackRate;
     private float attackRange = 1f;
     public float currentAttackRange;
