@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -657,7 +657,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f904053aa1a1625469fc0cd64f4fdd3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mount: {fileID: 0}
+  slotImage: {fileID: 1845769853528447790}
+  nameText: {fileID: 6446547390219931555}
+  costText: {fileID: 1411583869069934859}
+  buyButton: {fileID: 6654359595632449492}
   cardSlotPrefab: {fileID: 228139822927816391, guid: 5bcff2977ed4e2543a261ad7f79adced, type: 3}
   merchantItemViewPrefab: {fileID: 4593650895277504444, guid: 648402edd47d1394c9a8ea72b3ecca70, type: 3}
 --- !u!1 &5963886680989523501

@@ -34,7 +34,7 @@ public class MerchantUI : MonoBehaviour
         {
             var entryGO = Instantiate(shopItemEntryPrefab, contentParent);
             var entry = entryGO.GetComponent<ShopItemEntry>();
-            entry.Setup(item, OnBuyClicked);
+            entry.Setup(item, player, OnBuyClicked);
         }
 
         gameObject.SetActive(true);
@@ -43,9 +43,9 @@ public class MerchantUI : MonoBehaviour
 
     private void OnBuyClicked(MerchantItem item)
     {
-        int finalCost = item.cost;
-        if (item is SoulsItem soulsItem)
-            finalCost = soulsItem.GetDynamicCost(player);
+        int finalCost = item is SoulsItem soulsItem
+        ? soulsItem.GetDynamicCost(player)
+        : item.cost;
 
         if (player.AmountGold < finalCost)
         {
@@ -55,9 +55,6 @@ public class MerchantUI : MonoBehaviour
 
         player.SpendGold(finalCost);
         item.Apply(player, gm);
-
-        if (item is CardItem cardItem)
-            gm.AddCardToDeck(cardItem.cardData);
 
         gm.ShowMessage($"Compraste “{item.itemName}” por {finalCost}", 2f);
 

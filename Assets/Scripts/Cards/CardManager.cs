@@ -63,6 +63,11 @@ public class CardManager : MonoBehaviour
             gameManager.DeactivateDiscardPileImage();
             FindFirstObjectByType<GameManager>().UpdateTextNumberOfCardsDiscard();
         }
+        else if (drawPile.Count == 0 && discardPile.Count == 0)
+        {
+            gameManager.ShowMessage("No hay cartas que robar!", 2);
+            return;
+        }
 
         var cardToDraw = drawPile[0];
         drawPile.RemoveAt(0);
@@ -171,7 +176,7 @@ public class CardManager : MonoBehaviour
             cardUI.SetCardUI(cardData);
 
             Debug.Log("la carta cogida de descartes es: " + cardData.cardName);
-            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect || cardData.cardType == CardType.Hability)
+            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect || cardData.cardType == CardType.Hability || cardData.cardType ==CardType.Summon)
             {
                 var drag = cardObj.GetComponent<CardDragDrop>();
                 drag.dropTilemap = zonaValidaTilemap;
@@ -188,7 +193,6 @@ public class CardManager : MonoBehaviour
 
             cardsInHand.Add(cardObj);
             UpdateHandVisuals();
-            //DrawCard();
             count--;
         }
     }

@@ -52,11 +52,6 @@ public class Tutorial : MonoBehaviour
                     startingDeck.Add(card);
                     baseHealth += card.healthModifier;
                 }
-                //if (card.cardName == "Box")
-                //{
-                //    startingDeck.Add(card);
-                //    baseHealth += card.healthModifier;
-                //}
             }
 
             if (card.cardName == "Dark Reap")
@@ -64,10 +59,6 @@ public class Tutorial : MonoBehaviour
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
 
-                //if (card.cardName == "MasRapido" || card.cardName == "Muerteeeee")
-                //{
-                //    startingDeck.Add(card);
-                //}
             }
             if (card.cardName == "Abyss" || card.cardName == "2-Draw" || card.cardName == "Fireball" || card.cardName == "Zero Zone")
             {
