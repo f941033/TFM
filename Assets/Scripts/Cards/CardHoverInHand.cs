@@ -20,7 +20,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public Vector3 hoverStartPosition;    // Guarda posición al entrar
     private Vector3 targetHoverPosition;   // Posición a la que sube
     private float selecScale = 1.25f;
-    [SerializeField] private float hoverYOffset = 50f;
+    private float hoverYOffset = 75f;
     [SerializeField] private float animationDuration = 0.2f;
     [SerializeField] private AnimationCurve easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     private int indiceOriginal;
