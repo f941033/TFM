@@ -62,10 +62,9 @@ public class CardUI : MonoBehaviour
         }
             else if (cardData is DeckEffectCardData deck)
             {
-                textCost.gameObject.SetActive(false);
                 backgroundImage.sprite = deckBackground;
+                textCost.text = deck.cost.ToString();
                 damageImage.gameObject.SetActive(false);
-                costImage.gameObject.SetActive(false);
                 textDamage.gameObject.SetActive(false);
                 textType.text = "BOUND";
             }

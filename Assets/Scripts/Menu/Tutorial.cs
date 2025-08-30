@@ -54,7 +54,7 @@ public class Tutorial : MonoBehaviour
                 }
             }
 
-            if (card.cardName == "Dark Reap")
+            if (card.cardName == "Dark Reap" || card.cardName == "Recycle")
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
@@ -67,7 +67,6 @@ public class Tutorial : MonoBehaviour
 
             }
             if(card.cardName == "Gobblin"){
-                Debug.Log("He encontrado la carta gobblin");
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
             }

@@ -111,9 +111,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 canvasGroup.alpha = 1f;
                 return;
             }
-        }
-
-        if (cardData is TrapCardData trap)
+        }  else if (cardData is TrapCardData trap)
         {
             if (!player.TrySpendSouls(trap.cost))
             {
@@ -128,9 +126,24 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 return;
             }
         }
-        if (cardData is SummonCardData summon)
+        else if (cardData is SummonCardData summon)
         {
             if (!player.TrySpendSouls(summon.cost))
+            {
+                FindFirstObjectByType<GameManager>().ShowMessage("¡No tienes suficientes almas!", 2);
+                Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
+                // sonido de que la carta no se puede jugar
+                eventData.pointerDrag = null;
+                eventData.pointerPress = null;
+                canvasGroup.blocksRaycasts = true;
+                isDragging = false;
+                canvasGroup.alpha = 1f;
+                return;
+            }
+        }
+        else if (cardData is DeckEffectCardData deck)
+        {
+            if (!player.TrySpendSouls(deck.cost))
             {
                 FindFirstObjectByType<GameManager>().ShowMessage("¡No tienes suficientes almas!", 2);
                 Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
@@ -153,8 +166,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         canvasGroup.alpha = 0.15f;
         isDragging = true;
 
-
-        // poner en el cardData un atributo más para saber su escala
         // poner en el cardData un atributo más para saber su escala
         if (cardData.numberOfTiles == 4)
         {
@@ -255,13 +266,22 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                                     break;
                                 }
                                 deckEffect.Play(player, worldCenter);
-                                Debug.Log("Hay descartes");
                                 Deck.CardPlayed(gameObject, cardData);
 
                                 isSet = true;
                                 break;
 
                             case DeckEffectCardData.Effect.Draw:
+                                deckEffect.Play(player, worldCenter);
+                                Deck.CardPlayed(gameObject, cardData);
+                                isSet = true;
+                                break;
+                            case DeckEffectCardData.Effect.LastUsed:
+                                if (Deck.lastCardUsed == null)
+                                {   
+                                    gameManager.ShowMessage("No has usado ninguna carta", 2);
+                                    break;
+                                }
                                 deckEffect.Play(player, worldCenter);
                                 Deck.CardPlayed(gameObject, cardData);
                                 isSet = true;
@@ -289,9 +309,9 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                             handler.StartCooldown();
 
                         isSet = true;
-                        
                         ReturnToHand();
-                    }else if (cardData.cardType == CardType.Summon)
+                    }
+                    else if (cardData.cardType == CardType.Summon)
                     {
                         Debug.Log("He soltado la carta summon");
                         dropTilemap.SetTileFlags(cellPos, TileFlags.None);
@@ -331,9 +351,14 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
             if (cardData is TrapCardData trap)
                 player.SpendSouls(trap.cost);
-            if (cardData is SummonCardData summon)
+            else if (cardData is SummonCardData summon)
                 player.SpendSouls(summon.cost);
+            else if (cardData is DeckEffectCardData deck)
+                player.SpendSouls(deck.cost);
 
+            Debug.Log("Ultima carta usada es :" + cardData.cardName);
+            Deck.lastCardUsed = cardData;
+            Debug.Log("La variable de ultima carta usada es :" + Deck.lastCardUsed);
             gameManager.UpdateTextNumberOfCardsDiscard();
         }
     }

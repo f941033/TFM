@@ -33,6 +33,8 @@ public class CardManager : MonoBehaviour
     public int mulliganSelectedCount = 0;
     public int MulliganSelectedCount => mulliganSelectedCount;
     public int MulliganMaxSelectable => drawPile.Count;
+    public CardData lastCardUsed = null;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -200,6 +202,39 @@ public class CardManager : MonoBehaviour
             cardsInHand.Add(cardObj);
             UpdateHandVisuals();
             count--;
+        }
+    }
+
+    public void DrawLastCardUsed()
+    {
+        Debug.Log("Entro en el metodo de ultima carta usada");
+        if (lastCardUsed != null)
+        {
+            Debug.Log("Entro en el if de ultima carta usada");
+            CardData cardData = lastCardUsed;
+
+            var cardObj = Instantiate(prefabCard, handTransform.position, Quaternion.identity, handTransform);
+            var cardUI = cardObj.GetComponentInChildren<CardUI>();
+            cardUI.SetCardUI(cardData);
+
+            Debug.Log("la última carta cogida es: " + cardData.cardName);
+            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect || cardData.cardType == CardType.Hability || cardData.cardType == CardType.Summon)
+            {
+                var drag = cardObj.GetComponent<CardDragDrop>();
+                drag.dropTilemap = zonaValidaTilemap;
+                drag.cardData = cardData;
+                drag.player = player;
+                drag.Deck = this;
+            }
+            else if (cardData is BuffCardData buffData)
+            {
+                Destroy(cardObj.GetComponent<CardDragDrop>());
+                var hability = cardObj.GetComponentInChildren<HabilityCardHandler>();
+                hability.Initialize(buffData, player);
+            }
+
+            cardsInHand.Add(cardObj);
+            UpdateHandVisuals();
         }
     }
 
