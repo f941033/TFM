@@ -27,7 +27,6 @@ public class HabilityCardHandler : MonoBehaviour
 
         if (card is BuffCardData)
         {
-            Debug.Log("Se que es una carta bufo");
             button.gameObject.SetActive(true);
             button.interactable = true;
 
@@ -38,25 +37,6 @@ public class HabilityCardHandler : MonoBehaviour
         {
             button.gameObject.SetActive(true);
         }
-        Debug.Log("he inicializado el overlay");
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        float cooldown = GetCooldownValue();
-
-        if (cooldownRemaining > 0f)
-        {
-            cooldownRemaining -= Time.deltaTime;
-            overlayImage.fillAmount = 1f - Mathf.Clamp01(cooldownRemaining / cooldown);
-            if (cooldownRemaining <= 0f)
-            {
-                overlayImage.fillAmount = 1f;
-                button.interactable = true;
-            }
-        }
-        */
     }
 
     public void OnClickBuff()

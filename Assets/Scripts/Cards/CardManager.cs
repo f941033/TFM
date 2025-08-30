@@ -27,6 +27,12 @@ public class CardManager : MonoBehaviour
     public List<GameObject> cardsInHand = new List<GameObject>();
     //public byte handSize = 4;
     public byte currentHandSize;
+    public bool inMulligan = false;
+    public bool mulliganUsed = false;
+    [SerializeField] private bool mulliganToDiscard = true; 
+    public int mulliganSelectedCount = 0;
+    public int MulliganSelectedCount => mulliganSelectedCount;
+    public int MulliganMaxSelectable => drawPile.Count;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -125,11 +131,11 @@ public class CardManager : MonoBehaviour
             cardsInHand[i].transform.localRotation = Quaternion.Euler(0f, 0f, rotationAngle);
 
             float horizontalOffset = (cardSpacing * (i - (cardCount - 1) / 2f));
-            float normalizedPosition = (2f * i / (cardCount - 1) - 1f)/2f ; // Normalize card position between -1,1
-            float verticalOffset = verticalSpacing * (1 - normalizedPosition * normalizedPosition );
+            float normalizedPosition = (2f * i / (cardCount - 1) - 1f) / 2f; // Normalize card position between -1,1
+            float verticalOffset = verticalSpacing * (1 - normalizedPosition * normalizedPosition);
 
             //set card position
-            cardsInHand[i].transform.localPosition = new Vector3(horizontalOffset, verticalOffset,0f);
+            cardsInHand[i].transform.localPosition = new Vector3(horizontalOffset, verticalOffset, 0f);
 
         }
     }
@@ -176,7 +182,7 @@ public class CardManager : MonoBehaviour
             cardUI.SetCardUI(cardData);
 
             Debug.Log("la carta cogida de descartes es: " + cardData.cardName);
-            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect || cardData.cardType == CardType.Hability || cardData.cardType ==CardType.Summon)
+            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect || cardData.cardType == CardType.Hability || cardData.cardType == CardType.Summon)
             {
                 var drag = cardObj.GetComponent<CardDragDrop>();
                 drag.dropTilemap = zonaValidaTilemap;
@@ -217,5 +223,193 @@ public class CardManager : MonoBehaviour
 
         if (discardPile.Count > 0)
             gameManager.ActivateDiscardPileImage();
+    }
+    
+    public void ResetMulliganForActionPhase()
+    {
+        inMulligan = false;
+        mulliganUsed = false;
+        mulliganSelectedCount = 0;
+    }
+
+    public void BeginMulligan()
+    {
+        if (mulliganUsed) { FindFirstObjectByType<GameManager>().ShowMessage("Ya hiciste mulligan.", 2); return; }
+        if (GameManager.CurrentPhase != DeckboundDungeon.GamePhase.GamePhase.Action) return;
+        if (drawPile.Count == 0) { FindFirstObjectByType<GameManager>().ShowMessage("No quedan cartas en el mazo.", 2); return; }
+
+        foreach (var go in cardsInHand)
+        {
+            // 1) Bloquea interacción normal
+            var drag = go.GetComponent<CardDragDrop>();
+            if (drag) drag.enabled = false;
+
+            var hab = go.GetComponentInChildren<HabilityCardHandler>(true);
+            if (hab) hab.enabled = false;
+
+            // 2) Overlay que captura el click (arriba del todo)
+            var overlayTr = go.transform.Find("MulliganOverlay");
+            GameObject overlay;
+            if (!overlayTr)
+            {
+                overlay = new GameObject("MulliganOverlay", typeof(RectTransform), typeof(Image));
+                var rt = (RectTransform)overlay.transform;
+                rt.SetParent(go.transform, false);
+                rt.anchorMin = Vector2.zero;
+                rt.anchorMax = Vector2.one;
+                rt.offsetMin = Vector2.zero;
+                rt.offsetMax = Vector2.zero;
+                overlay.transform.SetAsLastSibling();
+
+                var img = overlay.GetComponent<Image>();
+                img.color = new Color(0, 0, 0, 0); 
+                img.raycastTarget = true;
+
+                overlay.AddComponent<MulliganSelectable>();
+            }
+            else
+            {
+                overlay = overlayTr.gameObject;
+                overlay.transform.SetAsLastSibling(); // asegúrate que está arriba
+                overlay.SetActive(true);
+            }
+
+            // 3) Inicializa el selector en el OVERLAY (no en la raíz)
+            var cardUI = go.GetComponentInChildren<CardUI>();
+            var sel = overlay.GetComponent<MulliganSelectable>();
+            sel.Init(this, cardUI);
+            sel.SetSelected(false, applyVisual: true);
+        }
+
+        inMulligan = true;
+        mulliganSelectedCount = 0;
+
+        Debug.Log("[Mulligan] Comienza selección. drawPile=" + drawPile.Count);
+        FindFirstObjectByType<GameManager>().ShowMessage("Selecciona cartas y confirma.", 2);
+    }
+
+    public void ConfirmMulligan()
+    {
+        if (!inMulligan) return;
+
+        var toReplace = new List<GameObject>();
+        foreach (var go in cardsInHand)
+        {
+            var sel = go.GetComponentInChildren<MulliganSelectable>();
+            if (sel != null && sel.Selected) toReplace.Add(go);
+        }
+
+        int n = toReplace.Count;
+        if (n == 0)
+        {
+            CancelMulligan();
+            return;
+        }
+
+        if (n > drawPile.Count)
+        {
+            FindFirstObjectByType<GameManager>().ShowMessage("No hay suficientes cartas en el mazo para ese mulligan.", 2);
+            return;
+        }
+
+        // 1) Mover seleccionadas a descartes o al fondo del mazo
+        foreach (var go in toReplace)
+        {
+            cardsInHand.Remove(go);
+
+            var ui = go.GetComponentInChildren<CardUI>();
+            var data = ui ? ui.data : null;
+
+            if (data != null)
+            {
+                if (mulliganToDiscard)
+                    discardPile.Add(data);
+                else
+                    drawPile.Add(data);
+            }
+
+            Destroy(go);
+        }
+
+        var gm = FindFirstObjectByType<GameManager>();
+        gm.UpdateTextNumberOfCardsDiscard();
+        if (discardPile.Count > 0) gm.ActivateDiscardPileImage();
+
+        for (int i = 0; i < n; i++)
+            DrawCard();
+
+        UpdateHandVisuals();
+
+        // 3) Salir de mulligan
+        mulliganUsed = true;
+        inMulligan = false;
+
+        // Rehabilitar drag y cardHandler
+        foreach (var go in cardsInHand)
+        {
+            var drag = go.GetComponent<CardDragDrop>();
+            if (drag) drag.enabled = true;
+
+            var hab = go.GetComponentInChildren<HabilityCardHandler>(true);
+            if (hab) hab.enabled = true;
+
+            // Elimina overlay si existe
+            var overlay = go.transform.Find("MulliganOverlay");
+            if (overlay) overlay.gameObject.SetActive(false); // o Destroy(overlay.gameObject);
+
+            // Si dejaste algún MulliganSelectable en raíz (no debería ya), límpialo
+            var selRoot = go.GetComponent<MulliganSelectable>();
+            if (selRoot) Destroy(selRoot);
+        }
+
+        gameManager.OnMulliganFinished();
+    }
+
+    // Cancelar sin cambios
+    public void CancelMulligan()
+    {
+        if (!inMulligan) return;
+
+        inMulligan = false;
+        mulliganSelectedCount = 0;
+
+        foreach (var go in cardsInHand)
+        {
+            var drag = go.GetComponent<CardDragDrop>();
+            if (drag) drag.enabled = true;
+
+            var hab = go.GetComponentInChildren<HabilityCardHandler>(true);
+            if (hab) hab.enabled = true;
+
+            // Elimina overlay si existe
+            var overlay = go.transform.Find("MulliganOverlay");
+            if (overlay) overlay.gameObject.SetActive(false); // o Destroy(overlay.gameObject);
+
+            // Si dejaste algún MulliganSelectable en raíz (no debería ya), límpialo
+            var selRoot = go.GetComponent<MulliganSelectable>();
+            if (selRoot) Destroy(selRoot);
+        }
+
+        gameManager.OnMulliganFinished();
+    }
+
+    // Llamado por MulliganSelectable al togglear
+    public bool TryToggleSelect(MulliganSelectable sel, bool wantSelect)
+    {
+        if (!inMulligan) return false;
+
+        if (wantSelect)
+        {
+            if (mulliganSelectedCount >= drawPile.Count)
+                return false;
+
+            mulliganSelectedCount++;
+            return true;
+        }
+        else
+        {
+            mulliganSelectedCount = Mathf.Max(0, mulliganSelectedCount - 1);
+            return true;
+        }
     }
 }

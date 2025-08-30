@@ -88,7 +88,11 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        
+        if (Deck != null && Deck.inMulligan)
+        {
+            // Bloquear drag en modo mulligan
+            return;
+        }
 
         if (cardData.cardType == CardType.Hability)
         {

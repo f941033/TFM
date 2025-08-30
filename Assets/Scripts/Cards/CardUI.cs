@@ -22,6 +22,8 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Sprite cooldownSprite;
     [SerializeField] private Image cooldownFillImage;
     [SerializeField] private TextMeshProUGUI textType;
+    [SerializeField] private Image usesImage;
+    [SerializeField] private TextMeshProUGUI textUses;
 
     public void SetCardUI(CardData cardData)
     {
@@ -52,44 +54,49 @@ public class CardUI : MonoBehaviour
             textType.text = "TRAP";
             if (trap.IsAreaDamage)
                 damageImage.sprite = areaDamageImage;
-        }
-        else if (cardData is DeckEffectCardData deck)
-        {
-            textCost.gameObject.SetActive(false);
-            backgroundImage.sprite = deckBackground;
-            damageImage.gameObject.SetActive(false);
-            costImage.gameObject.SetActive(false);
-            textDamage.gameObject.SetActive(false);
-            textType.text = "BOUND";
-        }
-        else if (cardData is SummonCardData summon){
-            textCost.text = summon.cost.ToString();
-            backgroundImage.sprite = trapBackground;
-            damageImage.gameObject.SetActive(false);
-            textDamage.gameObject.SetActive(false);
-            textType.text = "SUMMON";
-        }
-        else
-        {
-            if (cardData is HabilityCardData hab)
+            if (trap.uses > 0)
             {
-                if (!hab.IsDamage)
-                {
-                    damageImage.gameObject.SetActive(false);
-                    textDamage.gameObject.SetActive(false);
-                }
-                if(hab.IsAreaDamage)
-                    damageImage.sprite = areaDamageImage;
+                usesImage.gameObject.SetActive(true);
+                textUses.text = trap.uses.ToString();
             }
-            textCost.gameObject.SetActive(false);
-            backgroundImage.sprite = buffBackground;
-            damageImage.gameObject.SetActive(false);
-            textDamage.gameObject.SetActive(false);
-            costImage.sprite = cooldownSprite;
-            cooldownFillImage.gameObject.SetActive(true);
-            Debug.Log("Es una carta de buff o hab y activo el cooldownImage");
-            textType.text = "SPELL";
         }
+            else if (cardData is DeckEffectCardData deck)
+            {
+                textCost.gameObject.SetActive(false);
+                backgroundImage.sprite = deckBackground;
+                damageImage.gameObject.SetActive(false);
+                costImage.gameObject.SetActive(false);
+                textDamage.gameObject.SetActive(false);
+                textType.text = "BOUND";
+            }
+            else if (cardData is SummonCardData summon)
+            {
+                textCost.text = summon.cost.ToString();
+                backgroundImage.sprite = trapBackground;
+                damageImage.gameObject.SetActive(false);
+                textDamage.gameObject.SetActive(false);
+                textType.text = "SUMMON";
+            }
+            else
+            {
+                if (cardData is HabilityCardData hab)
+                {
+                    if (!hab.IsDamage)
+                    {
+                        damageImage.gameObject.SetActive(false);
+                        textDamage.gameObject.SetActive(false);
+                    }
+                    if (hab.IsAreaDamage)
+                        damageImage.sprite = areaDamageImage;
+                }
+                textCost.gameObject.SetActive(false);
+                backgroundImage.sprite = buffBackground;
+                damageImage.gameObject.SetActive(false);
+                textDamage.gameObject.SetActive(false);
+                costImage.sprite = cooldownSprite;
+                cooldownFillImage.gameObject.SetActive(true);
+                textType.text = "SPELL";
+            }
     }
 
     void Awake()
@@ -107,17 +114,13 @@ public class CardUI : MonoBehaviour
     }
         public void ShowData()
     {
-        Debug.Log("Estoy clicando la carta y voy a mostrar los datos");
         // Solo en fases donde quieras permitir ver detalles:
         if (GameManager.CurrentPhase == GamePhase.Deck ||
             GameManager.CurrentPhase == GamePhase.Pause)
         {
             var cardDetails = FindFirstObjectByType<CardDetailUI>();
-             if (cardDetails == null)
-            {
-                Debug.LogWarning("[CardUI] No hay ningún CardDetailUI en escena");
-                return;
-            }
+             if (cardDetails == null) return;
+
             cardDetails.Show(data);
         }
     }

@@ -47,7 +47,6 @@ public class EnemyMovement : MonoBehaviour
         playerObj = GameObject.FindWithTag(playerTag);
         if (playerObj == null)
         {
-            Debug.LogError("No se encontró Player con Tag " + playerTag);
             enabled = false;
             return;
         }
@@ -55,7 +54,6 @@ public class EnemyMovement : MonoBehaviour
         transform.position = SnapToGrid(transform.position);
 
         // Debug inicial
-        Debug.Log($"[{gameObject.name}] Iniciado. TileSize: {tileSize}. Posición inicial: {transform.position}");
 
         // Verificar si hay camino al player al inicio
         CheckInitialPathToPlayer();
@@ -73,7 +71,6 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log($"[{gameObject.name}] Camino inicial encontrado con {initialPath.Count} pasos.");
         }
     }
 

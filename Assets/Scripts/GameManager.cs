@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
     private GamePhase previousPhase;
 
     public int closedRooms;
+    [SerializeField] private GameObject mulliganPanel;
+    private bool spawnStarted = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -70,7 +72,6 @@ public class GameManager : MonoBehaviour
         //enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
         merchant = FindAnyObjectByType<MerchantUI>();
         closedRooms = FindObjectsByType<SalaController>(FindObjectsSortMode.None).Length - 1;
-        Debug.Log($"salas cerradas: {closedRooms}");
     }
 
 
@@ -84,7 +85,6 @@ public class GameManager : MonoBehaviour
     public void EnemyKaputt()
     {
         enemiesDied++;
-        Debug.Log("enemigo " + enemiesDied + " muerto");
         //if (enemiesDied == enemiesToKillInCurrentWave)
         if (ZeroEnemies())
         {
@@ -315,6 +315,7 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void StartRun()
     {
+        spawnStarted = false; 
         inPrepPhase = false;
         ChangePhase(GamePhase.Action);
         runButton.SetActive(false);
@@ -342,14 +343,35 @@ public class GameManager : MonoBehaviour
 
         cardManager.discardPile.Clear();
         DeactivateDiscardPileImage();
-        Debug.Log(startingDeck.Count);
         textNumberOfCardsDeck.text = cardManager.drawPile.Count.ToString();
 
         cardManager.Shuffle(cardManager.drawPile);
         cardManager.DrawFullHand();
 
+        cardManager.ResetMulliganForActionPhase();
+        if (cardManager.drawPile.Count > 0)
+        {
+            cardManager.BeginMulligan();
+            if (mulliganPanel) mulliganPanel.SetActive(true);
+        }
+        else
+        {
+            BeginSpawningEnemies();
+        }
+    }
+
+    private void BeginSpawningEnemies()
+    {
+        if (spawnStarted) return;
+        spawnStarted = true;
         var spawner = GameObject.Find("SpawnManager").GetComponent<SpawnEnemies>();
         spawner.StartCoroutine(spawner.GenerarEnemigos());
+    }
+
+    public void OnMulliganFinished()
+    {
+        if (mulliganPanel) mulliganPanel.SetActive(false);
+        BeginSpawningEnemies();
     }
 
     void EliminarCanvasEnemies()
