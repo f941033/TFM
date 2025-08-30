@@ -7,19 +7,17 @@ public class MulliganSelectable : MonoBehaviour, IPointerClickHandler
     private CardManager manager;
     private CardUI cardUI;
     public bool Selected { get; private set; } = false;
-    private Image highlight;
-    private CanvasGroup cg;
+    private Image overlayImg;
 
     public void Init(CardManager mgr, CardUI card)
     {
         manager = mgr;
         cardUI = card;
-        if (!cg) cg = gameObject.GetComponent<CanvasGroup>() ?? gameObject.AddComponent<CanvasGroup>();
-        if (!highlight)
-        {
-            // Busca una Image de fondo del prefab de carta para tintarla sutilmente (opcional)
-            highlight = GetComponentInChildren<Image>();
-        }
+        overlayImg = GetComponent<Image>(); 
+        if (overlayImg)
+            overlayImg.raycastTarget = true;
+        Selected = false;
+        ApplyVisual();
     }
 
     public void SetSelected(bool value, bool applyVisual)
@@ -47,8 +45,7 @@ public class MulliganSelectable : MonoBehaviour, IPointerClickHandler
 
     private void ApplyVisual()
     {
-        if (cg) cg.alpha = Selected ? 0.6f : 1f;
-        // Si tienes un borde/outline propio, actívalo aquí.
-        // Ej.: if (outline) outline.SetActive(Selected);
+        if (!overlayImg) return;
+        overlayImg.color = Selected ? new Color(1f, 1f, 0f, 0.18f) : new Color(0f, 0f, 0f, 0f);
     }
 }

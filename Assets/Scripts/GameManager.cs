@@ -351,8 +351,8 @@ public class GameManager : MonoBehaviour
         cardManager.ResetMulliganForActionPhase();
         if (cardManager.drawPile.Count > 0)
         {
+            mulliganPanel.SetActive(true);
             cardManager.BeginMulligan();
-            if (mulliganPanel) mulliganPanel.SetActive(true);
         }
         else
         {
@@ -370,7 +370,7 @@ public class GameManager : MonoBehaviour
 
     public void OnMulliganFinished()
     {
-        if (mulliganPanel) mulliganPanel.SetActive(false);
+        mulliganPanel.SetActive(false);
         BeginSpawningEnemies();
     }
 
