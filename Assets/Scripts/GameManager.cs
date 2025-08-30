@@ -397,7 +397,23 @@ public class GameManager : MonoBehaviour
         // 1 cartas aleatorias de tipo Trap o Buff
         var all = Resources.LoadAll<CardData>("Cards");
         var pool = new List<CardData>();
-        foreach (var cards in all) if (cards.cardType == CardType.Trap || cards.cardType == CardType.Buff) pool.Add(cards);
+        //Elimino las cartas de bufo y habilidad que ya tenga el player para no ofrecerlas
+        var ownedSpellNames = new HashSet<string>();
+        if (startingDeck != null)
+        {
+            foreach (var c in startingDeck)
+            {
+                if (c == null) continue;
+                if (c.cardType == CardType.Buff || c.cardType == CardType.Hability)
+                    ownedSpellNames.Add(c.cardName);
+            }
+        }
+
+        foreach (var c in all)
+        {
+            if ((c.cardType == CardType.Trap || c.cardType == CardType.Buff) && !ownedSpellNames.Contains(c.cardName))
+                pool.Add(c);
+        }   
         for (int i = 0; i < 2; i++)
         {
             var pick = pool[UnityEngine.Random.Range(0, pool.Count)];
