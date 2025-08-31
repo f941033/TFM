@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using DeckboundDungeon.GamePhase;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class MerchantUI : MonoBehaviour
 {
