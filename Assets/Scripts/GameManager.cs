@@ -9,6 +9,7 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    public CameraMovement cameraMovementInstance;
     private int enemiesDied = 0;
     public int initialEnemiesToKill = 3;
     public int enemiesToKillInCurrentWave;
@@ -113,6 +114,7 @@ public class GameManager : MonoBehaviour
         ChangePhase(GamePhase.Preparation);
         Time.timeScale = 1f;
         panelEndWave.SetActive(true);
+        cameraMovementInstance.EnableCameraControl(false);
         GenerateRewardCard();
     }
 
@@ -185,6 +187,7 @@ public class GameManager : MonoBehaviour
         messageText.gameObject.SetActive(false);
         cardManager.ClearPanelCard();
         panelEndWave.SetActive(false);
+        cameraMovementInstance.EnableCameraControl(true);
 
         //numberWave++;
         //textNumberWave.text = "Ronda: " + numberWave;
@@ -414,6 +417,7 @@ public class GameManager : MonoBehaviour
         soulsBar.SetActive(false);
         ChangePhase(GamePhase.Merchant);
         panelMerchant.SetActive(true);
+        cameraMovementInstance.EnableCameraControl(false);
         var shopList = new List<MerchantItem>();
 
         // 1 cartas aleatorias de tipo Trap o Buff

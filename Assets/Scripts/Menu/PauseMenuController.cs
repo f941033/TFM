@@ -9,6 +9,8 @@ using DeckboundDungeon.GamePhase;
 
 public class PauseMenuController : MonoBehaviour
 {
+    public CameraMovement cameraMovementInstance;
+
     [Header("UI Principal")]
     [Tooltip("Canvas completo del menú de pausa")]
     public GameObject pauseMenuUI;
@@ -40,6 +42,8 @@ public class PauseMenuController : MonoBehaviour
         // encontremos el gestor de cartas para leer el deck actual
         gameManager = FindFirstObjectByType<GameManager>();
         cardManager = FindFirstObjectByType<CardManager>();
+        cameraMovementInstance = FindFirstObjectByType<CameraMovement>();
+
         if (gameManager == null)
             Debug.LogError("[PauseMenuController] No encontré ningún GameManager en la escena");
 
@@ -70,6 +74,7 @@ public class PauseMenuController : MonoBehaviour
     {
         Time.timeScale = 0f;
         pauseMenuUI.SetActive(true);
+        cameraMovementInstance.EnableCameraControl(false);
         isPaused = true;
     }
 
@@ -77,6 +82,7 @@ public class PauseMenuController : MonoBehaviour
     {
         deckPanel.SetActive(false);
         pauseMenuUI.SetActive(false);
+        cameraMovementInstance.EnableCameraControl(true);
         Time.timeScale = 1f;
         isPaused = false;
     }
@@ -93,12 +99,17 @@ public class PauseMenuController : MonoBehaviour
         deckPanel.SetActive(show);
 
         if (show)
-            PopulateDeckGrid();
+        {
+            cameraMovementInstance.EnableCameraControl(false);
+            PopulateDeckGrid();            
+        }
+           
     }
 
     private void BackMenu()
     {
         deckPanel.SetActive(false);
+        cameraMovementInstance.EnableCameraControl(true);
     }
     private void PopulateDeckGrid()
     {
@@ -140,6 +151,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void ShowCardsDeck()
     {
+        cameraMovementInstance.EnableCameraControl(false);
         titleText.text = "DECK";
         gameManager.ChangePhase(GamePhase.Deck);
         deckPanel.SetActive(true);
@@ -148,6 +160,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void ShowCardsDiscard()
     {
+        cameraMovementInstance.EnableCameraControl(false);
         titleText.text = "DISCARD";
         gameManager.ChangePhase(GamePhase.Deck);
         deckPanel.SetActive(true);
@@ -158,6 +171,7 @@ public class PauseMenuController : MonoBehaviour
     {
         //FindFirstObjectByType<CardDetailUI>().Hide();
         deckPanel.SetActive(false);
+        cameraMovementInstance.EnableCameraControl(true);
         gameManager.RestorePreviousPhase();
     }
 }

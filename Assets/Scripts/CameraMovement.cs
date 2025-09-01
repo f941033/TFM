@@ -38,6 +38,7 @@ public class CameraMovement : MonoBehaviour
         // Asegurar que la cámara inicie en el centro del mapa donde está el player
         Vector3 playerPosition = FindAnyObjectByType<PlayerController>().transform.position;
         transform.position = new Vector3(playerPosition.x, playerPosition.y, cameraZOffset);
+        EnableCameraControl(false);
     }
 
     void Update()
@@ -151,5 +152,10 @@ public class CameraMovement : MonoBehaviour
         Vector3 center = new Vector3((xMin + xMax) / 2f, (yMin + yMax) / 2f, transform.position.z);
         Vector3 size = new Vector3(xMax - xMin, yMax - yMin, 0.1f);
         Gizmos.DrawWireCube(center, size);
+    }
+
+    public void EnableCameraControl(bool enabled)
+    {
+        this.enabled = enabled;
     }
 }
