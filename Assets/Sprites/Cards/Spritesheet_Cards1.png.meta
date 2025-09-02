@@ -712,7 +712,7 @@ TextureImporter:
         width: 181
         height: 213
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -721,6 +721,94 @@ TextureImporter:
       bones: []
       spriteID: bfa7730af8c23fd49a836e0461804344
       internalID: 381451539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Egg_Icon
+      rect:
+        serializedVersion: 2
+        x: 3726
+        y: 1465
+        width: 174
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cc91dfdbe62d4f4ea6b55e900fb11e7
+      internalID: 838431754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atk_Icon
+      rect:
+        serializedVersion: 2
+        x: 3998
+        y: 1941
+        width: 107
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8a6cb2d650109e40a46f71d9d129595
+      internalID: 959625369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Health_Icon
+      rect:
+        serializedVersion: 2
+        x: 3994
+        y: 1822
+        width: 116
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc37021aa6d661444a0732405708f319
+      internalID: 1792592722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Range_Icon
+      rect:
+        serializedVersion: 2
+        x: 4004
+        y: 1697
+        width: 96
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1572612b3916e0148ba20bb9220e546f
+      internalID: -2046876268
       vertices: []
       indices: 
       edges: []
@@ -739,6 +827,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      Atk_Icon: 959625369
       CardBase_Brown: 6817816981098416819
       CardBase_Gray: -1415871108
       CardBase_Purple: 2551219397173627497
@@ -750,8 +839,11 @@ TextureImporter:
       CardType_Purple: 1311849550883256842
       DamageArea_Icon: -833072271446053697
       Damage_Icon: -7101805252363399705
+      Egg_Icon: 838431754
+      Health_Icon: 1792592722
       LifeLess_Icon: 6969338320338048960
       LifePlus_Icon: 6653219015117297657
+      Range_Icon: -2046876268
       Souls_Icon: 2286080486149089054
       Souls_IconAlone: 381451539
       TextBlock_Brown: 4934752065089030942

@@ -105,10 +105,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1028
+        width: 1020
         height: 1513
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -127,10 +127,10 @@ TextureImporter:
         serializedVersion: 2
         x: 1028
         y: 0
-        width: 1028
+        width: 1020
         height: 1513
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -147,9 +147,31 @@ TextureImporter:
       name: CardsSpriteBG_Brown
       rect:
         serializedVersion: 2
-        x: 2056
+        x: 2037
         y: 0
-        width: 1028
+        width: 1020
+        height: 1513
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ff99fc9a35d2c14f8b5b6eb65160126
+      internalID: -1801064577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsSpriteBG_Red
+      rect:
+        serializedVersion: 2
+        x: 3053
+        y: 0
+        width: 1020
         height: 1513
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -159,8 +181,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ff99fc9a35d2c14f8b5b6eb65160126
-      internalID: -1801064577
+      spriteID: 34b249a33612f8a4abd6259d8da5d4fc
+      internalID: -952885906
       vertices: []
       indices: 
       edges: []
@@ -182,6 +204,7 @@ TextureImporter:
       CardsSpriteBG_Brown: -1801064577
       CardsSpriteBG_Gray: 1842726819
       CardsSpriteBG_Purple: -450073874
+      CardsSpriteBG_Red: -952885906
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
