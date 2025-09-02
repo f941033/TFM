@@ -341,7 +341,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             //transform.localScale = Vector3.one;
             transform.localScale = originalScale;
             //rectTransform.anchoredPosition = originalAnchoredPosition;
-            rectTransform.position = GetComponent<CardHoverInHand>().hoverStartPosition;
+            rectTransform.position = GetComponent<CardHoverInHand>().basePosition;
         }
         else
         {
@@ -368,7 +368,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         transform.SetParent(originalTransform, true);
         transform.SetSiblingIndex(cardIndex);
         //rectTransform.anchoredPosition = originalAnchoredPosition;
-        rectTransform.position = GetComponent<CardHoverInHand>().hoverStartPosition;
+        rectTransform.position = GetComponent<CardHoverInHand>().basePosition;
         //transform.localScale = Vector3.one;
         transform.localScale = originalScale;
 

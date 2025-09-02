@@ -17,8 +17,8 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     // Hover en escala y animación
     private RectTransform rectTransform;
     private Vector3 originalScale;
-    public Vector3 hoverStartPosition;    // Guarda posición al entrar
-    private Vector3 targetHoverPosition;   // Posición a la que sube
+    public Vector3 basePosition; // NUEVA: Posición base fija que nunca cambia
+    private Vector3 targetHoverPosition; // Posición a la que sube
     private float selecScale = 1.25f;
     private float hoverYOffset = 75f;
     [SerializeField] private float animationDuration = 0.2f;
@@ -27,6 +27,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private Coroutine currentAnimation;
     private bool isHovering = false;
+    private bool isInitialized = false; // NUEVA: Para evitar problemas de inicialización
 
     void Awake()
     {
@@ -39,8 +40,33 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         originalScale = rectTransform.localScale;
     }
 
+    void Start()
+    {
+        // NUEVO: Guardar la posición base al inicio, cuando ya está posicionada correctamente
+        StartCoroutine(InitializeBasePosition());
+    }
+
+    private IEnumerator InitializeBasePosition()
+    {
+        // Esperar un frame para que el layout esté completamente calculado
+        yield return null;
+        basePosition = rectTransform.position;
+        isInitialized = true;
+    }
+
+    // NUEVO: Método público para actualizar la posición base cuando sea necesario
+    public void UpdateBasePosition()
+    {
+        if (!isHovering && isInitialized)
+        {
+            basePosition = rectTransform.position;
+        }
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!isInitialized) return; // Evitar problemas antes de la inicialización
+
         if (GameManager.CurrentPhase != GamePhase.Preparation &&
             GameManager.CurrentPhase != GamePhase.Action)
         {
@@ -51,18 +77,21 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if (isHovering) return;
         isHovering = true;
 
-        // Guardar datos antes de animar
-        hoverStartPosition = rectTransform.position;
-        targetHoverPosition = hoverStartPosition + Vector3.up * hoverYOffset;
+        // CAMBIO CLAVE: Usar siempre basePosition en lugar de la posición actual
+        targetHoverPosition = basePosition + Vector3.up * hoverYOffset;
         indiceOriginal = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
 
         if (currentAnimation != null) StopCoroutine(currentAnimation);
-        currentAnimation = StartCoroutine(Animate(hoverStartPosition, targetHoverPosition, originalScale, originalScale * selecScale));
+
+        // Animar desde la posición actual (donde esté) hacia la posición hover
+        currentAnimation = StartCoroutine(Animate(rectTransform.position, targetHoverPosition, rectTransform.localScale, originalScale * selecScale));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (!isInitialized) return;
+
         if (GameManager.CurrentPhase != GamePhase.Preparation &&
             GameManager.CurrentPhase != GamePhase.Action)
         {
@@ -77,7 +106,9 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         transform.SetSiblingIndex(indiceOriginal);
 
         if (currentAnimation != null) StopCoroutine(currentAnimation);
-        currentAnimation = StartCoroutine(Animate(rectTransform.position, hoverStartPosition, rectTransform.localScale, originalScale));
+
+        // CAMBIO CLAVE: Volver siempre a basePosition, no a una posición variable
+        currentAnimation = StartCoroutine(Animate(rectTransform.position, basePosition, rectTransform.localScale, originalScale));
     }
 
     private IEnumerator Animate(Vector3 fromPos, Vector3 toPos, Vector3 fromScale, Vector3 toScale)
@@ -91,8 +122,38 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
             rectTransform.localScale = Vector3.Lerp(fromScale, toScale, t);
             yield return null;
         }
+
+        // Asegurar valores finales exactos
         rectTransform.position = toPos;
         rectTransform.localScale = toScale;
         currentAnimation = null;
+    }
+
+    // NUEVO: Método para forzar reseteo a posición base (útil para debugging o casos especiales)
+    [ContextMenu("Reset to Base Position")]
+    public void ResetToBasePosition()
+    {
+        if (currentAnimation != null)
+        {
+            StopCoroutine(currentAnimation);
+            currentAnimation = null;
+        }
+
+        isHovering = false;
+        rectTransform.position = basePosition;
+        rectTransform.localScale = originalScale;
+        transform.SetSiblingIndex(indiceOriginal);
+    }
+
+    // NUEVO: Método para visualizar la posición base en el editor (debugging)
+    void OnDrawGizmosSelected()
+    {
+        if (isInitialized)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(basePosition, 0.1f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(basePosition + Vector3.up * hoverYOffset, 0.1f);
+        }
     }
 }
