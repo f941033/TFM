@@ -216,7 +216,7 @@ public class SpawnEnemies : MonoBehaviour
         {
             //Debug.Log("Spawning HEROE");
             Instantiate(heroePrefab, heroePoint.position, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(0.75f, 1.15f));
+            yield return new WaitForSeconds(Random.Range(0.5f, 1f));
         }
 
         foreach (var puerta in enemigosPorPuerta.Keys)
@@ -256,7 +256,7 @@ public class SpawnEnemies : MonoBehaviour
             // Instanciar enemigos en orden mezclado
             foreach (string tipoEnemigo in tiposEnemigos)
             {
-                yield return new WaitForSeconds(Random.Range(0.75f, 1.15f));
+                yield return new WaitForSeconds(Random.Range(0.5f, 1f));
 
                 Vector2 offset = new Vector2(Random.Range(-1.25f, 1.25f), Random.Range(-1.25f, 1.25f));
                 Vector2 spawnPosition = new Vector2(puerta.transform.position.x, puerta.transform.position.y) + offset;
