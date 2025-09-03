@@ -61,6 +61,9 @@ public class GameManager : MonoBehaviour
     public int closedRooms;
     [SerializeField] private GameObject mulliganPanel;
     private bool spawnStarted = false;
+    private bool firstTimeBackgroundSound = true;
+    private AudioSource audioSource;
+    public AudioClip clipBackgroundSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -73,6 +76,7 @@ public class GameManager : MonoBehaviour
         //enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
         merchant = FindAnyObjectByType<MerchantUI>();
         closedRooms = FindObjectsByType<SalaController>(FindObjectsSortMode.None).Length - 1;
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -258,6 +262,11 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
+        if (firstTimeBackgroundSound)
+        {
+            firstTimeBackgroundSound = false;
+            FindAnyObjectByType<AudioManager>().PlayBackgroundSound();
+        }
         cardManager.currentHandSize = 3;
         currentPrepHand = 1;
         UpdatePrepHandUI();
