@@ -32,6 +32,11 @@ public class HoverScaleSimple : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        audioSource.PlayOneShot(clipPressed);
+        if(gameObject.name == "PlayButton")
+        {
+            AudioClip clip = Resources.Load<AudioClip>("Audio/risa malefica");
+            audioSource.PlayOneShot(clip);
+        }else
+            audioSource.PlayOneShot(clipPressed);
     }
 }
