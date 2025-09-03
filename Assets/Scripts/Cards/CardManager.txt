@@ -20,6 +20,7 @@ public class CardManager : MonoBehaviour
     float cardSpacing = -150f;
     float verticalSpacing = 100f;
 
+
     [Header("Variables del mazo")]
     public List<CardData> drawPile = new List<CardData>();
     public List<CardData> discardPile = new List<CardData>();
@@ -28,12 +29,14 @@ public class CardManager : MonoBehaviour
     public byte currentHandSize;
     public bool inMulligan = false;
     public bool mulliganUsed = false;
-    [SerializeField] private bool mulliganToDiscard = true;
+    [SerializeField] private bool mulliganToDiscard = true; 
     public int mulliganSelectedCount = 0;
     public int MulliganSelectedCount => mulliganSelectedCount;
     public int MulliganMaxSelectable => drawPile.Count;
     public CardData lastCardUsed = null;
 
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = FindFirstObjectByType<PlayerController>();
@@ -49,6 +52,9 @@ public class CardManager : MonoBehaviour
         cardsInHand.Clear();
     }
 
+
+
+    // Update is called once per frame
     void Update()
     {
 
@@ -73,6 +79,8 @@ public class CardManager : MonoBehaviour
 
         var cardToDraw = drawPile[0];
         drawPile.RemoveAt(0);
+
+
         gameManager.textNumberOfCardsDeck.text = drawPile.Count.ToString();
 
         // ------------- INSTANCIAR LA CARTA ------------- //
@@ -130,33 +138,8 @@ public class CardManager : MonoBehaviour
 
             //set card position
             cardsInHand[i].transform.localPosition = new Vector3(horizontalOffset, verticalOffset, 0f);
+
         }
-
-        // CRÍTICO: Después de recolocar, actualizar las posiciones base
-        StartCoroutine(UpdateCardsBasePositionsAfterLayout());
-    }
-
-    // NUEVO: Actualizar posiciones base después de recolocación
-    private IEnumerator UpdateCardsBasePositionsAfterLayout()
-    {
-        // Esperar 2 frames para que el layout se aplique completamente
-        yield return null;
-        yield return null;
-
-        // Actualizar todas las posiciones base de las cartas en mano
-        foreach (GameObject cardObj in cardsInHand)
-        {
-            if (cardObj != null)
-            {
-                CardHoverInHand hoverComponent = cardObj.GetComponent<CardHoverInHand>();
-                if (hoverComponent != null)
-                {
-                    hoverComponent.ForceUpdateBasePosition();
-                }
-            }
-        }
-
-        Debug.Log($"Updated base positions for {cardsInHand.Count} cards after layout update");
     }
 
     public void DrawFullHand()
@@ -174,8 +157,9 @@ public class CardManager : MonoBehaviour
             cardsInHand.Remove(card);
             discardPile.Add(cardData);
             Destroy(card);
-            UpdateHandVisuals(); // Esto ya incluye la actualización de posiciones base
+            UpdateHandVisuals();
         }
+
     }
 
     public void Shuffle<T>(List<T> list)
@@ -216,7 +200,7 @@ public class CardManager : MonoBehaviour
             }
 
             cardsInHand.Add(cardObj);
-            UpdateHandVisuals(); // Esto ya incluye la actualización de posiciones base
+            UpdateHandVisuals();
             count--;
         }
     }
@@ -250,7 +234,7 @@ public class CardManager : MonoBehaviour
             }
 
             cardsInHand.Add(cardObj);
-            UpdateHandVisuals(); // Esto ya incluye la actualización de posiciones base
+            UpdateHandVisuals();
         }
     }
 
@@ -275,7 +259,7 @@ public class CardManager : MonoBehaviour
         if (discardPile.Count > 0)
             gameManager.ActivateDiscardPileImage();
     }
-
+    
     public void ResetMulliganForActionPhase()
     {
         inMulligan = false;
@@ -313,7 +297,7 @@ public class CardManager : MonoBehaviour
                 overlay.transform.SetAsLastSibling();
 
                 var img = overlay.GetComponent<Image>();
-                img.color = new Color(0, 0, 0, 0);
+                img.color = new Color(0, 0, 0, 0); 
                 img.raycastTarget = true;
 
                 overlay.AddComponent<MulliganSelectable>();
@@ -334,6 +318,7 @@ public class CardManager : MonoBehaviour
 
         inMulligan = true;
         mulliganSelectedCount = 0;
+
         Debug.Log("[Mulligan] Comienza selección. drawPile=" + drawPile.Count);
         FindFirstObjectByType<GameManager>().ShowMessage("Selecciona cartas y confirma.", 2);
     }
@@ -388,7 +373,7 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < n; i++)
             DrawCard();
 
-        UpdateHandVisuals(); // Esto ya incluye la actualización de posiciones base
+        UpdateHandVisuals();
 
         // 3) Salir de mulligan
         mulliganUsed = true;

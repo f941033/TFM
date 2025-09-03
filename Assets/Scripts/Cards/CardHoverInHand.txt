@@ -17,7 +17,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     // Hover en escala y animación
     private RectTransform rectTransform;
     private Vector3 originalScale;
-    public Vector3 basePosition; // Posición base fija que se actualiza correctamente
+    public Vector3 basePosition; // NUEVA: Posición base fija que nunca cambia
     private Vector3 targetHoverPosition; // Posición a la que sube
     private float selecScale = 1.25f;
     private float hoverYOffset = 75f;
@@ -27,7 +27,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private Coroutine currentAnimation;
     private bool isHovering = false;
-    private bool isInitialized = false;
+    private bool isInitialized = false; // NUEVA: Para evitar problemas de inicialización
 
     void Awake()
     {
@@ -42,7 +42,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     void Start()
     {
-        // Guardar la posición base al inicio, cuando ya está posicionada correctamente
+        // NUEVO: Guardar la posición base al inicio, cuando ya está posicionada correctamente
         StartCoroutine(InitializeBasePosition());
     }
 
@@ -52,28 +52,14 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         yield return null;
         basePosition = rectTransform.position;
         isInitialized = true;
-        Debug.Log($"Card {gameObject.name} initialized with base position: {basePosition}");
     }
 
-    // Método público para actualizar la posición base cuando sea necesario
+    // NUEVO: Método público para actualizar la posición base cuando sea necesario
     public void UpdateBasePosition()
     {
         if (!isHovering && isInitialized)
         {
-            Vector3 oldBase = basePosition;
             basePosition = rectTransform.position;
-            Debug.Log($"Card {gameObject.name} base position updated from {oldBase} to {basePosition}");
-        }
-    }
-
-    // Método para forzar actualización de posición base (llamado desde CardManager)
-    public void ForceUpdateBasePosition()
-    {
-        if (isInitialized)
-        {
-            Vector3 oldBase = basePosition;
-            basePosition = rectTransform.position;
-            Debug.Log($"Card {gameObject.name} base position FORCE updated from {oldBase} to {basePosition}");
         }
     }
 
@@ -90,16 +76,25 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         if (isHovering) return;
 
+        // CRÍTICO: Verificar si la carta ha sido recolocada antes del hover
+        float distanceFromBase = Vector3.Distance(rectTransform.position, basePosition);
+        if (distanceFromBase > 5f) // Si está muy lejos de donde debería estar
+        {
+            Debug.Log($"Card {gameObject.name} repositioned detected. Distance: {distanceFromBase}");
+            basePosition = rectTransform.position; // Actualizar inmediatamente
+        }
+
+
         isHovering = true;
 
-        // SIEMPRE usar basePosition como referencia (no verificar distancia aquí para evitar acumulación)
+        // CAMBIO CLAVE: Usar siempre basePosition en lugar de la posición actual
         targetHoverPosition = basePosition + Vector3.up * hoverYOffset;
         indiceOriginal = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
 
         if (currentAnimation != null) StopCoroutine(currentAnimation);
 
-        // Animar desde la posición actual hacia la posición hover
+        // Animar desde la posición actual (donde esté) hacia la posición hover
         currentAnimation = StartCoroutine(Animate(rectTransform.position, targetHoverPosition, rectTransform.localScale, originalScale * selecScale));
     }
 
@@ -122,7 +117,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         if (currentAnimation != null) StopCoroutine(currentAnimation);
 
-        // SIEMPRE volver a basePosition
+        // CAMBIO CLAVE: Volver siempre a basePosition, no a una posición variable
         currentAnimation = StartCoroutine(Animate(rectTransform.position, basePosition, rectTransform.localScale, originalScale));
     }
 
@@ -144,6 +139,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         currentAnimation = null;
     }
 
+    // NUEVO: Método para forzar reseteo a posición base (útil para debugging o casos especiales)
     [ContextMenu("Reset to Base Position")]
     public void ResetToBasePosition()
     {
@@ -159,6 +155,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         transform.SetSiblingIndex(indiceOriginal);
     }
 
+    // NUEVO: Método para visualizar la posición base en el editor (debugging)
     void OnDrawGizmosSelected()
     {
         if (isInitialized)
