@@ -367,7 +367,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SoulsIncr_Card
+      name: Recycle_Card
       rect:
         serializedVersion: 2
         x: 2478
@@ -529,7 +529,7 @@ TextureImporter:
         width: 826
         height: 708
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -565,9 +565,9 @@ TextureImporter:
       Electricity_Card: -486609375
       Fireball_Card: 421503429
       Pit_Card: 877911320
+      Recycle_Card: -1633327677
       Saws_Card: -1285000583
       Shock_Card: -235896832
-      SoulsIncr_Card: -1633327677
       SpeedIncr_Card: 1662136614
       Spikes_Card: -857629342
       Turret_Card: -763708711
