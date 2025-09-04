@@ -577,7 +577,7 @@ TextureImporter:
         serializedVersion: 2
         x: 2972
         y: 1190
-        width: 756
+        width: 703
         height: 394
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -729,12 +729,12 @@ TextureImporter:
       name: Egg_Icon
       rect:
         serializedVersion: 2
-        x: 3726
-        y: 1465
-        width: 174
-        height: 225
+        x: 3720
+        y: 1469
+        width: 187
+        height: 238
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -756,7 +756,7 @@ TextureImporter:
         width: 107
         height: 134
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -778,7 +778,7 @@ TextureImporter:
         width: 116
         height: 95
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -800,7 +800,7 @@ TextureImporter:
         width: 96
         height: 97
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
