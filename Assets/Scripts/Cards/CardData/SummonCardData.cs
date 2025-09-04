@@ -6,6 +6,9 @@ public class SummonCardData : CardData
     public GameObject minionPrefab;
     public int numberOfMinions;
     public float cost;
+    public int minionDamage;
+    public int minionHealth;
+    public int minionRange;
 
     public override void Play(PlayerController player, Vector3 worldPosition)
     {

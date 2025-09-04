@@ -21,3 +21,6 @@ MonoBehaviour:
   minionPrefab: {fileID: 3935197877417076588, guid: d0e61f34527c8924c8f28b9077bd4d2b, type: 3}
   numberOfMinions: 2
   cost: 4
+  minionDamage: 15
+  minionHealth: 30
+  minionRange: 1

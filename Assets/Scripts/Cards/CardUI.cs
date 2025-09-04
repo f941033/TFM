@@ -24,6 +24,13 @@ public class CardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textType;
     [SerializeField] private Image usesImage;
     [SerializeField] private TextMeshProUGUI textUses;
+    [SerializeField] private Sprite minionBackground;
+    [SerializeField] private GameObject minionDescription;
+    [SerializeField] private TextMeshProUGUI minionDamage;
+    [SerializeField] private TextMeshProUGUI minionHealth;
+    [SerializeField] private TextMeshProUGUI minionRange;
+    [SerializeField] private Sprite minionEgg;
+ 
 
     public void SetCardUI(CardData cardData)
     {
@@ -60,42 +67,47 @@ public class CardUI : MonoBehaviour
                 textUses.text = trap.uses.ToString();
             }
         }
-            else if (cardData is DeckEffectCardData deck)
+        else if (cardData is DeckEffectCardData deck)
+        {
+            backgroundImage.sprite = deckBackground;
+            textCost.text = deck.cost.ToString();
+            damageImage.gameObject.SetActive(false);
+            textDamage.gameObject.SetActive(false);
+            textType.text = "BOUND";
+        }
+        else if (cardData is SummonCardData summon)
+        {
+            backgroundImage.sprite = minionBackground;
+            textCost.text = summon.cost.ToString();
+            damageImage.sprite = minionEgg;
+            minionDescription.SetActive(true);
+            textDamage.text = "x" + summon.numberOfMinions;
+            minionHealth.text = summon.minionHealth.ToString();
+            minionDamage.text = summon.minionDamage.ToString();
+            minionRange.text = summon.minionRange.ToString();
+            textDescription.alignment = TextAlignmentOptions.Top;
+            textType.text = "SUMMON";
+        }
+        else
+        {
+            if (cardData is HabilityCardData hab)
             {
-                backgroundImage.sprite = deckBackground;
-                textCost.text = deck.cost.ToString();
-                damageImage.gameObject.SetActive(false);
-                textDamage.gameObject.SetActive(false);
-                textType.text = "BOUND";
-            }
-            else if (cardData is SummonCardData summon)
-            {
-                textCost.text = summon.cost.ToString();
-                backgroundImage.sprite = trapBackground;
-                damageImage.gameObject.SetActive(false);
-                textDamage.gameObject.SetActive(false);
-                textType.text = "SUMMON";
-            }
-            else
-            {
-                if (cardData is HabilityCardData hab)
+                if (!hab.IsDamage)
                 {
-                    if (!hab.IsDamage)
-                    {
-                        damageImage.gameObject.SetActive(false);
-                        textDamage.gameObject.SetActive(false);
-                    }
-                    if (hab.IsAreaDamage)
-                        damageImage.sprite = areaDamageImage;
+                    damageImage.gameObject.SetActive(false);
+                    textDamage.gameObject.SetActive(false);
                 }
-                textCost.gameObject.SetActive(false);
-                backgroundImage.sprite = buffBackground;
-                damageImage.gameObject.SetActive(false);
-                textDamage.gameObject.SetActive(false);
-                costImage.sprite = cooldownSprite;
-                cooldownFillImage.gameObject.SetActive(true);
-                textType.text = "SPELL";
+                if (hab.IsAreaDamage)
+                    damageImage.sprite = areaDamageImage;
             }
+            textCost.gameObject.SetActive(false);
+            backgroundImage.sprite = buffBackground;
+            damageImage.gameObject.SetActive(false);
+            textDamage.gameObject.SetActive(false);
+            costImage.sprite = cooldownSprite;
+            cooldownFillImage.gameObject.SetActive(true);
+            textType.text = "SPELL";
+        }
     }
 
     void Awake()
