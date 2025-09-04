@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     Transform currentTarget;            // objetivo actual (Player o Minion)
     MinionController2 minionTarget;     // referencia fuerte si atacando minion
     bool attackingMinion = false;
+    private object lastDamageSource;
 
     [Header("Configuración Genérica")]
     [SerializeField] private float health;
@@ -30,6 +31,7 @@ public class EnemyController : MonoBehaviour
     private AudioSource audioSource;
     public Image healthBarUI;
     private SpriteRenderer spriteRenderer;
+    private bool dead = false;
 
     [Header("Audio")]
     public AudioClip attackSound;
@@ -184,7 +186,7 @@ public class EnemyController : MonoBehaviour
     {
         if (currentTarget == null) return;
 
-        if(attackSound != null) audioSource.PlayOneShot(attackSound);
+        if (attackSound != null) audioSource.PlayOneShot(attackSound);
         if (type == EnemyType.Trampero)
         {
             particlesTrampero.Play();
@@ -329,7 +331,7 @@ public class EnemyController : MonoBehaviour
             // Si llega aquí, el path sigue bloqueado → atacar muro
             var wallComponent = wallTarget.GetComponent<DestructibleWall>();
             if (wallComponent == null) break;
-            if(attackSound != null) audioSource.PlayOneShot(attackSound);
+            if (attackSound != null) audioSource.PlayOneShot(attackSound);
             wallComponent.TakeDamage(damageWall);
 
             yield return new WaitForSeconds(1f / wallAttackRate);
@@ -352,7 +354,7 @@ public class EnemyController : MonoBehaviour
 
         if (col.CompareTag("DeathZone"))
         {
-            Die();
+            Die(lethalSource : null);
         }
     }
 
@@ -431,7 +433,7 @@ public class EnemyController : MonoBehaviour
         minionTarget = null;
         trapTarget = null;
         wallTarget = null;
-        if(particlesTrampero != null) { particlesTrampero.Stop(); }
+        if (particlesTrampero != null) { particlesTrampero.Stop(); }
 
         // Resetear animación y movimiento
         animator.SetBool("attacking", false);
@@ -444,17 +446,31 @@ public class EnemyController : MonoBehaviour
     {
         currentHealth -= damage;
         healthBarUI.fillAmount = currentHealth / health;
-        if (currentHealth <= 0) Die();
+        if (currentHealth <= 0) Die(lethalSource : null);
     }
 
-    private void Die()
+    private void Die(object lethalSource)
     {
+        if (dead) return;
+        dead = true;
         // Limpiar corrutinas antes de morir
         if (trapAttackCoroutine != null)
             StopCoroutine(trapAttackCoroutine);
         if (wallAttackCoroutine != null)
             StopCoroutine(wallAttackCoroutine);
 
+        if (lethalSource != null)
+        {
+            if (lethalSource is TeslaTowerController singleTesla)
+            {
+                singleTesla.CreditKill(this);
+            }
+            else if (lethalSource is TeslaConnectionSource conn)
+            {
+                conn.A?.CreditKill(this);
+                conn.B?.CreditKill(this);
+            }
+        }
         PlayerController player = playerTarget.GetComponent<PlayerController>();
         player?.AddGold(gold);
         gold = 0;
@@ -535,11 +551,18 @@ public class EnemyController : MonoBehaviour
 
     public void ActivateParticlesAttack()
     {
-        if(particlesAttack != null)
+        if (particlesAttack != null)
         {
             particlesAttack.Play();
             particlesAttack.GetComponent<AudioSource>().Play();
         }
-            
+
+    }
+
+    public void ReceiveDamageFrom(float damage, object source)
+    {
+        if (dead) return;
+        health -= damage;
+        if (health <= 0f) Die(lethalSource: source);
     }
 }

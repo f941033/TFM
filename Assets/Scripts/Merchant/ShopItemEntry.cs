@@ -44,23 +44,31 @@ public class ShopItemEntry : MonoBehaviour
         }
         else
         {
-            nameText.text = item.itemName; 
+            nameText.text = item.itemName;
             var go = Instantiate(merchantItemViewPrefab, slot, false);
             var view = go.GetComponent<MerchantItemView>();
-
+            view.icon.preserveAspect = true;
             if (view)
             {
-                if (view.icon)     view.icon.sprite = item.icon;
+                if (view.icon) view.icon.sprite = item.icon;
                 if (view.nameText) view.nameText.gameObject.SetActive(false);
                 if (view.costText) view.costText.gameObject.SetActive(false);
                 if (view.buyButton) view.buyButton.gameObject.SetActive(false);
             }
         }
 
+        var gm = FindFirstObjectByType<GameManager>();
+
+        bool isKey = item is KeyItem || (item.itemName != null && item.itemName.Contains("Llave"));
+
+        bool blockKey = isKey && gm != null && gm.closedRooms == 0;
+        bool blockSouls = item is SoulsItem && player.soulsBuyPerShop >= 3;
+        bool canBuy = !blockKey && !blockSouls;
+
         buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(OnContainerBuyClicked);
 
-        buyButton.interactable = !(data is SoulsItem) || player.soulsBuyPerShop < 3;
+        buyButton.interactable = canBuy;
     }
 
     private int GetDisplayCost(MerchantItem item)

@@ -15,6 +15,7 @@ public class MerchantItemView : MonoBehaviour
         PlayerController player = FindFirstObjectByType<PlayerController>();
         data = item;
         icon.sprite = item.icon;
+        icon.preserveAspect = true;
         nameText.text = item.itemName;
 
         if (item is SoulsItem soulsItem)

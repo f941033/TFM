@@ -155,8 +155,6 @@ public class CardManager : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log($"Updated base positions for {cardsInHand.Count} cards after layout update");
     }
 
     public void DrawFullHand()
