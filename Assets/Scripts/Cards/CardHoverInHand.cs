@@ -6,7 +6,7 @@ using System.Collections;
 
 public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [Header("Configuración")]
+    [Header("Configuraciï¿½n")]
     public Color hoverColor = new Color(1f, 0.9f, 0.6f, 1f);
     private Color originalColor;
 
@@ -14,11 +14,11 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public Image cardImage;
     private CardSelector cardSelector;
 
-    // Hover en escala y animación
+    // Hover en escala y animaciï¿½n
     private RectTransform rectTransform;
     private Vector3 originalScale;
-    public Vector3 basePosition; // Posición base fija que se actualiza correctamente
-    private Vector3 targetHoverPosition; // Posición a la que sube
+    public Vector3 basePosition; // Posiciï¿½n base fija que se actualiza correctamente
+    private Vector3 targetHoverPosition; // Posiciï¿½n a la que sube
     private float selecScale = 1.25f;
     private float hoverYOffset = 100f;
     [SerializeField] private float animationDuration = 0.2f;
@@ -42,44 +42,41 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     void Start()
     {
-        // Guardar la posición base al inicio, cuando ya está posicionada correctamente
+        // Guardar la posiciï¿½n base al inicio, cuando ya estï¿½ posicionada correctamente
         StartCoroutine(InitializeBasePosition());
     }
 
     private IEnumerator InitializeBasePosition()
     {
-        // Esperar un frame para que el layout esté completamente calculado
+        // Esperar un frame para que el layout estï¿½ completamente calculado
         yield return null;
         basePosition = rectTransform.position;
         isInitialized = true;
-        Debug.Log($"Card {gameObject.name} initialized with base position: {basePosition}");
     }
 
-    // Método público para actualizar la posición base cuando sea necesario
+    // Mï¿½todo pï¿½blico para actualizar la posiciï¿½n base cuando sea necesario
     public void UpdateBasePosition()
     {
         if (!isHovering && isInitialized)
         {
             Vector3 oldBase = basePosition;
             basePosition = rectTransform.position;
-            Debug.Log($"Card {gameObject.name} base position updated from {oldBase} to {basePosition}");
         }
     }
 
-    // Método para forzar actualización de posición base (llamado desde CardManager)
+    // Mï¿½todo para forzar actualizaciï¿½n de posiciï¿½n base (llamado desde CardManager)
     public void ForceUpdateBasePosition()
     {
         if (isInitialized)
         {
             Vector3 oldBase = basePosition;
             basePosition = rectTransform.position;
-            Debug.Log($"Card {gameObject.name} base position FORCE updated from {oldBase} to {basePosition}");
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!isInitialized) return; // Evitar problemas antes de la inicialización
+        if (!isInitialized) return; // Evitar problemas antes de la inicializaciï¿½n
 
         if (GameManager.CurrentPhase != GamePhase.Preparation &&
             GameManager.CurrentPhase != GamePhase.Action)
@@ -92,14 +89,14 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         isHovering = true;
 
-        // SIEMPRE usar basePosition como referencia (no verificar distancia aquí para evitar acumulación)
+        // SIEMPRE usar basePosition como referencia (no verificar distancia aquï¿½ para evitar acumulaciï¿½n)
         targetHoverPosition = basePosition + Vector3.up * hoverYOffset;
         indiceOriginal = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
 
         if (currentAnimation != null) StopCoroutine(currentAnimation);
 
-        // Animar desde la posición actual hacia la posición hover
+        // Animar desde la posiciï¿½n actual hacia la posiciï¿½n hover
         currentAnimation = StartCoroutine(Animate(rectTransform.position, targetHoverPosition, rectTransform.localScale, originalScale * selecScale));
     }
 

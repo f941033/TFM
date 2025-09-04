@@ -356,9 +356,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             else if (cardData is DeckEffectCardData deck)
                 player.SpendSouls(deck.cost);
 
-            Debug.Log("Ultima carta usada es :" + cardData.cardName);
             Deck.lastCardUsed = cardData;
-            Debug.Log("La variable de ultima carta usada es :" + Deck.lastCardUsed);
             gameManager.UpdateTextNumberOfCardsDiscard();
         }
     }

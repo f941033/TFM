@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TeslaTowerController : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class TeslaTowerController : MonoBehaviour
     [SerializeField] float connectionDamage      = 10f;   // daño por tic en el rayo
     [SerializeField] float connectionHitThickness= 0.25f; // grosor del “haz” para colisiones
 
+    [Header("Vidas (kills que puede realizar)")]
+    [SerializeField] int   maxKills = 20;
+    [SerializeField] private int remainingKills;
+    private bool isDeactivated = false;
+
     [Header("Render")]
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] Material  targetBeamMaterial;
@@ -37,6 +43,9 @@ public class TeslaTowerController : MonoBehaviour
     List<TeslaTowerController> connectedTowers = new();
     List<LineRenderer> connectionLines = new();
 
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI killsRemaining;
+
     void Awake()
     {
         // Si el prefab tiene TrapController con tu TrapCardData, toma su daño configurado
@@ -44,6 +53,9 @@ public class TeslaTowerController : MonoBehaviour
         if (trap != null && trap.cardData is TrapCardData td)
             areaDamage = td.damage;
 
+        remainingKills = maxKills;
+        if(killsRemaining != null)
+            killsRemaining.text = remainingKills.ToString();
         if (drawTargetBeam)
         {
             targetBeam = gameObject.AddComponent<LineRenderer>();
@@ -51,15 +63,16 @@ public class TeslaTowerController : MonoBehaviour
             targetBeam.positionCount = 2;
             targetBeam.material = targetBeamMaterial != null ? targetBeamMaterial : new Material(Shader.Find("Sprites/Default"));
             targetBeam.startWidth = 0.06f;
-            targetBeam.endWidth   = 0.06f;
+            targetBeam.endWidth = 0.06f;
             targetBeam.startColor = Color.cyan;
-            targetBeam.endColor   = Color.cyan;
+            targetBeam.endColor = Color.cyan;
             targetBeam.numCapVertices = 2;
         }
     }
 
     void Start()
     {
+        if (isDeactivated) return;
         StartCoroutine(EnemyDetectionRoutine());
         TryFindConnections();
         StartCoroutine(ReconnectRoutine());
@@ -67,10 +80,11 @@ public class TeslaTowerController : MonoBehaviour
 
     IEnumerator EnemyDetectionRoutine()
     {
-        while (true)
+        var w = new WaitForSeconds(checkInterval);
+        while (!isDeactivated)
         {
             UpdateEnemiesInRange();
-            yield return new WaitForSeconds(checkInterval);
+            yield return w;
         }
     }
 
@@ -101,6 +115,8 @@ public class TeslaTowerController : MonoBehaviour
 
     void Update()
     {
+        if (isDeactivated) return;
+
         if (currentTarget != null &&
             Vector2.Distance(transform.position, currentTarget.position) > detectionRadius)
             currentTarget = null;
@@ -111,11 +127,11 @@ public class TeslaTowerController : MonoBehaviour
             tickTimer = 0f;
 
             // Daño single-target
-            if (currentTarget != null)
+            if (currentTarget != null && remainingKills > 0)
                 DoTickDamageToTarget(currentTarget);
 
             // Daño en rayo de conexión (a todos los que pasen)
-            if (connectionDealsDamage)
+            if (connectionDealsDamage && remainingKills > 0)
             {
                 foreach (var other in connectedTowers)
                 {
@@ -135,15 +151,14 @@ public class TeslaTowerController : MonoBehaviour
         var enemy = target.GetComponentInParent<EnemyController>();
         if (enemy != null)
         {
-            enemy.ReceiveDamage(areaDamage);
-            if (debugLogs) Debug.Log($"[Tesla] Tick target {target.name} dmg:{areaDamage}", this);
+            enemy.ReceiveDamageFrom(areaDamage, this);
         }
     }
 
     void UpdateTargetBeam()
     {
         if (targetBeam == null) return;
-        if (currentTarget != null)
+        if (currentTarget != null && !isDeactivated)
         {
             targetBeam.enabled = true;
             targetBeam.SetPosition(0, transform.position);
@@ -157,7 +172,7 @@ public class TeslaTowerController : MonoBehaviour
     IEnumerator ReconnectRoutine()
     {
         var wait = new WaitForSeconds(0.5f);
-        while (true)
+        while (!isDeactivated)
         {
             if (connectedTowers.Count < maxConnections) TryFindConnections();
             yield return wait;
@@ -210,6 +225,38 @@ public class TeslaTowerController : MonoBehaviour
         return lr;
     }
 
+    public void CreditKill(EnemyController enemy)
+    {
+        Debug.Log("LLego a entrar al credit kill");
+        if (isDeactivated) return;
+        remainingKills--;
+        if(killsRemaining != null)
+            killsRemaining.text = remainingKills.ToString();
+
+        if (remainingKills <= 0)
+            DeactivateSelf();
+    }
+
+    void DeactivateSelf()
+    {
+        if (isDeactivated) return;
+        isDeactivated = true;
+
+        // Romper conexiones visuales y lógicas
+        foreach (var o in connectedTowers)
+            if (o != null) o.RemoveConnectionWith(this);
+        foreach (var lr in connectionLines)
+            if (lr != null) Destroy(lr.gameObject);
+        connectionLines.Clear();
+        connectedTowers.Clear();
+
+        if (targetBeam != null) targetBeam.enabled = false;
+        currentTarget = null;
+        enemiesInRange.Clear();
+
+        Destroy(gameObject);
+    }
+
     void UpdateConnectionLines()
     {
         for (int i = 0; i < connectedTowers.Count && i < connectionLines.Count; i++)
@@ -221,7 +268,6 @@ public class TeslaTowerController : MonoBehaviour
         }
     }
 
-    // --- Daño a lo que cruce el rayo de conexión (una sola vez por par) ---
     bool IsConnectionOwner(TeslaTowerController other)
         => GetInstanceID() < other.GetInstanceID(); // el de ID menor “posee” la conexión
 
@@ -248,7 +294,7 @@ public class TeslaTowerController : MonoBehaviour
             var enemy = h.collider.GetComponentInParent<EnemyController>();
             if (enemy != null)
             {
-                enemy.ReceiveDamage(connectionDamage);
+                enemy.ReceiveDamageFrom(connectionDamage, new TeslaConnectionSource(this, other));
                 count++;
             }
         }
@@ -256,11 +302,9 @@ public class TeslaTowerController : MonoBehaviour
         if (debugLogs)
         {
             Debug.DrawLine(a, b, Color.magenta, tickRate * 0.9f);
-            if (count > 0) Debug.Log($"[Tesla] Conn beam hit {count} enemies", this);
         }
     }
 
-    // --------------- Limpieza ---------------
     void OnDestroy()
     {
         foreach (var o in connectedTowers)
