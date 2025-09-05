@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     public int closedRooms;
     [SerializeField] private GameObject mulliganPanel;
     private bool spawnStarted = false;
-    private bool firstTimeBackgroundSound = true;
+    //private bool firstTimeBackgroundSound = true;
     private AudioSource audioSource;
     public AudioClip clipBackgroundSound;
 
@@ -262,11 +262,8 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
-        if (firstTimeBackgroundSound)
-        {
-            firstTimeBackgroundSound = false;
-            FindAnyObjectByType<AudioManager>().PlayBackgroundSound();
-        }
+        FindAnyObjectByType<AudioManager>().PlayBackgroundSound(1);
+
         cardManager.currentHandSize = 3;
         currentPrepHand = 1;
         UpdatePrepHandUI();
@@ -327,6 +324,7 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void StartRun()
     {
+        FindAnyObjectByType<AudioManager>().PlayBackgroundSound(2);
         spawnStarted = false; 
         inPrepPhase = false;
         ChangePhase(GamePhase.Action);
@@ -425,6 +423,7 @@ public class GameManager : MonoBehaviour
         playerController.soulsBuyPerShop = 0;
         soulsBar.SetActive(false);
         ChangePhase(GamePhase.Merchant);
+        FindAnyObjectByType<AudioManager>().PlayBackgroundSound(0);
         panelMerchant.SetActive(true);
         cameraMovementInstance.EnableCameraControl(false);
         var shopList = new List<MerchantItem>();

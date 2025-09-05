@@ -3,7 +3,12 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     private AudioSource audioSource;
-    public AudioClip clipBeep, clipBackgroundSound;
+    public AudioClip[] audioclips;
+
+    // ==============   LISTA DE CLIPS  ==============
+    // 0: MUSICA MENU PPAL
+    // 1: FASE DE PREPARACIÓN
+    // 2: FASE DE ACCIÓN
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,25 +22,13 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public void PlayBackgroundSound()
+    public void PlayBackgroundSound(int index)
     {
-        audioSource.Play();
-    }
-
-    public void PauseBackgroundSound()
-    {
-        audioSource.Pause();
-    }
-
-    public void UnPauseBackgroundSound()
-    {
-        audioSource.UnPause();
+        audioSource.Stop();
+        if(index != 2) audioSource.volume = 0.2f;
+        else audioSource.volume = 0.04f;
+        audioSource.PlayOneShot(audioclips[index]);
     }
 
 
-    public void SoundBeep()
-    {
-        if (clipBeep != null)
-            audioSource.PlayOneShot(clipBeep);
-    }
 }
