@@ -10,6 +10,7 @@ public class ChangeCardPosition : MonoBehaviour
 
     public LayerMask obstacleLayers; // Capas de obstáculos (paredes, etc.)
     public LayerMask spawnPointLayers;
+    LayerMask roomLayers;
     LayerMask trapLayers;
 
     float checkRadius = 0.4f; // Radio para verificación de colisión
@@ -24,6 +25,7 @@ public class ChangeCardPosition : MonoBehaviour
         obstacleTilemap = GameObject.Find("Paredes").GetComponent<Tilemap>();
         player = FindFirstObjectByType<PlayerController>();
         trapLayers = LayerMask.GetMask("TrapLayer");
+        roomLayers = LayerMask.GetMask("Room");
     }
 
     // Update is called once per frame
@@ -67,7 +69,16 @@ public class ChangeCardPosition : MonoBehaviour
         // 3. Verificar si ya hay una trampa en esta celda
         bool isCellOccupied = Physics2D.OverlapCircle(worldPos, checkRadius, trapLayers) != null;
 
-        return isPhysicallyValid && isOutsidePlayerRange && !isCellOccupied; 
+
+        // 4. Verificar que la sala está libre
+        Collider2D col = Physics2D.OverlapCircle(worldPos, checkRadius, roomLayers);
+        bool isRoomOpen = true;
+        if (col != null)
+        {
+            isRoomOpen = col.GetComponentInParent<SalaController>().estaLibre == true;
+        }
+
+        return isPhysicallyValid && isOutsidePlayerRange && !isCellOccupied && isRoomOpen; 
     }
 
 
