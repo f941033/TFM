@@ -79,6 +79,7 @@ public class CardUI : MonoBehaviour
         {
             backgroundImage.sprite = minionBackground;
             textCost.text = summon.cost.ToString();
+            textDamage.alignment = TMPro.TextAlignmentOptions.MidlineLeft;
             damageImage.sprite = minionEgg;
             minionDescription.SetActive(true);
             textDamage.text = "x" + summon.numberOfMinions;
