@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
         merchant = FindAnyObjectByType<MerchantUI>();
         closedRooms = FindObjectsByType<SalaController>(FindObjectsSortMode.None).Length - 1;
         audioSource = GetComponent<AudioSource>();
+        FindAnyObjectByType<AudioManager>().PlayBackgroundSound(0);
     }
 
 
