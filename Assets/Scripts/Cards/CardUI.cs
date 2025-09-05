@@ -30,7 +30,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI minionHealth;
     [SerializeField] private TextMeshProUGUI minionRange;
     [SerializeField] private Sprite minionEgg;
- 
+
 
     public void SetCardUI(CardData cardData)
     {
@@ -93,6 +93,7 @@ public class CardUI : MonoBehaviour
         {
             if (cardData is HabilityCardData hab)
             {
+                textCost.text = hab.cooldown.ToString();
                 if (!hab.IsDamage)
                 {
                     damageImage.gameObject.SetActive(false);
@@ -101,13 +102,24 @@ public class CardUI : MonoBehaviour
                 if (hab.IsAreaDamage)
                     damageImage.sprite = areaDamageImage;
             }
-            textCost.gameObject.SetActive(false);
+            if (cardData is BuffCardData buff)
+                textCost.text = buff.cooldown.ToString();
             backgroundImage.sprite = buffBackground;
             damageImage.gameObject.SetActive(false);
             textDamage.gameObject.SetActive(false);
             costImage.sprite = cooldownSprite;
             cooldownFillImage.gameObject.SetActive(true);
             textType.text = "SPELL";
+        }
+        if (GameManager.CurrentPhase == GamePhase.Deck ||
+            GameManager.CurrentPhase == GamePhase.Pause)
+        {
+            Destroy(this.GetComponent<CardHoverInHand>());
+        }
+        if (GameManager.CurrentPhase == GamePhase.Preparation ||
+            GameManager.CurrentPhase == GamePhase.Action)
+        {
+            Destroy(this.GetComponent<CardSelector>());
         }
     }
 
@@ -124,7 +136,7 @@ public class CardUI : MonoBehaviour
     {
         bool inShop = newPhase == GamePhase.Merchant;
     }
-        public void ShowData()
+    public void ShowData()
     {
         // Solo en fases donde quieras permitir ver detalles:
         if (GameManager.CurrentPhase == GamePhase.Deck ||
