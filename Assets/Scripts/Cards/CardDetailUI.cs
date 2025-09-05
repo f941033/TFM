@@ -28,9 +28,13 @@ public class CardDetailUI : MonoBehaviour
         var go = Instantiate(cardPrefab, cardContainer);
         var ui = go.GetComponent<CardUI>();
         ui.SetCardUI(data);
+        
+        var btnTr = go.transform.Find("ButtonDetails");
 
         Destroy(go.GetComponent<CardDragDrop>());
         Destroy(go.GetComponent<CardSelector>());
+        Destroy(go.GetComponent<CardHoverInHand>());
+        Destroy(btnTr.gameObject);
 
         descriptionText.text = data.description;
 

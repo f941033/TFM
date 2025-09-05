@@ -16,7 +16,7 @@ MonoBehaviour:
   description: "Hace 30 de da\xF1o en el area colocada"
   cardType: 3
   healthModifier: 10
-  numberOfTiles: 0
+  numberOfTiles: 4
   goldCost: 166
   areaPreviewPrefab: {fileID: 1444403662060021971, guid: 6256c002e678d3a46ba54a4ec718e1bc, type: 3}
   cooldown: 20
