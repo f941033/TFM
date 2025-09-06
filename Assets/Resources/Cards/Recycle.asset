@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c56239af7c64f448cf71fafba9ab99, type: 3}
   m_Name: Recycle
   m_EditorClassIdentifier: 
-  cardName: Recycle
-  description: Devuelve a tu mano la ultima carta usada
+  cardName: RECYCLE
+  description: Return the last card played to your hand.
   cardType: 2
   healthModifier: 10
   numberOfTiles: 0

@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
   m_Name: Saw
   m_EditorClassIdentifier: 
-  cardName: Saw
-  description: "Da\xF1o 15%"
+  cardName: THE BUTCHER
+  description: 'Damage 1 hit/enemy = 1 use
+
+    Area: 1 tile.
+
+    Enemy Speed: -20%,
+    5 seconds.'
   cardType: 1
   healthModifier: 15
   numberOfTiles: 0
@@ -23,6 +28,7 @@ MonoBehaviour:
   trapPrefab: {fileID: 7377369047218687532, guid: 9a2fa0d2eccd66542994497079b4a580, type: 3}
   cost: 3
   damage: 30
+  isAreaDamage: 0
   trapSizeInTiles: {x: 1, y: 1}
   reduceSpeed: 0.2
   seconds: 5

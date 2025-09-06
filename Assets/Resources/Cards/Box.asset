@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
   m_Name: Box
   m_EditorClassIdentifier: 
-  cardName: Box
-  description: Bloquea caminos
+  cardName: FRAGILE BOX
+  description: "Blocks the enemies path. \nDestroyed after 3 hits. "
   cardType: 1
   healthModifier: -5
   numberOfTiles: 1
@@ -23,6 +23,7 @@ MonoBehaviour:
   trapPrefab: {fileID: 7377369047218687532, guid: 21f38fb3cd101964384f40bd35b9962f, type: 3}
   cost: 1
   damage: 0
+  isAreaDamage: 0
   trapSizeInTiles: {x: 1, y: 1}
   reduceSpeed: 0
   seconds: 0

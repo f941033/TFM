@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1fc63ab785f1fb44a66583e8ae0b945, type: 3}
   m_Name: RiseSpeedAttack
   m_EditorClassIdentifier: 
-  cardName: Att
-  description: Ataque +20%, 15 segundos
+  cardName: DARK SPEED
+  description: Increases the Evil Lord attack speed +20% for 15 seconds.
   cardType: 0
   healthModifier: 0
   numberOfTiles: 0

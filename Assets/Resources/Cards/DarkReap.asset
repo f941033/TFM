@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1fc63ab785f1fb44a66583e8ae0b945, type: 3}
   m_Name: DarkReap
   m_EditorClassIdentifier: 
-  cardName: Dark Reap
-  description: Ataque +50%, 10 segundos
+  cardName: DARK REAPER
+  description: Increases the Evil Lord attack damage +50% for 10 seconds.
   cardType: 0
   healthModifier: 0
   numberOfTiles: 0

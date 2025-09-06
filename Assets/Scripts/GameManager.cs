@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         List<CardData> selectedCards = new List<CardData>();
         bool isSpecialRound = (numberWave > 0) && (numberWave % 5 == 0);
 
-        CardData turretCard = pool.Find(c => c.cardName.Equals("Turret"));
+        CardData turretCard = pool.Find(c => c.cardName.Equals("ROCK-BOW"));
 
         if (isSpecialRound && turretCard != null)
         {

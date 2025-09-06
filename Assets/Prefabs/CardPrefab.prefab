@@ -311,10 +311,10 @@ RectTransform:
   - {fileID: 4889197331542794352}
   m_Father: {fileID: 7995870902936603761}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.041, y: -591}
-  m_SizeDelta: {x: 159.43, y: 105.205}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 102.0445}
+  m_SizeDelta: {x: 217.948, y: 204.089}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5958178597649308774
 CanvasRenderer:
@@ -346,7 +346,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: -497719855, guid: aa5b37749b01d5f408ebdca2b3198a24, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2021,7 +2021,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -0.000034332}
-  m_SizeDelta: {x: 200, y: 105.2}
+  m_SizeDelta: {x: 117.97, y: 105.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7555792971798992169
 CanvasRenderer:
@@ -2055,8 +2055,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fb5bcb6a75880a04fa716a9017b35a21, type: 2}
+  m_sharedMaterial: {fileID: -5168441577899363616, guid: fb5bcb6a75880a04fa716a9017b35a21, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2080,8 +2080,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 150
+  m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2158,8 +2158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -16.407, y: -413.391}
-  m_SizeDelta: {x: 108.5, y: 63.768}
+  m_AnchoredPosition: {x: -12.394, y: -425.74704}
+  m_SizeDelta: {x: 113.625, y: 62.096}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8299555821698722270
 CanvasRenderer:
@@ -2216,8 +2216,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 9
+  m_fontSizeBase: 9
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

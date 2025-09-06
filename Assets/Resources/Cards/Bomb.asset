@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
   m_Name: Bomb
   m_EditorClassIdentifier: 
-  cardName: Bomb
-  description: "Explosi\xF3n sorpresa"
+  cardName: BOOM!
+  description: 'Radial explosion. Hits all the enemies within its range.
+
+    Pushes
+    enemies back 2 tiles.'
   cardType: 1
   healthModifier: -5
   numberOfTiles: 0

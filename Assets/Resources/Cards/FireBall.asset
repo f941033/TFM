@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadffe2894632804ca0e394ee289fe72, type: 3}
   m_Name: FireBall
   m_EditorClassIdentifier: 
-  cardName: Fireball
-  description: "Hace 30 de da\xF1o en el area colocada"
+  cardName: FIREBALL
+  description: Radial explosion. Hits all the enemies within its range.
   cardType: 3
   healthModifier: 10
   numberOfTiles: 4

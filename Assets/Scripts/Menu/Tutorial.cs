@@ -41,32 +41,33 @@ public class Tutorial : MonoBehaviour
 
         foreach (var card in allCards)
         {
-            if (card.cardName == "Pit" || card.cardName == "Acid" || card.cardName == "Box" || card.cardName == "Bomb" || card.cardName == "Saw")
+            if (card.cardName == "DARK PIT" || card.cardName == "ACID POOL" || card.cardName == "FRAGILE BOX" || card.cardName == "BOOM!" || card.cardName == "THE BUTCHER")
 
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
 
-                if (card.cardName == "Box" || card.cardName == "Bomb" || card.cardName == "Saw")
+                if (card.cardName == "FRAGILE BOX" || card.cardName == "BOOM!" || card.cardName == "THE BUTCHER")
                 {
                     startingDeck.Add(card);
                     baseHealth += card.healthModifier;
                 }
             }
 
-            if (card.cardName == "Dark Reap" || card.cardName == "Recycle")
+            if (card.cardName == "DARK REAPER" || card.cardName == "RECYCLE")
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
 
             }
-            if (card.cardName == "Abyss" || card.cardName == "2-Draw" || card.cardName == "Fireball" || card.cardName == "Zero Zone")
+            if (card.cardName == "RAISE THE DEAD" || card.cardName == "RE-BOUNDED" || card.cardName == "FIREBALL" || card.cardName == "ZERO ZONE")
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
 
             }
-            if(card.cardName == "Gobblin"){
+            if(card.cardName == "GOBLIN")
+            {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
             }

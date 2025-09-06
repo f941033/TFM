@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
   m_Name: Pit
   m_EditorClassIdentifier: 
-  cardName: Pit
-  description: "Muerte instant\xE1nea"
+  cardName: DARK PIT
+  description: It instanly kills any enemy.
   cardType: 1
   healthModifier: -5
   numberOfTiles: 4
@@ -23,6 +23,7 @@ MonoBehaviour:
   trapPrefab: {fileID: 6277402101696320810, guid: 7db39a53d2057c142b5b622c64d7810a, type: 3}
   cost: 7
   damage: 50
+  isAreaDamage: 0
   trapSizeInTiles: {x: 1, y: 1}
   reduceSpeed: 0
   seconds: 0

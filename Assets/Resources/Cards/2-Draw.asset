@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c56239af7c64f448cf71fafba9ab99, type: 3}
   m_Name: 2-Draw
   m_EditorClassIdentifier: 
-  cardName: 2-Draw
-  description: Roba dos cartas
+  cardName: RE-BOUNDED
+  description: Draw 2 random cards from your deck.
   cardType: 2
   healthModifier: 20
   numberOfTiles: 0

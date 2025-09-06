@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
   m_Name: Shock
   m_EditorClassIdentifier: 
-  cardName: Shock
-  description: "Da\xF1o 15%"
+  cardName: ELECTROSHOCK
+  description: 'Damage 1 hit/enemy = 1 use
+
+    Area: 1 tile.'
   cardType: 1
   healthModifier: 10
   numberOfTiles: 1
@@ -23,6 +25,7 @@ MonoBehaviour:
   trapPrefab: {fileID: 7377369047218687532, guid: d76fbfddd8688704ab0886fe2fb09026, type: 3}
   cost: 2
   damage: 15
+  isAreaDamage: 0
   trapSizeInTiles: {x: 1, y: 1}
   reduceSpeed: 0
   seconds: 0

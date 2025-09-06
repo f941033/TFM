@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c56239af7c64f448cf71fafba9ab99, type: 3}
   m_Name: Abyss
   m_EditorClassIdentifier: 
-  cardName: Abyss
-  description: "Devuelve a tu mano la \xFAltiima de la pila de descartes"
+  cardName: RAISE THE DEAD
+  description: Return the last card from the discard pile to your hand.
   cardType: 2
   healthModifier: 0
   numberOfTiles: 0

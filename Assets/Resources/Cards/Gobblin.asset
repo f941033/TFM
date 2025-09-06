@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbaa927a4f55dca4f9819d650a52f962, type: 3}
   m_Name: Gobblin
   m_EditorClassIdentifier: 
-  cardName: Gobblin
-  description: Invoca 2 gobblins
+  cardName: GOBLIN
+  description: Summons goblins to assist the Evil Lord.
   cardType: 4
   healthModifier: 0
   numberOfTiles: 1
