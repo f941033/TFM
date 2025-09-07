@@ -110,6 +110,7 @@ public class PauseMenuController : MonoBehaviour
     {
         deckPanel.SetActive(false);
         cameraMovementInstance.EnableCameraControl(true);
+        Time.timeScale = 1f;
     }
     private void PopulateDeckGrid()
     {

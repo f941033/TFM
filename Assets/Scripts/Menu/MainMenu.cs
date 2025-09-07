@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Game");
     }
 
@@ -30,6 +31,7 @@ public class MainMenu : MonoBehaviour
 
     public void RestartGame()
     {
+        Time.timeScale = 1f;
         PlayerPrefs.SetInt("ReinicioDesdeGameOver", 1);
         SceneManager.LoadScene("Game");
     }
