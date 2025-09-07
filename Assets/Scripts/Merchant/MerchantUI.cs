@@ -2,10 +2,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using DeckboundDungeon.GamePhase;
 using UnityEngine.UI;
+using System.Collections;
 
 public class MerchantUI : MonoBehaviour
 {
     public Image key;
+    public GameObject panelKeyInfo;
     public RoomsManager roomsManager;
     [SerializeField] private Transform contentParent;
     [SerializeField] private GameObject canvaMerchant;
@@ -61,9 +63,9 @@ public class MerchantUI : MonoBehaviour
         {
             gm.hasKey = true;
             key.gameObject.SetActive(true);
+            panelKeyInfo.SetActive(true);
         }
     }
-
 
     public void DeactiveKey()
     {
@@ -76,6 +78,11 @@ public class MerchantUI : MonoBehaviour
         soulsPanel.SetActive(true);
         if (!gm.hasKey)
             gm.PreparationPhase();
-        else gm.ShowMessage("Selecciona la sala a abrir, si te atreves", 3f);
+        else
+        {
+            gm.ShowMessage("Selecciona la sala a abrir, si te atreves", 3f);
+            StartCoroutine(gm.KeyVFX());
+        }
     }
+
 }

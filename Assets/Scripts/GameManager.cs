@@ -9,6 +9,7 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject panelKeyInfo;
     public CameraMovement cameraMovementInstance;
     private int enemiesDied = 0;
     public int initialEnemiesToKill = 3;
@@ -525,4 +526,11 @@ public class GameManager : MonoBehaviour
         closedRooms--;
         Debug.Log($"salas cerradas: {closedRooms}");
     }
+
+    public IEnumerator KeyVFX() 
+    {        
+        yield return new WaitForSecondsRealtime(3f);
+        panelKeyInfo.SetActive(false);
+    }
+
 }
