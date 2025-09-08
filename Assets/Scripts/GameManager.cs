@@ -277,7 +277,7 @@ public class GameManager : MonoBehaviour
         ChangePhase(GamePhase.Preparation);
 
         numberWave++;
-        textNumberWave.text = "Ronda: " + numberWave;
+        textNumberWave.text = "WAVE " + numberWave;
         enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
 
         panelTimeScale.SetActive(false);
