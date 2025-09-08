@@ -50,16 +50,16 @@ public class MerchantUI : MonoBehaviour
 
         if (player.AmountGold < finalCost)
         {
-            gm.ShowMessage("No tienes suficiente oro", 2f);
+            gm.ShowMessage("No gold? What a pitiful beggar of your own fate.", 2f);
             return;
         }
 
         player.SpendGold(finalCost);
         item.Apply(player, gm);
 
-        gm.ShowMessage($"Compraste “{item.itemName}” por {finalCost}", 2f);
+        gm.ShowMessage($"You bought “{item.itemName}” for {finalCost}", 2f);
 
-        if (item.itemName.Contains("Llave"))
+        if (item.itemName.Contains("Key"))
         {
             gm.hasKey = true;
             key.gameObject.SetActive(true);
@@ -80,7 +80,7 @@ public class MerchantUI : MonoBehaviour
             gm.PreparationPhase();
         else
         {
-            gm.ShowMessage("Selecciona la sala a abrir, si te atreves", 3f);
+            gm.ShowMessage("Open a room. If you crave your doom.", 3f);
             StartCoroutine(gm.KeyVFX());
         }
     }
