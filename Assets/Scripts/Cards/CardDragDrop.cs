@@ -100,7 +100,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             Debug.Log(handler != null);
             if (handler != null && handler.cooldownRemaining > 0f)
             {
-                gameManager.ShowMessage("¡Esta habilidad está en cooldown!", 2);
+                gameManager.ShowMessage("Trying to use it again? Pathetic… it’s still on cooldown.", 4);
 
                 // Cancela el drag: 
                 eventData.pointerDrag = null;
@@ -116,7 +116,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         {
             if (!player.TrySpendSouls(trap.cost))
             {
-                FindFirstObjectByType<GameManager>().ShowMessage("¡No tienes suficientes almas!", 2);
+                FindFirstObjectByType<GameManager>().ShowMessage("Trying to pay without souls? Earn them.", 4);
                 Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
                 // sonido de que la carta no se puede jugar
                 eventData.pointerDrag = null;
@@ -131,7 +131,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         {
             if (!player.TrySpendSouls(summon.cost))
             {
-                FindFirstObjectByType<GameManager>().ShowMessage("¡No tienes suficientes almas!", 2);
+                FindFirstObjectByType<GameManager>().ShowMessage("Trying to pay without souls? Earn them.", 4);
                 Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
                 // sonido de que la carta no se puede jugar
                 eventData.pointerDrag = null;
@@ -146,7 +146,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         {
             if (!player.TrySpendSouls(deck.cost))
             {
-                FindFirstObjectByType<GameManager>().ShowMessage("¡No tienes suficientes almas!", 2);
+                FindFirstObjectByType<GameManager>().ShowMessage("Trying to pay without souls? Earn them.", 4);
                 Debug.Log("No tienes suficientes almas para jugar " + cardData.cardName);
                 // sonido de que la carta no se puede jugar
                 eventData.pointerDrag = null;
@@ -254,7 +254,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                             case DeckEffectCardData.Effect.DrawFromDiscard:
                                 if (Deck.discardPile.Count == 0)
                                 {
-                                    gameManager.ShowMessage("No hay cartas en la pila de descartes", 2);
+                                    gameManager.ShowMessage("Hoping to find something in the discards? Only dust and failure.", 4);
                                     break;
                                 }
                                 deckEffect.Play(player, worldCenter);

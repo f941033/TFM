@@ -46,7 +46,7 @@ public class HabilityCardHandler : MonoBehaviour
         {
             if (cooldownRemaining > 0f)
             {
-                FindFirstObjectByType<GameManager>().ShowMessage("¡Tiene cooldown, no se puede activar!", 2);
+                FindFirstObjectByType<GameManager>().ShowMessage("The power you crave is on cooldown and it denies you its strength.", 4);
                 return;
             }
             Debug.Log("Aplico el bufo");

@@ -236,7 +236,7 @@ public class PlayerController : MonoBehaviour
 
     public void AddKey()
     {
-        FindFirstObjectByType<GameManager>().ShowMessage("No estás capacitado para verlo!!", 2);
+        FindFirstObjectByType<GameManager>().ShowMessage("You are not fit to see it… your weakness forbids it.", 4);
     }
     public void AddSouls()
     {
