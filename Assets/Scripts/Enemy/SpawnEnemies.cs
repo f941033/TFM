@@ -71,8 +71,13 @@ public class SpawnEnemies : MonoBehaviour
         {
             for (var i = 0; i < spawnPoint.transform.childCount; i++)
             {
-                spawnPoint.transform.GetChild(i).GetComponent<Animator>().SetBool("enabled", true);
-                spawnPoint.transform.GetChild(i).GetChild(0).gameObject.SetActive(true);
+                var torch = spawnPoint.transform.GetChild(i);
+
+                // activar la animación de la antorcha
+                if(torch.GetComponent<Animator>() != null) torch.GetComponent<Animator>().SetBool("enabled", true);
+
+                //activar su luz
+                torch.GetChild(0).gameObject.SetActive(true);
             }
         }
     }
