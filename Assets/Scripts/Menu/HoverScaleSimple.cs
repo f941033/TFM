@@ -17,7 +17,7 @@ public class HoverScaleSimple : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData e)
     {
         transform.localScale = originalScale * hoverScale;
-        audioSource.PlayOneShot(clipHover);
+        if(clipHover != null) audioSource.PlayOneShot(clipHover);
     }
 
     public void OnPointerExit(PointerEventData e)
