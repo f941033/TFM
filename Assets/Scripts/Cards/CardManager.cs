@@ -67,7 +67,7 @@ public class CardManager : MonoBehaviour
         }
         else if (drawPile.Count == 0 && discardPile.Count == 0)
         {
-            gameManager.ShowMessage("No hay cartas que robar!", 2);
+            gameManager.ShowMessage("Expecting another card? Foolish…", 3);
             return;
         }
 
@@ -283,9 +283,9 @@ public class CardManager : MonoBehaviour
 
     public void BeginMulligan()
     {
-        if (mulliganUsed) { FindFirstObjectByType<GameManager>().ShowMessage("Ya hiciste mulligan.", 2); return; }
+        if (mulliganUsed) { FindFirstObjectByType<GameManager>().ShowMessage("Your mulligan is spent… there is no turning back.", 3); return; }
         if (GameManager.CurrentPhase != DeckboundDungeon.GamePhase.GamePhase.Action) return;
-        if (drawPile.Count == 0) { FindFirstObjectByType<GameManager>().ShowMessage("No quedan cartas en el mazo.", 2); return; }
+        if (drawPile.Count == 0) { FindFirstObjectByType<GameManager>().ShowMessage("The deck is empty… and so is your hope.", 3); return; }
 
         foreach (var go in cardsInHand)
         {
@@ -356,7 +356,7 @@ public class CardManager : MonoBehaviour
 
         if (n > drawPile.Count)
         {
-            FindFirstObjectByType<GameManager>().ShowMessage("No hay suficientes cartas en el mazo para ese mulligan.", 2);
+            FindFirstObjectByType<GameManager>().ShowMessage("Looking for a mulligan? Too bad… there aren’t enough cards left for your misery.", 4);
             return;
         }
 
