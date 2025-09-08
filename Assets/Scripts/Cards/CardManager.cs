@@ -333,7 +333,7 @@ public class CardManager : MonoBehaviour
         inMulligan = true;
         mulliganSelectedCount = 0;
         Debug.Log("[Mulligan] Comienza selección. drawPile=" + drawPile.Count);
-        FindFirstObjectByType<GameManager>().ShowMessage("Selecciona cartas y confirma.", 2);
+        FindFirstObjectByType<GameManager>().ShowMessage("Sacrifice a card from your hand and replace it with another from the deck. \n If you lack the courage, crawl away with Cancel.", 100);
     }
 
     public void ConfirmMulligan()
