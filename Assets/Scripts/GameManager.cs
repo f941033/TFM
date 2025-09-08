@@ -92,12 +92,12 @@ public class GameManager : MonoBehaviour
     public void EnemyKaputt()
     {
         enemiesDied++;
-        //if (enemiesDied == enemiesToKillInCurrentWave)
-        if (ZeroEnemies())
-        {
-            enemiesDied = 0;
-            Invoke("EndWave", 1f);
-        }
+        if (enemiesDied >= enemiesToKillInCurrentWave)
+            if (ZeroEnemies())
+            {
+                enemiesDied = 0;
+                Invoke("EndWave", 1f);
+            }
     }
 
     private bool ZeroEnemies()
