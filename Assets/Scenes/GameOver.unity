@@ -592,6 +592,14 @@ PrefabInstance:
       propertyPath: m_PreserveAspect
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4181347724653300847, guid: 50fe5dbc54dad294bb2912b7ac9ba74b, type: 3}
+      propertyPath: m_margin.w
+      value: 12.959442
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181347724653300847, guid: 50fe5dbc54dad294bb2912b7ac9ba74b, type: 3}
+      propertyPath: m_margin.y
+      value: 13.576565
+      objectReference: {fileID: 0}
     - target: {fileID: 6284983057499213502, guid: 50fe5dbc54dad294bb2912b7ac9ba74b, type: 3}
       propertyPath: audioSource
       value: 
@@ -1152,6 +1160,30 @@ PrefabInstance:
     - target: {fileID: 4181347724653300847, guid: 50fe5dbc54dad294bb2912b7ac9ba74b, type: 3}
       propertyPath: m_text
       value: MAIN MENU
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181347724653300847, guid: 50fe5dbc54dad294bb2912b7ac9ba74b, type: 3}
+      propertyPath: m_margin.w
+      value: 12.48082
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181347724653300847, guid: 50fe5dbc54dad294bb2912b7ac9ba74b, type: 3}
+      propertyPath: m_margin.y
+      value: 14.182739
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181347724653300847, guid: 50fe5dbc54dad294bb2912b7ac9ba74b, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.019607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181347724653300847, guid: 50fe5dbc54dad294bb2912b7ac9ba74b, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.72156864
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181347724653300847, guid: 50fe5dbc54dad294bb2912b7ac9ba74b, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.85882354
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181347724653300847, guid: 50fe5dbc54dad294bb2912b7ac9ba74b, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278565083
       objectReference: {fileID: 0}
     - target: {fileID: 6284983057499213502, guid: 50fe5dbc54dad294bb2912b7ac9ba74b, type: 3}
       propertyPath: audioSource
