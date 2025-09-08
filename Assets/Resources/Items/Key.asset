@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c184724d4380604780325e04288e8da, type: 3}
   m_Name: Key
   m_EditorClassIdentifier: 
-  itemName: Llave
+  itemName: Key
   icon: {fileID: 347172880587908169, guid: 3014813665d4cd24db0ade41874ee80c, type: 3}
   cost: 200
