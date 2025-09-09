@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     public void EnemyKaputt()
     {
         enemiesDied++;
-        if (enemiesDied >= enemiesToKillInCurrentWave)
+        //if (enemiesDied >= enemiesToKillInCurrentWave)
             if (ZeroEnemies())
             {
                 enemiesDied = 0;
@@ -113,10 +113,21 @@ public class GameManager : MonoBehaviour
         }
 
         return true; // No hay enemigos vivos
+
     }
 
     void EndWave()
     {
+        EnemyController[] allEnemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
+
+        foreach (EnemyController enemy in allEnemies)
+        {
+            if (enemy != null && enemy.gameObject.activeInHierarchy && enemy.IsAlive())
+            {
+                return; // Hay al menos un enemigo vivo
+            }
+        }
+
         ChangePhase(GamePhase.Preparation);
         Time.timeScale = 1f;
         panelEndWave.SetActive(true);

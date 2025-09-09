@@ -8,36 +8,43 @@ public class EnemyMovement : MonoBehaviour
     public float moveSpeed = 1f;
     public LayerMask obstacleLayer;
     public Vector2 tileSize = new Vector2(0.5f, 0.5f);
-    Transform player; // Asigna el transform del jugador
-    Transform currentMoveTarget; // TRAMPERO: objetivo actual de movimiento (puede ser player o posición cerca de trampa)
-    private bool movingToTrap = false; // TRAMPERO: flag para saber si se está moviendo hacia una trampa
+    Transform player;
+    Transform currentMoveTarget;
+    private bool movingToTrap = false;
 
     private Vector2 currentDirection;
     private int damage;
 
     [Header("Knockback")]
-    public float knockbackDuration = 0.2f; // Duración del desplazamiento
-    public int knockbackTiles = 5; // Celdas a retroceder
+    public float knockbackDuration = 0.2f;
+    public int knockbackTiles = 5;
     private bool isKnockbackActive = false;
 
     [Header("Trampas")]
-    [SerializeField] private LayerMask trapLayer; // TRAMPERO: capa de las trampas
-    [SerializeField] private float trapDetectionDistance = 1.2f; // TRAMPERO: distancia para detectar trampas en el camino
+    [SerializeField] private LayerMask trapLayer;
+    [SerializeField] private float trapDetectionDistance = 1.2f;
 
     [Header("Comportamiento de Emergencia")]
-    [SerializeField] public bool emergencyMode = false; // Flag para modo de emergencia (público para HeroeMovement)
-    [SerializeField] private Transform currentWallTarget = null; // Muro objetivo actual
-    [SerializeField] private float wallDetectionRange = 50f; // Rango para buscar muros
-    [SerializeField] private int wallApproachRadius = 4; // Radio para buscar posiciones cerca del muro
-    [SerializeField] private Vector3 wallTargetPosition; // Posición objetivo junto al muro
+    [SerializeField] public bool emergencyMode = false;
+    [SerializeField] private Transform currentWallTarget = null;
+    [SerializeField] private float wallDetectionRange = 50f;
+    [SerializeField] private int wallApproachRadius = 4;
+    [SerializeField] private Vector3 wallTargetPosition;
+
+    [Header("LOD System")]
+    public EnemyLOD currentLOD = EnemyLOD.High;
+    public float highLODDistance = 10f;
+    public float mediumLODDistance = 25f;
 
     // =========== MOVIMIENTO ORTOGONAL Y BFS ====================
-
     public string playerTag = "Player";
     GameObject playerObj;
     private bool isMoving = false;
     public List<Vector3> path = new List<Vector3>();
     public int pathIndex = 0;
+    private bool pathCalculated = false;
+    private bool waitingForPath = false;
+
     private readonly Vector2Int[] directions = {
         Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right
     };
@@ -53,32 +60,75 @@ public class EnemyMovement : MonoBehaviour
         player = playerObj.transform;
         transform.position = SnapToGrid(transform.position);
 
-        // Debug inicial
+        // REGISTRAR en PathfindingManager
+        if (PathfindingManager.Instance != null)
+            PathfindingManager.Instance.RegisterEnemy(this);
 
-        // Verificar si hay camino al player al inicio
         CheckInitialPathToPlayer();
 
+        // Inicio con delay aleatorio para distribuir cálculos
+        float randomOffset = Random.Range(0f, 0.5f);
+        StartCoroutine(DelayedStart(randomOffset));
+    }
+
+    void OnDestroy()
+    {
+        // DESREGISTRAR cuando se destruya
+        if (PathfindingManager.Instance != null)
+            PathfindingManager.Instance.UnregisterEnemy(this);
+    }
+
+    IEnumerator DelayedStart(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         StartCoroutine(MovementLoop());
     }
 
     void CheckInitialPathToPlayer()
     {
-        List<Vector3> initialPath = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
-        if (initialPath == null || initialPath.Count == 0)
+        // Usar PathfindingManager para verificación inicial
+        if (PathfindingManager.Instance != null)
         {
-            Debug.Log($"[{gameObject.name}] No hay camino inicial al player. Activando modo de emergencia.");
-            ActivateEmergencyMode();
+            List<Vector3> initialPath = PathfindingManager.Instance.FindPathBFS(
+                SnapToGrid(transform.position),
+                SnapToGrid(player.position)
+            );
+
+            if (initialPath == null || initialPath.Count == 0)
+            {
+                Debug.Log($"[{gameObject.name}] No hay camino inicial al player. Activando modo de emergencia.");
+                ActivateEmergencyMode();
+            }
         }
+    }
+
+    void UpdateLOD()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer <= highLODDistance)
+            currentLOD = EnemyLOD.High;
+        else if (distanceToPlayer <= mediumLODDistance)
+            currentLOD = EnemyLOD.Medium;
         else
-        {
-        }
+            currentLOD = EnemyLOD.Low;
     }
 
     IEnumerator MovementLoop()
     {
         while (true)
         {
-            if (!isMoving)
+            UpdateLOD();
+
+            float waitTime = currentLOD switch
+            {
+                EnemyLOD.High => 0.15f,
+                EnemyLOD.Medium => 0.5f,
+                EnemyLOD.Low => 1f,
+                _ => 0.15f
+            };
+
+            if (!isMoving && !waitingForPath)
             {
                 if (emergencyMode)
                 {
@@ -89,17 +139,30 @@ public class EnemyMovement : MonoBehaviour
                     yield return StartCoroutine(HandleNormalMovement());
                 }
             }
-            yield return new WaitForSeconds(0.15f); // balance rendimiento/respuesta
+            yield return new WaitForSeconds(waitTime);
         }
     }
 
     IEnumerator HandleNormalMovement()
     {
-        List<Vector3> newPath = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
-        if (newPath != null && newPath.Count > 0)
+        // Solicitar path al PathfindingManager
+        waitingForPath = true;
+        pathCalculated = false;
+
+        if (PathfindingManager.Instance != null)
         {
-            // El primer nodo del path es la tile actual, el segundo el destino inmediato
-            path = newPath;
+            PathfindingManager.Instance.RequestPath(this,
+                SnapToGrid(transform.position),
+                SnapToGrid(player.position),
+                false);
+        }
+
+        // Esperar hasta recibir el path
+        yield return new WaitUntil(() => pathCalculated);
+        waitingForPath = false;
+
+        if (path != null && path.Count > 0)
+        {
             pathIndex = 1;
             while (pathIndex < path.Count)
             {
@@ -108,18 +171,19 @@ public class EnemyMovement : MonoBehaviour
                 pathIndex++;
             }
         }
-        else
-        {
-            // No hay camino, activar modo de emergencia
-            Debug.Log($"[{gameObject.name}] Camino perdido. Activando modo de emergencia.");
-            ActivateEmergencyMode();
-        }
     }
 
     IEnumerator HandleEmergencyMovement()
     {
-        // Simplificar: buscar muro más cercano y moverse hacia él
-        Transform nearestWall = FindNearestReachableWall();
+        Transform nearestWall = null;
+        if (WallCache.Instance != null)
+        {
+            nearestWall = WallCache.Instance.GetNearestWall(transform.position, wallDetectionRange);
+        }
+        else
+        {
+            nearestWall = FindNearestReachableWall();
+        }
 
         if (nearestWall != null)
         {
@@ -129,15 +193,26 @@ public class EnemyMovement : MonoBehaviour
             {
                 Debug.Log($"[{gameObject.name}] Moviéndose hacia muro en {nearestWall.position}. Posición objetivo: {approachPosition}");
 
-                // Intentar moverse hacia la posición de aproximación
-                List<Vector3> wallPath = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(approachPosition));
+                // Solicitar path hacia el muro usando PathfindingManager
+                waitingForPath = true;
+                pathCalculated = false;
 
-                if (wallPath != null && wallPath.Count > 0)
+                if (PathfindingManager.Instance != null)
+                {
+                    PathfindingManager.Instance.RequestPath(this,
+                        SnapToGrid(transform.position),
+                        SnapToGrid(approachPosition),
+                        true);
+                }
+
+                yield return new WaitUntil(() => pathCalculated);
+                waitingForPath = false;
+
+                if (path != null && path.Count > 0)
                 {
                     currentWallTarget = nearestWall;
                     wallTargetPosition = approachPosition;
 
-                    path = wallPath;
                     pathIndex = 1;
                     while (pathIndex < path.Count && currentWallTarget != null)
                     {
@@ -146,7 +221,6 @@ public class EnemyMovement : MonoBehaviour
                         pathIndex++;
                     }
 
-                    // Una vez llegado cerca del muro, notificar al EnemyController para que lo ataque
                     if (currentWallTarget != null)
                     {
                         Debug.Log($"[{gameObject.name}] Llegó cerca del muro. Iniciando ataque.");
@@ -172,9 +246,26 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    public void OnPathCalculated(List<Vector3> calculatedPath, bool isEmergency)
+    {
+        if (calculatedPath != null && calculatedPath.Count > 0)
+        {
+            path = calculatedPath;
+        }
+        else
+        {
+            path = null;
+            if (!isEmergency && !emergencyMode)
+            {
+                Debug.Log($"[{gameObject.name}] No hay camino al player. Activando modo de emergencia.");
+                ActivateEmergencyMode();
+            }
+        }
+        pathCalculated = true;
+    }
+
     Transform FindNearestReachableWall()
     {
-        // Buscar todos los objetos con tag PlayerWall
         GameObject[] playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
 
         if (playerWalls.Length == 0)
@@ -183,12 +274,8 @@ public class EnemyMovement : MonoBehaviour
             return null;
         }
 
-        Debug.Log($"[{gameObject.name}] Evaluando {playerWalls.Length} muros...");
-
         Transform bestWall = null;
         float bestDistance = float.MaxValue;
-        Vector3 bestApproachPos = Vector3.zero;
-
         Vector3 currentPos = SnapToGrid(transform.position);
 
         foreach (GameObject wall in playerWalls)
@@ -197,34 +284,25 @@ public class EnemyMovement : MonoBehaviour
 
             if (distance <= wallDetectionRange)
             {
-                // Buscar posición de aproximación para este muro
                 Vector3 approachPos = FindBestApproachPosition(wall.transform);
 
                 if (approachPos != Vector3.zero)
                 {
-                    // Verificar que se puede llegar a la posición de aproximación
-                    List<Vector3> testPath = FindPathBFS(currentPos, SnapToGrid(approachPos));
-
-                    if (testPath != null && testPath.Count > 0)
+                    if (PathfindingManager.Instance != null)
                     {
-                        if (distance < bestDistance)
+                        List<Vector3> testPath = PathfindingManager.Instance.FindPathBFS(currentPos, SnapToGrid(approachPos));
+
+                        if (testPath != null && testPath.Count > 0)
                         {
-                            bestDistance = distance;
-                            bestWall = wall.transform;
-                            bestApproachPos = approachPos;
+                            if (distance < bestDistance)
+                            {
+                                bestDistance = distance;
+                                bestWall = wall.transform;
+                            }
                         }
                     }
                 }
             }
-        }
-
-        if (bestWall != null)
-        {
-            Debug.Log($"[{gameObject.name}] Mejor muro encontrado a distancia {bestDistance}. Posición aproximación: {bestApproachPos}");
-        }
-        else
-        {
-            Debug.Log($"[{gameObject.name}] No se encontraron muros alcanzables de {playerWalls.Length} muros evaluados");
         }
 
         return bestWall;
@@ -237,43 +315,40 @@ public class EnemyMovement : MonoBehaviour
         Vector3 wallPos = SnapToGrid(wall.position);
         Vector2Int wallGrid = WorldToGrid(wallPos);
 
-        // Buscar en un radio expandido alrededor del muro
         for (int radius = 1; radius <= wallApproachRadius; radius++)
         {
-            // Buscar en todas las direcciones del radio actual
             for (int x = -radius; x <= radius; x++)
             {
                 for (int y = -radius; y <= radius; y++)
                 {
-                    // Solo verificar posiciones en el borde del radio (no el interior)
                     if (Mathf.Abs(x) != radius && Mathf.Abs(y) != radius) continue;
 
                     Vector2Int checkGrid = wallGrid + new Vector2Int(x, y);
 
-                    // Verificar que la posición no sea un obstáculo
                     if (!IsObstacle(checkGrid))
                     {
                         Vector3 checkWorld = GridToWorld(checkGrid);
 
-                        // Verificar que se puede llegar a esta posición
-                        List<Vector3> testPath = FindPathBFS(SnapToGrid(transform.position), checkWorld);
-                        if (testPath != null && testPath.Count > 0)
+                        if (PathfindingManager.Instance != null)
                         {
-                            Debug.Log($"[{gameObject.name}] Posición de aproximación encontrada para muro: {checkWorld} (radio {radius})");
-                            return checkWorld;
+                            List<Vector3> testPath = PathfindingManager.Instance.FindPathBFS(
+                                SnapToGrid(transform.position), checkWorld);
+
+                            if (testPath != null && testPath.Count > 0)
+                            {
+                                return checkWorld;
+                            }
                         }
                     }
                 }
             }
         }
 
-        Debug.Log($"[{gameObject.name}] No se encontró posición de aproximación válida para muro en {wallPos}");
         return Vector3.zero;
     }
 
     void NotifyWallReached(Transform wall)
     {
-        // Notificar al EnemyController que debe atacar este muro
         EnemyController enemyController = GetComponent<EnemyController>();
         if (enemyController != null)
         {
@@ -283,19 +358,20 @@ public class EnemyMovement : MonoBehaviour
 
     public void OnWallDestroyed()
     {
-        // Llamado cuando se destruye un muro
         currentWallTarget = null;
 
-        // Verificar si ahora hay camino al player
-        List<Vector3> pathToPlayer = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
-        if (pathToPlayer != null && pathToPlayer.Count > 0)
+        if (PathfindingManager.Instance != null)
         {
-            Debug.Log($"[{gameObject.name}] Camino al player restaurado. Desactivando modo de emergencia.");
-            DeactivateEmergencyMode();
-        }
-        else
-        {
-            Debug.Log($"[{gameObject.name}] Camino aún bloqueado. Continuando en modo de emergencia.");
+            List<Vector3> pathToPlayer = PathfindingManager.Instance.FindPathBFS(
+                SnapToGrid(transform.position),
+                SnapToGrid(player.position)
+            );
+
+            if (pathToPlayer != null && pathToPlayer.Count > 0)
+            {
+                Debug.Log($"[{gameObject.name}] Camino al player restaurado. Desactivando modo de emergencia.");
+                DeactivateEmergencyMode();
+            }
         }
     }
 
@@ -316,7 +392,6 @@ public class EnemyMovement : MonoBehaviour
         isMoving = true;
 
         Vector3 origen = transform.position;
-        // Calcular y almacenar la dirección de movimiento
         Vector2 moveDir = (destino - origen).normalized;
         currentDirection = moveDir;
 
@@ -334,47 +409,6 @@ public class EnemyMovement : MonoBehaviour
 
         transform.position = destino;
         isMoving = false;
-    }
-
-
-    public List<Vector3> FindPathBFS(Vector3 startWorld, Vector3 goalWorld)
-    {
-        Vector2Int start = WorldToGrid(startWorld);
-        Vector2Int goal = WorldToGrid(goalWorld);
-
-        Queue<Vector2Int> frontier = new Queue<Vector2Int>();
-        Dictionary<Vector2Int, Vector2Int> prev = new Dictionary<Vector2Int, Vector2Int>();
-        frontier.Enqueue(start);
-        prev[start] = start;
-
-        while (frontier.Count > 0)
-        {
-            Vector2Int current = frontier.Dequeue();
-            if (current == goal) break;
-
-            foreach (Vector2Int dir in directions)
-            {
-                Vector2Int next = current + dir;
-                if (prev.ContainsKey(next)) continue;
-                if (IsObstacle(next)) continue;
-
-                frontier.Enqueue(next);
-                prev[next] = current;
-            }
-        }
-
-        if (!prev.ContainsKey(goal)) return null; // no path
-
-        // Reconstruir path desde goal a start
-        List<Vector3> result = new List<Vector3>();
-        for (Vector2Int step = goal; ;)
-        {
-            result.Add(GridToWorld(step));
-            if (step == start) break;
-            step = prev[step];
-        }
-        result.Reverse();
-        return result;
     }
 
     // --- Tile utilities ---
@@ -398,41 +432,43 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector3 tileCenter = GridToWorld(gridPos);
         Collider2D c = Physics2D.OverlapBox(tileCenter, tileSize * 0.8f, 0, obstacleLayer);
-        // Incluye paredes y muros del jugador (tag PlayerWall)
         if (c == null) return false;
         if (c.CompareTag("PlayerWall") || c.gameObject.layer == LayerMask.NameToLayer("Obstacle")) return true;
         return false;
     }
 
-    // ==================== MÉTODOS PÚBLICOS (PRESERVADOS) ====================
-
+    // ==================== MÉTODOS PÚBLICOS ====================
     public void ClearAndRepath()
     {
         StopAllCoroutines();
         isMoving = false;
+        waitingForPath = false;
+        pathCalculated = false;
         path.Clear();
         pathIndex = 0;
 
-        // Centrar en el grid
         transform.position = SnapToGrid(transform.position);
 
-        // Verificar si necesitamos modo de emergencia después del repath
-        List<Vector3> pathToPlayer = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
-        if (pathToPlayer == null || pathToPlayer.Count == 0)
+        if (PathfindingManager.Instance != null)
         {
-            if (!emergencyMode)
+            List<Vector3> pathToPlayer = PathfindingManager.Instance.FindPathBFS(
+                SnapToGrid(transform.position),
+                SnapToGrid(player.position)
+            );
+
+            if (pathToPlayer == null || pathToPlayer.Count == 0)
             {
-                Debug.Log($"[{gameObject.name}] Repath: No hay camino, activando modo emergencia.");
-                ActivateEmergencyMode();
+                if (!emergencyMode)
+                {
+                    ActivateEmergencyMode();
+                }
+            }
+            else if (emergencyMode)
+            {
+                DeactivateEmergencyMode();
             }
         }
-        else if (emergencyMode)
-        {
-            Debug.Log($"[{gameObject.name}] Repath: Camino encontrado, desactivando modo emergencia.");
-            DeactivateEmergencyMode();
-        }
 
-        // Reiniciar MovementLoop
         StartCoroutine(MovementLoop());
     }
 
@@ -441,55 +477,44 @@ public class EnemyMovement : MonoBehaviour
         StopAllCoroutines();
         path.Clear();
         pathIndex = 0;
+        waitingForPath = false;
+        pathCalculated = false;
 
-        // Asegurar posición alineada al grid
         transform.position = SnapToGrid(transform.position);
-
-        // Pequeña pausa para asegurar que todo esté limpio
         StartCoroutine(DelayedRestart());
     }
 
     IEnumerator DelayedRestart()
     {
-        yield return new WaitForSeconds(0.1f); // Pequeña pausa
+        yield return new WaitForSeconds(0.1f);
 
-        // Verificar estado de emergency antes de reiniciar
-        List<Vector3> pathToPlayer = FindPathBFS(SnapToGrid(transform.position), SnapToGrid(player.position));
-        if (pathToPlayer == null || pathToPlayer.Count == 0)
+        if (PathfindingManager.Instance != null)
         {
-            ActivateEmergencyMode();
+            List<Vector3> pathToPlayer = PathfindingManager.Instance.FindPathBFS(
+                SnapToGrid(transform.position),
+                SnapToGrid(player.position)
+            );
+
+            if (pathToPlayer == null || pathToPlayer.Count == 0)
+            {
+                ActivateEmergencyMode();
+            }
         }
 
         StartCoroutine(MovementLoop());
-        Debug.Log("MovementLoop reiniciado");
     }
 
     public void StopCoroutineMove()
     {
         StopAllCoroutines();
-    }
-
-    IEnumerator MoveToNextTile(Vector2 direction)
-    {
-        Vector2 startPos = transform.position;
-        Vector2 targetPos = startPos + direction * tileSize;
-        float elapsed = 0f;
-
-        while (elapsed < 1f / moveSpeed)
-        {
-            transform.position = Vector2.Lerp(startPos, targetPos, elapsed * moveSpeed);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = targetPos;
+        waitingForPath = false;
+        pathCalculated = false;
     }
 
     public void ReduceSpeed(float speedPercent, int seconds)
     {
         if (speedPercent == 0f) return;
         StartCoroutine(ReduceSpeedCoroutine(speedPercent, seconds));
-
     }
 
     IEnumerator ReduceSpeedCoroutine(float speedPercent, int seconds)
@@ -501,7 +526,6 @@ public class EnemyMovement : MonoBehaviour
         moveSpeed = speedTemp;
     }
 
-    //------------ EFECTO ONDA EXPANSIVA DE LA BOMBA -------------------
     public void ApplyKnockback(int damage)
     {
         if (!isKnockbackActive)
@@ -514,9 +538,9 @@ public class EnemyMovement : MonoBehaviour
     IEnumerator KnockbackCoroutine()
     {
         isKnockbackActive = true;
-        StopCoroutine("MoveToTile"); // Detiene el movimiento normal
+        StopCoroutine("MoveToTile");
 
-        Vector2 knockbackDirection = -currentDirection; // Dirección contraria al movimiento
+        Vector2 knockbackDirection = -currentDirection;
         Vector2 startPos = transform.position;
         Vector2 targetPos = startPos + (knockbackDirection * tileSize * knockbackTiles);
 
@@ -536,19 +560,15 @@ public class EnemyMovement : MonoBehaviour
     }
 
     //====================  TRAMPERO  ====================//
-
-    // Método para establecer que debe moverse hacia una trampa
     public void SetTrapTarget(Transform trap)
     {
         if (trap != null)
         {
-            // Calcular posición a una distancia segura de la trampa
             Vector2 trapPos = trap.position;
             Vector2 currentPos = transform.position;
             Vector2 direction = (currentPos - trapPos).normalized;
             Vector2 safePosition = trapPos + direction * trapDetectionDistance;
 
-            // Crear un GameObject temporal para marcar la posición objetivo
             GameObject tempTarget = new GameObject("TrapTarget");
             tempTarget.transform.position = safePosition;
             currentMoveTarget = tempTarget.transform;
@@ -556,12 +576,10 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    // Método para limpiar objetivo de trampa y volver al player
     public void ClearTrapTarget()
     {
         if (movingToTrap && currentMoveTarget != player)
         {
-            // Destruir el GameObject temporal si existe
             if (currentMoveTarget != null && currentMoveTarget.gameObject.name == "TrapTarget")
             {
                 Destroy(currentMoveTarget.gameObject);
@@ -571,4 +589,12 @@ public class EnemyMovement : MonoBehaviour
         currentMoveTarget = player;
         movingToTrap = false;
     }
+}
+
+// Enum para el sistema LOD
+public enum EnemyLOD
+{
+    High,    // Cerca del player
+    Medium,  // Distancia media
+    Low      // Lejos del player
 }

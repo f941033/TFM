@@ -315,17 +315,21 @@ public class EnemyController : MonoBehaviour
         while (attackingWall && wallTarget != null)
         {
             // Verificar antes de cada ataque si hay camino al player
-            var movement = GetComponent<EnemyMovement>();
-            var path = movement.FindPathBFS(
-                movement.SnapToGrid(transform.position),
-                movement.SnapToGrid(playerTarget.position)
-            );
-            if (path != null && path.Count > 0)
+            if (PathfindingManager.Instance != null)
             {
-                // ¡Camino abierto! Salir del modo emergencia
-                attackingWall = false;
-                Debug.Log($"[{gameObject.name}] Camino al player disponible, deteniendo ataque a muros.");
-                break;
+                var movement = GetComponent<EnemyMovement>();
+                var path = PathfindingManager.Instance.FindPathBFS(
+                    movement.SnapToGrid(transform.position),
+                    movement.SnapToGrid(playerTarget.position)
+                );
+
+                if (path != null && path.Count > 0)
+                {
+                    // ¡Camino abierto! Salir del modo emergencia
+                    attackingWall = false;
+                    Debug.Log($"[{gameObject.name}] Camino al player disponible, deteniendo ataque a muros.");
+                    break;
+                }
             }
 
             // Si llega aquí, el path sigue bloqueado → atacar muro
