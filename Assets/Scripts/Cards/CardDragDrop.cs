@@ -23,9 +23,9 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public Tilemap tilemap;
     public LayerMask obstacleLayers; // Capas de obstáculos (paredes, etc.)
     public LayerMask spawnPointLayers;
-    LayerMask trapLayers;
+    LayerMask trapLayers, playerLayer;
     public Tilemap obstacleTilemap; // Tilemap de obstáculos (opcional)
-    public float checkRadius = 0.5f; // Radio para verificación de colisión
+    float checkRadius = 0.35f; // Radio para verificación de colisión
     public GameObject borderPrefab_1, borderPrefab_4;
     private GameObject currentBorder;        //borde temporal durante el arrastre
     [SerializeField] private GraphicRaycaster raycasterUI;
@@ -63,6 +63,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         tilemap = GameObject.Find("Tilemap Laberinto").GetComponent<Tilemap>();
         obstacleTilemap = GameObject.Find("Paredes").GetComponent<Tilemap>();
         trapLayers = LayerMask.GetMask("TrapLayer");
+        playerLayer = LayerMask.GetMask("Player");
     }
 
     void Update()
@@ -213,12 +214,13 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             !Physics2D.OverlapCircle(worldPos, checkRadius, spawnPointLayers);
 
         // 2. Verificar distancia a Player
-        bool isOutsidePlayerRange = true;
-        float distance = Vector3.Distance(worldPos, player.transform.position);
-        if (distance <= 2.25f)
-        {
-            isOutsidePlayerRange = false;
-        }
+        //bool isOutsidePlayerRange = true;
+        //float distance = Vector3.Distance(worldPos, player.transform.position);
+        //if (distance <= 2.25f)
+        //{
+        //    isOutsidePlayerRange = false;
+        //}
+        bool isOutsidePlayerRange = Physics2D.OverlapCircle(worldPos, checkRadius, playerLayer) == null;
 
         // 3. Verificar si ya hay una trampa en esta celda
         bool isCellOccupied = Physics2D.OverlapCircle(worldPos, checkRadius, trapLayers) != null;
@@ -236,7 +238,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         Vector3Int cellPos = dropTilemap.WorldToCell(worldPos);
         bool isSet = false;
 
-        if (dropTilemap.HasTile(cellPos))
+        if (dropTilemap.HasTile(cellPos) && Physics2D.OverlapCircle(worldPos, checkRadius, playerLayer) == null)
         {
             Collider2D col = Physics2D.OverlapPoint(new Vector2(worldPos.x, worldPos.y));
             if (col != null)

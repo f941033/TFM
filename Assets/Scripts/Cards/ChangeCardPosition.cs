@@ -11,9 +11,9 @@ public class ChangeCardPosition : MonoBehaviour
     public LayerMask obstacleLayers; // Capas de obstáculos (paredes, etc.)
     public LayerMask spawnPointLayers;
     LayerMask roomLayers;
-    LayerMask trapLayers;
+    LayerMask trapLayers, playerLayer;
 
-    float checkRadius = 0.4f; // Radio para verificación de colisión
+    float checkRadius = 0.35f; // Radio para verificación de colisión
     PlayerController player;
     //Vector3 previousPosition;
 
@@ -26,6 +26,7 @@ public class ChangeCardPosition : MonoBehaviour
         player = FindFirstObjectByType<PlayerController>();
         trapLayers = LayerMask.GetMask("TrapLayer");
         roomLayers = LayerMask.GetMask("Room");
+        playerLayer = LayerMask.GetMask("Player");
     }
 
     // Update is called once per frame
@@ -59,12 +60,13 @@ public class ChangeCardPosition : MonoBehaviour
             !Physics2D.OverlapCircle(worldPos, checkRadius, spawnPointLayers);
 
         // 2. Verificar distancia a Player
-        bool isOutsidePlayerRange = true;
-        float distance = Vector3.Distance(worldPos, player.transform.position);
-        if (distance <= 2.25f)
-        {
-            isOutsidePlayerRange = false;
-        }
+        //bool isOutsidePlayerRange = true;
+        //float distance = Vector3.Distance(worldPos, player.transform.position);
+        //if (distance <= 2.25f)
+        //{
+        //    isOutsidePlayerRange = false;
+        //}
+        bool isOutsidePlayerRange = Physics2D.OverlapCircle(worldPos, checkRadius, playerLayer) == null;
 
         // 3. Verificar si ya hay una trampa en esta celda
         bool isCellOccupied = Physics2D.OverlapCircle(worldPos, checkRadius, trapLayers) != null;

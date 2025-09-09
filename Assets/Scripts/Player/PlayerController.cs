@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float baseHealth { get; set; } = 100f;
     private float baseDamage = 15f;
     private float baseAttackSpeed = 1f;
-    private float baseRange = 1f;
+    private float baseRange = 0.5f;
     private float baseSoulsRate = 1f;
     [SerializeField] public float maxSouls = 15f;
     public PlayerSoulsBar playerSouls;
