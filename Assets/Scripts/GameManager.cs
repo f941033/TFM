@@ -96,14 +96,13 @@ public class GameManager : MonoBehaviour
             if (ZeroEnemies())
             {
                 enemiesDied = 0;
-                Invoke("EndWave", 1f);
+                Invoke("EndWave", 1.5f);
             }
     }
 
     private bool ZeroEnemies()
     {
         EnemyController[] allEnemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
-
         foreach (EnemyController enemy in allEnemies)
         {
             if (enemy != null && enemy.gameObject.activeInHierarchy && enemy.IsAlive())
@@ -111,15 +110,12 @@ public class GameManager : MonoBehaviour
                 return false; // Hay al menos un enemigo vivo
             }
         }
-
-        return true; // No hay enemigos vivos
-
+        return true;
     }
 
     void EndWave()
     {
         EnemyController[] allEnemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
-
         foreach (EnemyController enemy in allEnemies)
         {
             if (enemy != null && enemy.gameObject.activeInHierarchy && enemy.IsAlive())
