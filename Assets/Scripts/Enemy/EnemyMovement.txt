@@ -526,7 +526,6 @@ public class EnemyMovement : MonoBehaviour
         moveSpeed = speedTemp;
     }
 
-    // ================ ONDA EXPANSIVA DE LA BOMBA ================
     public void ApplyKnockback(int damage)
     {
         if (!isKnockbackActive)
@@ -543,222 +542,22 @@ public class EnemyMovement : MonoBehaviour
 
         Vector2 knockbackDirection = -currentDirection;
         Vector2 startPos = transform.position;
-
-        // NUEVA LÓGICA: Calcular hasta dónde puede llegar sin atravesar obstáculos
-        Vector2 finalPos = CalculateKnockbackWithCollision(startPos, knockbackDirection);
+        Vector2 targetPos = startPos + (knockbackDirection * tileSize * knockbackTiles);
 
         float elapsed = 0f;
 
         while (elapsed < knockbackDuration)
         {
-            transform.position = Vector2.Lerp(startPos, finalPos, elapsed / knockbackDuration);
+            transform.position = Vector2.Lerp(startPos, targetPos, elapsed / knockbackDuration);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        // Asegurar posición final alineada al grid
-        transform.position = SnapToGrid(finalPos);
-
+        transform.position = targetPos;
         isKnockbackActive = false;
         GetComponent<EnemyController>().ReceiveDamage(damage);
         ClearAndRepath();
     }
-
-    // NUEVO MÉTODO: Calcular knockback con detección de colisiones
-    Vector2 CalculateKnockbackWithCollision(Vector2 startPos, Vector2 knockbackDirection)
-    {
-        Vector2 currentPos = startPos;
-        Vector2 normalizedDirection = knockbackDirection.normalized;
-
-        // Verificar tile por tile en la dirección del knockback
-        for (int i = 1; i <= knockbackTiles; i++)
-        {
-            Vector2 nextPos = startPos + (normalizedDirection * tileSize.magnitude * i);
-            Vector2 snappedNextPos = SnapToGrid(nextPos);
-
-            // Si la siguiente posición es un obstáculo, detenerse en la actual
-            if (IsObstacleAtWorldPosition(snappedNextPos))
-            {
-                Debug.Log($"[{gameObject.name}] Knockback detenido en tile {i - 1} por obstáculo en {snappedNextPos}");
-                break;
-            }
-
-            // Si la posición es válida, actualizar la posición actual
-            currentPos = snappedNextPos;
-        }
-
-        // Si no se pudo mover ni un tile, intentar posiciones adyacentes
-        if (Vector2.Distance(currentPos, startPos) < 0.1f)
-        {
-            currentPos = FindAdjacentValidPosition(SnapToGrid(startPos));
-        }
-
-        return currentPos;
-    }
-
-    // NUEVO MÉTODO: Verificar si hay obstáculo en una posición del mundo
-    bool IsObstacleAtWorldPosition(Vector2 worldPos)
-    {
-        Vector2Int gridPos = WorldToGrid(worldPos);
-        return IsObstacle(gridPos);
-    }
-
-    // NUEVO MÉTODO: Buscar una posición adyacente válida si no se puede hacer knockback
-    Vector2 FindAdjacentValidPosition(Vector2 currentPos)
-    {
-        // Verificar las 4 direcciones cardinales adyacentes
-        Vector2[] adjacentDirections = {
-        Vector2.up * tileSize.y,
-        Vector2.down * tileSize.y,
-        Vector2.left * tileSize.x,
-        Vector2.right * tileSize.x
-    };
-
-        foreach (Vector2 direction in adjacentDirections)
-        {
-            Vector2 adjacentPos = currentPos + direction;
-            Vector2 snappedPos = SnapToGrid(adjacentPos);
-
-            if (!IsObstacleAtWorldPosition(snappedPos))
-            {
-                Debug.Log($"[{gameObject.name}] Knockback mínimo a posición adyacente: {snappedPos}");
-                return snappedPos;
-            }
-        }
-
-        // Si no hay posiciones adyacentes válidas, quedarse donde está
-        Debug.Log($"[{gameObject.name}] No se puede aplicar knockback - rodeado de obstáculos");
-        return currentPos;
-    }
-
-    // MÉTODO MEJORADO: Versión más precisa del SnapToGrid para knockback
-    Vector2 SnapToGrid(Vector2 pos)
-    {
-        float x = Mathf.Round(pos.x / tileSize.x) * tileSize.x;
-        float y = Mathf.Round(pos.y / tileSize.y) * tileSize.y;
-        return new Vector2(x, y);
-    }
-
-    // NUEVO MÉTODO: Buscar posición válida para knockback
-    //Vector2 FindValidKnockbackPosition(Vector2 startPos, Vector2 knockbackDirection)
-    //{
-    //    Vector2 originalTarget = startPos + (knockbackDirection * tileSize * knockbackTiles);
-    //    Vector2 snappedTarget = SnapToGrid(originalTarget);
-
-    //    // Si la posición objetivo es válida, usarla
-    //    if (IsValidPosition(snappedTarget))
-    //    {
-    //        return snappedTarget;
-    //    }
-
-    //    // Si no es válida, buscar la posición más cercana válida
-    //    return FindNearestValidPosition(snappedTarget, startPos);
-    //}
-
-    // NUEVO MÉTODO: Verificar si una posición es válida (no es obstáculo)
-    bool IsValidPosition(Vector2 worldPos)
-    {
-        Vector2Int gridPos = WorldToGrid(worldPos);
-        return !IsObstacle(gridPos);
-    }
-
-    // NUEVO MÉTODO: Buscar la posición válida más cercana
-    //Vector2 FindNearestValidPosition(Vector2 targetPos, Vector2 originalPos)
-    //{
-    //    // Lista de posiciones candidatas, empezando por la más cercana
-    //    List<Vector2> candidates = new List<Vector2>();
-
-    //    Vector2 snappedOriginal = SnapToGrid(originalPos);
-
-    //    // Buscar en un radio creciente alrededor de la posición objetivo
-    //    for (int radius = 0; radius <= knockbackTiles + 2; radius++)
-    //    {
-    //        // Agregar posiciones en el radio actual
-    //        for (int x = -radius; x <= radius; x++)
-    //        {
-    //            for (int y = -radius; y <= radius; y++)
-    //            {
-    //                // Solo verificar posiciones en el borde del radio (no el interior ya verificado)
-    //                if (radius == 0 || Mathf.Abs(x) == radius || Mathf.Abs(y) == radius)
-    //                {
-    //                    Vector2 candidate = targetPos + new Vector2(x * tileSize.x, y * tileSize.y);
-
-    //                    // Verificar que no sea la posición original del enemigo
-    //                    if (Vector2.Distance(candidate, snappedOriginal) > 0.1f && IsValidPosition(candidate))
-    //                    {
-    //                        candidates.Add(candidate);
-    //                    }
-    //                }
-    //            }
-    //        }
-
-    //        // Si encontramos candidatos en este radio, elegir el más cercano en la dirección del knockback
-    //        if (candidates.Count > 0)
-    //        {
-    //            return GetBestKnockbackCandidate(candidates, originalPos, targetPos);
-    //        }
-    //    }
-
-    //    // Si no se encuentra ninguna posición válida, mantener la posición original
-    //    Debug.LogWarning($"[{gameObject.name}] No se encontró posición válida para knockback. Manteniendo posición original.");
-    //    return snappedOriginal;
-    //}
-
-    // NUEVO MÉTODO: Elegir el mejor candidato basado en la dirección del knockback
-    //Vector2 GetBestKnockbackCandidate(List<Vector2> candidates, Vector2 originalPos, Vector2 targetPos)
-    //{
-    //    Vector2 knockbackDir = (targetPos - originalPos).normalized;
-    //    Vector2 bestCandidate = candidates[0];
-    //    float bestScore = float.MinValue;
-
-    //    foreach (Vector2 candidate in candidates)
-    //    {
-    //        Vector2 candidateDir = (candidate - originalPos).normalized;
-    //        float distance = Vector2.Distance(originalPos, candidate);
-
-    //        // Puntuación basada en:
-    //        // 1. Qué tan alineado está con la dirección del knockback (más importante)
-    //        // 2. Qué tan lejos está del punto original (knockback más fuerte es mejor)
-    //        float directionScore = Vector2.Dot(candidateDir, knockbackDir) * 2f;  // Peso x2 para dirección
-    //        float distanceScore = distance / (knockbackTiles * tileSize.magnitude); // Normalizado
-
-    //        float totalScore = directionScore + distanceScore;
-
-    //        if (totalScore > bestScore)
-    //        {
-    //            bestScore = totalScore;
-    //            bestCandidate = candidate;
-    //        }
-    //    }
-
-    //    return bestCandidate;
-    //}
-
-
-    // ===========  OLD ======================
-    //IEnumerator KnockbackCoroutine()
-    //{
-    //    isKnockbackActive = true;
-    //    StopCoroutine("MoveToTile");
-
-    //    Vector2 knockbackDirection = -currentDirection;
-    //    Vector2 startPos = transform.position;
-    //    Vector2 targetPos = startPos + (knockbackDirection * tileSize * knockbackTiles);
-
-    //    float elapsed = 0f;
-
-    //    while (elapsed < knockbackDuration)
-    //    {
-    //        transform.position = Vector2.Lerp(startPos, targetPos, elapsed / knockbackDuration);
-    //        elapsed += Time.deltaTime;
-    //        yield return null;
-    //    }
-
-    //    transform.position = targetPos;
-    //    isKnockbackActive = false;
-    //    GetComponent<EnemyController>().ReceiveDamage(damage);
-    //    ClearAndRepath();
-    //}
 
     //====================  TRAMPERO  ====================//
     public void SetTrapTarget(Transform trap)
