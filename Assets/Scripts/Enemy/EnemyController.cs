@@ -484,25 +484,25 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void FlipSprite()
-    {
-        if (currentTarget == null) return;
+    //private void FlipSprite()
+    //{
+    //    if (currentTarget == null) return;
 
-        Vector3 direction = (currentTarget.position - transform.position).normalized;
+    //    Vector3 direction = (currentTarget.position - transform.position).normalized;
 
-        // Voltear horizontalmente si el objetivo está principalmente a la izquierda/derecha
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-        {
-            spriteRenderer.flipX = direction.x < 0;
-        }
-        else
-        {
-            // Para objetivos verticales, opcionalmente podemos usar otro sprite o animación.
-            // En este caso no invertimos horizontalmente, pero la animación de ataque seguirá.
-            // Si se desea que sprite gira verticalmente, habría que usar otra propiedad.
-            spriteRenderer.flipX = false;
-        }
-    }
+    //    // Voltear horizontalmente si el objetivo está principalmente a la izquierda/derecha
+    //    if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+    //    {
+    //        spriteRenderer.flipX = direction.x < 0;
+    //    }
+    //    else
+    //    {
+    //        // Para objetivos verticales, opcionalmente podemos usar otro sprite o animación.
+    //        // En este caso no invertimos horizontalmente, pero la animación de ataque seguirá.
+    //        // Si se desea que sprite gira verticalmente, habría que usar otra propiedad.
+    //        spriteRenderer.flipX = false;
+    //    }
+    //}
 
 
     public void ReduceSpeed(float speedPercent, int seconds)

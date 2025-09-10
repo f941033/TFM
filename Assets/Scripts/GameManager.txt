@@ -66,8 +66,6 @@ public class GameManager : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip clipBackgroundSound;
 
-    private bool endWave = false;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -93,19 +91,13 @@ public class GameManager : MonoBehaviour
 
     public void EnemyKaputt()
     {
-        StartCoroutine(DelayedEndWaveCheck());
-    }
-
-    private IEnumerator DelayedEndWaveCheck()
-    {
-        yield return null;
         enemiesDied++;
         //if (enemiesDied >= enemiesToKillInCurrentWave)
-        if (ZeroEnemies())
-        {
-            enemiesDied = 0;
-            EndWave(); 
-        }
+            if (ZeroEnemies())
+            {
+                enemiesDied = 0;
+                Invoke("EndWave", 1.5f);
+            }
     }
 
     private bool ZeroEnemies()
@@ -123,8 +115,14 @@ public class GameManager : MonoBehaviour
 
     void EndWave()
     {
-        if (endWave) return;
-        endWave = true;
+        EnemyController[] allEnemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
+        foreach (EnemyController enemy in allEnemies)
+        {
+            if (enemy != null && enemy.gameObject.activeInHierarchy && enemy.IsAlive())
+            {
+                return; // Hay al menos un enemigo vivo
+            }
+        }
 
         ChangePhase(GamePhase.Preparation);
         Time.timeScale = 1f;
@@ -335,7 +333,6 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void StartRun()
     {
-        endWave = false;
         FindAnyObjectByType<AudioManager>().PlayBackgroundSound(2);
         spawnStarted = false; 
         inPrepPhase = false;
