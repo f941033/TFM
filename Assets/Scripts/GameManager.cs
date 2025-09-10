@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator DelayedEndWaveCheck()
     {
-        yield return null;
+        yield return new WaitForSecondsRealtime(2f);
         enemiesDied++;
         //if (enemiesDied >= enemiesToKillInCurrentWave)
         if (ZeroEnemies())
