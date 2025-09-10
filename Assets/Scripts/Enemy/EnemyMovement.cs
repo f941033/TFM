@@ -16,8 +16,8 @@ public class EnemyMovement : MonoBehaviour
     private int damage;
 
     [Header("Knockback")]
-    public float knockbackDuration = 0.2f;
-    public int knockbackTiles = 5;
+    public float knockbackDuration = 0.3f;
+    public int knockbackTiles = 3;
     private bool isKnockbackActive = false;
 
     [Header("Trampas")]

@@ -405,8 +405,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   tileSize: {x: 0.5, y: 0.5}
-  knockbackDuration: 0.2
-  knockbackTiles: 5
+  knockbackDuration: 0.3
+  knockbackTiles: 3
   trapLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -416,6 +416,9 @@ MonoBehaviour:
   wallDetectionRange: 50
   wallApproachRadius: 4
   wallTargetPosition: {x: 0, y: 0, z: 0}
+  currentLOD: 0
+  highLODDistance: 10
+  mediumLODDistance: 25
   playerTag: Player
   path: []
   pathIndex: 0
