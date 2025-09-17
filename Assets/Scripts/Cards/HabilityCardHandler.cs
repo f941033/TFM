@@ -41,7 +41,6 @@ public class HabilityCardHandler : MonoBehaviour
 
     public void OnClickBuff()
     {
-        Debug.Log("Clico la carta");
         if (cardData is BuffCardData buff)
         {
             if (cooldownRemaining > 0f)
@@ -49,7 +48,6 @@ public class HabilityCardHandler : MonoBehaviour
                 FindFirstObjectByType<GameManager>().ShowMessage("The power you crave is on cooldown and it denies you its strength.", 4);
                 return;
             }
-            Debug.Log("Aplico el bufo");
             buff.Play(player, Vector3.zero);
             cooldownRemaining = buff.cooldown;
             overlayImage.gameObject.SetActive(true);
@@ -80,7 +78,6 @@ public class HabilityCardHandler : MonoBehaviour
     {
         if (cardData is BuffCardData buff)
         {
-            Debug.Log("la carta es bufo");
             return buff.cooldown;
         }
 
@@ -121,8 +118,8 @@ public class HabilityCardHandler : MonoBehaviour
     if (overlayImage != null) overlayImage.fillAmount = 1f;
     if (button != null) button.interactable = true;
 
-    // Limpia o pon "Ready"
-    if (cooldownText != null) cooldownText.text = "";
+        // Limpia o pon "Ready"
+        if (cooldownText != null){} cooldownText.text = GetCooldownValue().ToString();
 
     cooldownRoutine = null;
 }
