@@ -566,7 +566,8 @@ public class EnemyController : MonoBehaviour
     public void ReceiveDamageFrom(float damage, object source)
     {
         if (dead) return;
-        health -= damage;
-        if (health <= 0f) Die(lethalSource: source);
+        currentHealth -= damage;
+        healthBarUI.fillAmount = currentHealth / health;
+        if (currentHealth <= 0f) Die(lethalSource: source);
     }
 }

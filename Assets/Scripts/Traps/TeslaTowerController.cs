@@ -133,10 +133,13 @@ public class TeslaTowerController : MonoBehaviour
             // Daño en rayo de conexión (a todos los que pasen)
             if (connectionDealsDamage && remainingKills > 0)
             {
-                foreach (var other in connectedTowers)
+                var partners = connectedTowers.ToArray(); // ← SNAPSHOT
+                for (int i = 0; i < partners.Length; i++)
                 {
+                    if (isDeactivated) break;            // por si te desactivas a mitad
+                    var other = partners[i];
                     if (other == null) continue;
-                    if (IsConnectionOwner(other)) // evitar doble aplicación
+                    if (IsConnectionOwner(other))
                         ConnectionAttack(other);
                 }
             }
@@ -242,11 +245,13 @@ public class TeslaTowerController : MonoBehaviour
         if (isDeactivated) return;
         isDeactivated = true;
 
-        // Romper conexiones visuales y lógicas
-        foreach (var o in connectedTowers)
+        var partners = connectedTowers.ToArray();   // ← SNAPSHOT
+        foreach (var o in partners)
             if (o != null) o.RemoveConnectionWith(this);
+
         foreach (var lr in connectionLines)
             if (lr != null) Destroy(lr.gameObject);
+
         connectionLines.Clear();
         connectedTowers.Clear();
 
@@ -256,7 +261,6 @@ public class TeslaTowerController : MonoBehaviour
 
         Destroy(gameObject);
     }
-
     void UpdateConnectionLines()
     {
         for (int i = 0; i < connectedTowers.Count && i < connectionLines.Count; i++)
@@ -307,7 +311,8 @@ public class TeslaTowerController : MonoBehaviour
 
     void OnDestroy()
     {
-        foreach (var o in connectedTowers)
+        var partners = connectedTowers.ToArray();
+        foreach (var o in partners)
             if (o != null) o.RemoveConnectionWith(this);
 
         foreach (var lr in connectionLines)
