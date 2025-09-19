@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47e48fa3cd8cc64f9cc33161ab19c13, type: 3}
   m_Name: Potion
   m_EditorClassIdentifier: 
-  itemName: Brebaje
+  itemName: Potion
   icon: {fileID: -2880734798192188640, guid: a5a511c27480964408745c0056ba9b83, type: 3}
   cost: 50
   healPercent: 0.6

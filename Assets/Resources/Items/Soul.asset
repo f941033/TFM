@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0dfd1800323ce4c8899b6743dc6143, type: 3}
   m_Name: Soul
   m_EditorClassIdentifier: 
-  itemName: Alma
+  itemName: Soul
   icon: {fileID: 2286080486149089054, guid: aa5b37749b01d5f408ebdca2b3198a24, type: 3}
   cost: 50
