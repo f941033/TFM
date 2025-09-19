@@ -11,7 +11,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private Color originalColor;
 
     [Header("Referencias")]
-    public Image cardImage;
+    public Image haloImage;
     private CardSelector cardSelector;
 
     // Hover en escala y animaci�n
@@ -31,11 +31,8 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     void Awake()
     {
-        if (cardImage == null)
-            cardImage = GetComponentInChildren<Image>();
-        originalColor = cardImage.color;
         cardSelector = GetComponent<CardSelector>();
-
+        haloImage.gameObject.SetActive(false);
         rectTransform = GetComponent<RectTransform>();
         originalScale = rectTransform.localScale;
     }
@@ -81,7 +78,13 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if (GameManager.CurrentPhase != GamePhase.Preparation &&
             GameManager.CurrentPhase != GamePhase.Action)
         {
-            if (!cardSelector.isSelected) cardImage.color = hoverColor;
+            if (!cardSelector.isSelected)
+            {
+                Color c = haloImage.color;
+                c.a = 0.2f;
+                haloImage.color = c;
+                haloImage.gameObject.SetActive(true);
+            }
             return;
         }
 
@@ -107,7 +110,9 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if (GameManager.CurrentPhase != GamePhase.Preparation &&
             GameManager.CurrentPhase != GamePhase.Action)
         {
-            if (!cardSelector.isSelected) cardImage.color = originalColor;
+            if (!cardSelector.isSelected)
+                haloImage.gameObject.SetActive(false);
+            
             return;
         }
 

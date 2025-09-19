@@ -5,19 +5,18 @@ using TMPro;
 
 public class CardSelector : MonoBehaviour, IPointerClickHandler
 {
-    public Image cardImage; // Asigna el componente Image de la carta en el inspector
+    public Image haloImage;
     public Color selectedColor = Color.green;
     public Color deselectedColor = Color.white;
     [HideInInspector] public bool isSelected = false;
-
     private CardSelectionManager selectionManager;
-    private CardDragDrop dataHolder; // Script que referencia el ScriptableObject cardData ¿cómo lo obtengo directamente?
+    private CardDragDrop dataHolder;
     public TextMeshProUGUI textName;
     void Awake()
     {
         selectionManager = FindAnyObjectByType<CardSelectionManager>();
         dataHolder = GetComponent<CardDragDrop>();
-        cardImage.color = deselectedColor;
+        haloImage.gameObject.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -28,13 +27,16 @@ public class CardSelector : MonoBehaviour, IPointerClickHandler
     public void Select()
     {
         isSelected = true;
-        cardImage.color = selectedColor;
+        Color c = haloImage.color;
+        c.a = 1f;
+        haloImage.color = c;
+        haloImage.gameObject.SetActive(true);
     }
 
     public void Deselect()
     {
         isSelected = false;
-        cardImage.color = deselectedColor;
+        haloImage.gameObject.SetActive(false);
     }
 
     public CardData GetCardData()

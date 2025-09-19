@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5540751946467247293}
   - component: {fileID: 1890178160205079234}
   - component: {fileID: 7752803208183232184}
-  - component: {fileID: 2908380642390555194}
   - component: {fileID: 8529965974362281586}
   - component: {fileID: 553415580947659074}
   - component: {fileID: 6613778939926741901}
@@ -107,20 +106,6 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
---- !u!114 &2908380642390555194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228139822927816391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1357604c42b203439f2837ba45f0fb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 228139822927816391}
-  hoverLayer: {fileID: 0}
 --- !u!114 &8529965974362281586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverColor: {r: 0.3443396, g: 1, b: 0.7557343, a: 0.78431374}
-  cardImage: {fileID: 0}
+  haloImage: {fileID: 5715179808903078328}
   basePosition: {x: 0, y: 0, z: 0}
   animationDuration: 0.2
   easeCurve:
@@ -253,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6f2377657ba6b4196f777d795168a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardImage: {fileID: 2075047113887814455}
+  haloImage: {fileID: 5715179808903078328}
   selectedColor: {r: 0, g: 1, b: 0, a: 0.8235294}
   deselectedColor: {r: 1, g: 1, b: 1, a: 1}
   isSelected: 0
