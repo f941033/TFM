@@ -111,11 +111,12 @@ public class CardUI : MonoBehaviour
             cooldownFillImage.gameObject.SetActive(true);
             textType.text = "SPELL";
         }
-        if (GameManager.CurrentPhase == GamePhase.Deck ||
+        /*if (GameManager.CurrentPhase == GamePhase.Deck ||
             GameManager.CurrentPhase == GamePhase.Pause)
         {
             Destroy(this.GetComponent<CardHoverInHand>());
         }
+        */
         if (GameManager.CurrentPhase == GamePhase.Preparation ||
             GameManager.CurrentPhase == GamePhase.Action)
         {

@@ -6,8 +6,6 @@ using TMPro;
 public class CardSelector : MonoBehaviour, IPointerClickHandler
 {
     public Image haloImage;
-    public Color selectedColor = Color.green;
-    public Color deselectedColor = Color.white;
     [HideInInspector] public bool isSelected = false;
     private CardSelectionManager selectionManager;
     private CardDragDrop dataHolder;

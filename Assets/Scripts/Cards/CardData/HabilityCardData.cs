@@ -32,12 +32,10 @@ public class HabilityCardData : CardData
     {
         ShowAreaEffect(worldPosition, effectRadius);
         var enemies = Physics2D.OverlapCircleAll(worldPosition, effectRadius, enemyLayer);
-        Debug.Log("he jugado la carta de habilidad");
         foreach (var enemy in enemies)
         {
             var e = enemy.GetComponent<EnemyController>();
             if (e == null) continue;
-            Debug.Log("He encontrado un enemigo");
             if (applyDamage)
                 e.ReceiveDamage(damage);
 

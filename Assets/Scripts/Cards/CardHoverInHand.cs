@@ -6,10 +6,6 @@ using System.Collections;
 
 public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [Header("Configuraci�n")]
-    public Color hoverColor = new Color(1f, 0.9f, 0.6f, 1f);
-    private Color originalColor;
-
     [Header("Referencias")]
     public Image haloImage;
     private CardSelector cardSelector;
