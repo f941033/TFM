@@ -91,13 +91,13 @@ Material:
     - __dirty: 0
     - _intenceB: 1.08
     m_Colors:
-    - _B: {r: 0.17085941, g: 0.10849059, b: 1, a: 0}
+    - _B: {r: 0.02419533, g: 0.19268733, b: 0, a: 1}
     - _Color01: {r: 1, g: 0.43921572, b: 0, a: 0}
     - _Color02: {r: 1, g: 0.2627451, b: 0, a: 0}
     - _Color03: {r: 1, g: 0, b: 0.14508247, a: 0}
     - _Color04: {r: 1, g: 0, b: 0.28442144, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _G: {r: 0, g: 0.6219907, b: 1, a: 0}
+    - _G: {r: 0, g: 2, b: 0.13824892, a: 0}
     - _Outline: {r: 1, g: 1, b: 1, a: 0}
     - _R: {r: 1, g: 0.9911022, b: 0.57112503, a: 0}
     - _UVDP: {r: 0.05, g: -0.05, b: 0, a: 0}
@@ -107,3 +107,4 @@ Material:
     - _UVP: {r: 0, g: 0, b: 0, a: 0}
     - _UVS: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
