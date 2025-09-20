@@ -450,9 +450,16 @@ public class EnemyController : MonoBehaviour
     {
         currentHealth -= damage;
         healthBarUI.fillAmount = currentHealth / health;
+        StartCoroutine(RedDamage());
         if (currentHealth <= 0) Die(lethalSource : null);
     }
 
+    IEnumerator RedDamage()
+    {
+        GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(1f);
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
     private void Die(object lethalSource)
     {
         if (dead) return;
