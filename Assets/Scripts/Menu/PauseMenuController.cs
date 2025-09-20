@@ -36,9 +36,12 @@ public class PauseMenuController : MonoBehaviour
     private GameManager gameManager;
     private CardManager cardManager;
     [SerializeField] private TextMeshProUGUI titleText;
+    public GameObject gm;
 
     void Awake()
     {
+        gm.SetActive(true);
+
         // encontremos el gestor de cartas para leer el deck actual
         gameManager = FindFirstObjectByType<GameManager>();
         cardManager = FindFirstObjectByType<CardManager>();
