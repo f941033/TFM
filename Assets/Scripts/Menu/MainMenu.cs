@@ -12,7 +12,8 @@ public class MainMenu : MonoBehaviour
     {
         int reinicioDesdeGameOver = PlayerPrefs.GetInt("ReinicioDesdeGameOver", 0);
         if (reinicioDesdeGameOver == 1)
-        {            
+        {
+            PlayerPrefs.SetInt("ReinicioDesdeGameOver", 0);
             if (panelInicial != null) panelInicial.SetActive(true);
             if(gameObject.name != "CanvasGameOver") gameObject.SetActive(false);
         }
