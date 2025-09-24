@@ -34,7 +34,7 @@ public class HoverScaleSimple : MonoBehaviour, IPointerEnterHandler, IPointerExi
         float elapsed = 0f;
         while (elapsed < animationDuration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             float t = easeCurve.Evaluate(elapsed / animationDuration);
             transform.localScale = Vector3.Lerp(fromScale, toScale, t);
             yield return null;
