@@ -35,6 +35,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public int amountGold = 50;
     [SerializeField] public byte soulsBuyPerShop = 0;
 
+    [Header("Player bar stats")]
+    [SerializeField] private TextMeshProUGUI damageText;
+    [SerializeField] private TextMeshProUGUI SpeedAttackText;
+    [SerializeField] private TextMeshProUGUI rangeText;
 
     //[Header("Events")]
     public event Action<float> OnSoulsChanged;
@@ -56,6 +60,10 @@ public class PlayerController : MonoBehaviour
         currentRange = baseRange;
         currentSouls = 6f;
         currentSoulsRate = baseSoulsRate;
+        
+        damageText.text = currentDamage.ToString();
+        SpeedAttackText.text = currentAttackSpeed.ToString();
+        rangeText.text = currentRange.ToString();
 
         rangeTrigger = GetComponent<CircleCollider2D>();
         rangeTrigger.isTrigger = true;
@@ -86,13 +94,16 @@ public class PlayerController : MonoBehaviour
                 break;
             case BuffType.Damage:
                 currentDamage *= modifier;
+                damageText.text = currentDamage.ToString();
                 break;
             case BuffType.AttackSpeed:
                 currentAttackSpeed *= modifier;
+                SpeedAttackText.text = currentAttackSpeed.ToString();
                 break;
             case BuffType.Range:
                 currentRange *= modifier;
                 rangeTrigger.radius = currentRange;
+                rangeText.text = currentRange.ToString();
                 break;
         }
         yield return new WaitForSeconds(duration);
@@ -104,13 +115,16 @@ public class PlayerController : MonoBehaviour
                 break;
             case BuffType.Damage:
                 currentDamage /= modifier;
+                damageText.text = currentDamage.ToString();
                 break;
             case BuffType.AttackSpeed:
                 currentAttackSpeed /= modifier;
+                SpeedAttackText.text = currentAttackSpeed.ToString();
                 break;
             case BuffType.Range:
                 currentRange /= modifier;
                 rangeTrigger.radius = currentRange;
+                rangeText.text = currentRange.ToString();
                 break;
         }
     }
