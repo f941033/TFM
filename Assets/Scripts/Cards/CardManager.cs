@@ -460,4 +460,9 @@ public class CardManager : MonoBehaviour
             return true;
         }
     }
+
+    public void ClearLastCard()
+    {
+        lastCardUsed = null;
+    }
 }

@@ -335,6 +335,7 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void StartRun()
     {
+        cardManager.ClearLastCard();
         endWave = false;
         FindAnyObjectByType<AudioManager>().PlayBackgroundSound(2);
         spawnStarted = false; 

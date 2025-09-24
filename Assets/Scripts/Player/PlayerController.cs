@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float baseHealth { get; set; } = 100f;
     private float baseDamage = 15f;
     private float baseAttackSpeed = 1f;
-    private float baseRange = 0.5f;
+    private float baseRange = 1f;
     private float baseSoulsRate = 1f;
     [SerializeField] public float maxSouls = 15f;
     public PlayerSoulsBar playerSouls;
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         currentRange = baseRange;
         currentSouls = 6f;
         currentSoulsRate = baseSoulsRate;
-        
+
         damageText.text = currentDamage.ToString();
         SpeedAttackText.text = currentAttackSpeed.ToString();
         rangeText.text = currentRange.ToString();
@@ -87,21 +87,26 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator ApplyBuffCoroutine(BuffType buff, float modifier, float duration)
     {
+        
+        float oldHealth = currentHealth;
+        float oldDamage = currentDamage;
+        float oldAttackSpeed = currentAttackSpeed;
+        float oldRange  = currentRange;
         switch (buff)
         {
             case BuffType.Health:
-                currentHealth *= modifier;
+                currentHealth = Mathf.CeilToInt(currentHealth * modifier);
                 break;
             case BuffType.Damage:
-                currentDamage *= modifier;
+                currentDamage = Mathf.CeilToInt(currentDamage * modifier);
                 damageText.text = currentDamage.ToString();
                 break;
             case BuffType.AttackSpeed:
-                currentAttackSpeed *= modifier;
+                currentAttackSpeed = Mathf.CeilToInt(currentAttackSpeed * modifier);
                 SpeedAttackText.text = currentAttackSpeed.ToString();
                 break;
             case BuffType.Range:
-                currentRange *= modifier;
+                currentRange = Mathf.CeilToInt(currentRange * modifier);
                 rangeTrigger.radius = currentRange;
                 rangeText.text = currentRange.ToString();
                 break;
@@ -111,18 +116,18 @@ public class PlayerController : MonoBehaviour
         switch (buff)
         {
             case BuffType.Health:
-                currentHealth /= modifier;
+                currentHealth = oldHealth;
                 break;
             case BuffType.Damage:
-                currentDamage /= modifier;
+                currentDamage = oldDamage;
                 damageText.text = currentDamage.ToString();
                 break;
             case BuffType.AttackSpeed:
-                currentAttackSpeed /= modifier;
+                currentAttackSpeed = oldAttackSpeed;
                 SpeedAttackText.text = currentAttackSpeed.ToString();
                 break;
             case BuffType.Range:
-                currentRange /= modifier;
+                currentRange = oldRange;
                 rangeTrigger.radius = currentRange;
                 rangeText.text = currentRange.ToString();
                 break;

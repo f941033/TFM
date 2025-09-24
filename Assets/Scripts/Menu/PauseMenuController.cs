@@ -37,6 +37,8 @@ public class PauseMenuController : MonoBehaviour
     private CardManager cardManager;
     [SerializeField] private TextMeshProUGUI titleText;
     public GameObject gm;
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject initialCanvas;
 
     void Awake()
     {
@@ -64,8 +66,9 @@ public class PauseMenuController : MonoBehaviour
     void Update()
     {
         // tecla Escape para abrir/cerrar pausa
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.CurrentPhase != GamePhase.Deck)
         {
+            if ((mainMenu != null && mainMenu.activeInHierarchy) || (initialCanvas != null && initialCanvas.activeInHierarchy)) return;
             if (isPaused)
                 ResumeGame();
             else
