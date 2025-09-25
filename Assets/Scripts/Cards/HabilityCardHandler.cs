@@ -41,7 +41,7 @@ public class HabilityCardHandler : MonoBehaviour
 
     public void OnClickBuff()
     {
-        if (cardData is BuffCardData buff)
+        /*if (cardData is BuffCardData buff)
         {
             if (cooldownRemaining > 0f)
             {
@@ -53,6 +53,7 @@ public class HabilityCardHandler : MonoBehaviour
             overlayImage.gameObject.SetActive(true);
             StartCooldown();
         }
+        */
     }
 
     public void StartCooldown()

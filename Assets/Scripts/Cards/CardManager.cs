@@ -75,36 +75,23 @@ public class CardManager : MonoBehaviour
         drawPile.RemoveAt(0);
         gameManager.textNumberOfCardsDeck.text = drawPile.Count.ToString();
 
-        // ------------- INSTANCIAR LA CARTA ------------- //
         var cardData = Instantiate(prefabCard, handTransform.position, Quaternion.identity, handTransform);
         CardUI cardUI = cardData.GetComponentInChildren<CardUI>();
         cardUI.SetCardUI(cardToDraw);
 
-        if (cardToDraw.cardType == CardType.Trap || cardToDraw.cardType == CardType.DeckEffect || cardToDraw.cardType == CardType.Summon)
+        var drag = cardData.GetComponent<CardDragDrop>();
+        drag.dropTilemap = zonaValidaTilemap;
+        drag.cardData = cardToDraw;
+        drag.player = player;
+        drag.Deck = this;
+        
+        if (cardToDraw.cardType == CardType.Hability || cardToDraw.cardType == CardType.Buff)
         {
-            var drag = cardData.GetComponent<CardDragDrop>();
-            drag.dropTilemap = zonaValidaTilemap;
-            drag.cardData = cardToDraw;
-            drag.player = player;
-            drag.Deck = this;
-        }
-        else if (cardToDraw.cardType == CardType.Hability)
-        {
-            var drag = cardData.GetComponent<CardDragDrop>();
-            drag.dropTilemap = zonaValidaTilemap;
-            drag.cardData = cardToDraw;
-            drag.player = player;
-            drag.Deck = this;
 
             HabilityCardHandler hability = cardData.GetComponentInChildren<HabilityCardHandler>();
             hability.Initialize(cardToDraw, player);
         }
-        else if (cardToDraw is BuffCardData buffData)
-        {
-            Destroy(cardData.GetComponent<CardDragDrop>());
-            HabilityCardHandler hability = cardData.GetComponentInChildren<HabilityCardHandler>();
-            hability.Initialize(buffData, player);
-        }
+
         cardsInHand.Add(cardData);
         UpdateHandVisuals();
     }
@@ -167,8 +154,9 @@ public class CardManager : MonoBehaviour
 
     public void CardPlayed(GameObject card, CardData cardData)
     {
-        if (cardData.cardType != CardType.Hability)
+        if (cardData.cardType != CardType.Hability && cardData.cardType != CardType.Buff)
         {
+            Debug.Log("He enctrado porque no es habilidad ni bufo");
             cardsInHand.Remove(card);
             discardPile.Add(cardData);
             Destroy(card);
@@ -197,8 +185,7 @@ public class CardManager : MonoBehaviour
             var cardUI = cardObj.GetComponentInChildren<CardUI>();
             cardUI.SetCardUI(cardData);
 
-            Debug.Log("la carta cogida de descartes es: " + cardData.cardName);
-            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect || cardData.cardType == CardType.Hability || cardData.cardType == CardType.Summon)
+            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect || cardData.cardType == CardType.Summon)
             {
                 var drag = cardObj.GetComponent<CardDragDrop>();
                 drag.dropTilemap = zonaValidaTilemap;
@@ -206,11 +193,15 @@ public class CardManager : MonoBehaviour
                 drag.player = player;
                 drag.Deck = this;
             }
-            else if (cardData is BuffCardData buffData)
+            else if (cardData.cardType== CardType.Buff || cardData.cardType == CardType.Hability) 
             {
-                Destroy(cardObj.GetComponent<CardDragDrop>());
+                var drag = cardObj.GetComponent<CardDragDrop>();
+                drag.dropTilemap = zonaValidaTilemap;
+                drag.cardData = cardData;
+                drag.player = player;
+                drag.Deck = this;
                 var hability = cardObj.GetComponentInChildren<HabilityCardHandler>();
-                hability.Initialize(buffData, player);
+                hability.Initialize(cardData, player);
             }
 
             cardsInHand.Add(cardObj);
@@ -232,7 +223,7 @@ public class CardManager : MonoBehaviour
             cardUI.SetCardUI(cardData);
 
             Debug.Log("la última carta cogida es: " + cardData.cardName);
-            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect || cardData.cardType == CardType.Hability || cardData.cardType == CardType.Summon)
+            if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect || cardData.cardType == CardType.Summon)
             {
                 var drag = cardObj.GetComponent<CardDragDrop>();
                 drag.dropTilemap = zonaValidaTilemap;
@@ -240,11 +231,15 @@ public class CardManager : MonoBehaviour
                 drag.player = player;
                 drag.Deck = this;
             }
-            else if (cardData is BuffCardData buffData)
+            else if (cardData.cardType == CardType.Buff || cardData.cardType == CardType.Hability)
             {
-                Destroy(cardObj.GetComponent<CardDragDrop>());
+                var drag = cardObj.GetComponent<CardDragDrop>();
+                drag.dropTilemap = zonaValidaTilemap;
+                drag.cardData = cardData;
+                drag.player = player;
+                drag.Deck = this;
                 var hability = cardObj.GetComponentInChildren<HabilityCardHandler>();
-                hability.Initialize(buffData, player);
+                hability.Initialize(cardData, player);
             }
 
             cardsInHand.Add(cardObj);

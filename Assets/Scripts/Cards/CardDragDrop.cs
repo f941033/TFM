@@ -158,6 +158,24 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 return;
             }
         }
+        else if (cardData is BuffCardData buff)
+        {
+            var handler = GetComponent<HabilityCardHandler>();
+            Debug.Log(handler != null);
+            if (handler != null && handler.cooldownRemaining > 0f)
+            {
+                gameManager.ShowMessage("Trying to use it again? Pathetic… it’s still on cooldown.", 4);
+
+                // Cancela el drag: 
+                eventData.pointerDrag = null;
+                eventData.pointerPress = null;
+
+                isDragging = false;
+                canvasGroup.blocksRaycasts = true;
+                canvasGroup.alpha = 1f;
+                return;
+            }
+        }
         originalAnchoredPosition = rectTransform.anchoredPosition;
         originalTransform = transform.parent;
         cardIndex = transform.GetSiblingIndex();
@@ -272,7 +290,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                             case DeckEffectCardData.Effect.LastUsed:
                                 if (Deck.lastCardUsed == null)
                                 {
-                                    gameManager.ShowMessage("No has usado ninguna carta", 2);
+                                    gameManager.ShowMessage("You didn`t use one this round, you fool...", 4);
                                     break;
                                 }
                                 deckEffect.Play(player, worldCenter);
@@ -306,11 +324,20 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                     }
                     else if (cardData.cardType == CardType.Summon)
                     {
-                        Debug.Log("He soltado la carta summon");
                         dropTilemap.SetTileFlags(cellPos, TileFlags.None);
                         cardData.Play(player, worldCenter);
                         Deck.CardPlayed(gameObject, cardData);
                         isSet = true;
+                    }
+                    else if (cardData is BuffCardData buff)
+                    {
+                        buff.Play(player, Vector3.zero);
+                        Deck.CardPlayed(gameObject, cardData);
+                        var handler = GetComponent<HabilityCardHandler>();
+                        if (handler != null)
+                            handler.StartCooldown();
+                        isSet = true;
+                        ReturnToHand();
                     }
 
                     if (hasPrevious)

@@ -139,7 +139,6 @@ public class CardUI : MonoBehaviour
     }
     public void ShowData()
     {
-        // Solo en fases donde quieras permitir ver detalles:
         if (GameManager.CurrentPhase == GamePhase.Deck ||
             GameManager.CurrentPhase == GamePhase.Pause)
         {
