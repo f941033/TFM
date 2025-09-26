@@ -4,8 +4,8 @@ using UnityEngine.Rendering.Universal;
 public class Flicker2DLight : MonoBehaviour
 {
     public Light2D light2D;
-    public float minIntensity = 0.7f;
-    public float maxIntensity = 1.2f;
+    public float minIntensity = 2f;
+    public float maxIntensity = 15f;
     public float flickerSpeed = 0.1f; // Cuanto menor, más rápido cambia
 
     float targetIntensity;
