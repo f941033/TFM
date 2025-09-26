@@ -12,14 +12,15 @@ public class SummonCardData : CardData
 
     public override void Play(PlayerController player, Vector3 worldPosition)
     {
+        float spacing = 1.0f; // distancia entre minions en unidades de mundo (ajústalo a tu tile size)
+
         for (int i = 0; i < numberOfMinions; i++)
         {
-            Vector2 offset = Random.insideUnitCircle * 1f;
-            Vector3 spawnPos = worldPosition + (Vector3)offset;
-            spawnPos.z = 0; // asegurar plano 2D
+            // i=0 aparece en worldPosition; i=1 a 1 unidad a la izquierda; etc.
+            Vector3 spawnPos = worldPosition + Vector3.left * i * spacing;
+            spawnPos.z = 0f; // plano 2D
 
-            GameObject minion = GameObject.Instantiate(minionPrefab, spawnPos, Quaternion.identity);
-            // puedes pasarle el jugador si es necesario:
+            GameObject minion = Instantiate(minionPrefab, spawnPos, Quaternion.identity);
             // minion.GetComponent<MinionController>()?.Initialize(player);
         }
     }
