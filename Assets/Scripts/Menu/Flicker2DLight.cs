@@ -6,7 +6,7 @@ public class Flicker2DLight : MonoBehaviour
     public Light2D light2D;
     public float minIntensity = 2f;
     public float maxIntensity = 20f;
-    public float flickerSpeed = 0.05f; // Cuanto menor, más rápido cambia
+    public float flickerSpeed = 0.2f; // Cuanto menor, más rápido cambia
 
     float targetIntensity;
     float timer;

@@ -101,18 +101,6 @@ public class SpawnEnemies : MonoBehaviour
     void CalcularNumeroEnemigos(int roundNumber, int enemiesToKillInCurrentWave)
     {
         isSpecialRound = (roundNumber % 5 == 0);
-
-        // ** NUEVO: Incrementar número de enemigos ligeramente a partir de ronda 6 **
-        int adjustedEnemyCount = enemiesToKillInCurrentWave;
-        if (roundNumber >= 6)
-        {
-            // Incremento no lineal basado en grupos de rondas
-            int bonusGroup = (roundNumber - 6) / 5; // Cada 5 rondas después de la 6
-            int bonusEnemies = bonusGroup + 1; // +1 en ronda 6-10, +2 en 11-15, etc.
-            adjustedEnemyCount += bonusEnemies;
-        }
-
-
         enemigosPorPuerta = new Dictionary<GameObject, EnemySpawnInfo>();
 
         // Inicializar diccionario con información vacía para cada puerta
@@ -122,8 +110,7 @@ public class SpawnEnemies : MonoBehaviour
         }
 
         // Repartir enemigos entre las puertas
-        // **MODIFICADO: Repartir enemigos entre las puertas con nueva lógica de tramperos**
-        for (int i = 1; i <= adjustedEnemyCount; i++)
+        for (int i = 1; i <= enemiesToKillInCurrentWave; i++)
         {
             if (chosenPoints.Count == 0)
                 continue;
@@ -131,54 +118,42 @@ public class SpawnEnemies : MonoBehaviour
             int randomWP = Random.Range(0, chosenPoints.Count);
             GameObject chosenPoint = chosenPoints[randomWP];
 
-            // **NUEVO: Determinar tipo de enemigo según la ronda**
-            if (roundNumber < 6)
+            // Determinar si será aventurero o trampero
+            // Probabilidad: 70% aventurero, 30% trampero
+            float random = Random.Range(0f, 1f);
+            if (random < 0.7f)
             {
-                // Rondas 1-5: Solo aventureros (sin tramperos)
                 enemigosPorPuerta[chosenPoint].aventureros++;
             }
             else
             {
-                // Ronda 6+: 70% aventureros, 30% tramperos
-                float random = Random.Range(0f, 1f);
-                if (random < 0.7f)
-                {
-                    enemigosPorPuerta[chosenPoint].aventureros++;
-                }
-                else
-                {
-                    enemigosPorPuerta[chosenPoint].tramperos++;
-                }
+                enemigosPorPuerta[chosenPoint].tramperos++;
             }
         }
 
-        // **MODIFICADO: Verificación solo para rondas 6+ (cuando hay tramperos)**
-        if (roundNumber >= 6)
+        // Verificar que cada puerta tenga más aventureros que tramperos
+        foreach (var puerta in enemigosPorPuerta.Keys)
         {
-            foreach (var puerta in enemigosPorPuerta.Keys)
+            EnemySpawnInfo info = enemigosPorPuerta[puerta];
+
+            // Si hay tramperos pero no hay aventureros, convertir un trampero en aventurero
+            if (info.tramperos > 0 && info.aventureros == 0)
             {
-                EnemySpawnInfo info = enemigosPorPuerta[puerta];
+                info.aventureros = 1;
+                info.tramperos--;
+            }
+            // Si hay más tramperos que aventureros, equilibrar
+            else if (info.tramperos >= info.aventureros && info.aventureros > 0)
+            {
+                int exceso = info.tramperos - info.aventureros + 1;
+                info.aventureros += exceso;
+                info.tramperos -= exceso;
 
-                // Si hay tramperos pero no hay aventureros, convertir un trampero en aventurero
-                if (info.tramperos > 0 && info.aventureros == 0)
+                // Asegurar que no queden tramperos negativos
+                if (info.tramperos < 0)
                 {
-                    info.aventureros = 1;
-                    info.tramperos--;
-                }
-
-                // Si hay más tramperos que aventureros, equilibrar
-                else if (info.tramperos >= info.aventureros && info.aventureros > 0)
-                {
-                    int exceso = info.tramperos - info.aventureros + 1;
-                    info.aventureros += exceso;
-                    info.tramperos -= exceso;
-
-                    // Asegurar que no queden tramperos negativos
-                    if (info.tramperos < 0)
-                    {
-                        info.aventureros += info.tramperos;
-                        info.tramperos = 0;
-                    }
+                    info.aventureros += info.tramperos;
+                    info.tramperos = 0;
                 }
             }
         }
@@ -253,6 +228,8 @@ public class SpawnEnemies : MonoBehaviour
         {
             EnemySpawnInfo info = enemigosPorPuerta[puerta];
 
+            //Debug.Log($"Puerta: Aventureros={info.aventureros}, Tramperos={info.tramperos}");
+
             // Crear una lista mezclada de tipos de enemigos para esta puerta
             List<string> tiposEnemigos = new List<string>();
 
@@ -268,6 +245,8 @@ public class SpawnEnemies : MonoBehaviour
                 tiposEnemigos.Add("trampero");
             }
 
+            //Debug.Log($"Lista tipos antes de mezclar: {string.Join(", ", tiposEnemigos)}");
+
             // Mezclar la lista para orden aleatorio
             for (int i = 0; i < tiposEnemigos.Count; i++)
             {
@@ -277,6 +256,8 @@ public class SpawnEnemies : MonoBehaviour
                 tiposEnemigos[i] = temp;
             }
 
+            //Debug.Log($"Lista tipos después de mezclar: {string.Join(", ", tiposEnemigos)}");
+
             // Instanciar enemigos en orden mezclado
             foreach (string tipoEnemigo in tiposEnemigos)
             {
@@ -285,13 +266,31 @@ public class SpawnEnemies : MonoBehaviour
                 Vector2 offset = new Vector2(Random.Range(-1.25f, 1.25f), Random.Range(-1.25f, 1.25f));
                 Vector2 spawnPosition = new Vector2(puerta.transform.position.x, puerta.transform.position.y) + offset;
 
+                //Debug.Log($"Spawning {tipoEnemigo} at {spawnPosition}");
+
                 if (tipoEnemigo == "aventurero")
                 {
+                    //Debug.Log($"Instanciando AVENTURERO con prefab: {enemyPrefab.name}");
                     GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+                    // VERIFICAR EL TIPO EN EL ENEMYCONTROLLER
+                    //EnemyController controller = spawnedEnemy.GetComponent<EnemyController>();
+                    //if (controller != null)
+                    //{
+                    //    Debug.Log($"EnemyController tipo: {controller.type}");
+                    //}
                 }
                 else if (tipoEnemigo == "trampero")
                 {
+                    //Debug.Log($"Instanciando TRAMPERO con prefab: {tramperoPrefab.name}");
                     GameObject spawnedEnemy = Instantiate(tramperoPrefab, spawnPosition, Quaternion.identity);
+
+                    // VERIFICAR EL TIPO EN EL ENEMYCONTROLLER
+                    //EnemyController controller = spawnedEnemy.GetComponent<EnemyController>();
+                    //if (controller != null)
+                    //{
+                    //    Debug.Log($"EnemyController tipo: {controller.type}");
+                    //}
                 }
             }
         }
