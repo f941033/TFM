@@ -10,11 +10,12 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public Image haloImage;
     private CardSelector cardSelector;
 
-    // Hover en escala y animaci�n
+    // Hover en escala y animación
     private RectTransform rectTransform;
     private Vector3 originalScale;
-    public Vector3 basePosition; // Posici�n base fija que se actualiza correctamente
-    private Vector3 targetHoverPosition; // Posici�n a la que sube
+    private Quaternion originalRotation; // Nueva variable para guardar la rotación original
+    public Vector3 basePosition;
+    private Vector3 targetHoverPosition;
     private float selecScale = 1.25f;
     private float hoverYOffset = 120f;
     [SerializeField] private float animationDuration = 0.2f;
@@ -31,45 +32,45 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         haloImage.gameObject.SetActive(false);
         rectTransform = GetComponent<RectTransform>();
         originalScale = rectTransform.localScale;
+        originalRotation = rectTransform.localRotation; // Guardar rotación original
     }
 
     void Start()
     {
-        // Guardar la posici�n base al inicio, cuando ya est� posicionada correctamente
         StartCoroutine(InitializeBasePosition());
     }
 
     private IEnumerator InitializeBasePosition()
     {
-        // Esperar un frame para que el layout est� completamente calculado
         yield return null;
         basePosition = rectTransform.position;
+        originalRotation = rectTransform.localRotation; // Actualizar después del layout
         isInitialized = true;
     }
 
-    // M�todo p�blico para actualizar la posici�n base cuando sea necesario
     public void UpdateBasePosition()
     {
         if (!isHovering && isInitialized)
         {
             Vector3 oldBase = basePosition;
             basePosition = rectTransform.position;
+            originalRotation = rectTransform.localRotation; // Actualizar rotación base
         }
     }
 
-    // M�todo para forzar actualizaci�n de posici�n base (llamado desde CardManager)
     public void ForceUpdateBasePosition()
     {
         if (isInitialized)
         {
             Vector3 oldBase = basePosition;
             basePosition = rectTransform.position;
+            originalRotation = rectTransform.localRotation; // Actualizar rotación base
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!isInitialized) return; // Evitar problemas antes de la inicializaci�n
+        if (!isInitialized) return;
 
         if (GameManager.CurrentPhase != GamePhase.Preparation &&
             GameManager.CurrentPhase != GamePhase.Action)
@@ -85,18 +86,23 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         }
 
         if (isHovering) return;
-
         isHovering = true;
 
-        // SIEMPRE usar basePosition como referencia (no verificar distancia aqu� para evitar acumulaci�n)
         targetHoverPosition = basePosition + Vector3.up * hoverYOffset;
         indiceOriginal = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
 
         if (currentAnimation != null) StopCoroutine(currentAnimation);
 
-        // Animar desde la posici�n actual hacia la posici�n hover
-        currentAnimation = StartCoroutine(Animate(rectTransform.position, targetHoverPosition, rectTransform.localScale, originalScale * selecScale));
+        // Animar posición, escala Y rotación (enderezar la carta)
+        currentAnimation = StartCoroutine(AnimateWithRotation(
+            rectTransform.position,
+            targetHoverPosition,
+            rectTransform.localScale,
+            originalScale * selecScale,
+            rectTransform.localRotation,
+            Quaternion.identity // Rotación "recta" (sin inclinación)
+        ));
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -108,22 +114,52 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             if (!cardSelector.isSelected)
                 haloImage.gameObject.SetActive(false);
-            
+
             return;
         }
 
         if (!isHovering) return;
         isHovering = false;
 
-        // Restaurar orden y animar de regreso
         transform.SetSiblingIndex(indiceOriginal);
 
         if (currentAnimation != null) StopCoroutine(currentAnimation);
 
-        // SIEMPRE volver a basePosition
-        currentAnimation = StartCoroutine(Animate(rectTransform.position, basePosition, rectTransform.localScale, originalScale));
+        // Volver a posición, escala y rotación originales
+        currentAnimation = StartCoroutine(AnimateWithRotation(
+            rectTransform.position,
+            basePosition,
+            rectTransform.localScale,
+            originalScale,
+            rectTransform.localRotation,
+            originalRotation // Volver a la rotación original del abanico
+        ));
     }
 
+    // Nueva corrutina que incluye animación de rotación
+    private IEnumerator AnimateWithRotation(Vector3 fromPos, Vector3 toPos, Vector3 fromScale, Vector3 toScale, Quaternion fromRotation, Quaternion toRotation)
+    {
+        float elapsed = 0f;
+        while (elapsed < animationDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = easeCurve.Evaluate(elapsed / animationDuration);
+
+            rectTransform.position = Vector3.Lerp(fromPos, toPos, t);
+            rectTransform.localScale = Vector3.Lerp(fromScale, toScale, t);
+            rectTransform.localRotation = Quaternion.Slerp(fromRotation, toRotation, t); // Interpolación suave de rotación
+
+            yield return null;
+        }
+
+        // Asegurar valores finales exactos
+        rectTransform.position = toPos;
+        rectTransform.localScale = toScale;
+        rectTransform.localRotation = toRotation;
+        currentAnimation = null;
+    }
+
+    // Mantener la corrutina original por compatibilidad (aunque ya no se usa)
     private IEnumerator Animate(Vector3 fromPos, Vector3 toPos, Vector3 fromScale, Vector3 toScale)
     {
         float elapsed = 0f;
@@ -136,7 +172,6 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
             yield return null;
         }
 
-        // Asegurar valores finales exactos
         rectTransform.position = toPos;
         rectTransform.localScale = toScale;
         currentAnimation = null;
@@ -154,6 +189,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         isHovering = false;
         rectTransform.position = basePosition;
         rectTransform.localScale = originalScale;
+        rectTransform.localRotation = originalRotation; // Restaurar rotación original
         transform.SetSiblingIndex(indiceOriginal);
     }
 
