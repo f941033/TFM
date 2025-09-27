@@ -26,7 +26,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     LayerMask trapLayers, playerLayer;
     public Tilemap obstacleTilemap; // Tilemap de obstáculos (opcional)
     float checkRadius = 0.35f; // Radio para verificación de colisión
-    public GameObject borderPrefab_1, borderPrefab_4;
+    public GameObject borderPrefab_1, borderPrefab_2, borderPrefab_4;
     private GameObject currentBorder;        //borde temporal durante el arrastre
     [SerializeField] private GraphicRaycaster raycasterUI;
 
@@ -189,6 +189,10 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         if (cardData.numberOfTiles == 4)
         {
             currentBorder = Instantiate(borderPrefab_4);
+        }
+        else if (cardData.numberOfTiles == 2)
+        {
+            currentBorder = Instantiate(borderPrefab_2);
         }
         else
         {
