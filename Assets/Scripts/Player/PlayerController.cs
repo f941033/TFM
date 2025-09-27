@@ -208,6 +208,8 @@ public class PlayerController : MonoBehaviour
         OnSoulsChanged?.Invoke(currentSouls);
         soulsAnimation.SetTrigger("soul");
     }
+
+
     public void AddGold(int gold)
     {
         amountGold += gold;
