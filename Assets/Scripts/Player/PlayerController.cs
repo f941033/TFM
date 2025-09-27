@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip attackSound;
+    public AudioClip hitSound;
+    [SerializeField] private float hitSoundCooldown = 0.5f; // Tiempo mínimo entre sonidos de daño
+    private float lastHitSoundTime = 0f;
 
 
     void Awake()
@@ -184,6 +187,12 @@ public class PlayerController : MonoBehaviour
 
     public void receiveDamage(float damage)
     {
+        // Verificar si ha pasado suficiente tiempo desde el último sonido de daño
+        if (Time.time - lastHitSoundTime >= hitSoundCooldown)
+        {
+            audioSource.PlayOneShot(hitSound);
+            lastHitSoundTime = Time.time;
+        }
         currentHealth -= damage;
         GetComponent<Damageable>().TakeDamage(damage);
 
