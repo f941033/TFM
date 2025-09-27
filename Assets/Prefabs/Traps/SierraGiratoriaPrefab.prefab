@@ -209,7 +209,6 @@ MonoBehaviour:
   spawnPointLayers:
     serializedVersion: 2
     m_Bits: 512
-  checkRadius: 0.5
 --- !u!82 &757569377318850457
 AudioSource:
   m_ObjectHideFlags: 0
@@ -223,7 +222,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 0aac8d5697975d14eb6522f9989470df, type: 3}
   m_Resource: {fileID: 8300000, guid: 0aac8d5697975d14eb6522f9989470df, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.02
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0

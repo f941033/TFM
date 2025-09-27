@@ -514,6 +514,7 @@ public class EnemyMovement : MonoBehaviour
     public void ReduceSpeed(float speedPercent, int seconds)
     {
         if (speedPercent == 0f) return;
+        if(name.Contains("Heroe")) return;
         StartCoroutine(ReduceSpeedCoroutine(speedPercent, seconds));
     }
 
