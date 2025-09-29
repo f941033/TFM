@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using System;
 
 public class HabilityCardHandler : MonoBehaviour
 {
@@ -15,6 +16,12 @@ public class HabilityCardHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cooldownText;
     private Coroutine cooldownRoutine;
     private int lastShownSeconds = -1;
+    [SerializeField] private Image DarkReapImage;
+    [SerializeField] private Image DarkSpeedImage;
+    [SerializeField] private float blinkThreshold = 5f;
+    [SerializeField] private float blinkSpeed = 6f;
+    [SerializeField] private float minAlpha = 0.35f;
+    private Coroutine blinkRoutine;
 
     public void Initialize(CardData card, PlayerController player)
     {
@@ -22,52 +29,41 @@ public class HabilityCardHandler : MonoBehaviour
 
         this.player = player;
 
+        DarkReapImage  = GameObject.Find("PlayerStats/StatsPlayer/PowerUp")?.transform.Find("AttkIncr")?.GetComponent<Image>();
+        DarkSpeedImage = GameObject.Find("PlayerStats/StatsPlayer/PowerUp")?.transform.Find("SpeedIncr")?.GetComponent<Image>();
+
         overlayImage.fillAmount = 1f;
         overlayImage.gameObject.SetActive(true);
 
-        if (card is BuffCardData)
+        /*if (card is BuffCardData)
         {
             button.gameObject.SetActive(true);
             button.interactable = true;
-
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(OnClickBuff);
         }
         else
         {
             button.gameObject.SetActive(true);
-        }
-    }
-
-    public void OnClickBuff()
-    {
-        /*if (cardData is BuffCardData buff)
-        {
-            if (cooldownRemaining > 0f)
-            {
-                FindFirstObjectByType<GameManager>().ShowMessage("The power you crave is on cooldown and it denies you its strength.", 4);
-                return;
-            }
-            buff.Play(player, Vector3.zero);
-            cooldownRemaining = buff.cooldown;
-            overlayImage.gameObject.SetActive(true);
-            StartCooldown();
-        }
-        */
+        }*/
     }
 
     public void StartCooldown()
     {
+        Debug.Log("Entro en el cooldown");
+        var target = GetBlinkTarget();
+        if (cardData.cardName == "DARK REAPER")
+        {
+            Debug.Log("Entro en el if the reaper");
+            if (DarkReapImage)
+            {
+                Debug.Log("tengo imagen valida");
+                DarkReapImage.gameObject.SetActive(true);
+            }
+        }
+
+        else if (cardData.cardName == "DARK SPEED") { if (DarkSpeedImage) DarkSpeedImage.gameObject.SetActive(true); }
+
         cooldownText.gameObject.SetActive(true);
         float cooldown = GetCooldownValue();
-        /*
-        overlayImage.fillAmount = 0f;
-        Debug.Log("Activo el overlay");
-        button.gameObject.SetActive(true);
-        overlayImage.gameObject.SetActive(true);
-        if (button != null)
-            button.interactable = false;
-        */
         if (cooldown <= 0) return;
         if (cooldownRoutine != null)
             StopCoroutine(cooldownRoutine);
@@ -89,50 +85,93 @@ public class HabilityCardHandler : MonoBehaviour
     }
 
     private IEnumerator CooldownRoutine(float duration)
-{
-    cooldownRemaining = duration;
-    lastShownSeconds = -1;
-
-    // estado inicial
-    if (overlayImage != null)
     {
-        overlayImage.gameObject.SetActive(true);
-        overlayImage.fillAmount = 0f;
-    }
-   // if (button != null) button.interactable = false;
-    UpdateCooldownText(force:true);
+        cooldownRemaining = duration;
+        lastShownSeconds = -1;
 
-    while (cooldownRemaining > 0f)
-    {
-        cooldownRemaining -= Time.deltaTime;
-
+        // estado inicial
         if (overlayImage != null)
-            overlayImage.fillAmount = 1f - Mathf.Clamp01(cooldownRemaining / duration);
+        {
+            overlayImage.gameObject.SetActive(true);
+            overlayImage.fillAmount = 0f;
+        }
+        // if (button != null) button.interactable = false;
+        UpdateCooldownText(force: true);
 
-        UpdateCooldownText(); // solo cambia el texto si el entero de segundos ha cambiado
+        Image target = GetBlinkTarget();
+        if (cooldownRemaining <= blinkThreshold && blinkRoutine == null)
+            blinkRoutine = StartCoroutine(BlinkWhileLowTime(target));
 
-        yield return null; // cada frame
+        while (cooldownRemaining > 0f)
+        {
+            cooldownRemaining -= Time.deltaTime;
+
+            if (overlayImage != null)
+                overlayImage.fillAmount = 1f - Mathf.Clamp01(cooldownRemaining / duration);
+
+            if (cooldownRemaining <= blinkThreshold && blinkRoutine == null)
+                blinkRoutine = StartCoroutine(BlinkWhileLowTime(target));
+
+            UpdateCooldownText();
+
+            yield return null;
+        }
+
+        // Fin del CD
+        cooldownRemaining = 0f;
+        if (cardData.cardName == "DARK REAPER")   { if (DarkReapImage)  DarkReapImage.gameObject.SetActive(false); }
+
+        else if (cardData.cardName == "DARK SPEED") { if (DarkSpeedImage) DarkSpeedImage.gameObject.SetActive(false); }
+
+        if (overlayImage) overlayImage.fillAmount = 1f;
+
+        // parar blink y restaurar alpha por si sigue activo
+        if (blinkRoutine != null) { StopCoroutine(blinkRoutine); blinkRoutine = null; }
+        if (target) SetAlpha(target, 1f);
+
+        cooldownRoutine = null;
     }
 
-    // Fin del CD
-    cooldownRemaining = 0f;
-    if (overlayImage != null) overlayImage.fillAmount = 1f;
-    if (button != null) button.interactable = true;
-
-        // Limpia o pon "Ready"
-        if (cooldownText != null){} cooldownText.text = GetCooldownValue().ToString();
-
-    cooldownRoutine = null;
-}
-
-private void UpdateCooldownText(bool force = false)
-{
-    if (cooldownText == null) return;
-    int s = Mathf.CeilToInt(Mathf.Max(0f, cooldownRemaining));
-    if (force || s != lastShownSeconds)
+    private void UpdateCooldownText(bool force = false)
     {
-        lastShownSeconds = s;
-        cooldownText.SetText(s > 0 ? s.ToString() : "");
+        if (cooldownText == null) return;
+        int s = Mathf.CeilToInt(Mathf.Max(0f, cooldownRemaining));
+        if (force || s != lastShownSeconds)
+        {
+            lastShownSeconds = s;
+            cooldownText.SetText(s > 0 ? s.ToString() : "");
+        }
     }
-}
+
+    private void SetAlpha(Image img, float a)
+    {
+        if (!img) return;
+        var c = img.color; c.a = a; img.color = c;
+    }
+
+    private IEnumerator BlinkWhileLowTime(Image target)
+    {
+        if (!target) yield break;
+
+        while (cooldownRemaining > 0f && cooldownRemaining <= blinkThreshold)
+        {
+            float t = Mathf.PingPong(Time.unscaledTime * blinkSpeed, 1f);
+            float a = Mathf.Lerp(minAlpha, 1f, t);
+            SetAlpha(target, a);
+            yield return null;
+        }
+        // restaurar
+        SetAlpha(target, 1f);
+        blinkRoutine = null;
+    }
+    private Image GetBlinkTarget()
+    {
+        if (cardData == null) return null;
+
+        if (cardData.cardName == "DARK REAPER")   return DarkReapImage;
+        if (cardData.cardName == "DARK SPEED")  return DarkSpeedImage;
+
+        // fallback: la propia overlay de la carta, si quieres
+        return overlayImage;
+    }
 }

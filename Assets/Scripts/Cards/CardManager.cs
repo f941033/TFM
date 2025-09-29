@@ -156,7 +156,6 @@ public class CardManager : MonoBehaviour
     {
         if (cardData.cardType != CardType.Hability && cardData.cardType != CardType.Buff)
         {
-            Debug.Log("He enctrado porque no es habilidad ni bufo");
             cardsInHand.Remove(card);
             discardPile.Add(cardData);
             Destroy(card);
