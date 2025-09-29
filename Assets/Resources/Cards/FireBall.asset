@@ -26,7 +26,9 @@ MonoBehaviour:
   applyDebuff: 0
   debuffDuration: 2
   debuffs: []
-  effectRadius: 2
+  squareSize: 2
+  requireTileToAffect: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2048
+  hitBoxScale: 0.95
