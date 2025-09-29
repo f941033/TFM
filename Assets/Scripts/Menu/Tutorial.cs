@@ -54,13 +54,13 @@ public class Tutorial : MonoBehaviour
                 }
             }
 
-            if (card.cardName == "DARK REAPER" || card.cardName == "RECYCLE")
+            if (card.cardName == "DARK REAPER")
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
 
             }
-            if (card.cardName == "RAISE THE DEAD" || card.cardName == "RE-BOUNDED" || card.cardName == "FIREBALL" || card.cardName == "ZERO ZONE")
+            if (card.cardName == "FIREBALL" || card.cardName == "ZERO ZONE")
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;
