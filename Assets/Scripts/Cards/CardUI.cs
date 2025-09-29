@@ -59,7 +59,7 @@ public class CardUI : MonoBehaviour
             backgroundImage.sprite = trapBackground;
             textDamage.text = trap.damage.ToString();
             textType.text = "TRAP";
-            if(trap.damage == 0)
+            if (trap.damage == 0)
                 damageImage.gameObject.SetActive(false);
             if (trap.IsAreaDamage)
                     damageImage.sprite = areaDamageImage;
@@ -110,15 +110,11 @@ public class CardUI : MonoBehaviour
             damageImage.gameObject.SetActive(false);
             textDamage.gameObject.SetActive(false);
             costImage.sprite = cooldownSprite;
+            if (ColorUtility.TryParseHtmlString("#00FFF7", out var c))
+            costImage.color = c;
             cooldownFillImage.gameObject.SetActive(true);
             textType.text = "SPELL";
         }
-        /*if (GameManager.CurrentPhase == GamePhase.Deck ||
-            GameManager.CurrentPhase == GamePhase.Pause)
-        {
-            Destroy(this.GetComponent<CardHoverInHand>());
-        }
-        */
         if (GameManager.CurrentPhase == GamePhase.Preparation ||
             GameManager.CurrentPhase == GamePhase.Action)
         {

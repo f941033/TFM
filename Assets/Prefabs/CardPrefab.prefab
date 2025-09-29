@@ -260,6 +260,11 @@ MonoBehaviour:
   warningCooldown: {fileID: 0}
   button: {fileID: 2698126561960785233}
   cooldownText: {fileID: 2205115775731041931}
+  DarkReapImage: {fileID: 0}
+  DarkSpeedImage: {fileID: 0}
+  blinkThreshold: 5
+  blinkSpeed: 6
+  minAlpha: 0.35
 --- !u!1 &424336355918421419
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.4525411, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
