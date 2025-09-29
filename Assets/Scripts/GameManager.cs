@@ -228,7 +228,7 @@ public class GameManager : MonoBehaviour
                 selectedCards.Add(item);
         }
 
-        if (numberWave % 1 == 0)
+        if (numberWave % 5 == 0)
         {
             MerchantShop();
         }
