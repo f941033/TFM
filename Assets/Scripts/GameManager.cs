@@ -58,13 +58,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button skipButton;
     public GameObject runButton;
     private GamePhase previousPhase;
-
     public int closedRooms;
     [SerializeField] private GameObject mulliganPanel;
+    [SerializeField] private Button mulliganButton;
     private bool spawnStarted = false;
     //private bool firstTimeBackgroundSound = true;
     private AudioSource audioSource;
     public AudioClip clipBackgroundSound;
+    private const string PREF_MULLIGAN_SEEN = "mulligan_seen_action";
 
     private bool endWave = false;
 
@@ -156,6 +157,9 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (numberWave < 10)
+            pool.RemoveAll(c => c.cardType == CardType.DeckEffect);
+
         pool.RemoveAll(c => (c.cardType == CardType.Buff || c.cardType == CardType.Hability) && ownedSpellNames.Contains(c.cardName));
 
         List<CardData> selectedCards = new List<CardData>();
@@ -224,7 +228,7 @@ public class GameManager : MonoBehaviour
                 selectedCards.Add(item);
         }
 
-        if (numberWave % 5 == 0)
+        if (numberWave % 1 == 0)
         {
             MerchantShop();
         }
@@ -352,7 +356,7 @@ public class GameManager : MonoBehaviour
         cardManager.drawPile = new List<CardData>();
 
         drawPileImage.SetActive(true);
-
+        cardManager.ResetCardPlayedFlagForAction();
         soulsBar.SetActive(false);
         cardManager.drawPile.Clear();
         //Crear el mazo de cartas de tipo ACCI�N
@@ -374,13 +378,50 @@ public class GameManager : MonoBehaviour
         cardManager.ResetMulliganForActionPhase();
         if (cardManager.drawPile.Count > 0)
         {
-            mulliganPanel.SetActive(true);
-            cardManager.BeginMulligan();
+            bool firstTime = !Prefs.GetBool(PREF_MULLIGAN_SEEN, false);
+            if (firstTime)
+            {
+                mulliganPanel.SetActive(true);
+                cardManager.BeginMulligan();
+                Prefs.SetBool(Prefs.Keys.MulliganSeenAction, true);
+            }
+            else
+            {
+                BeginSpawningEnemies();
+                SetupMulliganButton();
+            }
         }
         else
         {
+            if (mulliganButton) mulliganButton.gameObject.SetActive(false);
             BeginSpawningEnemies();
         }
+    }
+
+    private void SetupMulliganButton()
+    {
+        if (!mulliganButton) return;
+
+        // activo pero solo si aún no jugó carta en esta fase
+        bool canUse = !cardManager.cardPlayedThisActionPhase;
+        mulliganButton.gameObject.SetActive(true);
+        mulliganButton.interactable = canUse;
+    }
+
+    public void OpenMulliganFromButton()
+    {
+        if (cardManager.cardPlayedThisActionPhase) { mulliganButton.interactable = false; return; }
+
+        mulliganPanel.SetActive(true);
+        cardManager.BeginMulligan();
+
+        mulliganButton.gameObject.SetActive(false);
+    }
+
+    public void OnCardPlayedInAction()
+    {
+        if (CurrentPhase != GamePhase.Action) return;
+        if (mulliganButton) mulliganButton.interactable = false;
     }
 
     private void BeginSpawningEnemies()
@@ -472,17 +513,23 @@ public class GameManager : MonoBehaviour
         }
 
         // 2 cartas “deck effect” (deck cards)
-        pool.Clear();
-
-        foreach (var cards in all) if (cards.cardType == CardType.DeckEffect) pool.Add(cards);
-        for (int i = 0; i < 2; i++)
+        if (numberWave >= 10)                               // <-- ADD
         {
-            var pick = pool[UnityEngine.Random.Range(0, pool.Count)];
-            var cardItem = ScriptableObject.CreateInstance<CardItem>();
-            cardItem.itemName = pick.cardName;
-            cardItem.cost = pick.goldCost;
-            cardItem.cardData = pick;
-            shopList.Add(cardItem);
+            pool.Clear();
+            foreach (var cards in all)
+                if (cards.cardType == CardType.DeckEffect)
+                    pool.Add(cards);
+
+            for (int i = 0; i < 2 && pool.Count > 0; i++)
+            {
+                var pick = pool[UnityEngine.Random.Range(0, pool.Count)];
+                var cardItem = ScriptableObject.CreateInstance<CardItem>();
+                cardItem.itemName = pick.cardName;
+                cardItem.cost = pick.goldCost;
+                cardItem.cardData = pick;
+                shopList.Add(cardItem);
+                pool.Remove(pick);
+            }
         }
 
         // 1 llave

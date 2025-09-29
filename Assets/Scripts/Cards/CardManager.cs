@@ -33,6 +33,8 @@ public class CardManager : MonoBehaviour
     public int MulliganSelectedCount => mulliganSelectedCount;
     public int MulliganMaxSelectable => drawPile.Count;
     public CardData lastCardUsed = null;
+    public bool cardPlayedThisActionPhase { get; private set; }
+    public void ResetCardPlayedFlagForAction() => cardPlayedThisActionPhase = false;
 
     void Start()
     {
@@ -160,6 +162,11 @@ public class CardManager : MonoBehaviour
             discardPile.Add(cardData);
             Destroy(card);
             UpdateHandVisuals(); // Esto ya incluye la actualización de posiciones base
+        }
+        if (GameManager.CurrentPhase == DeckboundDungeon.GamePhase.GamePhase.Action)
+        {
+            cardPlayedThisActionPhase = true;
+            FindFirstObjectByType<GameManager>()?.OnCardPlayedInAction();
         }
     }
 

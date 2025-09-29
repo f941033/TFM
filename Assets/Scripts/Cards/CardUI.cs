@@ -59,8 +59,10 @@ public class CardUI : MonoBehaviour
             backgroundImage.sprite = trapBackground;
             textDamage.text = trap.damage.ToString();
             textType.text = "TRAP";
+            if(trap.damage == 0)
+                damageImage.gameObject.SetActive(false);
             if (trap.IsAreaDamage)
-                damageImage.sprite = areaDamageImage;
+                    damageImage.sprite = areaDamageImage;
             if (trap.uses > 0)
             {
                 usesImage.gameObject.SetActive(true);
