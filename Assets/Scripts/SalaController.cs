@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 
 public class SalaController : MonoBehaviour
 {
+    public RoomDissolution roomDissolution;
     public Tilemap tilemap;
     public Tilemap borderTilemap;
     Color originalColor;
@@ -94,13 +95,23 @@ public class SalaController : MonoBehaviour
                 item.estaLibre = true;
                 gm.OpenRoom();
                 spawnEnemiesController.AddWayPoints(item.wayPoints, item.removeWayPoints);
-                item.tilemap.gameObject.SetActive(false);
+                //item.tilemap.gameObject.SetActive(false);
+                UnlockRoom();
             }
             ActivarTrampas();
             gm.PreparationPhase();
             //indexSala++;
         }
 
+    }
+
+    void UnlockRoom()
+    {
+        // Iniciar disolución en lugar de SetActive(false)
+        if (roomDissolution != null)
+        {
+            roomDissolution.StartDissolution();
+        }
     }
 
     void ActivarTrampas()
