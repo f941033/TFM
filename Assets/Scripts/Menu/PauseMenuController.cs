@@ -96,6 +96,8 @@ public class PauseMenuController : MonoBehaviour
     public void QuitGame()
     {
         // En el editor no hace nada, pero en build cierra la app
+        PlayerPrefs.DeleteKey("StartFromMainMenu");
+        PlayerPrefs.Save();
         Application.Quit();
     }
 

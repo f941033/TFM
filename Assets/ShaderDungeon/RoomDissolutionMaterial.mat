@@ -48,10 +48,12 @@ Material:
     - _DissolveAmount: 0
     - _EdgeWidth: 0.05
     - _EnableExternalAlpha: 0
+    - _NoiseScale: 1
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 0.10188681, g: 0.09900322, b: 0.09900322, a: 0.9490196}
     - _EdgeColor: {r: 0.9960785, g: 0.03529412, b: 0.054901965, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TilemapOrigin: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

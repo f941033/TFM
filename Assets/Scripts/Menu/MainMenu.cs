@@ -3,20 +3,21 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public Vector3 hoverScale = new Vector3(1.1f, 1.1f, 1f); // tamaño al pasar el ratón
-    private Vector3 originalScale; // guardamos el tamaño original
-    public GameObject panelInicial, gameManager;
+    //public Vector3 hoverScale = new Vector3(1.1f, 1.1f, 1f); // tamaño al pasar el ratón
+    //private Vector3 originalScale; // guardamos el tamaño original
+    public GameObject panelInicial;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    void Start()
     {
-        int reinicioDesdeGameOver = PlayerPrefs.GetInt("ReinicioDesdeGameOver", 0);
-        if (reinicioDesdeGameOver == 1)
+        int startFromMainMenu = PlayerPrefs.GetInt("StartFromMainMenu", 1); // 1 es el valor por defecto
+
+        if (startFromMainMenu == 0)
         {
-            PlayerPrefs.SetInt("ReinicioDesdeGameOver", 0);
             if (panelInicial != null) panelInicial.SetActive(true);
-            if(gameObject.name != "CanvasGameOver") gameObject.SetActive(false);
+            if(gameObject.name == "CanvasMainMenu") gameObject.SetActive(false);
         }
+
     }
 
     // Update is called once per frame
@@ -25,22 +26,28 @@ public class MainMenu : MonoBehaviour
         
     }
 
+    // INICIAR DESDE MAIN MENU
     public void StartGame()
     {
         Time.timeScale = 1f;
-        PlayerPrefs.SetInt("ReinicioDesdeGameOver", 0);
+        PlayerPrefs.SetInt("StartFromMainMenu", 1);
+        PlayerPrefs.Save();
         SceneManager.LoadScene("Game");
     }
 
     public void QuitGame()
     {
+        PlayerPrefs.DeleteKey("StartFromMainMenu");
+        PlayerPrefs.Save();
         Application.Quit();
     }
 
+    // INICIAR DESDE PANEL INICIAL
     public void RestartGame()
     {
         Time.timeScale = 1f;
-        PlayerPrefs.SetInt("ReinicioDesdeGameOver", 1);
+        PlayerPrefs.SetInt("StartFromMainMenu", 0);
+        PlayerPrefs.Save();
         SceneManager.LoadScene("Game");
     }
 }
