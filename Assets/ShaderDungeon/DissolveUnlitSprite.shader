@@ -4,75 +4,83 @@ Shader "Custom/DissolveUnlitSprite"
     {
         _MainTex ("Sprite Texture", 2D) = "white" {}
         _NoiseTex ("Noise Texture", 2D) = "white" {}
-        _DissolveAmount ("Dissolve Amount", Range(0,1)) = 0
-        _EdgeColor ("Edge Color", Color) = (1,0.5,0,1)
-        _EdgeWidth ("Edge Width", Range(0.01,0.2)) = 0.08
-        _Color ("Tint", Color) = (1,1,1,1)
+        _DissolveAmount ("Dissolve Amount", Range(0, 1)) = 0
+        _EdgeWidth ("Edge Width", Range(0.01, 0.2)) = 0.1
+        _EdgeColor ("Edge Color", Color) = (1, 0.5, 0, 1)
+        _Color ("Tint", Color) = (1, 1, 1, 1)
     }
+
     SubShader
     {
-        Tags { "Queue"="Transparent" "RenderType"="Transparent" }
-        LOD 100
+        Tags {"Queue"="Transparent" "RenderType"="Transparent" "CanUseSpriteAtlas"="True"}
+        
+        Cull Off
+        Lighting Off
+        ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
-            Blend SrcAlpha OneMinusSrcAlpha
-            Cull Off
-            ZWrite Off
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+
             #include "UnityCG.cginc"
 
-            struct appdata
+            struct appdata_t
             {
                 float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
+                float4 color : COLOR;
+                float2 texcoord : TEXCOORD0;
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                fixed4 color : COLOR;
+                float2 texcoord : TEXCOORD0;
             };
 
             sampler2D _MainTex;
-            float4 _MainTex_ST;
             sampler2D _NoiseTex;
+            float4 _MainTex_ST;
             float4 _NoiseTex_ST;
             float _DissolveAmount;
-            float4 _EdgeColor;
             float _EdgeWidth;
-            float4 _Color;
-            
-            v2f vert (appdata v)
+            fixed4 _EdgeColor;
+            fixed4 _Color;
+
+            v2f vert(appdata_t IN)
             {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                return o;
+                v2f OUT;
+                OUT.vertex = UnityObjectToClipPos(IN.vertex);
+                OUT.texcoord = TRANSFORM_TEX(IN.texcoord, _MainTex);
+                OUT.color = IN.color * _Color;
+                return OUT;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag(v2f IN) : SV_Target
             {
+                fixed4 c = tex2D(_MainTex, IN.texcoord) * IN.color;
+                
+                // Muestra de ruido
+                float noise = tex2D(_NoiseTex, IN.texcoord * _NoiseTex_ST.xy).r;
+                
+                // Calcular disolución
                 float dissolve = _DissolveAmount;
-                fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-                float noise = tex2D(_NoiseTex, i.uv).r;
-
-                // Disolver por ruido
-                if(noise < dissolve)
-                {
+                
+                // Si el ruido es menor que el dissolve amount, descartar pixel
+                if (noise < dissolve)
                     discard;
-                }
-
-                // Borde
-                if (noise < dissolve + _EdgeWidth && noise >= dissolve)
+                
+                // Efecto de borde brillante
+                if (noise < dissolve + _EdgeWidth)
                 {
-                    col.rgb = _EdgeColor.rgb;
-                    col.a = max(_EdgeColor.a, col.a);
+                    c.rgb = _EdgeColor.rgb;
+                    c.a = _EdgeColor.a;
                 }
-
-                return col;
+                
+                return c;
             }
             ENDCG
         }

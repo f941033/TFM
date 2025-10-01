@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 public class RoomDissolution : MonoBehaviour
 {
     [Header("Dissolution Settings")]
-    public Material dissolutionMaterial;
+    public Material dissolutionMaterial; // Material base (shared)
     public float dissolutionDuration = 2f;
     public AnimationCurve dissolutionCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
@@ -14,23 +14,25 @@ public class RoomDissolution : MonoBehaviour
     public AudioClip dissolutionSound;
 
     private TilemapRenderer tilemapRenderer;
+    private Material materialInstance; // NUEVA VARIABLE: instancia única
     private bool isDissolving = false;
 
     void Start()
     {
         tilemapRenderer = GetComponent<TilemapRenderer>();
 
-        // Asignar el material de disolución
+        // ESTO ES LO CLAVE: Crear una instancia única del material para esta sala
         if (dissolutionMaterial != null)
         {
-            tilemapRenderer.material = dissolutionMaterial;
-            dissolutionMaterial.SetFloat("_DissolveAmount", 0f);
+            materialInstance = new Material(dissolutionMaterial); // Crear copia
+            tilemapRenderer.material = materialInstance; // Usar la copia
+            materialInstance.SetFloat("_DissolveAmount", 0f);
         }
     }
 
     public void StartDissolution()
     {
-        if (!isDissolving && dissolutionMaterial != null)
+        if (!isDissolving && materialInstance != null)
         {
             StartCoroutine(DissolveCoroutine());
         }
@@ -47,7 +49,6 @@ public class RoomDissolution : MonoBehaviour
         }
 
         float elapsedTime = 0f;
-
         while (elapsedTime < dissolutionDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -55,17 +56,18 @@ public class RoomDissolution : MonoBehaviour
 
             // Usar curva de animación para suavizar
             float dissolveValue = dissolutionCurve.Evaluate(progress);
-            dissolutionMaterial.SetFloat("_DissolveAmount", dissolveValue);
+
+            // USAR LA INSTANCIA ÚNICA, NO EL MATERIAL COMPARTIDO
+            materialInstance.SetFloat("_DissolveAmount", dissolveValue);
 
             yield return null;
         }
 
         // Asegurar que termine completamente
-        dissolutionMaterial.SetFloat("_DissolveAmount", 1f);
+        materialInstance.SetFloat("_DissolveAmount", 1f);
 
         // Desactivar el GameObject después de la disolución
         gameObject.SetActive(false);
-
         isDissolving = false;
     }
 
@@ -73,5 +75,14 @@ public class RoomDissolution : MonoBehaviour
     public void TestDissolution()
     {
         StartDissolution();
+    }
+
+    // IMPORTANTE: Limpiar la instancia cuando se destruya el objeto
+    void OnDestroy()
+    {
+        if (materialInstance != null)
+        {
+            DestroyImmediate(materialInstance);
+        }
     }
 }
