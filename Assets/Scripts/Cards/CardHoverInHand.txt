@@ -143,12 +143,11 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         while (elapsed < animationDuration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / animationDuration);
-            float eased = easeCurve.Evaluate(t);
+            float t = easeCurve.Evaluate(elapsed / animationDuration);
 
-            rectTransform.position = Vector3.Lerp(fromPos, toPos, eased);
-            rectTransform.localScale = Vector3.Lerp(fromScale, toScale, eased);
-            rectTransform.localRotation = Quaternion.Slerp(fromRotation, toRotation, eased);
+            rectTransform.position = Vector3.Lerp(fromPos, toPos, t);
+            rectTransform.localScale = Vector3.Lerp(fromScale, toScale, t);
+            rectTransform.localRotation = Quaternion.Slerp(fromRotation, toRotation, t); // Interpolación suave de rotación
 
             yield return null;
         }
