@@ -43,28 +43,22 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private IEnumerator InitializeBasePosition()
     {
         yield return null;
-        basePosition = rectTransform.position;
+        basePosition = rectTransform.localPosition;
+        targetHoverPosition = basePosition + Vector3.up * hoverYOffset;
         originalRotation = rectTransform.localRotation; // Actualizar después del layout
         isInitialized = true;
     }
 
-    public void UpdateBasePosition()
-    {
-        if (!isHovering && isInitialized)
-        {
-            Vector3 oldBase = basePosition;
-            basePosition = rectTransform.position;
-            originalRotation = rectTransform.localRotation; // Actualizar rotación base
-        }
-    }
 
     public void ForceUpdateBasePosition()
     {
         if (isInitialized)
         {
             Vector3 oldBase = basePosition;
-            basePosition = rectTransform.position;
+            basePosition = rectTransform.localPosition;
+            targetHoverPosition = basePosition + Vector3.up * hoverYOffset;
             originalRotation = rectTransform.localRotation; // Actualizar rotación base
+            indiceOriginal = transform.GetSiblingIndex();
         }
     }
 
@@ -96,7 +90,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         // Animar posición, escala Y rotación (enderezar la carta)
         currentAnimation = StartCoroutine(AnimateWithRotation(
-            rectTransform.position,
+            basePosition,
             targetHoverPosition,
             rectTransform.localScale,
             originalScale * selecScale,
@@ -125,14 +119,20 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         if (currentAnimation != null) StopCoroutine(currentAnimation);
 
+        // Si solo queda esta carta, fuerza a 0° en origen
+        Quaternion targetRot = (transform.parent.childCount == 1)
+            ? Quaternion.identity
+            : originalRotation;
+
+
         // Volver a posición, escala y rotación originales
         currentAnimation = StartCoroutine(AnimateWithRotation(
-            rectTransform.position,
+            targetHoverPosition,
             basePosition,
             rectTransform.localScale,
             originalScale,
             rectTransform.localRotation,
-            originalRotation // Volver a la rotación original del abanico
+            targetRot // Volver a la rotación original del abanico
         ));
     }
 
@@ -140,13 +140,20 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private IEnumerator AnimateWithRotation(Vector3 fromPos, Vector3 toPos, Vector3 fromScale, Vector3 toScale, Quaternion fromRotation, Quaternion toRotation)
     {
         float elapsed = 0f;
+
+        // Guarda la X fija
+        float fixedX = rectTransform.localPosition.x;
+
         while (elapsed < animationDuration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / animationDuration);
             float eased = easeCurve.Evaluate(t);
 
-            rectTransform.position = Vector3.Lerp(fromPos, toPos, eased);
+            // Sólo interpola la Y; X permanece fija
+            float newY = Mathf.Lerp(fromPos.y, toPos.y, t);
+            rectTransform.localPosition = new Vector3(fixedX, newY, fromPos.z);
+            //rectTransform.localPosition = Vector3.Lerp(fromPos, toPos, eased);
             rectTransform.localScale = Vector3.Lerp(fromScale, toScale, eased);
             rectTransform.localRotation = Quaternion.Slerp(fromRotation, toRotation, eased);
 
@@ -154,29 +161,12 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         }
 
         // Asegurar valores finales exactos
-        rectTransform.position = toPos;
+        rectTransform.localPosition = new Vector3(fixedX, toPos.y, fromPos.z); ;
         rectTransform.localScale = toScale;
         rectTransform.localRotation = toRotation;
         currentAnimation = null;
     }
 
-    // Mantener la corrutina original por compatibilidad (aunque ya no se usa)
-    private IEnumerator Animate(Vector3 fromPos, Vector3 toPos, Vector3 fromScale, Vector3 toScale)
-    {
-        float elapsed = 0f;
-        while (elapsed < animationDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = easeCurve.Evaluate(elapsed / animationDuration);
-            rectTransform.position = Vector3.Lerp(fromPos, toPos, t);
-            rectTransform.localScale = Vector3.Lerp(fromScale, toScale, t);
-            yield return null;
-        }
-
-        rectTransform.position = toPos;
-        rectTransform.localScale = toScale;
-        currentAnimation = null;
-    }
 
     [ContextMenu("Reset to Base Position")]
     public void ResetToBasePosition()
