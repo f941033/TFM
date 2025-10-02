@@ -146,7 +146,7 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         while (elapsed < animationDuration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / animationDuration);
             float eased = easeCurve.Evaluate(t);
 
