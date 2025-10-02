@@ -131,6 +131,7 @@ MonoBehaviour:
   borderPrefab_1: {fileID: 2514062046054944184, guid: fa24afdd1efcef046b5b5eaaaa64dca5, type: 3}
   borderPrefab_2: {fileID: 2514062046054944184, guid: 71e004397dbecad489bc3fb9e8490a08, type: 3}
   borderPrefab_4: {fileID: 2514062046054944184, guid: b3dad1fac86eaf04ca9117f643d6bbc7, type: 3}
+  borderPrefab_9: {fileID: 2514062046054944184, guid: 57f65a1632e3f9f40aaae19e9613729e, type: 3}
   raycasterUI: {fileID: 0}
   dropTilemap: {fileID: 0}
   highlightMap: {fileID: 0}
@@ -200,7 +201,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   haloImage: {fileID: 5715179808903078328}
+  originalRotation: {x: 0, y: 0, z: 0, w: 0}
   basePosition: {x: 0, y: 0, z: 0}
+  hoverYOffset: 120
   animationDuration: 0.2
   easeCurve:
     serializedVersion: 2

@@ -64,17 +64,28 @@ MonoBehaviour:
   textDescription: {fileID: 1509624353965011216}
   textCost: {fileID: 2205115775731041931}
   textDamage: {fileID: 7874559390015761224}
-  textUse: {fileID: 8142434465573530874}
   data: {fileID: 0}
   backgroundImage: {fileID: 2075047113887814455}
   trapBackground: {fileID: -187958489351416072, guid: 9425ded1a2c7a794f93e74482c7f990a, type: 3}
   buffBackground: {fileID: -424489222799608843, guid: 9425ded1a2c7a794f93e74482c7f990a, type: 3}
+  deckBackground: {fileID: 0}
   damageImage: {fileID: 2400003060270256869}
-  useImage: {fileID: 2372759111113623021}
+  areaDamageImage: {fileID: 0}
   costImage: {fileID: 7056149638346329167}
   spriteImage: {fileID: 6144249354334679010}
-  goldCostText: {fileID: 1488844834297742990}
-  buyButton: {fileID: 8855550731502941212}
+  detailsButton: {fileID: 0}
+  typeBackgroundTrap: {fileID: 0}
+  cooldownSprite: {fileID: 0}
+  cooldownFillImage: {fileID: 0}
+  textType: {fileID: 0}
+  usesImage: {fileID: 0}
+  textUses: {fileID: 0}
+  minionBackground: {fileID: 0}
+  minionDescription: {fileID: 0}
+  minionDamage: {fileID: 0}
+  minionHealth: {fileID: 0}
+  minionRange: {fileID: 0}
+  minionEgg: {fileID: 0}
 --- !u!114 &7752803208183232184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,9 +142,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   obstacleTilemap: {fileID: 0}
-  checkRadius: 0.4
   borderPrefab_1: {fileID: 2514062046054944184, guid: fa24afdd1efcef046b5b5eaaaa64dca5, type: 3}
+  borderPrefab_2: {fileID: 2514062046054944184, guid: 71e004397dbecad489bc3fb9e8490a08, type: 3}
   borderPrefab_4: {fileID: 2514062046054944184, guid: b3dad1fac86eaf04ca9117f643d6bbc7, type: 3}
+  borderPrefab_9: {fileID: 2514062046054944184, guid: 57f65a1632e3f9f40aaae19e9613729e, type: 3}
   raycasterUI: {fileID: 0}
   dropTilemap: {fileID: 0}
   highlightMap: {fileID: 0}
@@ -202,8 +214,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768f56fd69afdc84caec304809ca511e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 0.3443396, g: 1, b: 0.7557343, a: 0.78431374}
-  cardImage: {fileID: 0}
+  haloImage: {fileID: 0}
+  originalRotation: {x: 0, y: 0, z: 0, w: 0}
+  basePosition: {x: 0, y: 0, z: 0}
+  hoverYOffset: 120
+  animationDuration: 0.2
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &3138034295888315653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,9 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6f2377657ba6b4196f777d795168a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardImage: {fileID: 2075047113887814455}
-  selectedColor: {r: 0, g: 1, b: 0, a: 0.8235294}
-  deselectedColor: {r: 1, g: 1, b: 1, a: 1}
+  haloImage: {fileID: 0}
   isSelected: 0
   textName: {fileID: 8496887275114331779}
 --- !u!1 &1436953100294205489
@@ -360,6 +397,13 @@ MonoBehaviour:
   cooldownRemaining: 0
   overlayImage: {fileID: 0}
   warningCooldown: {fileID: 0}
+  button: {fileID: 0}
+  cooldownText: {fileID: 0}
+  DarkReapImage: {fileID: 0}
+  DarkSpeedImage: {fileID: 0}
+  blinkThreshold: 5
+  blinkSpeed: 6
+  minAlpha: 0.35
 --- !u!1 &1545378031445455877
 GameObject:
   m_ObjectHideFlags: 0
