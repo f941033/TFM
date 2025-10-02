@@ -23,8 +23,11 @@ public class ChangeSprite : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             if (index == 0) sprite.GetComponent<Animator>().enabled = false;
-            sprite.GetComponent<SpriteRenderer>().sprite = sprites[index];
-            index++;
+            if (index < sprites.Length)
+            {
+                sprite.GetComponent<SpriteRenderer>().sprite = sprites[index];
+                index++;
+            }
 
             if (index == sprites.Length)
             {
