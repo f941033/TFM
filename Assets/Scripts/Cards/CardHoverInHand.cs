@@ -13,11 +13,11 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     // Hover en escala y animación
     private RectTransform rectTransform;
     private Vector3 originalScale;
-    private Quaternion originalRotation; // Nueva variable para guardar la rotación original
+    public Quaternion originalRotation; // Nueva variable para guardar la rotación original
     public Vector3 basePosition;
     private Vector3 targetHoverPosition;
     private float selecScale = 1.25f;
-    private float hoverYOffset = 120f;
+    public float hoverYOffset = 120f;
     [SerializeField] private float animationDuration = 0.2f;
     [SerializeField] private AnimationCurve easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     private int indiceOriginal;
@@ -182,6 +182,23 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
         rectTransform.localScale = originalScale;
         rectTransform.localRotation = originalRotation; // Restaurar rotación original
         transform.SetSiblingIndex(indiceOriginal);
+    }
+
+    public void ForceExitHover()
+    {
+        if (currentAnimation != null)
+        {
+            StopCoroutine(currentAnimation);
+            currentAnimation = null;
+        }
+
+        // Restaura inmediatamente la posición, rotación y escala base
+        rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, basePosition.y, rectTransform.localPosition.z);
+        rectTransform.rotation = originalRotation;
+        rectTransform.localScale = originalScale;
+
+        haloImage.gameObject.SetActive(false);
+        isHovering = false;
     }
 
     void OnDrawGizmosSelected()

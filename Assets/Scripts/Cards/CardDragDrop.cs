@@ -15,6 +15,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private Transform layerDrag;
     private int cardIndex;
     private Vector2 originalAnchoredPosition;
+    private Quaternion originalRotation;
     public CardData cardData;
     internal CardManager Deck;
     internal GameManager gameManager;
@@ -176,7 +177,17 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 return;
             }
         }
+
+        CardHoverInHand hoverComponent = GetComponent<CardHoverInHand>();
+        if (hoverComponent != null)
+        {
+            hoverComponent.ForceExitHover(); // Método que crearemos
+        }
+
+
         originalAnchoredPosition = rectTransform.anchoredPosition;
+        originalRotation = rectTransform.rotation;
+
         originalTransform = transform.parent;
         cardIndex = transform.GetSiblingIndex();
         transform.SetParent(layerDrag, true);
@@ -364,17 +375,20 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             transform.SetSiblingIndex(cardIndex);
             transform.localScale = originalScale;
 
-            // MEJORADO: Usar basePosition actualizada en lugar de posición guardada
-            CardHoverInHand hoverComponent = GetComponent<CardHoverInHand>();
-            if (hoverComponent != null && hoverComponent.basePosition != Vector3.zero)
-            {
-                rectTransform.position = hoverComponent.basePosition;
-            }
-            else
-            {
-                // Fallback por si hay algún problema
-                rectTransform.anchoredPosition = originalAnchoredPosition;
-            }
+            rectTransform.anchoredPosition = originalAnchoredPosition;
+            rectTransform.rotation = originalRotation;
+
+            //// MEJORADO: Usar basePosition actualizada en lugar de posición guardada
+            //CardHoverInHand hoverComponent = GetComponent<CardHoverInHand>();
+            //if (hoverComponent != null && hoverComponent.basePosition != Vector3.zero)
+            //{
+            //    rectTransform.position = hoverComponent.basePosition;
+            //}
+            //else
+            //{
+            //    // Fallback por si hay algún problema
+            //    rectTransform.anchoredPosition = originalAnchoredPosition;
+            //}
         }
         else
         {
@@ -400,17 +414,20 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         transform.SetSiblingIndex(cardIndex);
         transform.localScale = originalScale;
 
-        // MEJORADO: Usar basePosition actualizada
-        CardHoverInHand hoverComponent = GetComponent<CardHoverInHand>();
-        if (hoverComponent != null && hoverComponent.basePosition != Vector3.zero)
-        {
-            rectTransform.position = hoverComponent.basePosition;
-        }
-        else
-        {
-            // Fallback por si hay algún problema
-            rectTransform.anchoredPosition = originalAnchoredPosition;
-        }
+        //// MEJORADO: Usar basePosition actualizada
+        //CardHoverInHand hoverComponent = GetComponent<CardHoverInHand>();
+        //if (hoverComponent != null && hoverComponent.basePosition != Vector3.zero)
+        //{
+        //    rectTransform.position = hoverComponent.basePosition;
+        //}
+        //else
+        //{
+        //    // Fallback por si hay algún problema
+        //    rectTransform.anchoredPosition = originalAnchoredPosition;
+        //}
+
+        rectTransform.anchoredPosition = originalAnchoredPosition;
+        rectTransform.rotation = originalRotation;
 
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
