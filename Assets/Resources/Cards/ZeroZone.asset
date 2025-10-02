@@ -17,7 +17,7 @@ MonoBehaviour:
     area.
   cardType: 3
   healthModifier: 10
-  numberOfTiles: 9
+  numberOfTiles: 4
   goldCost: 50
   areaPreviewPrefab: {fileID: 1444403662060021971, guid: 2f572ff95ce351c40b49b59d18805cfe, type: 3}
   cooldown: 20
