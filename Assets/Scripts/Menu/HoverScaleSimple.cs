@@ -50,7 +50,7 @@ public class HoverScaleSimple : MonoBehaviour, IPointerEnterHandler, IPointerExi
         //transform.localScale = originalScale;
         if (currentAnimation != null) StopCoroutine(currentAnimation);
         currentAnimation = StartCoroutine(Animate(finalScale, originalScale));
-        if (clipHover != null) audioSource.PlayOneShot(clipHover);
+        if (clipHover != null && audioSource != null) audioSource.PlayOneShot(clipHover);
     }
 
     //public void SoundOnPressed()
