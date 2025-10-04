@@ -1,0 +1,819 @@
+fileFormatVersion: 2
+guid: c5ac93354f420fc43a7da0468e5e62c0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5553579652195781276
+    second: boundCard_0
+  - first:
+      213: 2796628079385002267
+    second: boundCard_1
+  - first:
+      213: -1705332199185217365
+    second: boundCard_2
+  - first:
+      213: 1293230874407715929
+    second: boundCard_3
+  - first:
+      213: 1861802588218671674
+    second: boundCard_4
+  - first:
+      213: -3122875855588192453
+    second: boundCard_5
+  - first:
+      213: -6260754626799325546
+    second: boundCard_6
+  - first:
+      213: -4795069792367245824
+    second: boundCard_7
+  - first:
+      213: 6283839576219806565
+    second: boundCard_8
+  - first:
+      213: -4040511751817514515
+    second: boundCard_9
+  - first:
+      213: 7412502272456493702
+    second: boundCard_10
+  - first:
+      213: -6363138016060742383
+    second: boundCard_11
+  - first:
+      213: 6004355251584432922
+    second: boundCard_12
+  - first:
+      213: 6046580883636214241
+    second: boundCard_13
+  - first:
+      213: -3654924992583511092
+    second: boundCard_14
+  - first:
+      213: 2060694058370849434
+    second: boundCard_15
+  - first:
+      213: 2938024624099579087
+    second: boundCard_16
+  - first:
+      213: -3371157770637595636
+    second: boundCard_17
+  - first:
+      213: -1142153588263125161
+    second: boundCard_18
+  - first:
+      213: 3015938281653655133
+    second: boundCard_19
+  - first:
+      213: 2163758509788945424
+    second: boundCard_20
+  - first:
+      213: 7413687972061569665
+    second: boundCard_21
+  - first:
+      213: -3053768810590595945
+    second: boundCard_22
+  - first:
+      213: 1702286674514348636
+    second: boundCard_23
+  - first:
+      213: 8345776851043494300
+    second: boundCard_24
+  - first:
+      213: 2625117643360556377
+    second: boundCard_25
+  - first:
+      213: -945177446019921915
+    second: boundCard_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: boundCard_0
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 709
+        width: 32
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9a87f00547421d40800000000000000
+      internalID: 5553579652195781276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_1
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 709
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1140a8cb6e9fc620800000000000000
+      internalID: 2796628079385002267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_2
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 709
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba8878b66617558e0800000000000000
+      internalID: -1705332199185217365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_3
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 709
+        width: 14
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 954c3a1e0aa72f110800000000000000
+      internalID: 1293230874407715929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_4
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 709
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a324da8f69376d910800000000000000
+      internalID: 1861802588218671674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_5
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 709
+        width: 31
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3f850e74f059a4d0800000000000000
+      internalID: -3122875855588192453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_6
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 709
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69e2ebb76d45d19a0800000000000000
+      internalID: -6260754626799325546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_7
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 709
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0068eb0ed6d747db0800000000000000
+      internalID: -4795069792367245824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_8
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 709
+        width: 26
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56b6f162dcea43750800000000000000
+      internalID: 6283839576219806565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_9
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 258
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de1302228f73de7c0800000000000000
+      internalID: -4040511751817514515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_10
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 258
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68a8b8e2b8f7ed660800000000000000
+      internalID: 7412502272456493702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_11
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 258
+        width: 26
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1156aef00b791b7a0800000000000000
+      internalID: -6363138016060742383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_12
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 258
+        width: 34
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1bf0f3f941c35350800000000000000
+      internalID: 6004355251584432922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_13
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 0
+        width: 558
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e9ddca0745c9e350800000000000000
+      internalID: 6046580883636214241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_14
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 188
+        width: 26
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc3dc587519174dc0800000000000000
+      internalID: -3654924992583511092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_15
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 174
+        width: 39
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9ad3fbf35e099c10800000000000000
+      internalID: 2060694058370849434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_16
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 174
+        width: 34
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc45ecc44d5f5c820800000000000000
+      internalID: 2938024624099579087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_17
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 188
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0c29576edd3731d0800000000000000
+      internalID: -3371157770637595636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_18
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 168
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75f73a4ec514620f0800000000000000
+      internalID: -1142153588263125161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_19
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 169
+        width: 25
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d56d77653e3cad920800000000000000
+      internalID: 3015938281653655133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_20
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 168
+        width: 34
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01cd2bb86e6370e10800000000000000
+      internalID: 2163758509788945424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_21
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 168
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 182e0526ee5b2e660800000000000000
+      internalID: 7413687972061569665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_22
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 169
+        width: 27
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79494924275de95d0800000000000000
+      internalID: -3053768810590595945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_23
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 169
+        width: 27
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5a0f4c16bcbf9710800000000000000
+      internalID: 1702286674514348636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_24
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 168
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c99202504d722d370800000000000000
+      internalID: 8345776851043494300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_25
+      rect:
+        serializedVersion: 2
+        x: 915
+        y: 168
+        width: 30
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 955dd12969a4e6420800000000000000
+      internalID: 2625117643360556377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boundCard_26
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 168
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5088540ee1e02e2f0800000000000000
+      internalID: -945177446019921915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      boundCard_0: 5553579652195781276
+      boundCard_1: 2796628079385002267
+      boundCard_10: 7412502272456493702
+      boundCard_11: -6363138016060742383
+      boundCard_12: 6004355251584432922
+      boundCard_13: 6046580883636214241
+      boundCard_14: -3654924992583511092
+      boundCard_15: 2060694058370849434
+      boundCard_16: 2938024624099579087
+      boundCard_17: -3371157770637595636
+      boundCard_18: -1142153588263125161
+      boundCard_19: 3015938281653655133
+      boundCard_2: -1705332199185217365
+      boundCard_20: 2163758509788945424
+      boundCard_21: 7413687972061569665
+      boundCard_22: -3053768810590595945
+      boundCard_23: 1702286674514348636
+      boundCard_24: 8345776851043494300
+      boundCard_25: 2625117643360556377
+      boundCard_26: -945177446019921915
+      boundCard_3: 1293230874407715929
+      boundCard_4: 1861802588218671674
+      boundCard_5: -3122875855588192453
+      boundCard_6: -6260754626799325546
+      boundCard_7: -4795069792367245824
+      boundCard_8: 6283839576219806565
+      boundCard_9: -4040511751817514515
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
