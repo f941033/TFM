@@ -1,0 +1,1287 @@
+fileFormatVersion: 2
+guid: 5df11dfcfff41ef4196055ae871313ad
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2084545467141682270
+    second: summonCard_0
+  - first:
+      213: -6565850509017649048
+    second: summonCard_1
+  - first:
+      213: -770712135193496489
+    second: summonCard_2
+  - first:
+      213: 4926845427217472315
+    second: summonCard_3
+  - first:
+      213: 2255618027504835259
+    second: summonCard_4
+  - first:
+      213: 8509040159851891906
+    second: summonCard_5
+  - first:
+      213: 3812210270478264040
+    second: summonCard_6
+  - first:
+      213: -8909518121459123038
+    second: summonCard_7
+  - first:
+      213: 8581890557259423735
+    second: summonCard_8
+  - first:
+      213: -4172489717836187095
+    second: summonCard_9
+  - first:
+      213: -5961955176724873000
+    second: summonCard_10
+  - first:
+      213: -8920039401910259041
+    second: summonCard_11
+  - first:
+      213: 9177075029299073689
+    second: summonCard_12
+  - first:
+      213: 3194944511769452916
+    second: summonCard_13
+  - first:
+      213: 8562096949470040802
+    second: summonCard_14
+  - first:
+      213: 3002854195564924758
+    second: summonCard_15
+  - first:
+      213: 1877369191354601979
+    second: summonCard_16
+  - first:
+      213: 4784545536184235754
+    second: summonCard_17
+  - first:
+      213: 3544265263940417247
+    second: summonCard_18
+  - first:
+      213: -3394017893512824898
+    second: summonCard_19
+  - first:
+      213: -3242107669547089292
+    second: summonCard_20
+  - first:
+      213: 8890646500305520385
+    second: summonCard_21
+  - first:
+      213: 2807724792535754174
+    second: summonCard_22
+  - first:
+      213: -7538011092383349078
+    second: summonCard_23
+  - first:
+      213: -3489063723260417928
+    second: summonCard_24
+  - first:
+      213: 6952258483535613176
+    second: summonCard_25
+  - first:
+      213: 1747107269911585073
+    second: summonCard_26
+  - first:
+      213: -4001072382849244114
+    second: summonCard_27
+  - first:
+      213: 2666601172896088295
+    second: summonCard_28
+  - first:
+      213: 7134026428997172656
+    second: summonCard_29
+  - first:
+      213: -7489076697702031783
+    second: summonCard_30
+  - first:
+      213: -2261613340857650911
+    second: summonCard_31
+  - first:
+      213: 5867278506448847951
+    second: summonCard_32
+  - first:
+      213: -2415558506205590496
+    second: summonCard_33
+  - first:
+      213: -5728309928642280877
+    second: summonCard_34
+  - first:
+      213: 2032480855779392447
+    second: summonCard_35
+  - first:
+      213: -339724074176791156
+    second: summonCard_36
+  - first:
+      213: -5050188876282946831
+    second: summonCard_37
+  - first:
+      213: 2359012019936052282
+    second: summonCard_38
+  - first:
+      213: 379380081300589495
+    second: summonCard_39
+  - first:
+      213: -2814252572829560909
+    second: summonCard_40
+  - first:
+      213: -5240832435858640181
+    second: summonCard_41
+  - first:
+      213: -5435649968866418292
+    second: summonCard_42
+  - first:
+      213: -987365289978867218
+    second: summonCard_43
+  - first:
+      213: 7331542208217363358
+    second: summonCard_44
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: summonCard_0
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 783
+        width: 45
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e547127de0bcdec10800000000000000
+      internalID: 2084545467141682270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_1
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 792
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8607fa9dfb961e4a0800000000000000
+      internalID: -6565850509017649048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 778
+        width: 38
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75475bd7561ed45f0800000000000000
+      internalID: -770712135193496489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_3
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 792
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3b1e8000dbaf5440800000000000000
+      internalID: 4926845427217472315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_4
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 792
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bba946e25a09d4f10800000000000000
+      internalID: 2255618027504835259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_5
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 792
+        width: 54
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cc418b41fe261670800000000000000
+      internalID: 8509040159851891906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_6
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 792
+        width: 53
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e6e3f40b01b7e430800000000000000
+      internalID: 3812210270478264040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_7
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 792
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2acf58229780b5480800000000000000
+      internalID: -8909518121459123038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_8
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 792
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ff1ab63efff81770800000000000000
+      internalID: 8581890557259423735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_9
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 792
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92a776b55b65816c0800000000000000
+      internalID: -4172489717836187095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_10
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 792
+        width: 34
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d04384ca51e24da0800000000000000
+      internalID: -5961955176724873000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_11
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 792
+        width: 32
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f92b6a2ac67a53480800000000000000
+      internalID: -8920039401910259041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_12
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 792
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9929a7eed158b5f70800000000000000
+      internalID: 9177075029299073689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_13
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 792
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4712a1d1b19b65c20800000000000000
+      internalID: 3194944511769452916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_14
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 792
+        width: 14
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e21e95cfcda2d670800000000000000
+      internalID: 8562096949470040802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_15
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 792
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65f40f62bf74ca920800000000000000
+      internalID: 3002854195564924758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_16
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 792
+        width: 31
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf114f23551cd0a10800000000000000
+      internalID: 1877369191354601979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_17
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 792
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae631f7c0de166240800000000000000
+      internalID: 4784545536184235754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_18
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 792
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd6bceeaa72cf2130800000000000000
+      internalID: 3544265263940417247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_19
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 792
+        width: 26
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb739d745b606e0d0800000000000000
+      internalID: -3394017893512824898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_20
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 460
+        width: 36
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47283118048b103d0800000000000000
+      internalID: -3242107669547089292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_21
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 460
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 107c74a23ebe16b70800000000000000
+      internalID: 8890646500305520385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_22
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 461
+        width: 26
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb5a626a2da07f620800000000000000
+      internalID: 2807724792535754174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_23
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 460
+        width: 34
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa6498d79da936790800000000000000
+      internalID: -7538011092383349078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_24
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 460
+        width: 26
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8786c50970b549fc0800000000000000
+      internalID: -3489063723260417928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_25
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 447
+        width: 38
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fc06d191426b7060800000000000000
+      internalID: 6952258483535613176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_26
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 447
+        width: 34
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 131259f2ec8fe3810800000000000000
+      internalID: 1747107269911585073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_27
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 64
+        width: 572
+        height: 726
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2425abcdd55978c0800000000000000
+      internalID: -4001072382849244114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_28
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 192
+        width: 38
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e08c1473aba10520800000000000000
+      internalID: 2666601172896088295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_29
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 192
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bdff9e4d37210360800000000000000
+      internalID: 7134026428997172656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_30
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 192
+        width: 53
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95e90d91c64711890800000000000000
+      internalID: -7489076697702031783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_31
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 192
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12135e626a22d90e0800000000000000
+      internalID: -2261613340857650911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_32
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 178
+        width: 37
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f440b2727b2cc6150800000000000000
+      internalID: 5867278506448847951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_33
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 192
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02c417736563a7ed0800000000000000
+      internalID: -2415558506205590496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_34
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 226
+        width: 38
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3520fe34874f080b0800000000000000
+      internalID: -5728309928642280877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_35
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 225
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbb338dd192d43c10800000000000000
+      internalID: 2032480855779392447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_36
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 226
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8d3b0521ce094bf0800000000000000
+      internalID: -339724074176791156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_37
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 212
+        width: 36
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fa968c59ff1ae9b0800000000000000
+      internalID: -5050188876282946831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_38
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 225
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a344a2dfee4ecb020800000000000000
+      internalID: 2359012019936052282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_39
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 21
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bbc7c48c24d34500800000000000000
+      internalID: 379380081300589495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_40
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 20
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bfc3401234c1f8d0800000000000000
+      internalID: -2814252572829560909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_41
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 20
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc2fc4daaa2d447b0800000000000000
+      internalID: -5240832435858640181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_42
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 21
+        width: 14
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c81aa521721b094b0800000000000000
+      internalID: -5435649968866418292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_43
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 20
+        width: 26
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee15243008c2c42f0800000000000000
+      internalID: -987365289978867218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summonCard_44
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 21
+        width: 34
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9334905bcedeb560800000000000000
+      internalID: 7331542208217363358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      summonCard_0: 2084545467141682270
+      summonCard_1: -6565850509017649048
+      summonCard_10: -5961955176724873000
+      summonCard_11: -8920039401910259041
+      summonCard_12: 9177075029299073689
+      summonCard_13: 3194944511769452916
+      summonCard_14: 8562096949470040802
+      summonCard_15: 3002854195564924758
+      summonCard_16: 1877369191354601979
+      summonCard_17: 4784545536184235754
+      summonCard_18: 3544265263940417247
+      summonCard_19: -3394017893512824898
+      summonCard_2: -770712135193496489
+      summonCard_20: -3242107669547089292
+      summonCard_21: 8890646500305520385
+      summonCard_22: 2807724792535754174
+      summonCard_23: -7538011092383349078
+      summonCard_24: -3489063723260417928
+      summonCard_25: 6952258483535613176
+      summonCard_26: 1747107269911585073
+      summonCard_27: -4001072382849244114
+      summonCard_28: 2666601172896088295
+      summonCard_29: 7134026428997172656
+      summonCard_3: 4926845427217472315
+      summonCard_30: -7489076697702031783
+      summonCard_31: -2261613340857650911
+      summonCard_32: 5867278506448847951
+      summonCard_33: -2415558506205590496
+      summonCard_34: -5728309928642280877
+      summonCard_35: 2032480855779392447
+      summonCard_36: -339724074176791156
+      summonCard_37: -5050188876282946831
+      summonCard_38: 2359012019936052282
+      summonCard_39: 379380081300589495
+      summonCard_4: 2255618027504835259
+      summonCard_40: -2814252572829560909
+      summonCard_41: -5240832435858640181
+      summonCard_42: -5435649968866418292
+      summonCard_43: -987365289978867218
+      summonCard_44: 7331542208217363358
+      summonCard_5: 8509040159851891906
+      summonCard_6: 3812210270478264040
+      summonCard_7: -8909518121459123038
+      summonCard_8: 8581890557259423735
+      summonCard_9: -4172489717836187095
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

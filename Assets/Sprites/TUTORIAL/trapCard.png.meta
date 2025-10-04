@@ -1,0 +1,1235 @@
+fileFormatVersion: 2
+guid: d49b2c1a380af8842a445b56923de4df
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8719568186526447821
+    second: trapCard_0
+  - first:
+      213: -3988644098365005697
+    second: trapCard_1
+  - first:
+      213: -6437134539262205400
+    second: trapCard_2
+  - first:
+      213: 8271600473801967721
+    second: trapCard_3
+  - first:
+      213: -4967866133934100527
+    second: trapCard_4
+  - first:
+      213: -1823589438350410707
+    second: trapCard_5
+  - first:
+      213: 529037219676236661
+    second: trapCard_6
+  - first:
+      213: -515431060624140074
+    second: trapCard_7
+  - first:
+      213: 4022307923991196542
+    second: trapCard_8
+  - first:
+      213: -2636706517312582359
+    second: trapCard_9
+  - first:
+      213: -8549521756332039017
+    second: trapCard_10
+  - first:
+      213: -845401805508968590
+    second: trapCard_11
+  - first:
+      213: 4589674175773707255
+    second: trapCard_12
+  - first:
+      213: -3356874359570060647
+    second: trapCard_13
+  - first:
+      213: -2461885737809525358
+    second: trapCard_14
+  - first:
+      213: -9072806649607844928
+    second: trapCard_15
+  - first:
+      213: -4012295548854748538
+    second: trapCard_16
+  - first:
+      213: 6066896281640696122
+    second: trapCard_17
+  - first:
+      213: 5156570571075334107
+    second: trapCard_18
+  - first:
+      213: 653329981533928570
+    second: trapCard_19
+  - first:
+      213: -6288849173537026410
+    second: trapCard_20
+  - first:
+      213: -2901449115480619412
+    second: trapCard_21
+  - first:
+      213: 7841198449318982789
+    second: trapCard_22
+  - first:
+      213: 7909511496627694817
+    second: trapCard_23
+  - first:
+      213: -2487373534274726605
+    second: trapCard_24
+  - first:
+      213: -2294718537825279689
+    second: trapCard_25
+  - first:
+      213: 2965009550490377003
+    second: trapCard_26
+  - first:
+      213: 2127326920596087728
+    second: trapCard_27
+  - first:
+      213: 1751817522951401023
+    second: trapCard_28
+  - first:
+      213: -7297204309350919777
+    second: trapCard_29
+  - first:
+      213: 6125710879855712904
+    second: trapCard_30
+  - first:
+      213: -8547032608705820168
+    second: trapCard_31
+  - first:
+      213: 5816479017179243808
+    second: trapCard_32
+  - first:
+      213: 9189887393364930879
+    second: trapCard_33
+  - first:
+      213: 7015221336133405248
+    second: trapCard_34
+  - first:
+      213: -4356185523659561210
+    second: trapCard_35
+  - first:
+      213: -4740598614757662089
+    second: trapCard_36
+  - first:
+      213: -491635243580524853
+    second: trapCard_37
+  - first:
+      213: 3182548077849274822
+    second: trapCard_38
+  - first:
+      213: 6188348023225839263
+    second: trapCard_39
+  - first:
+      213: -807429277651966098
+    second: trapCard_40
+  - first:
+      213: 5200922568995501529
+    second: trapCard_41
+  - first:
+      213: -1057500957943089351
+    second: trapCard_42
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: trapCard_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 809
+        width: 38
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3374b4fbeeeddf680800000000000000
+      internalID: -8719568186526447821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 809
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f70ee75435d75a8c0800000000000000
+      internalID: -3988644098365005697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_2
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 809
+        width: 53
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 822e0efed34baa6a0800000000000000
+      internalID: -6437134539262205400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_3
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 809
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9684bec5ec0aac270800000000000000
+      internalID: 8271600473801967721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_4
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 795
+        width: 37
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1df2a2372189e0bb0800000000000000
+      internalID: -4967866133934100527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_5
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 809
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2c38fe411f41b6e0800000000000000
+      internalID: -1823589438350410707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_6
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 809
+        width: 32
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57b23cf5c84875700800000000000000
+      internalID: 529037219676236661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_7
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 809
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d89b456e22d8d8f0800000000000000
+      internalID: -515431060624140074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_8
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 809
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e73fbbaeebb12d730800000000000000
+      internalID: 4022307923991196542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_9
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 809
+        width: 14
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92d40a27469886bd0800000000000000
+      internalID: -2636706517312582359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_10
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 809
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 794ea5a824ff95980800000000000000
+      internalID: -8549521756332039017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_11
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 809
+        width: 31
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ff92a79878444f0800000000000000
+      internalID: -845401805508968590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_12
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 809
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fb86c1885cc1bf30800000000000000
+      internalID: 4589674175773707255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_13
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 809
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99aa5323e8cf961d0800000000000000
+      internalID: -3356874359570060647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_14
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 809
+        width: 26
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 295434017ff95ddd0800000000000000
+      internalID: -2461885737809525358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_15
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 358
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cb82560c6ae61280800000000000000
+      internalID: -9072806649607844928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_16
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 358
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68ab1a4d4767158c0800000000000000
+      internalID: -4012295548854748538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_17
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 358
+        width: 25
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a39f45c3602f13450800000000000000
+      internalID: 6066896281640696122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_18
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 358
+        width: 34
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdfad2c1d91df8740800000000000000
+      internalID: 5156570571075334107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_19
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 46
+        width: 569
+        height: 761
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7c317e1828111900800000000000000
+      internalID: 653329981533928570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_20
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 288
+        width: 26
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69e01551ff489b8a0800000000000000
+      internalID: -6288849173537026410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_21
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 274
+        width: 38
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6608e9e66bfbb7d0800000000000000
+      internalID: -2901449115480619412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_22
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 274
+        width: 34
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5847009f17881dc60800000000000000
+      internalID: 7841198449318982789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_23
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 288
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ecac5fbcca34cd60800000000000000
+      internalID: 7909511496627694817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_24
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 250
+        width: 35
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 335d8d103f21b7dd0800000000000000
+      internalID: -2487373534274726605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_25
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 250
+        width: 34
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 731ab65d5a58720e0800000000000000
+      internalID: -2294718537825279689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_26
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 250
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2b9e941a74d52920800000000000000
+      internalID: 2965009550490377003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_27
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 250
+        width: 25
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b3614f2098c58d10800000000000000
+      internalID: 2127326920596087728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_28
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 180
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3ea2de61c4bf4810800000000000000
+      internalID: 1751817522951401023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_29
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 180
+        width: 31
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9150b7c75f1bba90800000000000000
+      internalID: -7297204309350919777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_30
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 180
+        width: 26
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88a9b8ef695e20550800000000000000
+      internalID: 6125710879855712904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_31
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 216
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f9c8626027d26980800000000000000
+      internalID: -8547032608705820168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_32
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 166
+        width: 34
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0256b7e59d848b050800000000000000
+      internalID: 5816479017179243808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_33
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 180
+        width: 26
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f317b57e4e9098f70800000000000000
+      internalID: 9189887393364930879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_34
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 216
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04a09f013a21b5160800000000000000
+      internalID: 7015221336133405248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_35
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 180
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 607a296a858bb83c0800000000000000
+      internalID: -4356185523659561210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_36
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 180
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77229a83da2063eb0800000000000000
+      internalID: -4740598614757662089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_37
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 180
+        width: 13
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc6f15bc95c5d29f0800000000000000
+      internalID: -491635243580524853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_38
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 180
+        width: 14
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c9eecc6d9eaa2c20800000000000000
+      internalID: 3182548077849274822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_39
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 16
+        width: 39
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9eedd66dbd61e550800000000000000
+      internalID: 6188348023225839263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_40
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 16
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e67ed44995f6bc4f0800000000000000
+      internalID: -807429277651966098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_41
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 16
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d5f94555836d2840800000000000000
+      internalID: 5200922568995501529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapCard_42
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 16
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 937ba2c4b700351f0800000000000000
+      internalID: -1057500957943089351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      trapCard_0: -8719568186526447821
+      trapCard_1: -3988644098365005697
+      trapCard_10: -8549521756332039017
+      trapCard_11: -845401805508968590
+      trapCard_12: 4589674175773707255
+      trapCard_13: -3356874359570060647
+      trapCard_14: -2461885737809525358
+      trapCard_15: -9072806649607844928
+      trapCard_16: -4012295548854748538
+      trapCard_17: 6066896281640696122
+      trapCard_18: 5156570571075334107
+      trapCard_19: 653329981533928570
+      trapCard_2: -6437134539262205400
+      trapCard_20: -6288849173537026410
+      trapCard_21: -2901449115480619412
+      trapCard_22: 7841198449318982789
+      trapCard_23: 7909511496627694817
+      trapCard_24: -2487373534274726605
+      trapCard_25: -2294718537825279689
+      trapCard_26: 2965009550490377003
+      trapCard_27: 2127326920596087728
+      trapCard_28: 1751817522951401023
+      trapCard_29: -7297204309350919777
+      trapCard_3: 8271600473801967721
+      trapCard_30: 6125710879855712904
+      trapCard_31: -8547032608705820168
+      trapCard_32: 5816479017179243808
+      trapCard_33: 9189887393364930879
+      trapCard_34: 7015221336133405248
+      trapCard_35: -4356185523659561210
+      trapCard_36: -4740598614757662089
+      trapCard_37: -491635243580524853
+      trapCard_38: 3182548077849274822
+      trapCard_39: 6188348023225839263
+      trapCard_4: -4967866133934100527
+      trapCard_40: -807429277651966098
+      trapCard_41: 5200922568995501529
+      trapCard_42: -1057500957943089351
+      trapCard_5: -1823589438350410707
+      trapCard_6: 529037219676236661
+      trapCard_7: -515431060624140074
+      trapCard_8: 4022307923991196542
+      trapCard_9: -2636706517312582359
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
