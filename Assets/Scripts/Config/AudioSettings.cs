@@ -67,7 +67,8 @@ public class AudioSettings : MonoBehaviour
             sfxAudioSource.volume = SFXVolume;
     }
 
-    public void PlayMusic(AudioClip clip, bool loop = true)
+    public void 
+        PlayMusic(AudioClip clip, bool loop = true)
     {
         if (musicAudioSource == null || clip == null) return;
         musicAudioSource.Stop();
