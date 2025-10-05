@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioSettings : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class AudioSettings : MonoBehaviour
     [Header("Defaults")]
     [Range(0f, 1f)] public float defaultMusicVolume = 0.7f;
     [Range(0f, 1f)] public float defaultSFXVolume = 0.8f;
+
+    [Header("Audio Mixer")]
+    public AudioMixer audioMixer;
 
     public static float MusicVolume { get; private set; }
     public static float SFXVolume { get; private set; }
@@ -41,10 +45,15 @@ public class AudioSettings : MonoBehaviour
     public void OnSFXVolumeChanged(float value)
     {
         SFXVolume = value;
-        ApplySFXVolume();
+
+        // Mapeo lineal más conservador
+        float db = Mathf.Lerp(-40f, 0f, value);
+
+        audioMixer.SetFloat("SFXVolume", db);
         PlayerPrefs.SetFloat("SFXVolume", SFXVolume);
         PlayerPrefs.Save();
     }
+
 
     void ApplyMusicVolume()
     {
@@ -68,10 +77,10 @@ public class AudioSettings : MonoBehaviour
         musicAudioSource.Play();
     }
 
-    public static void PlaySFX(AudioSource source, AudioClip clip)
+    public void PlaySFX(AudioClip clip)
     {
-        if (source == null || clip == null) return;
-        source.volume = SFXVolume;
-        source.PlayOneShot(clip);
+        if (clip == null) return;
+        sfxAudioSource.volume = SFXVolume;
+        sfxAudioSource.PlayOneShot(clip);
     }
 }

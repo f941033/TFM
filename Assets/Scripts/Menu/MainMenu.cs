@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
     //public Vector3 hoverScale = new Vector3(1.1f, 1.1f, 1f); // tamaño al pasar el ratón
     //private Vector3 originalScale; // guardamos el tamaño original
     public GameObject panelInicial;
+    public AudioClip gameOverClip;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,6 +19,7 @@ public class MainMenu : MonoBehaviour
             if(gameObject.name == "CanvasMainMenu") gameObject.SetActive(false);
         }
 
+        if (gameObject.name == "CanvasGameOver" && gameOverClip != null) AudioSettings.Instance.PlayMusic(gameOverClip,true);
     }
 
     // Update is called once per frame

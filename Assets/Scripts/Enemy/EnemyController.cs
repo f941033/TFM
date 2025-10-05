@@ -186,7 +186,7 @@ public class EnemyController : MonoBehaviour
     {
         if (currentTarget == null) return;
 
-        if (attackSound != null) AudioSettings.PlaySFX(audioSource, attackSound);
+        if (attackSound != null) AudioSettings.Instance.PlaySFX(attackSound);
         if (type == EnemyType.Trampero)
         {
             particlesTrampero.Play();
@@ -263,8 +263,8 @@ public class EnemyController : MonoBehaviour
             }
 
             // Reproducir sonido y atacar
-            if (audioSource != null && trapAttackSound != null)
-                AudioSettings.PlaySFX(audioSource, trapAttackSound);
+            if (trapAttackSound != null)
+                AudioSettings.Instance.PlaySFX(trapAttackSound);
 
 
             trapComponent.ReceiveDamage(damageTrap);
@@ -336,7 +336,7 @@ public class EnemyController : MonoBehaviour
             // Si llega aquí, el path sigue bloqueado → atacar muro
             var wallComponent = wallTarget.GetComponent<DestructibleWall>();
             if (wallComponent == null) break;
-            if (attackSound != null) AudioSettings.PlaySFX(audioSource, attackSound);
+            if (attackSound != null) AudioSettings.Instance.PlaySFX(attackSound);
 
             wallComponent.TakeDamage(damageWall);
 

@@ -595,7 +595,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator KeyVFX() 
     {        
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSecondsRealtime(2f);
         panelKeyInfo.SetActive(false);
     }
 

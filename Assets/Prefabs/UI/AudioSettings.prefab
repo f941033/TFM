@@ -176,8 +176,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicAudioSource: {fileID: 5330450940540711600}
+  sfxAudioSource: {fileID: 3317869799430964513}
   defaultMusicVolume: 0.7
   defaultSFXVolume: 0.8
+  audioMixer: {fileID: 24100000, guid: d73bf104b04b19945abb3ee53abe3ce5, type: 2}
 --- !u!1 &9084294033304064839
 GameObject:
   m_ObjectHideFlags: 0

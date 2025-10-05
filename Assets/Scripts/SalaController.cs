@@ -80,7 +80,8 @@ public class SalaController : MonoBehaviour
 
         if (gameObject.tag == "salaCentral") return;
 
-        
+        GameObject go = GameObject.Find("CanvasMerchant");
+        if (go != null && go.activeInHierarchy) return;
 
         if (gm.hasKey && esSalaContigua() && !estaLibre)
         {
@@ -177,8 +178,9 @@ public class SalaController : MonoBehaviour
             if (sala.GetComponent<SalaController>() == null)
             {
                 if (sala.GetComponent<SalaPolygonController>().estaLibre) return true;
-            }else
-                if(sala.GetComponent<SalaController>().estaLibre) return true;
+            }
+            else
+                if (sala.GetComponent<SalaController>().estaLibre) return true;
 
         }
         return false;

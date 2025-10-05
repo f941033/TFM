@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8759425826186554283, guid: 4160b5345f0456344b72073f8700e67c, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -3308426062151290011, guid: d73bf104b04b19945abb3ee53abe3ce5, type: 2}
     - target: {fileID: 2532265521642198492, guid: 4160b5345f0456344b72073f8700e67c, type: 3}
       propertyPath: m_Layer
       value: 14
