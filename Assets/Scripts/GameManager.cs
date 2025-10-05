@@ -9,6 +9,7 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject audioSettingsPrefab;
     public GameObject panelKeyInfo;
     public CameraMovement cameraMovementInstance;
     private int enemiesDied = 0;
@@ -64,14 +65,21 @@ public class GameManager : MonoBehaviour
     private bool spawnStarted = false;
     //private bool firstTimeBackgroundSound = true;
     private AudioSource audioSource;
-    public AudioClip clipBackgroundSound;
+    //public AudioClip clipBackgroundSound;
     private const string PREF_MULLIGAN_SEEN = "mulligan_seen_action";
 
     private bool endWave = false;
 
+    private void Awake()
+    {
+         if (FindObjectsByType<AudioSettings>(FindObjectsSortMode.None).Length == 0)
+            Instantiate(audioSettingsPrefab);
+    }
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
+    {  
         merchantUI = FindFirstObjectByType<MerchantUI>();
         ChangePhase(GamePhase.Preparation);
         skipButton.gameObject.SetActive(true);
