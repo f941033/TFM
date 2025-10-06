@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelInicial: {fileID: 0}
-  gameOverClip: {fileID: 8300000, guid: 03c338314e12f134d9292f258418cf43, type: 3}
+  gameOverClip: {fileID: 8300000, guid: 6b07488e567543148bf36e28ccf4318a, type: 3}
 --- !u!114 &336179101
 MonoBehaviour:
   m_ObjectHideFlags: 0
