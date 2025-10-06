@@ -44,9 +44,9 @@ public class MerchantUI : MonoBehaviour
 
     private void OnBuyClicked(MerchantItem item)
     {
-        int finalCost = item is SoulsItem soulsItem
-        ? soulsItem.GetDynamicCost(player)
-        : item.cost;
+        int finalCost = item.cost;
+        if (item is SoulsItem s) finalCost = s.GetDynamicCost(player);
+        else if (item is KeyItem k) finalCost = k.GetDynamicCost(gm);
 
         if (player.AmountGold < finalCost)
         {
@@ -57,11 +57,14 @@ public class MerchantUI : MonoBehaviour
         player.SpendGold(finalCost);
         item.Apply(player, gm);
 
-        gm.ShowMessage($"You bought “{item.itemName}” for {finalCost}", 2f);
+        //gm.ShowMessage(finalCost == 0
+          //  ? $"¡{item.itemName} GRATIS!"
+            //: $"You bought “{item.itemName}” for {finalCost}", 2f);
 
-        if (item.itemName.Contains("Key"))
+        if (item is KeyItem)
         {
             gm.hasKey = true;
+            gm.keysBoughtThisRun++;
             key.gameObject.SetActive(true);
             panelKeyInfo.SetActive(true);
         }

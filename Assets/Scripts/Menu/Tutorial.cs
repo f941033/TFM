@@ -77,6 +77,8 @@ public class Tutorial : MonoBehaviour
 
     public void PlayButton()
     {
+        playerController.soulsBoughtThisRun = 0;
+        FindFirstObjectByType<GameManager>().keysBoughtThisRun = 0;
         healthText.text = baseHealth.ToString();
         playerController.BaseHealth = baseHealth;
         gameManager.PreparationPhase(startingDeck);
