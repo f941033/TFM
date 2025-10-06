@@ -30,7 +30,8 @@ public class CardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI minionHealth;
     [SerializeField] private TextMeshProUGUI minionRange;
     [SerializeField] private Sprite minionEgg;
-
+    [SerializeField] private Image mulliganOverlay;
+    public Image GetMulliganOverlay() => mulliganOverlay;
 
     public void SetCardUI(CardData cardData)
     {

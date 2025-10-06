@@ -6,16 +6,17 @@ public class MulliganSelectable : MonoBehaviour, IPointerClickHandler
 {
     private CardManager manager;
     private CardUI cardUI;
-    public bool Selected { get; private set; } = false;
-    private Image overlayImg;
+    private Image haloImg;   // tu mulliganOverlay del CardUI
 
-    public void Init(CardManager mgr, CardUI card)
+    public bool Selected { get; private set; }
+
+    public void Init(CardManager mgr, CardUI ui)
     {
         manager = mgr;
-        cardUI = card;
-        overlayImg = GetComponent<Image>(); 
-        if (overlayImg)
-            overlayImg.raycastTarget = true;
+        cardUI  = ui;
+        haloImg = cardUI?.GetMulliganOverlay();
+
+        // Por si el halo está desactivado por defecto
         Selected = false;
         ApplyVisual();
     }
@@ -35,17 +36,29 @@ public class MulliganSelectable : MonoBehaviour, IPointerClickHandler
 
         Selected = wantSelect;
         ApplyVisual();
-
-        string cardName = cardUI ? cardUI.data?.cardName : "(sin CardUI)";
-        Debug.Log("[Mulligan] " + (Selected ? "Seleccionada" : "Deseleccionada")
-                  + " | total=" + manager.mulliganSelectedCount
-                  + " | max=" + manager.drawPile.Count
-                  + " | carta=" + cardName);
     }
 
     private void ApplyVisual()
     {
-        if (!overlayImg) return;
-        overlayImg.color = Selected ? new Color(1f, 1f, 0f, 0.18f) : new Color(0f, 0f, 0f, 0f);
+        if (!haloImg) return;
+
+        // Opción A: si el GO del halo está desactivado por defecto:
+        haloImg.gameObject.SetActive(Selected);
+
+        // Opción B (si el GO está activo y solo ocultas mostrador):
+        // haloImg.enabled = Selected;
+
+        // Asegura que NO haga raycast:
+        haloImg.raycastTarget = false;
+
+        // Opcional: forzar que quede detrás si te hace falta
+        if (Selected) haloImg.transform.SetAsFirstSibling();
+    }
+
+    private void OnDisable()
+    {
+        // Limpieza por si sales de mulligan o destruyes la carta
+        if (haloImg) haloImg.gameObject.SetActive(false);
+        Selected = false;
     }
 }
