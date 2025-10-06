@@ -86,6 +86,7 @@ MonoBehaviour:
   minionHealth: {fileID: 1712005436534135445}
   minionRange: {fileID: 7702437501631904325}
   minionEgg: {fileID: 838431754, guid: aa5b37749b01d5f408ebdca2b3198a24, type: 3}
+  mulliganOverlay: {fileID: 5715179808903078328}
 --- !u!114 &7752803208183232184
 MonoBehaviour:
   m_ObjectHideFlags: 0

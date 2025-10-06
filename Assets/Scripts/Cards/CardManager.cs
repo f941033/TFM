@@ -284,9 +284,9 @@ public class CardManager : MonoBehaviour
 
     public void BeginMulligan()
     {
-        if (mulliganUsed) { FindFirstObjectByType<GameManager>().ShowMessage("Your mulligan is spent… there is no turning back.", 3); return; }
+        if (mulliganUsed) { gameManager.ShowMessage("Your mulligan is spent… there is no turning back.", 3); return; }
         if (GameManager.CurrentPhase != DeckboundDungeon.GamePhase.GamePhase.Action) return;
-        if (drawPile.Count == 0) { FindFirstObjectByType<GameManager>().ShowMessage("The deck is empty… and so is your hope.", 3); return; }
+        if (drawPile.Count == 0) { gameManager.ShowMessage("The deck is empty… and so is your hope.", 3); return; }
 
         foreach (var go in cardsInHand)
         {
@@ -297,54 +297,35 @@ public class CardManager : MonoBehaviour
             var hab = go.GetComponentInChildren<HabilityCardHandler>(true);
             if (hab) hab.enabled = false;
 
-            // 2) Overlay que captura el click (arriba del todo)
-            var overlayTr = go.transform.Find("MulliganOverlay");
-            GameObject overlay;
-            if (!overlayTr)
-            {
-                overlay = new GameObject("MulliganOverlay", typeof(RectTransform), typeof(Image));
-                var rt = (RectTransform)overlay.transform;
-                rt.SetParent(go.transform, false);
-                rt.anchorMin = Vector2.zero;
-                rt.anchorMax = Vector2.one;
-                rt.offsetMin = Vector2.zero;
-                rt.offsetMax = Vector2.zero;
-                overlay.transform.SetAsLastSibling();
+            // 2) Activa/Inicializa el selectable del prefab (NO se crean GOs nuevos)
+            var ui = go.GetComponentInChildren<CardUI>(true);
+            var sel = go.GetComponent<MulliganSelectable>();
+            if (!sel) sel = go.AddComponent<MulliganSelectable>(); // por si algún prefab aún no lo tiene
 
-                var img = overlay.GetComponent<Image>();
-                img.color = new Color(0, 0, 0, 0);
-                img.raycastTarget = true;
-
-                overlay.AddComponent<MulliganSelectable>();
-            }
-            else
-            {
-                overlay = overlayTr.gameObject;
-                overlay.transform.SetAsLastSibling(); // asegúrate que está arriba
-                overlay.SetActive(true);
-            }
-
-            // 3) Inicializa el selector en el OVERLAY (no en la raíz)
-            var cardUI = go.GetComponentInChildren<CardUI>();
-            var sel = overlay.GetComponent<MulliganSelectable>();
-            sel.Init(this, cardUI);
-            sel.SetSelected(false, applyVisual: true);
+            sel.enabled = true;
+            sel.Init(this, ui);
+            sel.SetSelected(false, applyVisual: true); // apaga el halo por si acaso
         }
 
         inMulligan = true;
         mulliganSelectedCount = 0;
+
         Debug.Log("[Mulligan] Comienza selección. drawPile=" + drawPile.Count);
-        FindFirstObjectByType<GameManager>().ShowMessage("Sacrifice a card from your hand and replace it with another from the deck. \n If you lack the courage, crawl away with Cancel.", 6);
+        gameManager.ShowMessage(
+            "Sacrifice a card from your hand and replace it with another from the deck. \nIf you lack the courage, crawl away with Cancel.",
+            6
+        );
     }
 
     public void ConfirmMulligan()
     {
         if (!inMulligan) return;
 
+        // 1) Recoger seleccionadas
         var toReplace = new List<GameObject>();
         foreach (var go in cardsInHand)
         {
-            var sel = go.GetComponentInChildren<MulliganSelectable>();
+            var sel = go.GetComponent<MulliganSelectable>();
             if (sel != null && sel.Selected) toReplace.Add(go);
         }
 
@@ -357,58 +338,50 @@ public class CardManager : MonoBehaviour
 
         if (n > drawPile.Count)
         {
-            FindFirstObjectByType<GameManager>().ShowMessage("Looking for a mulligan? Too bad… there aren’t enough cards left for your misery.", 4);
+            gameManager.ShowMessage("Looking for a mulligan? Too bad… there aren’t enough cards left for your misery.", 4);
             return;
         }
 
-        // 1) Mover seleccionadas a descartes o al fondo del mazo
+        // 2) Mover seleccionadas a descartes o al fondo del mazo y destruir sus GOs
         foreach (var go in toReplace)
         {
             cardsInHand.Remove(go);
 
-            var ui = go.GetComponentInChildren<CardUI>();
+            var ui = go.GetComponentInChildren<CardUI>(true);
             var data = ui ? ui.data : null;
 
             if (data != null)
             {
-                if (mulliganToDiscard)
-                    discardPile.Add(data);
-                else
-                    drawPile.Add(data);
+                if (mulliganToDiscard) discardPile.Add(data);
+                else                   drawPile.Add(data);
             }
 
             Destroy(go);
         }
 
-        var gm = FindFirstObjectByType<GameManager>();
-        gm.UpdateTextNumberOfCardsDiscard();
-        if (discardPile.Count > 0) gm.ActivateDiscardPileImage();
+        // 3) UI de descarte
+        gameManager.UpdateTextNumberOfCardsDiscard();
+        if (discardPile.Count > 0) gameManager.ActivateDiscardPileImage();
 
-        for (int i = 0; i < n; i++)
-            DrawCard();
+        // 4) Robar nuevas cartas y recolocar
+        for (int i = 0; i < n; i++) DrawCard();
+        UpdateHandVisuals();
 
-        UpdateHandVisuals(); // Esto ya incluye la actualización de posiciones base
-
-        // 3) Salir de mulligan
+        // 5) Salir de mulligan: reactivar interacciones y apagar selectables/halos
         mulliganUsed = true;
         inMulligan = false;
 
-        // Rehabilitar drag y cardHandler
         foreach (var go in cardsInHand)
         {
-            var drag = go.GetComponent<CardDragDrop>();
-            if (drag) drag.enabled = true;
+            var drag = go.GetComponent<CardDragDrop>(); if (drag) drag.enabled = true;
+            var hab  = go.GetComponentInChildren<HabilityCardHandler>(true); if (hab) hab.enabled = true;
 
-            var hab = go.GetComponentInChildren<HabilityCardHandler>(true);
-            if (hab) hab.enabled = true;
-
-            // Elimina overlay si existe
-            var overlay = go.transform.Find("MulliganOverlay");
-            if (overlay) overlay.gameObject.SetActive(false); // o Destroy(overlay.gameObject);
-
-            // Si dejaste algún MulliganSelectable en raíz (no debería ya), límpialo
-            var selRoot = go.GetComponent<MulliganSelectable>();
-            if (selRoot) Destroy(selRoot);
+            var sel = go.GetComponent<MulliganSelectable>();
+            if (sel != null)
+            {
+                sel.SetSelected(false, applyVisual: true); // apaga el halo (mulliganOverlay)
+                sel.enabled = false;                       // sin clicks fuera del mulligan
+            }
         }
 
         gameManager.OnMulliganFinished();
@@ -424,19 +397,17 @@ public class CardManager : MonoBehaviour
 
         foreach (var go in cardsInHand)
         {
-            var drag = go.GetComponent<CardDragDrop>();
-            if (drag) drag.enabled = true;
+            // Reactiva interacciones normales
+            var drag = go.GetComponent<CardDragDrop>(); if (drag) drag.enabled = true;
+            var hab  = go.GetComponentInChildren<HabilityCardHandler>(true); if (hab) hab.enabled = true;
 
-            var hab = go.GetComponentInChildren<HabilityCardHandler>(true);
-            if (hab) hab.enabled = true;
-
-            // Elimina overlay si existe
-            var overlay = go.transform.Find("MulliganOverlay");
-            if (overlay) overlay.gameObject.SetActive(false); // o Destroy(overlay.gameObject);
-
-            // Si dejaste algún MulliganSelectable en raíz (no debería ya), límpialo
-            var selRoot = go.GetComponent<MulliganSelectable>();
-            if (selRoot) Destroy(selRoot);
+            // Apaga halo y deshabilita selectable
+            var sel = go.GetComponent<MulliganSelectable>();
+            if (sel != null)
+            {
+                sel.SetSelected(false, applyVisual: true); // apaga el mulliganOverlay
+                sel.enabled = false;
+            }
         }
 
         gameManager.OnMulliganFinished();
