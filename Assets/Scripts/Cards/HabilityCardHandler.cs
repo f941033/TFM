@@ -125,6 +125,8 @@ public class HabilityCardHandler : MonoBehaviour
 
         if (overlayImage) overlayImage.fillAmount = 1f;
 
+        if (cooldownText != null) cooldownText.text = GetCooldownValue().ToString();
+
         // parar blink y restaurar alpha por si sigue activo
         if (blinkRoutine != null) { StopCoroutine(blinkRoutine); blinkRoutine = null; }
         if (target) SetAlpha(target, 1f);
