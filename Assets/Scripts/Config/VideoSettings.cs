@@ -12,7 +12,7 @@ public class VideoSettings : MonoBehaviour
 
     const string PREF_BRIGHTNESS = "Brightness";
     const float DEFAULT = 1f;
-    const float MAX_ALPHA = 0.5f;
+    const float MAX_ALPHA = 0.025f;
 
     private ColorAdjustments colorAdjust;
 
