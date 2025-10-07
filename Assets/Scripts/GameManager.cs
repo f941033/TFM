@@ -217,17 +217,6 @@ public class GameManager : MonoBehaviour
         panelEndWave.SetActive(false);
         cameraMovementInstance.EnableCameraControl(true);
 
-        //numberWave++;
-        //textNumberWave.text = "Ronda: " + numberWave;
-        //enemiesToKillInCurrentWave = Mathf.CeilToInt(initialEnemiesToKill * Mathf.Pow(numberWave, 0.8f));
-
-
-        /*------------------------------------------------
-         *           A�ADIR CARTA NUEVA AL DECK
-         *------------------------------------------------   */
-
-        //esto es una chapuza pero funciona:
-
         string selectedName = selectionManager.GetSelectedCardName();
         allCards = Resources.LoadAll<CardData>("Cards");
 

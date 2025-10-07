@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using TMPro;
 using System;
+using DeckboundDungeon.GamePhase;
 
 public class HabilityCardHandler : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class HabilityCardHandler : MonoBehaviour
     private int lastShownSeconds = -1;
     [SerializeField] private Image DarkReapImage;
     [SerializeField] private Image DarkSpeedImage;
+    [SerializeField] private Image ZeroZoneImage;
     [SerializeField] private float blinkThreshold = 5f;
     [SerializeField] private float blinkSpeed = 6f;
     [SerializeField] private float minAlpha = 0.35f;
@@ -29,8 +31,9 @@ public class HabilityCardHandler : MonoBehaviour
 
         this.player = player;
 
-        DarkReapImage  = GameObject.Find("PlayerStats/StatsPlayer/PowerUp")?.transform.Find("AttkIncr")?.GetComponent<Image>();
+        DarkReapImage = GameObject.Find("PlayerStats/StatsPlayer/PowerUp")?.transform.Find("AttkIncr")?.GetComponent<Image>();
         DarkSpeedImage = GameObject.Find("PlayerStats/StatsPlayer/PowerUp")?.transform.Find("SpeedIncr")?.GetComponent<Image>();
+        ZeroZoneImage = GameObject.Find("PlayerStats/StatsPlayer/PowerUp")?.transform.Find("ZeroZone")?.GetComponent<Image>();
 
         overlayImage.fillAmount = 1f;
         overlayImage.gameObject.SetActive(true);
@@ -48,19 +51,18 @@ public class HabilityCardHandler : MonoBehaviour
 
     public void StartCooldown()
     {
-        Debug.Log("Entro en el cooldown");
         var target = GetBlinkTarget();
         if (cardData.cardName == "DARK REAPER")
         {
-            Debug.Log("Entro en el if the reaper");
             if (DarkReapImage)
             {
-                Debug.Log("tengo imagen valida");
                 DarkReapImage.gameObject.SetActive(true);
             }
         }
 
         else if (cardData.cardName == "DARK SPEED") { if (DarkSpeedImage) DarkSpeedImage.gameObject.SetActive(true); }
+
+        else if (cardData.cardName == "ZERO ZONE") { if (ZeroZoneImage) ZeroZoneImage.gameObject.SetActive(true); }
 
         cooldownText.gameObject.SetActive(true);
         float cooldown = GetCooldownValue();
@@ -119,9 +121,11 @@ public class HabilityCardHandler : MonoBehaviour
 
         // Fin del CD
         cooldownRemaining = 0f;
-        if (cardData.cardName == "DARK REAPER")   { if (DarkReapImage)  DarkReapImage.gameObject.SetActive(false); }
+        if (cardData.cardName == "DARK REAPER") { if (DarkReapImage) DarkReapImage.gameObject.SetActive(false); }
 
         else if (cardData.cardName == "DARK SPEED") { if (DarkSpeedImage) DarkSpeedImage.gameObject.SetActive(false); }
+
+        else if (cardData.cardName == "ZERO ZONE") { if (ZeroZoneImage) ZeroZoneImage.gameObject.SetActive(false); }
 
         if (overlayImage) overlayImage.fillAmount = 1f;
 
@@ -170,10 +174,43 @@ public class HabilityCardHandler : MonoBehaviour
     {
         if (cardData == null) return null;
 
-        if (cardData.cardName == "DARK REAPER")   return DarkReapImage;
-        if (cardData.cardName == "DARK SPEED")  return DarkSpeedImage;
+        if (cardData.cardName == "DARK REAPER") return DarkReapImage;
+        else if (cardData.cardName == "DARK SPEED") return DarkSpeedImage;
+        else if (cardData.cardName == "ZERO ZONE") return ZeroZoneImage;
 
-        // fallback: la propia overlay de la carta, si quieres
         return overlayImage;
+    }
+    
+    void OnEnable()
+    {
+        GameManager.OnPhaseChanged += HandlePhaseChanged;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnPhaseChanged -= HandlePhaseChanged;
+        ForceStopCooldown(); // limpia si desactivan el GO a mitad de CD
+    }
+
+    private void HandlePhaseChanged(GamePhase newPhase)
+    {
+        if (newPhase != GamePhase.Action)
+            ForceStopCooldown();
+    }
+
+    private void ForceStopCooldown()
+    {
+        if (cooldownRoutine != null) { StopCoroutine(cooldownRoutine); cooldownRoutine = null; }
+        if (blinkRoutine    != null) { StopCoroutine(blinkRoutine);    blinkRoutine    = null; }
+        cooldownRemaining = 0f;
+
+        HideAllBuffIcons();
+    }
+
+    private void HideAllBuffIcons()
+    {
+        if (DarkReapImage)  DarkReapImage.gameObject.SetActive(false);
+        if (DarkSpeedImage) DarkSpeedImage.gameObject.SetActive(false);
+        if (ZeroZoneImage)  ZeroZoneImage.gameObject.SetActive(false);
     }
 }
