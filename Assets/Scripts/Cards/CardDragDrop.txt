@@ -44,8 +44,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private Vector3 originalScale;
     private Vector3 originalPosition;
 
-    public static bool isAnyCardDragging = false;
-
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -214,11 +212,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         else
         {
             currentBorder = Instantiate(borderPrefab_1);
-        }
-
-        if (isDragging) // Solo si el drag fue exitoso
-        {
-            isAnyCardDragging = true;
         }
     }
 
@@ -434,7 +427,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         }
 
         isDragging = false;
-        isAnyCardDragging = false;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 

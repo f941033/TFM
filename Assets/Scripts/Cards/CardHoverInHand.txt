@@ -68,9 +68,11 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!isInitialized) return;
-
-        if (CardDragDrop.isAnyCardDragging) return;
-        
+        if (cardDragDrop != null && cardDragDrop.isDragging)
+        {
+            Debug.Log("[OnPointerEnter]estoy arrastrando, no deberia hacer hover");
+            return;
+        }
 
         if (GameManager.CurrentPhase != GamePhase.Preparation &&
             GameManager.CurrentPhase != GamePhase.Action)
@@ -108,7 +110,11 @@ public class CardHoverInHand : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerExit(PointerEventData eventData)
     {
         if (!isInitialized) return;
-        if (CardDragDrop.isAnyCardDragging) return;
+        if (cardDragDrop != null && cardDragDrop.isDragging) 
+        {
+            Debug.Log("[OnPointerExit]estoy arrastrando, no deberia hacer hover");
+            return; 
+        }
 
         if (GameManager.CurrentPhase != GamePhase.Preparation &&
             GameManager.CurrentPhase != GamePhase.Action)
