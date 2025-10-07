@@ -69,10 +69,11 @@ public class GameManager : MonoBehaviour
     private const string PREF_MULLIGAN_SEEN = "mulligan_seen_action";
 
     private bool endWave = false;
+    public int keysBoughtThisRun = 0;
 
     private void Awake()
     {
-         if (FindObjectsByType<AudioSettings>(FindObjectsSortMode.None).Length == 0)
+        if (FindObjectsByType<AudioSettings>(FindObjectsSortMode.None).Length == 0)
             Instantiate(audioSettingsPrefab);
     }
 

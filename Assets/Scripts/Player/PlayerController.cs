@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float currentSoulsRate;
     [SerializeField] public int amountGold = 50;
     [SerializeField] public byte soulsBuyPerShop = 0;
+    [SerializeField] public int soulsBoughtThisRun = 0;
 
     [Header("Player bar stats")]
     [SerializeField] private TextMeshProUGUI damageText;
@@ -274,8 +275,9 @@ public class PlayerController : MonoBehaviour
         {
             currentSouls++;
             maxSouls++;
-            playerSouls.UpdateMaxSouls();
             soulsBuyPerShop++;
+            soulsBoughtThisRun++;
+            playerSouls.UpdateMaxSouls();
         }
     }
 

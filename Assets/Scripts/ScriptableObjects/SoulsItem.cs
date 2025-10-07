@@ -8,6 +8,9 @@ public class SoulsItem : MerchantItem
     }
     public int GetDynamicCost(PlayerController player)
     {
-        return cost + (player.soulsBuyPerShop * 50);
+        int baseCost  = cost;
+        int purchases = player.soulsBoughtThisRun;
+
+        return (purchases == 0) ? 0 : baseCost * purchases;
     }
 }
