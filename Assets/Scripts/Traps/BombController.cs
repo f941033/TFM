@@ -9,7 +9,7 @@ public class BombController : MonoBehaviour
     Animator animator;
     AudioSource audioSource;
 
-    public float rangoDeteccion = 2.0f;
+    float rangoDeteccion = 1f;
     private bool activada = false;
     public int damage;
 
@@ -38,7 +38,7 @@ public class BombController : MonoBehaviour
     {
         activada = true;
         animator.SetTrigger("explode");
-        Invoke("Explode", 0.75f);
+        Invoke("Explode", 0.5f);
     }
 
     public void PlaySound()
