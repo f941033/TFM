@@ -111,8 +111,8 @@ public class CardUI : MonoBehaviour
             damageImage.gameObject.SetActive(false);
             textDamage.gameObject.SetActive(false);
             costImage.sprite = cooldownSprite;
-            if (ColorUtility.TryParseHtmlString("#00FFF7", out var c))
-            costImage.color = c;
+            //if (ColorUtility.TryParseHtmlString("#00FFF7", out var c))
+            //costImage.color = c;
             cooldownFillImage.gameObject.SetActive(true);
             textType.text = "SPELL";
         }
