@@ -183,7 +183,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         CardHoverInHand hoverComponent = GetComponent<CardHoverInHand>();
         if (hoverComponent != null)
         {
-            hoverComponent.ForceExitHover(); 
+            hoverComponent.ForceExitHover();
         }
 
 
@@ -249,27 +249,9 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     bool IsPositionValid(Vector3Int cellPos)
     {
-        /*
-        //Vector3 worldPos = tilemap.GetCellCenterWorld(cellPos);
-
-        //// 1. Verificar tiles y colliders físicos
-        //bool isPhysicallyValid =
-        //    tilemap.HasTile(cellPos) &&
-        //    !Physics2D.OverlapCircle(worldPos, checkRadius, obstacleLayers) &&
-        //    !Physics2D.OverlapCircle(worldPos, checkRadius, spawnPointLayers);
-
-        //// 2. Verificar distancia a Player
-        //bool isOutsidePlayerRange = Physics2D.OverlapCircle(worldPos, checkRadius, playerLayer) == null;
-
-        //// 3. Verificar si ya hay una trampa en esta celda
-        //bool isCellOccupied = Physics2D.OverlapCircle(worldPos, checkRadius, trapLayers) != null;
-
-        //return isPhysicallyValid && isOutsidePlayerRange && !isCellOccupied;
-        */
-
 
         //las cartas de acción se ponen siempre
-        if(cardData.cardType == CardType.Hability) return true;
+        //if (cardData.cardType == CardType.Hability) return true;
 
 
         // Obtener el tamaño de la carta en tiles
@@ -286,6 +268,11 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 // Tile debe existir
                 if (!tilemap.HasTile(checkTile))
                     return false;
+
+                //las cartas de acción se ponen siempre
+                if (cardData.cardType == CardType.Hability) return true;
+
+
 
                 // Obstáculos
                 if (Physics2D.OverlapCircle(checkWorld, checkRadius, obstacleLayers))
@@ -337,100 +324,101 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         Vector3Int cellPos = dropTilemap.WorldToCell(worldPos);
         bool isSet = false;
 
-        // Verificar que toda el área de la carta sea válida
-        // O siempre para una carta de Habilidad
-        if (IsPositionValid(cellPos) || cardData.cardType == CardType.Hability)
+        if (cardData.cardType == CardType.Hability)
         {
+            Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
+            dropTilemap.SetTileFlags(cellPos, TileFlags.None);
+            cardData.Play(player, worldCenter);
+            Deck.CardPlayed(gameObject, cardData);
 
-                Collider2D col = Physics2D.OverlapPoint(new Vector2(worldPos.x, worldPos.y));
-                if (col != null)
+            var handler = GetComponent<HabilityCardHandler>();
+            if (handler != null)
+                handler.StartCooldown();
+
+            isSet = true;
+            ReturnToHand();
+        }
+
+
+        // Verificar que toda el área de la carta sea válida
+        if (IsPositionValid(cellPos))
+        {
+            Collider2D col = Physics2D.OverlapPoint(new Vector2(worldPos.x, worldPos.y));
+            if (col != null)
+            {
+                SalaController sala = col.GetComponent<SalaController>();
+                if (sala != null && sala.estaLibre)
                 {
-                    SalaController sala = col.GetComponent<SalaController>();
-                    if (sala != null && sala.estaLibre)
+                    Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
+
+                    // CARTA DECK EFFECT
+                    if (cardData is DeckEffectCardData deckEffect)
                     {
-                        Vector3 worldCenter = dropTilemap.GetCellCenterWorld(cellPos);
-
-                        // CARTA DECK EFFECT
-                        if (cardData is DeckEffectCardData deckEffect)
+                        switch (deckEffect.effectType)
                         {
-                            switch (deckEffect.effectType)
-                            {
-                                case DeckEffectCardData.Effect.DrawFromDiscard:
-                                    if (Deck.discardPile.Count == 0)
-                                    {
-                                        gameManager.ShowMessage("Hoping to find something in the discards? Only dust and failure.", 4);
-                                        break;
-                                    }
-                                    deckEffect.Play(player, worldCenter);
-                                    Deck.CardPlayed(gameObject, cardData);
-
-                                    isSet = true;
+                            case DeckEffectCardData.Effect.DrawFromDiscard:
+                                if (Deck.discardPile.Count == 0)
+                                {
+                                    gameManager.ShowMessage("Hoping to find something in the discards? Only dust and failure.", 4);
                                     break;
-                                case DeckEffectCardData.Effect.Draw:
-                                    deckEffect.Play(player, worldCenter);
-                                    Deck.CardPlayed(gameObject, cardData);
-                                    isSet = true;
+                                }
+                                deckEffect.Play(player, worldCenter);
+                                Deck.CardPlayed(gameObject, cardData);
+
+                                isSet = true;
+                                break;
+                            case DeckEffectCardData.Effect.Draw:
+                                deckEffect.Play(player, worldCenter);
+                                Deck.CardPlayed(gameObject, cardData);
+                                isSet = true;
+                                break;
+                            case DeckEffectCardData.Effect.LastUsed:
+                                if (Deck.lastCardUsed == null)
+                                {
+                                    gameManager.ShowMessage("You didn`t use one this round, you fool...", 4);
                                     break;
-                                case DeckEffectCardData.Effect.LastUsed:
-                                    if (Deck.lastCardUsed == null)
-                                    {
-                                        gameManager.ShowMessage("You didn`t use one this round, you fool...", 4);
-                                        break;
-                                    }
-                                    deckEffect.Play(player, worldCenter);
-                                    Deck.CardPlayed(gameObject, cardData);
-                                    isSet = true;
-                                    break;
-                            }
-                        }
-
-                        // CARTA TRAMPA
-                        else if (cardData.cardType == CardType.Trap)
-                        {
-                            dropTilemap.SetTileFlags(cellPos, TileFlags.None);
-                            cardData.Play(player, worldCenter);
-                            Deck.CardPlayed(gameObject, cardData);
-                            isSet = true;
-                        }
-                        //CARTA HABILIDAD
-                        else if (cardData.cardType == CardType.Hability)
-                        {
-                            dropTilemap.SetTileFlags(cellPos, TileFlags.None);
-                            cardData.Play(player, worldCenter);
-                            Deck.CardPlayed(gameObject, cardData);
-
-                            var handler = GetComponent<HabilityCardHandler>();
-                            if (handler != null)
-                                handler.StartCooldown();
-
-                            isSet = true;
-                            ReturnToHand();
-                        }
-                        else if (cardData.cardType == CardType.Summon)
-                        {
-                            dropTilemap.SetTileFlags(cellPos, TileFlags.None);
-                            cardData.Play(player, worldCenter);
-                            Deck.CardPlayed(gameObject, cardData);
-                            isSet = true;
-                        }
-                        else if (cardData is BuffCardData buff)
-                        {
-                            buff.Play(player, Vector3.zero);
-                            Deck.CardPlayed(gameObject, cardData);
-                            var handler = GetComponent<HabilityCardHandler>();
-                            if (handler != null)
-                                handler.StartCooldown();
-                            isSet = true;
-                            ReturnToHand();
-                        }
-
-                        if (hasPrevious)
-                        {
-                            highlightMap.SetTile(previousCell, null);
-                            hasPrevious = false;
+                                }
+                                deckEffect.Play(player, worldCenter);
+                                Deck.CardPlayed(gameObject, cardData);
+                                isSet = true;
+                                break;
                         }
                     }
+
+                    // CARTA TRAMPA
+                    else if (cardData.cardType == CardType.Trap)
+                    {
+                        dropTilemap.SetTileFlags(cellPos, TileFlags.None);
+                        cardData.Play(player, worldCenter);
+                        Deck.CardPlayed(gameObject, cardData);
+                        isSet = true;
+                    }
+
+                    else if (cardData.cardType == CardType.Summon)
+                    {
+                        dropTilemap.SetTileFlags(cellPos, TileFlags.None);
+                        cardData.Play(player, worldCenter);
+                        Deck.CardPlayed(gameObject, cardData);
+                        isSet = true;
+                    }
+                    else if (cardData is BuffCardData buff)
+                    {
+                        buff.Play(player, Vector3.zero);
+                        Deck.CardPlayed(gameObject, cardData);
+                        var handler = GetComponent<HabilityCardHandler>();
+                        if (handler != null)
+                            handler.StartCooldown();
+                        isSet = true;
+                        ReturnToHand();
+                    }
+
+                    if (hasPrevious)
+                    {
+                        highlightMap.SetTile(previousCell, null);
+                        hasPrevious = false;
+                    }
                 }
+            }
         }
 
         isDragging = false;
@@ -448,17 +436,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             rectTransform.anchoredPosition = originalAnchoredPosition;
             rectTransform.rotation = originalRotation;
 
-            //// MEJORADO: Usar basePosition actualizada en lugar de posición guardada
-            //CardHoverInHand hoverComponent = GetComponent<CardHoverInHand>();
-            //if (hoverComponent != null && hoverComponent.basePosition != Vector3.zero)
-            //{
-            //    rectTransform.position = hoverComponent.basePosition;
-            //}
-            //else
-            //{
-            //    // Fallback por si hay algún problema
-            //    rectTransform.anchoredPosition = originalAnchoredPosition;
-            //}
         }
         else
         {
@@ -483,18 +460,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         transform.SetParent(originalTransform, true);
         transform.SetSiblingIndex(cardIndex);
         transform.localScale = originalScale;
-
-        //// MEJORADO: Usar basePosition actualizada
-        //CardHoverInHand hoverComponent = GetComponent<CardHoverInHand>();
-        //if (hoverComponent != null && hoverComponent.basePosition != Vector3.zero)
-        //{
-        //    rectTransform.position = hoverComponent.basePosition;
-        //}
-        //else
-        //{
-        //    // Fallback por si hay algún problema
-        //    rectTransform.anchoredPosition = originalAnchoredPosition;
-        //}
 
         rectTransform.anchoredPosition = originalAnchoredPosition;
         rectTransform.rotation = originalRotation;
