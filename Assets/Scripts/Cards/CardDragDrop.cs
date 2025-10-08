@@ -26,7 +26,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public LayerMask spawnPointLayers;
     LayerMask trapLayers, playerLayer;
     public Tilemap obstacleTilemap; // Tilemap de obstáculos (opcional)
-    float checkRadius = 0.35f; // Radio para verificación de colisión
+    float checkRadius = 0.25f; // Radio para verificación de colisión
     public GameObject borderPrefab_1, borderPrefab_2, borderPrefab_4, borderPrefab_9;
     private GameObject currentBorder;        //borde temporal durante el arrastre
     [SerializeField] private GraphicRaycaster raycasterUI;
