@@ -24,6 +24,7 @@ public class HabilityCardHandler : MonoBehaviour
     [SerializeField] private float blinkSpeed = 6f;
     [SerializeField] private float minAlpha = 0.35f;
     private Coroutine blinkRoutine;
+    [SerializeField] private Image background;
 
     public void Initialize(CardData card, PlayerController player)
     {
@@ -97,6 +98,8 @@ public class HabilityCardHandler : MonoBehaviour
             overlayImage.gameObject.SetActive(true);
             overlayImage.fillAmount = 0f;
         }
+
+        background.color = new Color32(69, 90, 77, 255);
         // if (button != null) button.interactable = false;
         UpdateCooldownText(force: true);
 
@@ -134,6 +137,8 @@ public class HabilityCardHandler : MonoBehaviour
         // parar blink y restaurar alpha por si sigue activo
         if (blinkRoutine != null) { StopCoroutine(blinkRoutine); blinkRoutine = null; }
         if (target) SetAlpha(target, 1f);
+
+        background.color = new Color32(255, 255, 255, 255);
 
         cooldownRoutine = null;
     }

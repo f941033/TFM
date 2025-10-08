@@ -267,9 +267,11 @@ MonoBehaviour:
   cooldownText: {fileID: 2205115775731041931}
   DarkReapImage: {fileID: 0}
   DarkSpeedImage: {fileID: 0}
+  ZeroZoneImage: {fileID: 0}
   blinkThreshold: 5
   blinkSpeed: 6
   minAlpha: 0.35
+  background: {fileID: 2075047113887814455}
 --- !u!1 &424336355918421419
 GameObject:
   m_ObjectHideFlags: 0
