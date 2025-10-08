@@ -74,7 +74,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 512
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -103,10 +103,10 @@ TextureImporter:
       name: UI_ItemScroll_0
       rect:
         serializedVersion: 2
-        x: 397
-        y: 202
-        width: 14
-        height: 24
+        x: 13
+        y: 3
+        width: 24
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c435f58a7c6d69047895f4c3a6c8b296
     internalID: 0
     vertices: []
     indices: 
