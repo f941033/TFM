@@ -162,6 +162,8 @@ public class CardManager : MonoBehaviour
             discardPile.Add(cardData);
             Destroy(card);
             UpdateHandVisuals(); // Esto ya incluye la actualización de posiciones base
+            if (cardsInHand.Count == 0)
+                gameManager.NextPreparationHand();
         }
         if (GameManager.CurrentPhase == DeckboundDungeon.GamePhase.GamePhase.Action)
         {

@@ -551,7 +551,7 @@ public class GameManager : MonoBehaviour
         selectedCards.Add(card);
     }
 
-    private void NextPreparationHand()
+    public void NextPreparationHand()
     {
         //skipButton.gameObject.SetActive(true);
         cardManager.DiscardHand();
