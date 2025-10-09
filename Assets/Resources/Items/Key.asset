@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Key
   m_EditorClassIdentifier: 
   itemName: Key
-  icon: {fileID: 347172880587908169, guid: 3014813665d4cd24db0ade41874ee80c, type: 3}
+  icon: {fileID: 21300000, guid: 057aed85c54eec542b35dd6efc4e84e4, type: 3}
   cost: 200
