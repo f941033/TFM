@@ -4,7 +4,8 @@ public static class Prefs
 {
     public static class Keys
     {
-        public const string MulliganSeenAction  = "mulligan_seen_action";
+        public const string MulliganSeenAction = "mulligan_seen_action";
+        public const string InitialTutorial = "initial_tutorial_seen";
     }
 
     public static bool GetBool(string key, bool def=false)

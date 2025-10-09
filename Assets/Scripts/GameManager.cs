@@ -67,9 +67,10 @@ public class GameManager : MonoBehaviour
     private AudioSource audioSource;
     //public AudioClip clipBackgroundSound;
     private const string PREF_MULLIGAN_SEEN = "mulligan_seen_action";
-
+    private const string PREF_INITIAL_TUTORIAL_SEEN = "initial_tutorial_seen";
     private bool endWave = false;
     public int keysBoughtThisRun = 0;
+    [SerializeField] private GameObject CanvasInitialTutorial;
 
     private void Awake()
     {
@@ -275,6 +276,14 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
+        bool firstTime = !Prefs.GetBool(PREF_INITIAL_TUTORIAL_SEEN, false);
+        if (firstTime)
+        {
+            CanvasInitialTutorial.SetActive(true);
+            Prefs.SetBool(PREF_INITIAL_TUTORIAL_SEEN, true);
+        }
+
+        mulliganButton.gameObject.SetActive(false);
         FindAnyObjectByType<AudioManager>().PlayBackgroundSound(1);
 
         cardManager.currentHandSize = 3;
@@ -560,11 +569,11 @@ public class GameManager : MonoBehaviour
         currentPrepHand++;
         UpdatePrepHandUI();
 
-        if (currentPrepHand > totalPrepHands)
+        /*if (currentPrepHand > totalPrepHands)
         {
             StartRun();
-        }
-        else if(currentPrepHand == totalPrepHands)
+        }*/
+        if(currentPrepHand == totalPrepHands)
         {
             //skipButton.gameObject.SetActive(false);
             handleNextHand.SetActive(false);
