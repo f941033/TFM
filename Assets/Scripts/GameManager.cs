@@ -442,6 +442,8 @@ public class GameManager : MonoBehaviour
     public void OnMulliganFinished()
     {
         mulliganPanel.SetActive(false);
+        mulliganButton.gameObject.SetActive(true);
+        mulliganButton.interactable = false;
         BeginSpawningEnemies();
     }
 
