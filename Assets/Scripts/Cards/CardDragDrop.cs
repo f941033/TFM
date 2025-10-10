@@ -45,6 +45,7 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private Vector3 originalPosition;
 
     public static bool isAnyCardDragging = false;
+    public AudioClip invalidSound;
 
     void Awake()
     {
@@ -428,6 +429,8 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         if (!isSet)
         {
+            if (invalidSound != null) AudioSettings.Instance.PlaySFX(invalidSound);
+
             // Revertir la carta a su posición original
             transform.SetParent(originalTransform, true);
             transform.SetSiblingIndex(cardIndex);

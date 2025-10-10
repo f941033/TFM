@@ -138,6 +138,7 @@ MonoBehaviour:
   highlightMap: {fileID: 0}
   highlightTile: {fileID: 0}
   isDragging: 0
+  invalidSound: {fileID: 8300000, guid: 5296abbf846231b46a51bebf2c3c2199, type: 3}
 --- !u!223 &553415580947659074
 Canvas:
   m_ObjectHideFlags: 0
