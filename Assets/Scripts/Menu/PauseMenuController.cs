@@ -40,6 +40,8 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject initialCanvas;
 
+    float originalTimeScale = 1f;
+
     void Awake()
     {
         gm.SetActive(true);
@@ -78,6 +80,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void PauseGame()
     {
+        originalTimeScale = Time.timeScale;
         Time.timeScale = 0f;
         pauseMenuUI.SetActive(true);
         cameraMovementInstance.EnableCameraControl(false);
@@ -89,7 +92,7 @@ public class PauseMenuController : MonoBehaviour
         deckPanel.SetActive(false);
         pauseMenuUI.SetActive(false);
         cameraMovementInstance.EnableCameraControl(true);
-        Time.timeScale = 1f;
+        Time.timeScale = originalTimeScale;
         isPaused = false;
     }
 
