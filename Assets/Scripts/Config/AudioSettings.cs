@@ -10,8 +10,8 @@ public class AudioSettings : MonoBehaviour
     public AudioSource sfxAudioSource;
 
     [Header("Defaults")]
-    [Range(0f, 1f)] public float defaultMusicVolume = 0.7f;
-    [Range(0f, 1f)] public float defaultSFXVolume = 0.8f;
+    [Range(0f, 1f)] public float defaultMusicVolume = 0.1f;
+    [Range(0f, 1f)] public float defaultSFXVolume = 0.7f;
 
     [Header("Audio Mixer")]
     public AudioMixer audioMixer;
