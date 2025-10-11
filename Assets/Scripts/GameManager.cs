@@ -564,22 +564,27 @@ public class GameManager : MonoBehaviour
 
     public void NextPreparationHand()
     {
-        //skipButton.gameObject.SetActive(true);
+        if (currentPrepHand == totalPrepHands)
+        {
+            //skipButton.gameObject.SetActive(false);
+            handleNextHand.SetActive(false);
+            return;
+        }
+        currentPrepHand++;
         cardManager.DiscardHand();
         cardManager.DrawFullHand();
 
-        currentPrepHand++;
         UpdatePrepHandUI();
 
-        /*if (currentPrepHand > totalPrepHands)
-        {
-            StartRun();
-        }*/
         if(currentPrepHand == totalPrepHands)
         {
             //skipButton.gameObject.SetActive(false);
             handleNextHand.SetActive(false);
         }
+        /*if (currentPrepHand > totalPrepHands)
+        {
+            StartRun();
+        }*/
     }
     private void UpdatePrepHandUI()
     {
