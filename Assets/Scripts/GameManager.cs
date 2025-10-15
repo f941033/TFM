@@ -256,6 +256,11 @@ public class GameManager : MonoBehaviour
 
     public void ShowMessage(string text, float duration)
     {
+        if (CurrentPhase == GamePhase.Merchant && merchantUI != null)
+        {
+            merchantUI.Speak(text, duration);
+            return;
+        }
         if (HideMessageCO != null)
             StopCoroutine(HideMessageCO);
         messageText.text = text;
