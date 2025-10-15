@@ -529,10 +529,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 591364787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.200875, y: 0.62187505}
+  m_AnchorMax: {x: 0.7982812, y: 0.71843755}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1236.7603, y: 99.9824}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &485605101
 MonoBehaviour:
@@ -644,7 +644,6 @@ GameObject:
   - component: {fileID: 591364787}
   - component: {fileID: 591364789}
   - component: {fileID: 591364788}
-  - component: {fileID: 591364790}
   - component: {fileID: 591364791}
   m_Layer: 5
   m_Name: PanelGameOver
@@ -713,32 +712,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591364786}
   m_CullTransparentMesh: 1
---- !u!114 &591364790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 591364786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 70
-    m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &591364791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1590,10 +1563,10 @@ RectTransform:
   - {fileID: 461653892}
   m_Father: {fileID: 591364787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.41743755, y: 0.10856251}
+  m_AnchorMax: {x: 0.582, y: 0.55487496}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 468.2095, y: 573.8187}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2019682419
 MonoBehaviour:
@@ -1653,10 +1626,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 591364787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.26221877, y: 0.7722814}
+  m_AnchorMax: {x: 0.74, y: 0.88600004}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1236.7603, y: 195.6511}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2048102174
 MonoBehaviour:
@@ -1705,8 +1678,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 260
-  m_fontSizeBase: 260
+  m_fontSize: 240
+  m_fontSizeBase: 240
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
