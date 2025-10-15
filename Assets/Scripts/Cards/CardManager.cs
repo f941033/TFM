@@ -35,6 +35,7 @@ public class CardManager : MonoBehaviour
     public CardData lastCardUsed = null;
     public bool cardPlayedThisActionPhase { get; private set; }
     public void ResetCardPlayedFlagForAction() => cardPlayedThisActionPhase = false;
+    private readonly List<MulliganSelectable> mulliganOrder = new List<MulliganSelectable>();
 
     void Start()
     {
@@ -309,6 +310,7 @@ public class CardManager : MonoBehaviour
             sel.SetSelected(false, applyVisual: true); // apaga el halo por si acaso
         }
 
+        mulliganOrder.Clear();
         inMulligan = true;
         mulliganSelectedCount = 0;
 
@@ -422,16 +424,68 @@ public class CardManager : MonoBehaviour
 
         if (wantSelect)
         {
-            if (mulliganSelectedCount >= drawPile.Count)
-                return false;
+            if (mulliganSelectedCount < MulliganMaxSelectable)
+            {
+                mulliganSelectedCount++;
+                mulliganOrder.Add(sel);
+                return true;
+            }
 
-            mulliganSelectedCount++;
+            if (mulliganOrder.Count > 0)
+            {
+                var oldest = mulliganOrder[0];
+                mulliganOrder.RemoveAt(0);
+
+                mulliganSelectedCount = Mathf.Max(0, mulliganSelectedCount - 1);
+
+                oldest.SetSelected(false, applyVisual: true);
+
+                mulliganSelectedCount++;
+                mulliganOrder.Add(sel);
+                return true;
+            }
+
+            mulliganSelectedCount = 1;
+            mulliganOrder.Clear();
+            mulliganOrder.Add(sel);
             return true;
         }
         else
         {
-            mulliganSelectedCount = Mathf.Max(0, mulliganSelectedCount - 1);
+            if (mulliganSelectedCount > 0)
+                mulliganSelectedCount--;
+
+            for (int i = mulliganOrder.Count - 1; i >= 0; i--)
+            {
+                if (mulliganOrder[i] == sel)
+                {
+                    mulliganOrder.RemoveAt(i);
+                    break;
+                }
+            }
             return true;
+        }
+    }
+
+    public void ForceCloseMulliganForEndWave()
+    {
+        if (!inMulligan) return;
+
+        inMulligan = false;
+        mulliganSelectedCount = 0;
+
+        foreach (var go in cardsInHand)
+        {
+            // reactivar interacción normal
+            var drag = go.GetComponent<CardDragDrop>();
+            if (drag) drag.enabled = true;
+
+            var hab = go.GetComponentInChildren<HabilityCardHandler>(true);
+            if (hab) hab.enabled = true;
+
+            // apagar selectable + bloqueo de raycast + halo
+            var sel = go.GetComponent<MulliganSelectable>();
+            if (sel != null) sel.ForceDisable();
         }
     }
 
