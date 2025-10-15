@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DeckboundDungeon.GamePhase;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class MerchantUI : MonoBehaviour
 {
@@ -18,6 +19,24 @@ public class MerchantUI : MonoBehaviour
     private PlayerController player;
     private CardManager deck;
     private GameManager gm;
+    [SerializeField] private TextMeshProUGUI speechBubbleText;
+    private Coroutine speechCO;
+
+    public void Speak(string text, float duration = 2f)
+    {
+        if (!speechBubbleText) return;
+        if (speechCO != null) StopCoroutine(speechCO);
+
+        speechBubbleText.text = text;
+        speechCO = StartCoroutine(HideSpeechAfter(duration));
+    }
+
+    private IEnumerator HideSpeechAfter(float t)
+    {
+        yield return new WaitForSeconds(t);
+        speechBubbleText.text = "The deal is on the table. \n Buy what you will, if your wretched coins allow it.";
+        speechCO = null;
+    }
 
     void Awake()
     {
@@ -57,9 +76,8 @@ public class MerchantUI : MonoBehaviour
         player.SpendGold(finalCost);
         item.Apply(player, gm);
 
-        //gm.ShowMessage(finalCost == 0
-          //  ? $"¡{item.itemName} GRATIS!"
-            //: $"You bought “{item.itemName}” for {finalCost}", 2f);
+        var line = item.GetPurchaseLine(player, gm, finalCost);
+        Speak(line, 3f);
 
         if (item is KeyItem)
         {
