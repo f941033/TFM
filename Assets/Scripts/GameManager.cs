@@ -284,6 +284,7 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------------
     public void PreparationPhase(List<CardData> selectedCards)
     {
+        cardManager.ClearLastCard();
         bool firstTime = !Prefs.GetBool(PREF_INITIAL_TUTORIAL_SEEN, false);
         if (firstTime)
         {
