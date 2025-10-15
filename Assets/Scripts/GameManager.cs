@@ -137,6 +137,9 @@ public class GameManager : MonoBehaviour
         if (endWave) return;
         endWave = true;
 
+        if (cardManager != null)
+            cardManager.ForceCloseMulliganForEndWave();
+        mulliganPanel.SetActive(false);
         ChangePhase(GamePhase.Preparation);
         Time.timeScale = 1f;
         panelEndWave.SetActive(true);
@@ -449,6 +452,7 @@ public class GameManager : MonoBehaviour
         mulliganPanel.SetActive(false);
         mulliganButton.gameObject.SetActive(true);
         mulliganButton.interactable = false;
+        messageText.text = "";
         BeginSpawningEnemies();
     }
 

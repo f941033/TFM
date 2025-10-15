@@ -6,19 +6,47 @@ public class MulliganSelectable : MonoBehaviour, IPointerClickHandler
 {
     private CardManager manager;
     private CardUI cardUI;
-    private Image haloImg;   // tu mulliganOverlay del CardUI
-
+    private Image haloImg;
+    [SerializeField] private Graphic clickTarget;
     public bool Selected { get; private set; }
 
     public void Init(CardManager mgr, CardUI ui)
     {
         manager = mgr;
-        cardUI  = ui;
+        cardUI = ui;
         haloImg = cardUI?.GetMulliganOverlay();
+        EnsureClickableTarget();
 
         // Por si el halo está desactivado por defecto
         Selected = false;
         ApplyVisual();
+        if (clickTarget) clickTarget.raycastTarget = true;
+    }
+    private void EnsureClickableTarget()
+    {
+        if (!clickTarget)
+        {
+            // intenta usar un Graphic ya existente en la raíz
+            clickTarget = GetComponent<Graphic>();
+            if (!clickTarget) clickTarget = GetComponentInChildren<Graphic>(true);
+        }
+        if (!clickTarget)
+        {
+            // último recurso: crea una Image transparente
+            var img = gameObject.GetComponent<Image>() ?? gameObject.AddComponent<Image>();
+            img.color = new Color(0,0,0,0);
+            clickTarget = img;
+        }
+
+        // que cubra toda la carta
+        var rt = (clickTarget as Image)?.rectTransform ?? GetComponent<RectTransform>();
+        if (rt)
+        {
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.one;
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
+        }
     }
 
     public void SetSelected(bool value, bool applyVisual)
@@ -60,5 +88,11 @@ public class MulliganSelectable : MonoBehaviour, IPointerClickHandler
         // Limpieza por si sales de mulligan o destruyes la carta
         if (haloImg) haloImg.gameObject.SetActive(false);
         Selected = false;
+    }
+    public void ForceDisable()
+    {
+        SetSelected(false, applyVisual: true);
+        if (clickTarget) clickTarget.raycastTarget = false;
+        enabled = false;
     }
 }
