@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class EnemyMovement : MonoBehaviour
 {
+    //private SpriteRenderer spriteRenderer; 
+
     [Header("Configuracion")]
     public float moveSpeed = 1f;
     public LayerMask obstacleLayer;
@@ -59,6 +61,7 @@ public class EnemyMovement : MonoBehaviour
         }
         player = playerObj.transform;
         transform.position = SnapToGrid(transform.position);
+        //spriteRenderer = GetComponent<SpriteRenderer>();
 
         // REGISTRAR en PathfindingManager
         if (PathfindingManager.Instance != null)
@@ -395,6 +398,12 @@ public class EnemyMovement : MonoBehaviour
         Vector2 moveDir = (destino - origen).normalized;
         currentDirection = moveDir;
 
+        //if (spriteRenderer != null && moveDir.x != 0)
+        //{
+        //    spriteRenderer.flipX = moveDir.x < 0;
+        //}
+
+
         float distance = Vector3.Distance(origen, destino);
         float duration = distance / moveSpeed;
         float elapsed = 0f;
@@ -403,7 +412,8 @@ public class EnemyMovement : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            transform.position = Vector3.Lerp(origen, destino, t);
+            transform.position = Vector3.Lerp(origen, destino, t);          
+
             yield return null;
         }
 
