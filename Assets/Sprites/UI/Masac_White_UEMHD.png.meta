@@ -1,0 +1,1157 @@
+fileFormatVersion: 2
+guid: af56a6e4755e7264ea52b67694afc26c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5998584772793985695
+    second: Masac_White_UEMHD_0
+  - first:
+      213: 1473150498642803235
+    second: Masac_White_UEMHD_1
+  - first:
+      213: 4809674914544458239
+    second: Masac_White_UEMHD_2
+  - first:
+      213: -2055683823869925519
+    second: Masac_White_UEMHD_3
+  - first:
+      213: 3207849798431096236
+    second: Masac_White_UEMHD_4
+  - first:
+      213: -3616495847184950657
+    second: Masac_White_UEMHD_5
+  - first:
+      213: 5419213309996787479
+    second: Masac_White_UEMHD_6
+  - first:
+      213: 415977709845019782
+    second: Masac_White_UEMHD_7
+  - first:
+      213: -2112587003425238564
+    second: Masac_White_UEMHD_8
+  - first:
+      213: -5075985296335165178
+    second: Masac_White_UEMHD_9
+  - first:
+      213: 3360547737066501104
+    second: Masac_White_UEMHD_10
+  - first:
+      213: 8151619439464131885
+    second: Masac_White_UEMHD_11
+  - first:
+      213: 1398141063595551297
+    second: Masac_White_UEMHD_12
+  - first:
+      213: 7739422828829496083
+    second: Masac_White_UEMHD_13
+  - first:
+      213: -5797634075236782675
+    second: Masac_White_UEMHD_14
+  - first:
+      213: 768102027014197325
+    second: Masac_White_UEMHD_15
+  - first:
+      213: 6068791591817617009
+    second: Masac_White_UEMHD_16
+  - first:
+      213: -8942738685713354640
+    second: Masac_White_UEMHD_17
+  - first:
+      213: -6926273712741176541
+    second: Masac_White_UEMHD_18
+  - first:
+      213: 4379771802860542019
+    second: Masac_White_UEMHD_19
+  - first:
+      213: 6611345349368244205
+    second: Masac_White_UEMHD_20
+  - first:
+      213: -8616499173865421620
+    second: Masac_White_UEMHD_21
+  - first:
+      213: 4108176304394753366
+    second: Masac_White_UEMHD_22
+  - first:
+      213: 5708119780846424593
+    second: Masac_White_UEMHD_23
+  - first:
+      213: -5278247139754041971
+    second: Masac_White_UEMHD_24
+  - first:
+      213: 2959440711676749045
+    second: Masac_White_UEMHD_25
+  - first:
+      213: 6904248422299847375
+    second: Masac_White_UEMHD_26
+  - first:
+      213: 2498961855453317963
+    second: Masac_White_UEMHD_27
+  - first:
+      213: 355851446867803264
+    second: Masac_White_UEMHD_28
+  - first:
+      213: 3048354273405660802
+    second: Masac_White_UEMHD_29
+  - first:
+      213: 3405359873973218661
+    second: Masac_White_UEMHD_30
+  - first:
+      213: -5932211621347688797
+    second: Masac_White_UEMHD_31
+  - first:
+      213: -1130896166073021308
+    second: Masac_White_UEMHD_32
+  - first:
+      213: 1422900216389532515
+    second: Masac_White_UEMHD_33
+  - first:
+      213: 4640884862997620138
+    second: Masac_White_UEMHD_34
+  - first:
+      213: -539793215480060300
+    second: Masac_White_UEMHD_35
+  - first:
+      213: -3638958218407524047
+    second: Masac_White_UEMHD_36
+  - first:
+      213: 6587112118365451013
+    second: Masac_White_UEMHD_37
+  - first:
+      213: -8235428527396424855
+    second: Masac_White_UEMHD_38
+  - first:
+      213: 7350100323237985348
+    second: Masac_White_UEMHD_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3473
+        width: 5215
+        height: 5130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9ae379a1114f3350800000000000000
+      internalID: 5998584772793985695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_1
+      rect:
+        serializedVersion: 2
+        x: 5495
+        y: 3485
+        width: 2791
+        height: 5072
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32a3b4cc29ea17410800000000000000
+      internalID: 1473150498642803235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_2
+      rect:
+        serializedVersion: 2
+        x: 8529
+        y: 3427
+        width: 2378
+        height: 5187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff9978e1ad56fb240800000000000000
+      internalID: 4809674914544458239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_3
+      rect:
+        serializedVersion: 2
+        x: 11149
+        y: 3485
+        width: 2791
+        height: 5072
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17767b3247eb873e0800000000000000
+      internalID: -2055683823869925519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_4
+      rect:
+        serializedVersion: 2
+        x: 13883
+        y: 3432
+        width: 2673
+        height: 5178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cad3b405562948c20800000000000000
+      internalID: 3207849798431096236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_5
+      rect:
+        serializedVersion: 2
+        x: 4053
+        y: 0
+        width: 1546
+        height: 1545
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7a9dd02030afcdc0800000000000000
+      internalID: -3616495847184950657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_6
+      rect:
+        serializedVersion: 2
+        x: 5941
+        y: 830
+        width: 396
+        height: 505
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7176d601bc9e43b40800000000000000
+      internalID: 5419213309996787479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_7
+      rect:
+        serializedVersion: 2
+        x: 6802
+        y: 1231
+        width: 125
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68cfacde589d5c500800000000000000
+      internalID: 415977709845019782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_8
+      rect:
+        serializedVersion: 2
+        x: 8305
+        y: 1231
+        width: 125
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd15bb730559ea2e0800000000000000
+      internalID: -2112587003425238564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_9
+      rect:
+        serializedVersion: 2
+        x: 8472
+        y: 829
+        width: 368
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60926d6444a7e89b0800000000000000
+      internalID: -5075985296335165178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_10
+      rect:
+        serializedVersion: 2
+        x: 9308
+        y: 829
+        width: 368
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f37796ac5013ae20800000000000000
+      internalID: 3360547737066501104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_11
+      rect:
+        serializedVersion: 2
+        x: 9932
+        y: 836
+        width: 307
+        height: 499
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2dad69e0be502170800000000000000
+      internalID: 8151619439464131885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_12
+      rect:
+        serializedVersion: 2
+        x: 6407
+        y: 836
+        width: 339
+        height: 358
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14aef71c3e1376310800000000000000
+      internalID: 1398141063595551297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_13
+      rect:
+        serializedVersion: 2
+        x: 6813
+        y: 836
+        width: 103
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3135eeebe04f76b60800000000000000
+      internalID: 7739422828829496083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_14
+      rect:
+        serializedVersion: 2
+        x: 6954
+        y: 836
+        width: 376
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dadafc7968aaa8fa0800000000000000
+      internalID: -5797634075236782675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_15
+      rect:
+        serializedVersion: 2
+        x: 7329
+        y: 829
+        width: 351
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d40507759b8d8aa00800000000000000
+      internalID: 768102027014197325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_16
+      rect:
+        serializedVersion: 2
+        x: 7733
+        y: 836
+        width: 229
+        height: 358
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17e9a268ccda83450800000000000000
+      internalID: 6068791591817617009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_17
+      rect:
+        serializedVersion: 2
+        x: 7969
+        y: 829
+        width: 296
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07079e6cb8205e380800000000000000
+      internalID: -8942738685713354640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_18
+      rect:
+        serializedVersion: 2
+        x: 8316
+        y: 836
+        width: 103
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32bafe651cee0ef90800000000000000
+      internalID: -6926273712741176541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_19
+      rect:
+        serializedVersion: 2
+        x: 8888
+        y: 829
+        width: 368
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34856caef3318cc30800000000000000
+      internalID: 4379771802860542019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_20
+      rect:
+        serializedVersion: 2
+        x: 10291
+        y: 829
+        width: 339
+        height: 358
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de7668c119730cb50800000000000000
+      internalID: 6611345349368244205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_21
+      rect:
+        serializedVersion: 2
+        x: 10697
+        y: 836
+        width: 229
+        height: 358
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc40e4e47ab0c6880800000000000000
+      internalID: -8616499173865421620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_22
+      rect:
+        serializedVersion: 2
+        x: 10931
+        y: 829
+        width: 364
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6555022359c230930800000000000000
+      internalID: 4108176304394753366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_23
+      rect:
+        serializedVersion: 2
+        x: 11348
+        y: 721
+        width: 367
+        height: 473
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1125bb0a2b0573f40800000000000000
+      internalID: 5708119780846424593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_24
+      rect:
+        serializedVersion: 2
+        x: 11751
+        y: 829
+        width: 357
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8d1d361136efb6b0800000000000000
+      internalID: -5278247139754041971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_25
+      rect:
+        serializedVersion: 2
+        x: 12135
+        y: 829
+        width: 368
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f46251c5ab021920800000000000000
+      internalID: 2959440711676749045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_26
+      rect:
+        serializedVersion: 2
+        x: 5927
+        y: 208
+        width: 312
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcacb3c1c51d0df50800000000000000
+      internalID: 6904248422299847375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_27
+      rect:
+        serializedVersion: 2
+        x: 6293
+        y: 213
+        width: 241
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4bcb8541981ea220800000000000000
+      internalID: 2498961855453317963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_28
+      rect:
+        serializedVersion: 2
+        x: 6581
+        y: 213
+        width: 188
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08c3d5b610d30f400800000000000000
+      internalID: 355851446867803264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_29
+      rect:
+        serializedVersion: 2
+        x: 6799
+        y: 213
+        width: 301
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28e63ef8f0eed4a20800000000000000
+      internalID: 3048354273405660802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_30
+      rect:
+        serializedVersion: 2
+        x: 7068
+        y: 213
+        width: 257
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56dea8453c4424f20800000000000000
+      internalID: 3405359873973218661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_31
+      rect:
+        serializedVersion: 2
+        x: 7374
+        y: 213
+        width: 38
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ae7029e5fc8cada0800000000000000
+      internalID: -5932211621347688797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_32
+      rect:
+        serializedVersion: 2
+        x: 7455
+        y: 213
+        width: 286
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48ccd5fbdef3e40f0800000000000000
+      internalID: -1130896166073021308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_33
+      rect:
+        serializedVersion: 2
+        x: 7784
+        y: 213
+        width: 189
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36b79bc35382fb310800000000000000
+      internalID: 1422900216389532515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_34
+      rect:
+        serializedVersion: 2
+        x: 8134
+        y: 208
+        width: 311
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa5e576c13cb76040800000000000000
+      internalID: 4640884862997620138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_35
+      rect:
+        serializedVersion: 2
+        x: 8467
+        y: 213
+        width: 302
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47625233ee44288f0800000000000000
+      internalID: -539793215480060300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_36
+      rect:
+        serializedVersion: 2
+        x: 8809
+        y: 213
+        width: 337
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 139c457c7c2df7dc0800000000000000
+      internalID: -3638958218407524047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_37
+      rect:
+        serializedVersion: 2
+        x: 9218
+        y: 213
+        width: 229
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 503f7d6529f1a6b50800000000000000
+      internalID: 6587112118365451013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_38
+      rect:
+        serializedVersion: 2
+        x: 9499
+        y: 208
+        width: 256
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 963fa633361e5bd80800000000000000
+      internalID: -8235428527396424855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Masac_White_UEMHD_39
+      rect:
+        serializedVersion: 2
+        x: 9796
+        y: 208
+        width: 240
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44c751e2d4dc00660800000000000000
+      internalID: 7350100323237985348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Masac_White_UEMHD_0: 5998584772793985695
+      Masac_White_UEMHD_1: 1473150498642803235
+      Masac_White_UEMHD_10: 3360547737066501104
+      Masac_White_UEMHD_11: 8151619439464131885
+      Masac_White_UEMHD_12: 1398141063595551297
+      Masac_White_UEMHD_13: 7739422828829496083
+      Masac_White_UEMHD_14: -5797634075236782675
+      Masac_White_UEMHD_15: 768102027014197325
+      Masac_White_UEMHD_16: 6068791591817617009
+      Masac_White_UEMHD_17: -8942738685713354640
+      Masac_White_UEMHD_18: -6926273712741176541
+      Masac_White_UEMHD_19: 4379771802860542019
+      Masac_White_UEMHD_2: 4809674914544458239
+      Masac_White_UEMHD_20: 6611345349368244205
+      Masac_White_UEMHD_21: -8616499173865421620
+      Masac_White_UEMHD_22: 4108176304394753366
+      Masac_White_UEMHD_23: 5708119780846424593
+      Masac_White_UEMHD_24: -5278247139754041971
+      Masac_White_UEMHD_25: 2959440711676749045
+      Masac_White_UEMHD_26: 6904248422299847375
+      Masac_White_UEMHD_27: 2498961855453317963
+      Masac_White_UEMHD_28: 355851446867803264
+      Masac_White_UEMHD_29: 3048354273405660802
+      Masac_White_UEMHD_3: -2055683823869925519
+      Masac_White_UEMHD_30: 3405359873973218661
+      Masac_White_UEMHD_31: -5932211621347688797
+      Masac_White_UEMHD_32: -1130896166073021308
+      Masac_White_UEMHD_33: 1422900216389532515
+      Masac_White_UEMHD_34: 4640884862997620138
+      Masac_White_UEMHD_35: -539793215480060300
+      Masac_White_UEMHD_36: -3638958218407524047
+      Masac_White_UEMHD_37: 6587112118365451013
+      Masac_White_UEMHD_38: -8235428527396424855
+      Masac_White_UEMHD_39: 7350100323237985348
+      Masac_White_UEMHD_4: 3207849798431096236
+      Masac_White_UEMHD_5: -3616495847184950657
+      Masac_White_UEMHD_6: 5419213309996787479
+      Masac_White_UEMHD_7: 415977709845019782
+      Masac_White_UEMHD_8: -2112587003425238564
+      Masac_White_UEMHD_9: -5075985296335165178
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
