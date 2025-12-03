@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: e0d6f06ae1ec2884e9492b6527e4f025
+guid: 7a69279424f87034ab7b58b77df25691
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5585272928197230279
-    second: barroprueba_0
+      213: -5512638346805638289
+    second: SpriteSheetTrap_Stalactita_0
+  - first:
+      213: -8466386111739079340
+    second: SpriteSheetTrap_Stalactita_1
+  - first:
+      213: 6879048784800298355
+    second: SpriteSheetTrap_Stalactita_2
+  - first:
+      213: 5262723387804959418
+    second: SpriteSheetTrap_Stalactita_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,9 +81,9 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -100,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: barroprueba_0
+      name: SpriteSheetTrap_Stalactita_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
+        x: 3
+        y: 2
+        width: 26
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7ce3dcad220e28d40800000000000000
-      internalID: 5585272928197230279
+      spriteID: f6b047b71ac2f73b0800000000000000
+      internalID: -5512638346805638289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheetTrap_Stalactita_1
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 2
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 455dd7e20ba518a80800000000000000
+      internalID: -8466386111739079340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheetTrap_Stalactita_2
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 2
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 375ba9a4c6a477f50800000000000000
+      internalID: 6879048784800298355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheetTrap_Stalactita_3
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 2
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab24141c903f80940800000000000000
+      internalID: 5262723387804959418
       vertices: []
       indices: 
       edges: []
@@ -125,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cbc2051e33ebd454087886fa8b816ea6
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      barroprueba_0: 5585272928197230279
+      SpriteSheetTrap_Stalactita_0: -5512638346805638289
+      SpriteSheetTrap_Stalactita_1: -8466386111739079340
+      SpriteSheetTrap_Stalactita_2: 6879048784800298355
+      SpriteSheetTrap_Stalactita_3: 5262723387804959418
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
