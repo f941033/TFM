@@ -60,7 +60,7 @@ public class Tutorial : MonoBehaviour
                 baseHealth += card.healthModifier;
 
             }
-            if (card.cardName == "FIREBALL" || card.cardName == "ZERO ZONE")
+            if (card.cardName == "FIREBALL" || card.cardName == "MUD" || card.cardName == "VOID")
             {
                 startingDeck.Add(card);
                 baseHealth += card.healthModifier;

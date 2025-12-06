@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     private float attackCooldown = 0f;
     private float attackRate = 1.5f;
     public float currentAttackRate;
-    private float attackRange = 2f;
+    private float attackRange = 1f;
     public float currentAttackRange;
     private bool playerInRange = false;
     public int gold;

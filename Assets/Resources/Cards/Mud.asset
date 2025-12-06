@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ed7a1f59df5c543939a2ef1a30280c, type: 3}
+  m_Name: Mud
+  m_EditorClassIdentifier: 
+  cardName: MUD
+  description: 'Area: 4 tiles.
+
+    Enemy Speed: -15%, 3 seconds.'
+  cardType: 1
+  healthModifier: 0
+  numberOfTiles: 4
+  goldCost: 100
+  used: 0
+  uses: 8
+  trapPrefab: {fileID: 7377369047218687532, guid: 6434fc6f6d3f0a547a31dca2f4623815, type: 3}
+  cost: 1
+  damage: 0
+  isAreaDamage: 0
+  trapSizeInTiles: {x: 1, y: 1}
+  reduceSpeed: 0.15
+  seconds: 4

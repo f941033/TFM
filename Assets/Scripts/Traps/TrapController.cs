@@ -27,7 +27,6 @@ public class TrapController : MonoBehaviour
         if (!(cardData is InstantTrapCardData)) return;
         if (!other.CompareTag("Enemy")) return;
 
-        Debug.Log("Algo ha entrado en el collider");
         var enemy = other.GetComponent<EnemyController>();
         if (enemy == null) return;
 
@@ -40,13 +39,6 @@ public class TrapController : MonoBehaviour
     void Start()
     {
         originalTile = Resources.Load<TileBase>("Tiles/FloorTile");
-        //if (cardData is ContinuousTrapCardData cloudData)
-        //{
-            //Debug.Log("Entro en que es de tipo Continuo");
-            //StartCoroutine(CloudDamage(cloudData));
-            //return;
-        //}
-        //Debug.Log("Y ahora estoy fuera del if");
     }
 
     private IEnumerator CloudDamage(ContinuousTrapCardData cloud)
@@ -68,8 +60,6 @@ public class TrapController : MonoBehaviour
     }
 
     public void ClearAndDestroy(){
-        //Vector3Int cellPos = tilemap.WorldToCell(transform.position);
-        //tilemap.SetColor(cellPos, Color.white);
         Destroy(gameObject); 
     }
     void OnDrawGizmos()
@@ -78,7 +68,6 @@ public class TrapController : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawSphere(transform.position, 0.1f);
 
-        // Ahora intentamos dibujar cualquier Collider2D
         var cols = GetComponents<Collider2D>();
         foreach (var col in cols)
         {
@@ -95,7 +84,6 @@ public class TrapController : MonoBehaviour
                 Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(c, circ.radius);
             }
-            // si hay otros Collider2D, añádelos aquí…
         }
     }
 

@@ -102,7 +102,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         if (cardData.cardType == CardType.Hability)
         {
             var handler = GetComponent<HabilityCardHandler>();
-            Debug.Log(handler != null);
             if (handler != null && handler.cooldownRemaining > 0f)
             {
                 gameManager.ShowMessage("Trying to use it again? Pathetic… it’s still on cooldown.", 4);
@@ -165,7 +164,6 @@ public class CardDragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         else if (cardData is BuffCardData buff)
         {
             var handler = GetComponent<HabilityCardHandler>();
-            Debug.Log(handler != null);
             if (handler != null && handler.cooldownRemaining > 0f)
             {
                 gameManager.ShowMessage("Trying to use it again? Pathetic… it’s still on cooldown.", 4);

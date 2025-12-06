@@ -38,28 +38,12 @@ public class HabilityCardHandler : MonoBehaviour
 
         overlayImage.fillAmount = 1f;
         overlayImage.gameObject.SetActive(true);
-
-        /*if (card is BuffCardData)
-        {
-            button.gameObject.SetActive(true);
-            button.interactable = true;
-        }
-        else
-        {
-            button.gameObject.SetActive(true);
-        }*/
     }
 
     public void StartCooldown()
     {
         var target = GetBlinkTarget();
-        if (cardData.cardName == "DARK REAPER")
-        {
-            if (DarkReapImage)
-            {
-                DarkReapImage.gameObject.SetActive(true);
-            }
-        }
+        if (cardData.cardName == "DARK REAPER") { if (DarkReapImage) DarkReapImage.gameObject.SetActive(true);}
 
         else if (cardData.cardName == "DARK SPEED") { if (DarkSpeedImage) DarkSpeedImage.gameObject.SetActive(true); }
 

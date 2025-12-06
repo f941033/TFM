@@ -21,7 +21,7 @@ public class WallCache : MonoBehaviour
 
     void Update()
     {
-        // Actualizar cache periódicamente
+        // Actualizar cache periï¿½dicamente
         if (Time.time - lastRefreshTime > refreshInterval)
         {
             RefreshWallCache();
@@ -42,8 +42,6 @@ public class WallCache : MonoBehaviour
 
         // Limpiar cache de paths cuando se actualiza la cache de muros
         pathCache.Clear();
-
-        Debug.Log($"WallCache: Actualizado con {cachedWalls.Count} muros");
     }
 
     public Transform GetNearestWall(Vector3 position, float maxDistance)
@@ -105,7 +103,7 @@ public class WallCache : MonoBehaviour
         {
             cachedWalls.Add(newWall);
             pathCache.Clear(); // Limpiar cache de paths
-            Debug.Log($"WallCache: Nuevo muro añadido a cache. Total: {cachedWalls.Count} muros");
+            Debug.Log($"WallCache: Nuevo muro aï¿½adido a cache. Total: {cachedWalls.Count} muros");
         }
     }
 

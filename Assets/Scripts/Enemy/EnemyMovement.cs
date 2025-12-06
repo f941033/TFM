@@ -47,6 +47,11 @@ public class EnemyMovement : MonoBehaviour
     private bool pathCalculated = false;
     private bool waitingForPath = false;
 
+    [Header("Imán / Atracción")]
+    public float magnetExtraSpeed = 2f;   // factor de velocidad extra cuando es atraído
+    private bool isMagnetized = false;
+
+
     private readonly Vector2Int[] directions = {
         Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right
     };
@@ -131,7 +136,7 @@ public class EnemyMovement : MonoBehaviour
                 _ => 0.15f
             };
 
-            if (!isMoving && !waitingForPath)
+            if (!isMoving && !waitingForPath && !isMagnetized)
             {
                 if (emergencyMode)
                 {
@@ -391,35 +396,36 @@ public class EnemyMovement : MonoBehaviour
     }
 
     IEnumerator MoveToTile(Vector3 destino)
+{
+    isMoving = true;
+
+    Vector3 origen = transform.position;
+    Vector2 moveDir = (destino - origen).normalized;
+    currentDirection = moveDir;
+
+    float distance = Vector3.Distance(origen, destino);
+    float duration = distance / moveSpeed;
+    float elapsed = 0f;
+
+    while (elapsed < duration)
     {
-        isMoving = true;
-
-        Vector3 origen = transform.position;
-        Vector2 moveDir = (destino - origen).normalized;
-        currentDirection = moveDir;
-
-        //if (spriteRenderer != null && moveDir.x != 0)
-        //{
-        //    spriteRenderer.flipX = moveDir.x < 0;
-        //}
-
-
-        float distance = Vector3.Distance(origen, destino);
-        float duration = distance / moveSpeed;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
+        if (isMagnetized)
         {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            transform.position = Vector3.Lerp(origen, destino, t);          
-
-            yield return null;
+            isMoving = false;
+            yield break;
         }
 
-        transform.position = destino;
-        isMoving = false;
+        elapsed += Time.deltaTime;
+        float t = Mathf.Clamp01(elapsed / duration);
+        transform.position = Vector3.Lerp(origen, destino, t);
+
+        yield return null;
     }
+
+    transform.position = destino;
+    isMoving = false;
+}
+
 
     // --- Tile utilities ---
     public Vector3 SnapToGrid(Vector3 pos)
@@ -450,6 +456,8 @@ public class EnemyMovement : MonoBehaviour
     // ==================== MÉTODOS PÚBLICOS ====================
     public void ClearAndRepath()
     {
+        if (isMagnetized) return;
+
         StopAllCoroutines();
         isMoving = false;
         waitingForPath = false;
@@ -484,6 +492,8 @@ public class EnemyMovement : MonoBehaviour
 
     public void RestartCoroutineMove()
     {
+        if (isMagnetized) return;
+
         StopAllCoroutines();
         path.Clear();
         pathIndex = 0;
@@ -516,6 +526,8 @@ public class EnemyMovement : MonoBehaviour
 
     public void StopCoroutineMove()
     {
+        if (isMagnetized) return;
+
         StopAllCoroutines();
         waitingForPath = false;
         pathCalculated = false;
@@ -800,6 +812,52 @@ public class EnemyMovement : MonoBehaviour
 
         currentMoveTarget = player;
         movingToTrap = false;
+    }
+    // ================== IMÁN / ATRACCIÓN ==================
+    public void ApplyMagnet(Vector3 center, float duration, float extraSpeedMultiplier = 0f)
+    {
+         if (!gameObject.activeInHierarchy) return;
+
+        if (extraSpeedMultiplier <= 0f)
+            extraSpeedMultiplier = magnetExtraSpeed;
+
+
+        StopCoroutine("MagnetCoroutine");
+        StartCoroutine(MagnetCoroutine(center, duration, extraSpeedMultiplier));
+    }
+
+    private IEnumerator MagnetCoroutine(Vector3 center, float duration, float extraSpeedMultiplier)
+    {
+        isMagnetized = true;
+        isMoving = false;
+        waitingForPath = false;
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            Vector3 dir = (center - transform.position);
+            float dist = dir.magnitude;
+
+            dir.Normalize();
+
+            float finalSpeed = moveSpeed * extraSpeedMultiplier;
+            transform.position += dir * finalSpeed * Time.deltaTime;
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = SnapToGrid(transform.position);
+
+        isMagnetized = false;
+        isMoving = false;
+        waitingForPath = false;
+        pathCalculated = false;
+        path.Clear();
+        pathIndex = 0;
+
+        Debug.Log($"[EnemyMovement:{name}] Magnet terminado en {transform.position}");
     }
 }
 
