@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Void
   m_EditorClassIdentifier: 
   cardName: VOID
-  description: 
+  description: Radial void. Deals 5 damage to all enemies in range, dragging them
+    toward the center.
   cardType: 3
   healthModifier: 20
   numberOfTiles: 9

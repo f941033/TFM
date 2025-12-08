@@ -856,8 +856,6 @@ public class EnemyMovement : MonoBehaviour
         pathCalculated = false;
         path.Clear();
         pathIndex = 0;
-
-        Debug.Log($"[EnemyMovement:{name}] Magnet terminado en {transform.position}");
     }
 }
 
