@@ -51,6 +51,13 @@ public class EnemyMovement : MonoBehaviour
     public float magnetExtraSpeed = 2f;   // factor de velocidad extra cuando es atraído
     private bool isMagnetized = false;
 
+    [Header("Freeze / Congelación")]
+    public bool isFrozen = false;
+    private Coroutine freezeCoroutine;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Color frozenColor = new Color(0.4f, 0.7f, 1f); // azulito
+    private Color originalColor;
+
 
     private readonly Vector2Int[] directions = {
         Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right
@@ -67,6 +74,12 @@ public class EnemyMovement : MonoBehaviour
         player = playerObj.transform;
         transform.position = SnapToGrid(transform.position);
         //spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+            originalColor = spriteRenderer.color;
 
         // REGISTRAR en PathfindingManager
         if (PathfindingManager.Instance != null)
@@ -136,7 +149,7 @@ public class EnemyMovement : MonoBehaviour
                 _ => 0.15f
             };
 
-            if (!isMoving && !waitingForPath && !isMagnetized)
+            if (!isMoving && !waitingForPath && !isMagnetized && !isFrozen)
             {
                 if (emergencyMode)
                 {
@@ -409,7 +422,7 @@ public class EnemyMovement : MonoBehaviour
 
     while (elapsed < duration)
     {
-        if (isMagnetized)
+        if (isMagnetized || isFrozen)
         {
             isMoving = false;
             yield break;
@@ -856,6 +869,45 @@ public class EnemyMovement : MonoBehaviour
         pathCalculated = false;
         path.Clear();
         pathIndex = 0;
+    }
+
+    public void Freeze(float duration)
+    {
+        if (!gameObject.activeInHierarchy) return;
+        // Si ya estaba congelado, refrescamos duración
+        if (freezeCoroutine != null)
+            StopCoroutine(freezeCoroutine);
+
+        freezeCoroutine = StartCoroutine(FreezeCoroutine(duration));
+    }
+
+    private IEnumerator FreezeCoroutine(float duration)
+    {
+        isFrozen = true;
+        isMoving = false;          // por si estaba en medio de MoveToTile
+        waitingForPath = false;    // no pedimos paths nuevos mientras está congelado
+
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;  // por si algo lo ha cambiado antes
+            spriteRenderer.color = frozenColor;
+        }
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        isFrozen = false;
+        freezeCoroutine = null;
+        
+        if (spriteRenderer != null)
+            spriteRenderer.color = originalColor;
+
+        // Al descongelarse, volvemos a recalcular path si hace falta
+        ClearAndRepath();
     }
 }
 

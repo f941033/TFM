@@ -502,7 +502,7 @@ MonoBehaviour:
   detectionRadius: 3
   checkInterval: 0.2
   tickRate: 1
-  areaDamage: 10
+  areaDamage: 5
   drawTargetBeam: 1
   connectionRadius: 10
   maxConnections: 2

@@ -20,7 +20,7 @@ public class BombController : MonoBehaviour
     }
     void Update()
     {
-        if (activada) return; // Evita reactivar si ya está activada
+        if (activada) return; // Evita reactivar si ya estï¿½ activada
 
         GameObject[] enemigos = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemigo in enemigos)
@@ -48,7 +48,7 @@ public class BombController : MonoBehaviour
 
     void Explode()
     { 
-        // Activar efecto de partículas
+        // Activar efecto de partï¿½culas
         if (explosionEffect != null)
         {
             ParticleSystem explosion = Instantiate(
@@ -62,7 +62,7 @@ public class BombController : MonoBehaviour
             Destroy(explosion.gameObject, explosion.main.duration);
         }
 
-        //Aplicar daño en área
+        //Aplicar daï¿½o en ï¿½rea
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             transform.position,
             explosionRadius

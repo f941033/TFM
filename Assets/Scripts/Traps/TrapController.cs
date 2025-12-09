@@ -60,6 +60,11 @@ public class TrapController : MonoBehaviour
     }
 
     public void ClearAndDestroy(){
+
+        if (GetComponent<FrostburstTrap>() != null)
+        {
+            return;
+        }
         Destroy(gameObject); 
     }
     void OnDrawGizmos()

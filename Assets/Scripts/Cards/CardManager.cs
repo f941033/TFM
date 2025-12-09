@@ -221,17 +221,14 @@ public class CardManager : MonoBehaviour
 
     public void DrawLastCardUsed()
     {
-        Debug.Log("Entro en el metodo de ultima carta usada");
         if (lastCardUsed != null)
         {
-            Debug.Log("Entro en el if de ultima carta usada");
             CardData cardData = lastCardUsed;
 
             var cardObj = Instantiate(prefabCard, handTransform.position, Quaternion.identity, handTransform);
             var cardUI = cardObj.GetComponentInChildren<CardUI>();
             cardUI.SetCardUI(cardData);
 
-            Debug.Log("la última carta cogida es: " + cardData.cardName);
             if (cardData.cardType == CardType.Trap || cardData.cardType == CardType.DeckEffect || cardData.cardType == CardType.Summon)
             {
                 var drag = cardObj.GetComponent<CardDragDrop>();
