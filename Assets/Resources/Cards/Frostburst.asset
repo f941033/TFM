@@ -20,7 +20,7 @@ MonoBehaviour:
   numberOfTiles: 1
   goldCost: 0
   used: 0
-  uses: 2
+  uses: 1
   trapPrefab: {fileID: 7377369047218687532, guid: 0615fb07b693a264c84a105e1f1e4462, type: 3}
   cost: 2
   damage: 0

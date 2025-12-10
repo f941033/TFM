@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7195835835760226432}
   - component: {fileID: 4933481121959300758}
   - component: {fileID: 1356941104645830612}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Impact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4903,7 +4903,7 @@ GameObject:
   - component: {fileID: 4794655212493717476}
   - component: {fileID: 2607184467005568375}
   - component: {fileID: -8759425826186554283}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: VFX_Projectile_Ice_Impact_01_Horizontal_Billboard_Color_Loop_Static
   m_TagString: Untagged
   m_Icon: {fileID: 0}
