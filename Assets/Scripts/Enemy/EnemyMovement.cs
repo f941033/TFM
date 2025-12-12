@@ -58,6 +58,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Color frozenColor = new Color(0.4f, 0.7f, 1f); // azulito
     private Color originalColor;
 
+    bool delayed= false;
+
 
     private readonly Vector2Int[] directions = {
         Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right
@@ -548,6 +550,8 @@ public class EnemyMovement : MonoBehaviour
 
     public void ReduceSpeed(float speedPercent, int seconds)
     {
+        if (delayed)
+            return;
         if (speedPercent == 0f) return;
         if(name.Contains("Heroe")) return;
         StartCoroutine(ReduceSpeedCoroutine(speedPercent, seconds));
@@ -555,11 +559,13 @@ public class EnemyMovement : MonoBehaviour
 
     IEnumerator ReduceSpeedCoroutine(float speedPercent, int seconds)
     {
+        delayed = true;
         yield return new WaitForSeconds(1.5f);
         float speedTemp = moveSpeed;
         moveSpeed *= speedPercent;
         yield return new WaitForSeconds(seconds);
         moveSpeed = speedTemp;
+        delayed = false;
     }
 
     // ================ ONDA EXPANSIVA DE LA BOMBA ================

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6160349541528422814}
   - component: {fileID: 8768354133262798304}
   - component: {fileID: 8261066863789658928}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: "Ca\xF1on"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 3009786956473875944}
   - component: {fileID: 4389836680003733558}
   - component: {fileID: 3718399301329372688}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 5662933646770562773}
   - component: {fileID: 3236589953679226030}
   - component: {fileID: 5803669322039359989}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 2081175262615400690}
   - component: {fileID: 5511759207884208026}
   - component: {fileID: 1986210861274530081}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6160494710280513426}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PointOfFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 2768896663624079852}
   - component: {fileID: 1483011315987483603}
   - component: {fileID: -6598138827764509213}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: TurretPrefab
   m_TagString: Trap
   m_Icon: {fileID: 0}
