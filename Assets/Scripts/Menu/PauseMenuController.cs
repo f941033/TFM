@@ -68,7 +68,7 @@ public class PauseMenuController : MonoBehaviour
     void Update()
     {
         // tecla Escape para abrir/cerrar pausa
-        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.CurrentPhase != GamePhase.Deck)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) && GameManager.CurrentPhase != GamePhase.Deck)
         {
             if ((mainMenu != null && mainMenu.activeInHierarchy) || (initialCanvas != null && initialCanvas.activeInHierarchy)) return;
             if (isPaused)

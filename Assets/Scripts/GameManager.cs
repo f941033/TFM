@@ -286,7 +286,7 @@ public class GameManager : MonoBehaviour
     {
         cardManager.ClearLastCard();
         bool firstTime = !Prefs.GetBool(PREF_INITIAL_TUTORIAL_SEEN, false);
-        if (firstTime)
+        if (numberWave<1)
         {
             CanvasInitialTutorial.SetActive(true);
             Prefs.SetBool(PREF_INITIAL_TUTORIAL_SEEN, true);
